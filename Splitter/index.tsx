@@ -1,0 +1,513 @@
+import { DownOutlined, LeftOutlined, RightOutlined, UpOutlined } from '../src/icons';
+import type {
+  CSSProperties,
+  ReactElement,
+  ReactNode,
+  PointerEvent as ReactPointerEvent,
+} from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+export type SplitterSize = number | `${number}%`;
+export type SplitterOrientation = 'horizontal' | 'vertical';
+
+export type SplitterPanelProps = {
+  children?: ReactNode;
+  collapsible?: boolean;
+  defaultSize?: SplitterSize;
+  max?: SplitterSize;
+  min?: SplitterSize;
+  resizable?: boolean;
+  size?: SplitterSize;
+  style?: CSSProperties;
+};
+
+export type SplitterProps = {
+  children: ReactNode;
+  className?: string;
+  lazy?: boolean;
+  onResize?: (sizes: number[]) => void;
+  onResizeEnd?: (sizes: number[]) => void;
+  onResizeStart?: (sizes: number[]) => void;
+  orientation?: SplitterOrientation;
+  style?: CSSProperties;
+  vertical?: boolean;
+};
+
+type SplitterComponent = React.FC<SplitterProps> & {
+  Panel: React.FC<SplitterPanelProps>;
+};
+
+const DRAGGER_SIZE = 8;
+const MIN_PANEL_SIZE = 0;
+
+const SplitterPanel: React.FC<SplitterPanelProps> = ({ children }) => <>{children}</>;
+
+const isPercentSize = (value: SplitterSize): value is `${number}%` =>
+  typeof value === 'string' && value.endsWith('%');
+
+const parseSize = (value: SplitterSize | undefined, total: number, fallback: number) => {
+  if (value === undefined) {
+    return fallback;
+  }
+
+  if (isPercentSize(value)) {
+    return (Number.parseFloat(value) / 100) * total;
+  }
+
+  return Number(value);
+};
+
+const roundSizes = (sizes: number[]) => sizes.map((size) => Math.round(size));
+
+const getPointerPosition = (
+  event: PointerEvent | ReactPointerEvent,
+  orientation: SplitterOrientation,
+) => (orientation === 'horizontal' ? event.clientX : event.clientY);
+
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
+const CustomSplitter: SplitterComponent = ({
+  children,
+  className,
+  lazy = false,
+  onResize,
+  onResizeEnd,
+  onResizeStart,
+  orientation,
+  style,
+  vertical = false,
+}) => {
+  const resolvedOrientation = orientation ?? (vertical ? 'vertical' : 'horizontal');
+  const rootRef = useRef<HTMLDivElement>(null);
+  const sizesRef = useRef<number[]>([]);
+  const lastNonZeroSizesRef = useRef<number[]>([]);
+  const [containerSize, setContainerSize] = useState(0);
+  const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [sizes, setSizes] = useState<number[]>([]);
+
+  const panels = useMemo(
+    () =>
+      React.Children.toArray(children).filter(
+        React.isValidElement,
+      ) as ReactElement<SplitterPanelProps>[],
+    [children],
+  );
+
+  const trackSize = Math.max(0, containerSize - Math.max(0, panels.length - 1) * DRAGGER_SIZE);
+
+  const getPanelMin = useCallback(
+    (index: number) => parseSize(panels[index]?.props.min, trackSize, MIN_PANEL_SIZE),
+    [panels, trackSize],
+  );
+
+  const getPanelMax = useCallback(
+    (index: number) => parseSize(panels[index]?.props.max, trackSize, trackSize),
+    [panels, trackSize],
+  );
+
+  const normalizeToTrack = useCallback(
+    (nextSizes: number[]) => {
+      if (!trackSize || !nextSizes.length) {
+        return nextSizes;
+      }
+
+      const normalized = [...nextSizes];
+      const diff = trackSize - normalized.reduce((sum, size) => sum + size, 0);
+      const flexibleIndex = normalized.findIndex((size) => size > 0);
+      normalized[flexibleIndex === -1 ? 0 : flexibleIndex] += diff;
+      return normalized.map((size, index) => clamp(size, 0, getPanelMax(index)));
+    },
+    [getPanelMax, trackSize],
+  );
+
+  const buildInitialSizes = useCallback(
+    (previous?: number[]) => {
+      if (!trackSize || !panels.length) {
+        return [];
+      }
+
+      if (previous?.length === panels.length) {
+        const previousTotal = previous.reduce((sum, size) => sum + size, 0);
+        if (previousTotal > 0) {
+          return normalizeToTrack(previous.map((size) => (size / previousTotal) * trackSize));
+        }
+      }
+
+      const explicitSizes = panels.map((panel) =>
+        parseSize(panel.props.size ?? panel.props.defaultSize, trackSize, -1),
+      );
+      const usedSize = explicitSizes
+        .filter((size) => size >= 0)
+        .reduce((sum, size) => sum + size, 0);
+      const unsetCount = explicitSizes.filter((size) => size < 0).length;
+      const fallbackSize = unsetCount ? Math.max(0, (trackSize - usedSize) / unsetCount) : 0;
+
+      return normalizeToTrack(
+        explicitSizes.map((size, index) =>
+          clamp(size >= 0 ? size : fallbackSize, getPanelMin(index), getPanelMax(index)),
+        ),
+      );
+    },
+    [getPanelMax, getPanelMin, normalizeToTrack, panels, trackSize],
+  );
+
+  const updateSizes = useCallback(
+    (nextSizes: number[], notify = true) => {
+      const normalized = normalizeToTrack(nextSizes);
+      setSizes(normalized);
+      sizesRef.current = normalized;
+      normalized.forEach((size, index) => {
+        if (size > 1) {
+          lastNonZeroSizesRef.current[index] = size;
+        }
+      });
+      if (notify) {
+        onResize?.(roundSizes(normalized));
+      }
+    },
+    [normalizeToTrack, onResize],
+  );
+
+  useEffect(() => {
+    const node = rootRef.current;
+    if (!node) {
+      return undefined;
+    }
+
+    const syncSize = () => {
+      const rect = node.getBoundingClientRect();
+      setContainerSize(resolvedOrientation === 'horizontal' ? rect.width : rect.height);
+    };
+    syncSize();
+
+    const observer = new ResizeObserver(syncSize);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [resolvedOrientation]);
+
+  useEffect(() => {
+    setSizes((previous) => {
+      const nextSizes = buildInitialSizes(previous);
+      sizesRef.current = nextSizes;
+      lastNonZeroSizesRef.current = nextSizes.map((size) =>
+        Math.max(size, trackSize / Math.max(panels.length, 1)),
+      );
+      return nextSizes;
+    });
+  }, [buildInitialSizes, panels.length, trackSize]);
+
+  const getResizedPair = useCallback(
+    (sourceSizes: number[], index: number, delta: number) => {
+      const nextSizes = [...sourceSizes];
+      const leftSize = nextSizes[index];
+      const rightSize = nextSizes[index + 1];
+      const leftMin = getPanelMin(index);
+      const rightMin = getPanelMin(index + 1);
+      const leftMax = getPanelMax(index);
+      const rightMax = getPanelMax(index + 1);
+      const minDelta = Math.max(leftMin - leftSize, rightSize - rightMax);
+      const maxDelta = Math.min(leftMax - leftSize, rightSize - rightMin);
+      const safeDelta = clamp(delta, minDelta, maxDelta);
+
+      nextSizes[index] = leftSize + safeDelta;
+      nextSizes[index + 1] = rightSize - safeDelta;
+      return normalizeToTrack(nextSizes);
+    },
+    [getPanelMax, getPanelMin, normalizeToTrack],
+  );
+
+  const resizePair = useCallback(
+    (index: number, delta: number, notify = true) => {
+      updateSizes(getResizedPair(sizesRef.current, index, delta), notify);
+    },
+    [getResizedPair, updateSizes],
+  );
+
+  const startResize = (index: number, event: ReactPointerEvent<HTMLDivElement>) => {
+    if (panels[index].props.resizable === false || panels[index + 1].props.resizable === false) {
+      return;
+    }
+
+    event.preventDefault();
+    const startPosition = getPointerPosition(event, resolvedOrientation);
+    const startSizes = [...sizesRef.current];
+    let latestSizes = startSizes;
+
+    setDraggingIndex(index);
+    onResizeStart?.(roundSizes(startSizes));
+
+    const handlePointerMove = (moveEvent: PointerEvent) => {
+      const delta = getPointerPosition(moveEvent, resolvedOrientation) - startPosition;
+      latestSizes = getResizedPair(startSizes, index, delta);
+      if (!lazy) {
+        updateSizes(latestSizes, true);
+      }
+    };
+
+    const handlePointerUp = () => {
+      document.removeEventListener('pointermove', handlePointerMove);
+      document.removeEventListener('pointerup', handlePointerUp);
+      setDraggingIndex(null);
+      if (lazy) {
+        updateSizes(latestSizes, true);
+      }
+      onResizeEnd?.(roundSizes(sizesRef.current));
+    };
+
+    document.addEventListener('pointermove', handlePointerMove);
+    document.addEventListener('pointerup', handlePointerUp);
+  };
+
+  const toggleCollapse = (index: number, neighborIndex: number) => {
+    const nextSizes = [...sizesRef.current];
+
+    if (nextSizes[index] > 1) {
+      lastNonZeroSizesRef.current[index] = nextSizes[index];
+      nextSizes[neighborIndex] += nextSizes[index];
+      nextSizes[index] = 0;
+    } else {
+      const restoredSize =
+        lastNonZeroSizesRef.current[index] ||
+        parseSize(panels[index].props.defaultSize, trackSize, trackSize / panels.length);
+      nextSizes[index] = clamp(restoredSize, getPanelMin(index), getPanelMax(index));
+      nextSizes[neighborIndex] = Math.max(0, nextSizes[neighborIndex] - nextSizes[index]);
+    }
+
+    updateSizes(nextSizes);
+    onResizeEnd?.(roundSizes(sizesRef.current));
+  };
+
+  const resetSizes = () => {
+    const nextSizes = buildInitialSizes();
+    updateSizes(nextSizes);
+    onResizeEnd?.(roundSizes(nextSizes));
+  };
+
+  const rootStyle: CSSProperties = {
+    border: '1px solid #f0f0f0',
+    borderRadius: 8,
+    display: 'flex',
+    flexDirection: resolvedOrientation === 'horizontal' ? 'row' : 'column',
+    height: 360,
+    minHeight: 0,
+    overflow: 'hidden',
+    width: '100%',
+    ...style,
+  };
+
+  const renderCollapseButton = (
+    draggerIndex: number,
+    panelIndex: number,
+    direction: 'start' | 'end',
+  ) => {
+    const panel = panels[panelIndex];
+    if (!panel?.props.collapsible) {
+      return null;
+    }
+
+    const neighborIndex = direction === 'start' ? panelIndex + 1 : panelIndex - 1;
+    const isCollapsed = (sizes[panelIndex] ?? 0) <= 1;
+    const isNeighborCollapsed = (sizes[neighborIndex] ?? 0) <= 1;
+
+    // 自己折叠后隐藏；对侧面板折叠后也隐藏（避免与展开按钮重复/语义冲突）
+    if (isCollapsed || isNeighborCollapsed) {
+      return null;
+    }
+
+    // 展开时箭头指向面板将被折叠到的方向
+    const Icon =
+      resolvedOrientation === 'horizontal'
+        ? direction === 'start'
+          ? LeftOutlined
+          : RightOutlined
+        : direction === 'start'
+        ? UpOutlined
+        : DownOutlined;
+
+    return (
+      <button
+        aria-label="折叠面板"
+        title="折叠面板"
+        onClick={(event) => {
+          event.stopPropagation();
+          toggleCollapse(panelIndex, neighborIndex);
+        }}
+        style={{
+          alignItems: 'center',
+          background: '#fff',
+          border: '1px solid #d9d9d9',
+          borderRadius: 4,
+          color: '#595959',
+          cursor: 'pointer',
+          display: 'flex',
+          height: 20,
+          justifyContent: 'center',
+          padding: 0,
+          width: 20,
+          fontSize: 12,
+        }}
+        type="button"
+      >
+        <Icon />
+      </button>
+    );
+  };
+
+  // 渲染"展开"按钮：当某个面板被折叠时显示在分隔条上，箭头指向展开方向
+  const renderExpandButton = (panelIndex: number, direction: 'start' | 'end') => {
+    const panel = panels[panelIndex];
+    if (!panel?.props.collapsible) {
+      return null;
+    }
+
+    const isCollapsed = (sizes[panelIndex] ?? 0) <= 1;
+    if (!isCollapsed) {
+      return null;
+    }
+
+    const neighborIndex = direction === 'start' ? panelIndex + 1 : panelIndex - 1;
+
+    // 折叠后面板展开的方向与折叠方向相反
+    const Icon =
+      resolvedOrientation === 'horizontal'
+        ? direction === 'start'
+          ? RightOutlined // 左面板折叠后，展开方向朝右
+          : LeftOutlined // 右面板折叠后，展开方向朝左
+        : direction === 'start'
+        ? DownOutlined
+        : UpOutlined;
+
+    return (
+      <button
+        aria-label="展开面板"
+        title="展开面板"
+        onClick={(event) => {
+          event.stopPropagation();
+          toggleCollapse(panelIndex, neighborIndex);
+        }}
+        style={{
+          alignItems: 'center',
+          background: '#fff',
+          border: '1px solid #d9d9d9',
+          borderRadius: 4,
+          color: '#595959',
+          cursor: 'pointer',
+          display: 'flex',
+          height: 20,
+          justifyContent: 'center',
+          padding: 0,
+          width: 20,
+          fontSize: 12,
+        }}
+        type="button"
+      >
+        <Icon />
+      </button>
+    );
+  };
+
+  return (
+    <div className={className} ref={rootRef} style={rootStyle}>
+      {panels.map((panel, index) => {
+        const isHidden = sizes[index] <= 1;
+
+        return (
+          <React.Fragment key={index}>
+            <div
+              style={{
+                background: index % 2 ? '#fff' : '#fafafa',
+                flex: `0 0 ${sizes[index] ?? 0}px`,
+                minHeight: 0,
+                minWidth: 0,
+                overflow: 'auto',
+                padding: isHidden ? 0 : 16,
+                transition: draggingIndex === null ? 'flex-basis 0.2s ease' : undefined,
+                ...panel.props.style,
+              }}
+            >
+              {!isHidden && panel.props.children}
+            </div>
+
+            {index < panels.length - 1 && (
+              <div
+                aria-orientation={resolvedOrientation}
+                onDoubleClick={resetSizes}
+                onKeyDown={(event) => {
+                  const step = event.shiftKey ? 40 : 10;
+                  const directionMap =
+                    resolvedOrientation === 'horizontal'
+                      ? { ArrowLeft: -step, ArrowRight: step }
+                      : { ArrowUp: -step, ArrowDown: step };
+                  const delta = directionMap[event.key as keyof typeof directionMap];
+                  if (delta !== undefined) {
+                    event.preventDefault();
+                    resizePair(index, delta);
+                  }
+                }}
+                onPointerDown={(event) => startResize(index, event)}
+                onPointerEnter={() => setHoveredIndex(index)}
+                onPointerLeave={() => setHoveredIndex(null)}
+                role="separator"
+                style={{
+                  alignItems: 'center',
+                  background:
+                    hoveredIndex === index || draggingIndex === index ? '#e6f4ff' : '#f5f5f5',
+                  cursor: resolvedOrientation === 'horizontal' ? 'col-resize' : 'row-resize',
+                  display: 'flex',
+                  flex: `0 0 ${DRAGGER_SIZE}px`,
+                  justifyContent: 'center',
+                  outline: 'none',
+                  position: 'relative',
+                  userSelect: 'none',
+                  zIndex: 1,
+                }}
+                tabIndex={0}
+              >
+                <div
+                  style={{
+                    background:
+                      hoveredIndex === index || draggingIndex === index ? '#1677ff' : '#d9d9d9',
+                    borderRadius: 2,
+                    height: resolvedOrientation === 'horizontal' ? 48 : 2,
+                    width: resolvedOrientation === 'horizontal' ? 2 : 48,
+                  }}
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    display: 'flex',
+                    flexDirection: resolvedOrientation === 'horizontal' ? 'column' : 'row',
+                    gap: 2,
+                    opacity:
+                      hoveredIndex === index ||
+                      (sizes[index] ?? 0) <= 1 ||
+                      (sizes[index + 1] ?? 0) <= 1
+                        ? 1
+                        : 0,
+                    transition: 'opacity 0.15s ease',
+                    pointerEvents:
+                      hoveredIndex === index ||
+                      (sizes[index] ?? 0) <= 1 ||
+                      (sizes[index + 1] ?? 0) <= 1
+                        ? 'auto'
+                        : 'none',
+                  }}
+                >
+                  {renderCollapseButton(index, index, 'start')}
+                  {renderCollapseButton(index, index + 1, 'end')}
+                  {renderExpandButton(index, 'start')}
+                  {renderExpandButton(index + 1, 'end')}
+                </div>
+              </div>
+            )}
+          </React.Fragment>
+        );
+      })}
+    </div>
+  );
+};
+
+CustomSplitter.Panel = SplitterPanel;
+
+export default CustomSplitter;

@@ -1,0 +1,12 @@
+# 不发布到 npm 的文件
+src
+demo
+tsconfig.json
+tsup.config.ts
+vite.config.ts
+*.log
+.DS_Store
+node_modules
+.vscode
+.idea
+*.tsbuildinfo
