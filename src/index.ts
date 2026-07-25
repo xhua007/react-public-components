@@ -1,15 +1,15 @@
 // 统一入口
 export { default as CollapseBox } from '../CollapseBox';
 export type {
-  CollapseBoxProps,
-  CollapseBoxDirection,
-  CollapseBoxButtonPosition,
+	CollapseBoxProps,
+	CollapseBoxDirection,
+	CollapseBoxButtonPosition,
 } from '../CollapseBox';
 
 export { default as Splitter } from '../Splitter';
 export type {
-  SplitterProps,
-  SplitterPanelProps,
-  SplitterSize,
-  SplitterOrientation,
+	SplitterProps,
+	SplitterPanelProps,
+	SplitterSize,
+	SplitterOrientation,
 } from '../Splitter';
