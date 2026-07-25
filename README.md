@@ -170,7 +170,7 @@ export default function Demo() {
 
 1. **登录 npm**：确保已注册 npm 账号，并在终端中完成登录：
    ```bash
-   npm login
+   npm login --auth-type=web
    ```
    *检查当前登录状态：*
    ```bash
