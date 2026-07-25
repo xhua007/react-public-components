@@ -161,3 +161,66 @@ export default function Demo() {
 └── Splitter/
     └── index.tsx
 ```
+
+---
+
+## 四、发布到 npm
+
+### 1. 前置准备
+
+1. **登录 npm**：确保已注册 npm 账号，并在终端中完成登录：
+   ```bash
+   npm login
+   ```
+   *检查当前登录状态：*
+   ```bash
+   npm whoami
+   ```
+
+2. **检查镜像源**：发布必须使用 npm 官方镜像源，如果使用了国内镜像源（如淘宝/npmmirror），请切换回官方源：
+   ```bash
+   # 查看当前镜像源
+   npm config get registry
+
+   # 切换为官方源
+   npm config set registry https://registry.npmjs.org/
+   ```
+
+### 2. 更新版本号
+
+根据 [语义化版本 (SemVer)](https://semver.org/lang/zh-CN/) 规范更新 `package.json` 中的版本号：
+
+```bash
+# 小修复（Patch）：0.1.1 -> 0.1.2
+npm version patch
+
+# 新功能（Minor）：0.1.1 -> 0.2.0
+npm version minor
+
+# 破坏性更新（Major）：0.1.1 -> 1.0.0
+npm version major
+```
+
+### 3. 构建与发布
+
+推荐先在本地手动运行构建命令验证代码无误，再运行发布命令：
+
+```bash
+# 1. 手动构建打包（验证代码是否有编译错误）
+npm run build
+
+# 2. （可选）预览发布内容，检查打入包的文件列表
+npm publish --dry-run
+
+# 3. 正式发布（注意是 npm publish，不需要加 run）
+npm publish
+```
+
+> **自动化保障**：本项目已在 `package.json` 中配置了 `"prepublishOnly": "npm run build"` 生命周期钩子。即便你忘记手动运行 `npm run build`，在直接执行 `npm publish` 时，npm 也会**自动先帮你打包构建**，确保发布的始终是最新代码。
+> 
+> **提示**：如果是首发公开包，可显式指定访问级别：
+> ```bash
+> npm publish --access public
+> ```
+
+
