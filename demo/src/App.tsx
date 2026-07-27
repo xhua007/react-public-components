@@ -1,11 +1,8 @@
-import { ConfigProvider } from 'antd';
-import zhCN from 'antd/locale/zh_CN';
 import CollapseBox from '../../CollapseBox';
 import Splitter from '../../Splitter';
 
 export default function App() {
 	return (
-		<ConfigProvider locale={zhCN}>
 			<div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 32 }}>
 				<h1>组件预览</h1>
 
@@ -74,6 +71,5 @@ export default function App() {
 					</Splitter>
 				</section>
 			</div>
-		</ConfigProvider>
 	);
 }
