@@ -14,6 +14,7 @@ export interface CollapseBoxProps {
 	defaultHeight?: number | string;
 	contentPadding?: string;
 	headerHeight?: number;
+	className?: string;
 }
 
 const formatDimension = (value?: number | string): string | undefined => {
@@ -38,6 +39,7 @@ const CollapsibleBox = ({
 	defaultHeight = 300,
 	contentPadding = '16px',
 	headerHeight = 16,
+	className,
 }: CollapseBoxProps) => {
 	const [isExpanded, setIsExpanded] = useState(true);
 
@@ -93,8 +95,9 @@ const CollapsibleBox = ({
 		}
 	};
 
-	const wrapperClass =
+	const baseWrapperClass =
 		direction === 'horizontal' ? 'collapsible-wrapper horizontal' : 'collapsible-wrapper vertical';
+	const wrapperClass = className ? `${baseWrapperClass} ${className}` : baseWrapperClass;
 
 	const containerClass =
 		direction === 'horizontal' && buttonPosition === 'right'

@@ -35,6 +35,7 @@ import 'react-public-components/styles.css';
 | `defaultHeight`  | `number \| string`                       | `300`          | 容器高度（支持像素数字如 `300` 或百分比字符串如 `'50%'`）                          |
 | `contentPadding` | `string`                                 | `'16px'`       | 内容区内边距                                                                       |
 | `headerHeight`   | `number`                                 | `16`           | 头部预留高度，用于计算内容区最大高度                                               |
+| `className`      | `string`                                 | -              | 根节点自定义类名                                                                   |
 
 ### 基础用法
 
