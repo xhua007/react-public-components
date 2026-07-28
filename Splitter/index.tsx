@@ -38,7 +38,7 @@ type SplitterComponent = React.FC<SplitterProps> & {
 };
 
 const DRAGGER_SIZE = 8;
-const MIN_PANEL_SIZE = 0;
+const MIN_DRAG_SIZE = 40; // 手动拖拽调整大小时的默认最小限制 (px)
 
 const SplitterPanel: React.FC<SplitterPanelProps> = ({ children }) => <>{children}</>;
 
@@ -97,7 +97,7 @@ const CustomSplitter: SplitterComponent = ({
 	const trackSize = Math.max(0, containerSize - Math.max(0, panels.length - 1) * DRAGGER_SIZE);
 
 	const getPanelMin = useCallback(
-		(index: number) => parseSize(panels[index]?.props.min, trackSize, MIN_PANEL_SIZE),
+		(index: number) => parseSize(panels[index]?.props.min, trackSize, 0),
 		[panels, trackSize],
 	);
 
@@ -185,8 +185,7 @@ const CustomSplitter: SplitterComponent = ({
 		}
 
 		const syncSize = () => {
-			const rect = node.getBoundingClientRect();
-			setContainerSize(resolvedOrientation === 'horizontal' ? rect.width : rect.height);
+			setContainerSize(resolvedOrientation === 'horizontal' ? node.clientWidth : node.clientHeight);
 		};
 		syncSize();
 
@@ -209,21 +208,38 @@ const CustomSplitter: SplitterComponent = ({
 	const getResizedPair = useCallback(
 		(sourceSizes: number[], index: number, delta: number) => {
 			const nextSizes = [...sourceSizes];
-			const leftSize = nextSizes[index];
-			const rightSize = nextSizes[index + 1];
+			const leftPanel = panels[index];
+			const rightPanel = panels[index + 1];
+
 			const leftMin = getPanelMin(index);
 			const rightMin = getPanelMin(index + 1);
 			const leftMax = getPanelMax(index);
 			const rightMax = getPanelMax(index + 1);
-			const minDelta = Math.max(leftMin - leftSize, rightSize - rightMax);
-			const maxDelta = Math.min(leftMax - leftSize, rightSize - rightMin);
-			const safeDelta = clamp(delta, minDelta, maxDelta);
 
-			nextSizes[index] = leftSize + safeDelta;
-			nextSizes[index + 1] = rightSize - safeDelta;
+			let targetLeft = sourceSizes[index] + delta;
+			let targetRight = sourceSizes[index + 1] - delta;
+
+			// 如果面板可折叠且设置了 min > 0，当拖拽目标尺寸小于 min / 2 时可自动吸附折叠到 0
+			if (leftPanel?.props.collapsible && leftMin > 0 && targetLeft < leftMin / 2) {
+				targetLeft = 0;
+				targetRight = sourceSizes[index] + sourceSizes[index + 1];
+			} else if (rightPanel?.props.collapsible && rightMin > 0 && targetRight < rightMin / 2) {
+				targetRight = 0;
+				targetLeft = sourceSizes[index] + sourceSizes[index + 1];
+			} else {
+				const minDelta = Math.max(leftMin - sourceSizes[index], sourceSizes[index + 1] - rightMax);
+				const maxDelta = Math.min(leftMax - sourceSizes[index], sourceSizes[index + 1] - rightMin);
+				const safeDelta = clamp(delta, minDelta, maxDelta);
+
+				targetLeft = sourceSizes[index] + safeDelta;
+				targetRight = sourceSizes[index + 1] - safeDelta;
+			}
+
+			nextSizes[index] = targetLeft;
+			nextSizes[index + 1] = targetRight;
 			return normalizeToTrack(nextSizes);
 		},
-		[getPanelMax, getPanelMin, normalizeToTrack],
+		[getPanelMax, getPanelMin, normalizeToTrack, panels],
 	);
 
 	const resizePair = useCallback(
@@ -296,6 +312,7 @@ const CustomSplitter: SplitterComponent = ({
 	const rootStyle: CSSProperties = {
 		border: '1px solid #f0f0f0',
 		borderRadius: 8,
+		boxSizing: 'border-box',
 		display: 'flex',
 		flexDirection: resolvedOrientation === 'horizontal' ? 'row' : 'column',
 		height: 360,
@@ -445,12 +462,16 @@ const CustomSplitter: SplitterComponent = ({
 		<div className={className} ref={rootRef} style={rootStyle}>
 			{panels.map((panel, index) => {
 				const isHidden = sizes[index] <= 1;
+				const isLeftOrTopCollapsed = (sizes[index] ?? 0) <= 1;
+				const isRightOrBottomCollapsed = (sizes[index + 1] ?? 0) <= 1;
+				const isAnyCollapsed = isLeftOrTopCollapsed || isRightOrBottomCollapsed;
 
 				return (
 					<React.Fragment key={index}>
 						<div
 							style={{
 								background: index % 2 ? '#fff' : '#fafafa',
+								boxSizing: 'border-box',
 								flex: `0 0 ${sizes[index] ?? 0}px`,
 								minHeight: 0,
 								minWidth: 0,
@@ -466,6 +487,13 @@ const CustomSplitter: SplitterComponent = ({
 						{index < panels.length - 1 && (
 							<div
 								aria-orientation={resolvedOrientation}
+								onClick={() => {
+									if (isRightOrBottomCollapsed) {
+										toggleCollapse(index + 1, index);
+									} else if (isLeftOrTopCollapsed) {
+										toggleCollapse(index, index + 1);
+									}
+								}}
 								onDoubleClick={resetSizes}
 								onKeyDown={(event) => {
 									const step = event.shiftKey ? 40 : 10;
@@ -483,25 +511,35 @@ const CustomSplitter: SplitterComponent = ({
 								onPointerEnter={() => setHoveredIndex(index)}
 								onPointerLeave={() => setHoveredIndex(null)}
 								role="separator"
+								title={isAnyCollapsed ? '点击可展开恢复面板' : '拖动调整大小，双击重置'}
 								style={{
 									alignItems: 'center',
 									background:
-										hoveredIndex === index || draggingIndex === index ? '#e6f4ff' : '#f5f5f5',
-									cursor: resolvedOrientation === 'horizontal' ? 'col-resize' : 'row-resize',
+										hoveredIndex === index || draggingIndex === index || isAnyCollapsed
+											? '#e6f4ff'
+											: '#f5f5f5',
+									boxSizing: 'border-box',
+									cursor: isAnyCollapsed
+										? 'pointer'
+										: resolvedOrientation === 'horizontal'
+											? 'col-resize'
+											: 'row-resize',
 									display: 'flex',
 									flex: `0 0 ${DRAGGER_SIZE}px`,
 									justifyContent: 'center',
 									outline: 'none',
 									position: 'relative',
 									userSelect: 'none',
-									zIndex: 1,
+									zIndex: isAnyCollapsed ? 2 : 1,
 								}}
 								tabIndex={0}
 							>
 								<div
 									style={{
 										background:
-											hoveredIndex === index || draggingIndex === index ? '#1677ff' : '#d9d9d9',
+											hoveredIndex === index || draggingIndex === index || isAnyCollapsed
+												? '#1677ff'
+												: '#d9d9d9',
 										borderRadius: 2,
 										height: resolvedOrientation === 'horizontal' ? 48 : 2,
 										width: resolvedOrientation === 'horizontal' ? 2 : 48,
@@ -509,21 +547,23 @@ const CustomSplitter: SplitterComponent = ({
 								/>
 
 								{/* 未折叠状态下呈现折叠按钮 */}
-								<div
-									style={{
-										position: 'absolute',
-										display: 'flex',
-										flexDirection: resolvedOrientation === 'horizontal' ? 'column' : 'row',
-										gap: 4,
-										opacity: hoveredIndex === index ? 1 : 0.85,
-										transition: 'opacity 0.15s ease',
-										pointerEvents: 'auto',
-										zIndex: 5,
-									}}
-								>
-									{renderCollapseButton(index, index, 'start')}
-									{renderCollapseButton(index, index + 1, 'end')}
-								</div>
+								{!isAnyCollapsed && (
+									<div
+										style={{
+											position: 'absolute',
+											display: 'flex',
+											flexDirection: resolvedOrientation === 'horizontal' ? 'column' : 'row',
+											gap: 4,
+											opacity: hoveredIndex === index ? 1 : 0.85,
+											transition: 'opacity 0.15s ease',
+											pointerEvents: 'auto',
+											zIndex: 5,
+										}}
+									>
+										{renderCollapseButton(index, index, 'start')}
+										{renderCollapseButton(index, index + 1, 'end')}
+									</div>
+								)}
 							</div>
 						)}
 					</React.Fragment>
