@@ -115,10 +115,19 @@ const CustomSplitter: SplitterComponent = ({
 			const normalized = [...nextSizes];
 			const diff = trackSize - normalized.reduce((sum, size) => sum + size, 0);
 			const flexibleIndex = normalized.findIndex((size) => size > 0);
-			normalized[flexibleIndex === -1 ? 0 : flexibleIndex] += diff;
-			return normalized.map((size, index) => clamp(size, 0, getPanelMax(index)));
+			if (flexibleIndex !== -1) {
+				normalized[flexibleIndex] += diff;
+			}
+
+			return normalized.map((size, index) => {
+				// 折叠状态（size <= 1）保持为 0，不受 min 限制干扰
+				if (size <= 1) {
+					return 0;
+				}
+				return clamp(size, getPanelMin(index), getPanelMax(index));
+			});
 		},
-		[getPanelMax, trackSize],
+		[getPanelMax, getPanelMin, trackSize],
 	);
 
 	const buildInitialSizes = useCallback(
@@ -292,6 +301,7 @@ const CustomSplitter: SplitterComponent = ({
 		height: 360,
 		minHeight: 0,
 		overflow: 'hidden',
+		position: 'relative',
 		width: '100%',
 		...style,
 	};
@@ -346,6 +356,7 @@ const CustomSplitter: SplitterComponent = ({
 					padding: 0,
 					width: 20,
 					fontSize: 12,
+					boxShadow: '0 2px 4px rgba(0,0,0,0.08)',
 				}}
 				type="button"
 			>
@@ -354,51 +365,74 @@ const CustomSplitter: SplitterComponent = ({
 		);
 	};
 
-	// 渲染"展开"按钮：当某个面板被折叠时显示在分隔条上，箭头指向展开方向
-	const renderExpandButton = (panelIndex: number, direction: 'start' | 'end') => {
+	// 渲染处于折叠状态下的“展开”触发手柄（挂载在根容器内侧 8px 处，100% 常显、绝对不被裁剪）
+	const renderCollapsedExpandHandle = (panelIndex: number) => {
 		const panel = panels[panelIndex];
 		if (!panel?.props.collapsible) {
 			return null;
 		}
 
-		const isCollapsed = (sizes[panelIndex] ?? 0) <= 1;
+		const isCollapsed = sizes.length > 0 && (sizes[panelIndex] ?? 0) <= 1;
 		if (!isCollapsed) {
 			return null;
 		}
 
-		const neighborIndex = direction === 'start' ? panelIndex + 1 : panelIndex - 1;
+		const isFirstPanel = panelIndex === 0;
+		const neighborIndex = isFirstPanel ? panelIndex + 1 : panelIndex - 1;
 
-		// 折叠后面板展开的方向与折叠方向相反
 		const Icon =
 			resolvedOrientation === 'horizontal'
-				? direction === 'start'
-					? RightOutlined // 左面板折叠后，展开方向朝右
-					: LeftOutlined // 右面板折叠后，展开方向朝左
-				: direction === 'start'
+				? isFirstPanel
+					? RightOutlined // 左面板折叠后，图标指向右 > (展开左面板)
+					: LeftOutlined // 右面板折叠后，图标指向左 < (展开右面板)
+				: isFirstPanel
 					? DownOutlined
 					: UpOutlined;
 
+		const label =
+			resolvedOrientation === 'horizontal'
+				? isFirstPanel
+					? '展开左侧面板'
+					: '展开右侧面板'
+				: isFirstPanel
+					? '展开上方面板'
+					: '展开下方面板';
+
+		const positionStyle: CSSProperties =
+			resolvedOrientation === 'horizontal'
+				? isFirstPanel
+					? { left: 8, top: '50%', transform: 'translateY(-50%)' }
+					: { right: 8, top: '50%', transform: 'translateY(-50%)' }
+				: isFirstPanel
+					? { top: 8, left: '50%', transform: 'translateX(-50%)' }
+					: { bottom: 8, left: '50%', transform: 'translateX(-50%)' };
+
 		return (
 			<button
-				aria-label="展开面板"
-				title="展开面板"
+				aria-label={label}
+				key={`collapsed-handle-${panelIndex}`}
+				title={label}
 				onClick={(event) => {
 					event.stopPropagation();
 					toggleCollapse(panelIndex, neighborIndex);
 				}}
 				style={{
+					position: 'absolute',
 					alignItems: 'center',
 					background: '#fff',
-					border: '1px solid #d9d9d9',
+					border: '1px solid #1677ff',
 					borderRadius: 4,
-					color: '#595959',
+					color: '#1677ff',
 					cursor: 'pointer',
 					display: 'flex',
-					height: 20,
+					height: 24,
 					justifyContent: 'center',
 					padding: 0,
-					width: 20,
+					width: 24,
 					fontSize: 12,
+					boxShadow: '0 2px 8px rgba(22, 119, 255, 0.35)',
+					zIndex: 20,
+					...positionStyle,
 				}}
 				type="button"
 			>
@@ -473,37 +507,31 @@ const CustomSplitter: SplitterComponent = ({
 										width: resolvedOrientation === 'horizontal' ? 2 : 48,
 									}}
 								/>
+
+								{/* 未折叠状态下呈现折叠按钮 */}
 								<div
 									style={{
 										position: 'absolute',
 										display: 'flex',
 										flexDirection: resolvedOrientation === 'horizontal' ? 'column' : 'row',
-										gap: 2,
-										opacity:
-											hoveredIndex === index ||
-											(sizes[index] ?? 0) <= 1 ||
-											(sizes[index + 1] ?? 0) <= 1
-												? 1
-												: 0,
+										gap: 4,
+										opacity: hoveredIndex === index ? 1 : 0.85,
 										transition: 'opacity 0.15s ease',
-										pointerEvents:
-											hoveredIndex === index ||
-											(sizes[index] ?? 0) <= 1 ||
-											(sizes[index + 1] ?? 0) <= 1
-												? 'auto'
-												: 'none',
+										pointerEvents: 'auto',
+										zIndex: 5,
 									}}
 								>
 									{renderCollapseButton(index, index, 'start')}
 									{renderCollapseButton(index, index + 1, 'end')}
-									{renderExpandButton(index, 'start')}
-									{renderExpandButton(index + 1, 'end')}
 								</div>
 							</div>
 						)}
 					</React.Fragment>
 				);
 			})}
+
+			{/* 当有面板处于折叠状态时，在根容器内部边缘常显渲染展开手柄 */}
+			{panels.map((_, index) => renderCollapsedExpandHandle(index))}
 		</div>
 	);
 };
