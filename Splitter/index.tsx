@@ -208,38 +208,20 @@ const CustomSplitter: SplitterComponent = ({
 	const getResizedPair = useCallback(
 		(sourceSizes: number[], index: number, delta: number) => {
 			const nextSizes = [...sourceSizes];
-			const leftPanel = panels[index];
-			const rightPanel = panels[index + 1];
-
 			const leftMin = getPanelMin(index);
 			const rightMin = getPanelMin(index + 1);
 			const leftMax = getPanelMax(index);
 			const rightMax = getPanelMax(index + 1);
 
-			let targetLeft = sourceSizes[index] + delta;
-			let targetRight = sourceSizes[index + 1] - delta;
+			const minDelta = Math.max(leftMin - sourceSizes[index], sourceSizes[index + 1] - rightMax);
+			const maxDelta = Math.min(leftMax - sourceSizes[index], sourceSizes[index + 1] - rightMin);
+			const safeDelta = clamp(delta, minDelta, maxDelta);
 
-			// 如果面板可折叠且设置了 min > 0，当拖拽目标尺寸小于 min / 2 时可自动吸附折叠到 0
-			if (leftPanel?.props.collapsible && leftMin > 0 && targetLeft < leftMin / 2) {
-				targetLeft = 0;
-				targetRight = sourceSizes[index] + sourceSizes[index + 1];
-			} else if (rightPanel?.props.collapsible && rightMin > 0 && targetRight < rightMin / 2) {
-				targetRight = 0;
-				targetLeft = sourceSizes[index] + sourceSizes[index + 1];
-			} else {
-				const minDelta = Math.max(leftMin - sourceSizes[index], sourceSizes[index + 1] - rightMax);
-				const maxDelta = Math.min(leftMax - sourceSizes[index], sourceSizes[index + 1] - rightMin);
-				const safeDelta = clamp(delta, minDelta, maxDelta);
-
-				targetLeft = sourceSizes[index] + safeDelta;
-				targetRight = sourceSizes[index + 1] - safeDelta;
-			}
-
-			nextSizes[index] = targetLeft;
-			nextSizes[index + 1] = targetRight;
+			nextSizes[index] = sourceSizes[index] + safeDelta;
+			nextSizes[index + 1] = sourceSizes[index + 1] - safeDelta;
 			return normalizeToTrack(nextSizes);
 		},
-		[getPanelMax, getPanelMin, normalizeToTrack, panels],
+		[getPanelMax, getPanelMin, normalizeToTrack],
 	);
 
 	const resizePair = useCallback(
