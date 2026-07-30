@@ -24,6 +24,7 @@ export type SplitterPanelProps = {
 export type SplitterProps = {
 	children: ReactNode;
 	className?: string;
+	draggerSize?: number;
 	lazy?: boolean;
 	onResize?: (sizes: number[]) => void;
 	onResizeEnd?: (sizes: number[]) => void;
@@ -37,7 +38,7 @@ type SplitterComponent = React.FC<SplitterProps> & {
 	Panel: React.FC<SplitterPanelProps>;
 };
 
-const DRAGGER_SIZE = 8;
+const DEFAULT_DRAGGER_SIZE = 4;
 const MIN_DRAG_SIZE = 40; // 手动拖拽调整大小时的默认最小限制 (px)
 
 const SplitterPanel: React.FC<SplitterPanelProps> = ({ children }) => <>{children}</>;
@@ -69,6 +70,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(Math.max(val
 const CustomSplitter: SplitterComponent = ({
 	children,
 	className,
+	draggerSize = DEFAULT_DRAGGER_SIZE,
 	lazy = false,
 	onResize,
 	onResizeEnd,
@@ -94,7 +96,7 @@ const CustomSplitter: SplitterComponent = ({
 		[children],
 	);
 
-	const trackSize = Math.max(0, containerSize - Math.max(0, panels.length - 1) * DRAGGER_SIZE);
+	const trackSize = Math.max(0, containerSize - Math.max(0, panels.length - 1) * draggerSize);
 
 	const getPanelMin = useCallback(
 		(index: number) => parseSize(panels[index]?.props.min, trackSize, 0),
@@ -364,82 +366,6 @@ const CustomSplitter: SplitterComponent = ({
 		);
 	};
 
-	// 渲染处于折叠状态下的“展开”触发手柄（挂载在根容器内侧 8px 处，100% 常显、绝对不被裁剪）
-	const renderCollapsedExpandHandle = (panelIndex: number) => {
-		const panel = panels[panelIndex];
-		if (!panel?.props.collapsible) {
-			return null;
-		}
-
-		const isCollapsed = sizes.length > 0 && (sizes[panelIndex] ?? 0) <= 1;
-		if (!isCollapsed) {
-			return null;
-		}
-
-		const isFirstPanel = panelIndex === 0;
-		const neighborIndex = isFirstPanel ? panelIndex + 1 : panelIndex - 1;
-
-		const Icon =
-			resolvedOrientation === 'horizontal'
-				? isFirstPanel
-					? RightOutlined // 左面板折叠后，图标指向右 > (展开左面板)
-					: LeftOutlined // 右面板折叠后，图标指向左 < (展开右面板)
-				: isFirstPanel
-					? DownOutlined
-					: UpOutlined;
-
-		const label =
-			resolvedOrientation === 'horizontal'
-				? isFirstPanel
-					? '展开左侧面板'
-					: '展开右侧面板'
-				: isFirstPanel
-					? '展开上方面板'
-					: '展开下方面板';
-
-		const positionStyle: CSSProperties =
-			resolvedOrientation === 'horizontal'
-				? isFirstPanel
-					? { left: 8, top: '50%', transform: 'translateY(-50%)' }
-					: { right: 8, top: '50%', transform: 'translateY(-50%)' }
-				: isFirstPanel
-					? { top: 8, left: '50%', transform: 'translateX(-50%)' }
-					: { bottom: 8, left: '50%', transform: 'translateX(-50%)' };
-
-		return (
-			<button
-				aria-label={label}
-				key={`collapsed-handle-${panelIndex}`}
-				title={label}
-				onClick={(event) => {
-					event.stopPropagation();
-					toggleCollapse(panelIndex, neighborIndex);
-				}}
-				style={{
-					position: 'absolute',
-					alignItems: 'center',
-					background: '#fff',
-					border: '1px solid #1677ff',
-					borderRadius: 4,
-					color: '#1677ff',
-					cursor: 'pointer',
-					display: 'flex',
-					height: 24,
-					justifyContent: 'center',
-					padding: 0,
-					width: 24,
-					fontSize: 12,
-					boxShadow: '0 2px 8px rgba(22, 119, 255, 0.35)',
-					zIndex: 20,
-					...positionStyle,
-				}}
-				type="button"
-			>
-				<Icon />
-			</button>
-		);
-	};
-
 	return (
 		<div className={className} ref={rootRef} style={rootStyle}>
 			{panels.map((panel, index) => {
@@ -469,13 +395,6 @@ const CustomSplitter: SplitterComponent = ({
 						{index < panels.length - 1 && (
 							<div
 								aria-orientation={resolvedOrientation}
-								onClick={() => {
-									if (isRightOrBottomCollapsed) {
-										toggleCollapse(index + 1, index);
-									} else if (isLeftOrTopCollapsed) {
-										toggleCollapse(index, index + 1);
-									}
-								}}
 								onDoubleClick={resetSizes}
 								onKeyDown={(event) => {
 									const step = event.shiftKey ? 40 : 10;
@@ -493,21 +412,20 @@ const CustomSplitter: SplitterComponent = ({
 								onPointerEnter={() => setHoveredIndex(index)}
 								onPointerLeave={() => setHoveredIndex(null)}
 								role="separator"
-								title={isAnyCollapsed ? '点击可展开恢复面板' : '拖动调整大小，双击重置'}
+								title="拖动调整大小，双击重置"
 								style={{
 									alignItems: 'center',
 									background:
-										hoveredIndex === index || draggingIndex === index || isAnyCollapsed
+										hoveredIndex === index || draggingIndex === index
 											? '#e6f4ff'
 											: '#f5f5f5',
 									boxSizing: 'border-box',
-									cursor: isAnyCollapsed
-										? 'pointer'
-										: resolvedOrientation === 'horizontal'
+									cursor:
+										resolvedOrientation === 'horizontal'
 											? 'col-resize'
 											: 'row-resize',
 									display: 'flex',
-									flex: `0 0 ${DRAGGER_SIZE}px`,
+									flex: `0 0 ${draggerSize}px`,
 									justifyContent: 'center',
 									outline: 'none',
 									position: 'relative',
@@ -528,7 +446,7 @@ const CustomSplitter: SplitterComponent = ({
 									}}
 								/>
 
-								{/* 未折叠状态下呈现折叠按钮 */}
+								{/* 未折叠状态下呈现折叠按钮（默认隐藏，鼠标移动到拖拽区域时显示） */}
 								{!isAnyCollapsed && (
 									<div
 										style={{
@@ -536,9 +454,10 @@ const CustomSplitter: SplitterComponent = ({
 											display: 'flex',
 											flexDirection: resolvedOrientation === 'horizontal' ? 'column' : 'row',
 											gap: 4,
-											opacity: hoveredIndex === index ? 1 : 0.85,
+											opacity: hoveredIndex === index || draggingIndex === index ? 1 : 0,
+											pointerEvents:
+												hoveredIndex === index || draggingIndex === index ? 'auto' : 'none',
 											transition: 'opacity 0.15s ease',
-											pointerEvents: 'auto',
 											zIndex: 5,
 										}}
 									>
@@ -546,14 +465,71 @@ const CustomSplitter: SplitterComponent = ({
 										{renderCollapseButton(index, index + 1, 'end')}
 									</div>
 								)}
+
+								{/* 折叠状态下呈现展开按钮（默认隐藏，鼠标移动到拖拽区域时显示，且仅点击 icon 展开） */}
+								{isAnyCollapsed && (
+									<div
+										style={{
+											position: 'absolute',
+											display: 'flex',
+											alignItems: 'center',
+											justifyContent: 'center',
+											opacity: hoveredIndex === index || draggingIndex === index ? 1 : 0,
+											pointerEvents:
+												hoveredIndex === index || draggingIndex === index ? 'auto' : 'none',
+											transition: 'opacity 0.15s ease',
+											zIndex: 5,
+										}}
+									>
+										{(() => {
+											const ExpandIcon =
+												resolvedOrientation === 'horizontal'
+													? isLeftOrTopCollapsed
+														? RightOutlined
+														: LeftOutlined
+													: isLeftOrTopCollapsed
+														? DownOutlined
+														: UpOutlined;
+
+											const targetIndex = isLeftOrTopCollapsed ? index : index + 1;
+											const neighborIndex = isLeftOrTopCollapsed ? index + 1 : index;
+
+											return (
+												<button
+													aria-label="展开面板"
+													title="展开面板"
+													onClick={(event) => {
+														event.stopPropagation();
+														toggleCollapse(targetIndex, neighborIndex);
+													}}
+													style={{
+														alignItems: 'center',
+														background: '#fff',
+														border: '1px solid #1677ff',
+														borderRadius: 4,
+														color: '#1677ff',
+														cursor: 'pointer',
+														display: 'flex',
+														height: 20,
+														justifyContent: 'center',
+														padding: 0,
+														width: 20,
+														fontSize: 12,
+														boxShadow: '0 2px 4px rgba(0,0,0,0.12)',
+													}}
+													type="button"
+												>
+													<ExpandIcon />
+												</button>
+											);
+										})()}
+									</div>
+								)}
 							</div>
 						)}
 					</React.Fragment>
 				);
 			})}
-
-			{/* 当有面板处于折叠状态时，在根容器内部边缘常显渲染展开手柄 */}
-			{panels.map((_, index) => renderCollapsedExpandHandle(index))}
 		</div>
 	);
 };
