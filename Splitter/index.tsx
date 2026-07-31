@@ -336,6 +336,8 @@ const CustomSplitter: SplitterComponent = ({
 					? UpOutlined
 					: DownOutlined;
 
+		const isHorizontal = resolvedOrientation === 'horizontal';
+
 		return (
 			<button
 				aria-label="折叠面板"
@@ -346,20 +348,29 @@ const CustomSplitter: SplitterComponent = ({
 				}}
 				style={{
 					alignItems: 'center',
-					background: '#fff',
-					border: '1px solid #d9d9d9',
-					borderRadius: 4,
+					background: '#f3f4f6',
+					border: '1px solid #e5e7eb',
+					borderRadius: 3,
 					color: '#595959',
 					cursor: 'pointer',
 					display: 'flex',
-					height: 20,
+					height: isHorizontal ? 36 : 14,
+					width: isHorizontal ? 14 : 36,
 					justifyContent: 'center',
 					padding: 0,
-					width: 20,
-					fontSize: 12,
-					boxShadow: '0 2px 4px rgba(0,0,0,0.08)',
+					fontSize: 10,
+					boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+					transition: 'all 0.2s ease',
 				}}
 				type="button"
+				onMouseEnter={(e) => {
+					e.currentTarget.style.background = '#e5e7eb';
+					e.currentTarget.style.color = '#1f2937';
+				}}
+				onMouseLeave={(e) => {
+					e.currentTarget.style.background = '#f3f4f6';
+					e.currentTarget.style.color = '#595959';
+				}}
 			>
 				<Icon />
 			</button>
@@ -412,16 +423,17 @@ const CustomSplitter: SplitterComponent = ({
 								onPointerEnter={() => setHoveredIndex(index)}
 								onPointerLeave={() => setHoveredIndex(null)}
 								role="separator"
-								title="拖动调整大小，双击重置"
+								title={isAnyCollapsed ? undefined : '拖动调整大小，双击重置'}
 								style={{
 									alignItems: 'center',
 									background:
-										hoveredIndex === index || draggingIndex === index
+										!isAnyCollapsed && (hoveredIndex === index || draggingIndex === index)
 											? '#e6f4ff'
 											: '#f5f5f5',
 									boxSizing: 'border-box',
-									cursor:
-										resolvedOrientation === 'horizontal'
+									cursor: isAnyCollapsed
+										? 'default'
+										: resolvedOrientation === 'horizontal'
 											? 'col-resize'
 											: 'row-resize',
 									display: 'flex',
@@ -434,19 +446,22 @@ const CustomSplitter: SplitterComponent = ({
 								}}
 								tabIndex={0}
 							>
-								<div
-									style={{
-										background:
-											hoveredIndex === index || draggingIndex === index || isAnyCollapsed
-												? '#1677ff'
-												: '#d9d9d9',
-										borderRadius: 2,
-										height: resolvedOrientation === 'horizontal' ? 48 : 2,
-										width: resolvedOrientation === 'horizontal' ? 2 : 48,
-									}}
-								/>
+								{/* 仅在未折叠状态下呈现拖拽指示线 */}
+								{!isAnyCollapsed && (
+									<div
+										style={{
+											background:
+												hoveredIndex === index || draggingIndex === index
+													? '#1677ff'
+													: '#d9d9d9',
+											borderRadius: 2,
+											height: resolvedOrientation === 'horizontal' ? 48 : 2,
+											width: resolvedOrientation === 'horizontal' ? 2 : 48,
+										}}
+									/>
+								)}
 
-								{/* 未折叠状态下呈现折叠按钮（默认隐藏，鼠标移动到拖拽区域时显示） */}
+								{/* 未折叠状态下呈现折叠按钮（鼠标移动到拖拽区域时显示） */}
 								{!isAnyCollapsed && (
 									<div
 										style={{
@@ -466,7 +481,7 @@ const CustomSplitter: SplitterComponent = ({
 									</div>
 								)}
 
-								{/* 折叠状态下呈现展开按钮（默认隐藏，鼠标移动到拖拽区域时显示，且仅点击 icon 展开） */}
+								{/* 折叠状态下呈现展开按钮（常态保持显示） */}
 								{isAnyCollapsed && (
 									<div
 										style={{
@@ -474,11 +489,13 @@ const CustomSplitter: SplitterComponent = ({
 											display: 'flex',
 											alignItems: 'center',
 											justifyContent: 'center',
-											opacity: hoveredIndex === index || draggingIndex === index ? 1 : 0,
-											pointerEvents:
-												hoveredIndex === index || draggingIndex === index ? 'auto' : 'none',
-											transition: 'opacity 0.15s ease',
+											opacity: 1,
+											pointerEvents: 'auto',
 											zIndex: 5,
+											transform:
+												resolvedOrientation === 'horizontal'
+													? `translate(${isLeftOrTopCollapsed ? '4px' : '-4px'}, -50%)`
+													: `translate(-50%, ${isLeftOrTopCollapsed ? '4px' : '-4px'})`,
 										}}
 									>
 										{(() => {
@@ -493,6 +510,7 @@ const CustomSplitter: SplitterComponent = ({
 
 											const targetIndex = isLeftOrTopCollapsed ? index : index + 1;
 											const neighborIndex = isLeftOrTopCollapsed ? index + 1 : index;
+											const isHorizontal = resolvedOrientation === 'horizontal';
 
 											return (
 												<button
@@ -504,20 +522,29 @@ const CustomSplitter: SplitterComponent = ({
 													}}
 													style={{
 														alignItems: 'center',
-														background: '#fff',
-														border: '1px solid #1677ff',
-														borderRadius: 4,
-														color: '#1677ff',
+														background: '#f3f4f6',
+														border: '1px solid #e5e7eb',
+														borderRadius: 3,
+														color: '#595959',
 														cursor: 'pointer',
 														display: 'flex',
-														height: 20,
+														height: isHorizontal ? 40 : 14,
+														width: isHorizontal ? 14 : 40,
 														justifyContent: 'center',
 														padding: 0,
-														width: 20,
-														fontSize: 12,
-														boxShadow: '0 2px 4px rgba(0,0,0,0.12)',
+														fontSize: 10,
+														boxShadow: '0 1px 3px rgba(0, 0, 0, 0.08)',
+														transition: 'all 0.2s ease',
 													}}
 													type="button"
+													onMouseEnter={(e) => {
+														e.currentTarget.style.background = '#e5e7eb';
+														e.currentTarget.style.color = '#1f2937';
+													}}
+													onMouseLeave={(e) => {
+														e.currentTarget.style.background = '#f3f4f6';
+														e.currentTarget.style.color = '#595959';
+													}}
 												>
 													<ExpandIcon />
 												</button>
