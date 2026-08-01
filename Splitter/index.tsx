@@ -82,7 +82,6 @@ const CustomSplitter: SplitterComponent = ({
 	const resolvedOrientation = orientation ?? (vertical ? 'vertical' : 'horizontal');
 	const rootRef = useRef<HTMLDivElement>(null);
 	const sizesRef = useRef<number[]>([]);
-	const lastNonZeroSizesRef = useRef<number[]>([]);
 	const [containerSize, setContainerSize] = useState(0);
 	const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -168,11 +167,6 @@ const CustomSplitter: SplitterComponent = ({
 			const normalized = normalizeToTrack(nextSizes);
 			setSizes(normalized);
 			sizesRef.current = normalized;
-			normalized.forEach((size, index) => {
-				if (size > 1) {
-					lastNonZeroSizesRef.current[index] = size;
-				}
-			});
 			if (notify) {
 				onResize?.(roundSizes(normalized));
 			}
@@ -200,12 +194,9 @@ const CustomSplitter: SplitterComponent = ({
 		setSizes((previous) => {
 			const nextSizes = buildInitialSizes(previous);
 			sizesRef.current = nextSizes;
-			lastNonZeroSizesRef.current = nextSizes.map((size) =>
-				Math.max(size, trackSize / Math.max(panels.length, 1)),
-			);
 			return nextSizes;
 		});
-	}, [buildInitialSizes, panels.length, trackSize]);
+	}, [buildInitialSizes]);
 
 	const getResizedPair = useCallback(
 		(sourceSizes: number[], index: number, delta: number) => {
@@ -272,14 +263,15 @@ const CustomSplitter: SplitterComponent = ({
 		const nextSizes = [...sizesRef.current];
 
 		if (nextSizes[index] > 1) {
-			lastNonZeroSizesRef.current[index] = nextSizes[index];
 			nextSizes[neighborIndex] += nextSizes[index];
 			nextSizes[index] = 0;
 		} else {
-			const restoredSize =
-				lastNonZeroSizesRef.current[index] ||
+			const initialSizes = buildInitialSizes();
+			const initialSize =
+				initialSizes[index] ??
 				parseSize(panels[index].props.defaultSize, trackSize, trackSize / panels.length);
-			nextSizes[index] = clamp(restoredSize, getPanelMin(index), getPanelMax(index));
+			const restoredSize = clamp(initialSize, getPanelMin(index), getPanelMax(index));
+			nextSizes[index] = restoredSize;
 			nextSizes[neighborIndex] = Math.max(0, nextSizes[neighborIndex] - nextSizes[index]);
 		}
 
@@ -348,14 +340,14 @@ const CustomSplitter: SplitterComponent = ({
 				}}
 				style={{
 					alignItems: 'center',
-					background: '#f3f4f6',
-					border: '1px solid #e5e7eb',
+					background: '#fff',
+					border: '1px solid #d9d9d9',
 					borderRadius: 3,
 					color: '#595959',
 					cursor: 'pointer',
 					display: 'flex',
-					height: isHorizontal ? 36 : 14,
-					width: isHorizontal ? 14 : 36,
+					height: isHorizontal ? 40 : 14,
+					width: isHorizontal ? 14 : 40,
 					justifyContent: 'center',
 					padding: 0,
 					fontSize: 10,
@@ -368,7 +360,7 @@ const CustomSplitter: SplitterComponent = ({
 					e.currentTarget.style.color = '#1f2937';
 				}}
 				onMouseLeave={(e) => {
-					e.currentTarget.style.background = '#f3f4f6';
+					e.currentTarget.style.background = '#fff';
 					e.currentTarget.style.color = '#595959';
 				}}
 			>
@@ -423,17 +415,16 @@ const CustomSplitter: SplitterComponent = ({
 								onPointerEnter={() => setHoveredIndex(index)}
 								onPointerLeave={() => setHoveredIndex(null)}
 								role="separator"
-								title={isAnyCollapsed ? undefined : '拖动调整大小，双击重置'}
+								title="拖动调整大小，双击重置"
 								style={{
 									alignItems: 'center',
 									background:
-										!isAnyCollapsed && (hoveredIndex === index || draggingIndex === index)
+										hoveredIndex === index || draggingIndex === index
 											? '#e6f4ff'
 											: '#f5f5f5',
 									boxSizing: 'border-box',
-									cursor: isAnyCollapsed
-										? 'default'
-										: resolvedOrientation === 'horizontal'
+									cursor:
+										resolvedOrientation === 'horizontal'
 											? 'col-resize'
 											: 'row-resize',
 									display: 'flex',
@@ -446,8 +437,8 @@ const CustomSplitter: SplitterComponent = ({
 								}}
 								tabIndex={0}
 							>
-								{/* 仅在未折叠状态下呈现拖拽指示线 */}
-								{!isAnyCollapsed && (
+								{/* 呈现拖拽指示线 */}
+								{(hoveredIndex === index || draggingIndex === index || !isAnyCollapsed) && (
 									<div
 										style={{
 											background:
@@ -455,20 +446,25 @@ const CustomSplitter: SplitterComponent = ({
 													? '#1677ff'
 													: '#d9d9d9',
 											borderRadius: 2,
-											height: resolvedOrientation === 'horizontal' ? 48 : 2,
-											width: resolvedOrientation === 'horizontal' ? 2 : 48,
+											height: resolvedOrientation === 'horizontal' ? 40 : 2,
+											width: resolvedOrientation === 'horizontal' ? 2 : 40,
 										}}
 									/>
 								)}
 
-								{/* 未折叠状态下呈现折叠按钮（鼠标移动到拖拽区域时显示） */}
+								{/* 未折叠状态下呈现折叠按钮（鼠标移动到拖拽区域时显示，左右并排） */}
 								{!isAnyCollapsed && (
 									<div
 										style={{
 											position: 'absolute',
+											top: '50%',
+											left: '50%',
+											transform: 'translate(-50%, -50%)',
 											display: 'flex',
-											flexDirection: resolvedOrientation === 'horizontal' ? 'column' : 'row',
-											gap: 4,
+											flexDirection: resolvedOrientation === 'horizontal' ? 'row' : 'column',
+											alignItems: 'center',
+											justifyContent: 'center',
+											gap: 2,
 											opacity: hoveredIndex === index || draggingIndex === index ? 1 : 0,
 											pointerEvents:
 												hoveredIndex === index || draggingIndex === index ? 'auto' : 'none',
@@ -481,11 +477,15 @@ const CustomSplitter: SplitterComponent = ({
 									</div>
 								)}
 
-								{/* 折叠状态下呈现展开按钮（常态保持显示） */}
+								{/* 折叠状态下呈现展开按钮（常态保持显示，精准垂直居中） */}
 								{isAnyCollapsed && (
 									<div
 										style={{
 											position: 'absolute',
+											top: resolvedOrientation === 'horizontal' ? '50%' : isLeftOrTopCollapsed ? 0 : undefined,
+											bottom: resolvedOrientation === 'horizontal' ? undefined : isRightOrBottomCollapsed ? 0 : undefined,
+											left: resolvedOrientation === 'horizontal' ? (isLeftOrTopCollapsed ? 0 : undefined) : '50%',
+											right: resolvedOrientation === 'horizontal' ? (isRightOrBottomCollapsed ? 0 : undefined) : undefined,
 											display: 'flex',
 											alignItems: 'center',
 											justifyContent: 'center',
