@@ -125,6 +125,10 @@ const CustomSplitter: SplitterComponent = ({
 				if (size <= 1) {
 					return 0;
 				}
+				// 拖拽过程从 0 拖出时，允许在 0 到 min 之间平滑过渡，不被强行跳变到 min
+				if (size < getPanelMin(index)) {
+					return size;
+				}
 				return clamp(size, getPanelMin(index), getPanelMax(index));
 			});
 		},
@@ -201,8 +205,11 @@ const CustomSplitter: SplitterComponent = ({
 	const getResizedPair = useCallback(
 		(sourceSizes: number[], index: number, delta: number) => {
 			const nextSizes = [...sourceSizes];
-			const leftMin = getPanelMin(index);
-			const rightMin = getPanelMin(index + 1);
+			const isLeftCollapsed = sourceSizes[index] <= 1;
+			const isRightCollapsed = sourceSizes[index + 1] <= 1;
+
+			const leftMin = isLeftCollapsed ? 0 : getPanelMin(index);
+			const rightMin = isRightCollapsed ? 0 : getPanelMin(index + 1);
 			const leftMax = getPanelMax(index);
 			const rightMax = getPanelMax(index + 1);
 
@@ -386,13 +393,25 @@ const CustomSplitter: SplitterComponent = ({
 								flex: `0 0 ${sizes[index] ?? 0}px`,
 								minHeight: 0,
 								minWidth: 0,
-								overflow: 'auto',
-								padding: isHidden ? 0 : 16,
+								overflow: 'hidden',
+								position: 'relative',
 								transition: draggingIndex === null ? 'flex-basis 0.2s ease' : undefined,
 								...panel.props.style,
 							}}
 						>
-							{!isHidden && panel.props.children}
+							{!isHidden && (
+								<div
+									style={{
+										boxSizing: 'border-box',
+										height: '100%',
+										overflow: 'auto',
+										padding: (sizes[index] ?? 0) < 32 ? 0 : 16,
+										width: '100%',
+									}}
+								>
+									{panel.props.children}
+								</div>
+							)}
 						</div>
 
 						{index < panels.length - 1 && (
