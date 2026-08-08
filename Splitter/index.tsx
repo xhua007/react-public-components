@@ -10,15 +10,47 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 export type SplitterSize = number | `${number}%`;
 export type SplitterOrientation = 'horizontal' | 'vertical';
 
+export type SplitterCollapsible =
+	| boolean
+	| {
+			start?: boolean;
+			end?: boolean;
+			showCollapsibleIcon?: boolean | 'auto';
+	  };
+
 export type SplitterPanelProps = {
 	children?: ReactNode;
-	collapsible?: boolean;
+	collapsible?: SplitterCollapsible;
 	defaultSize?: SplitterSize;
 	max?: SplitterSize;
 	min?: SplitterSize;
 	resizable?: boolean;
 	size?: SplitterSize;
 	style?: CSSProperties;
+};
+
+export interface ResolvedCollapsible {
+	start: boolean;
+	end: boolean;
+	showCollapsibleIcon: boolean | 'auto';
+}
+
+const getCollapsibleConfig = (collapsible?: SplitterCollapsible): ResolvedCollapsible => {
+	if (!collapsible) {
+		return { start: false, end: false, showCollapsibleIcon: 'auto' };
+	}
+	if (typeof collapsible === 'boolean') {
+		return {
+			start: collapsible,
+			end: collapsible,
+			showCollapsibleIcon: collapsible ? true : 'auto',
+		};
+	}
+	return {
+		start: collapsible.start ?? false,
+		end: collapsible.end ?? false,
+		showCollapsibleIcon: collapsible.showCollapsibleIcon ?? true,
+	};
 };
 
 export type SplitterProps = {
@@ -85,6 +117,7 @@ const CustomSplitter: SplitterComponent = ({
 	const [containerSize, setContainerSize] = useState(0);
 	const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+	const [hoveredCollapsePanelIndex, setHoveredCollapsePanelIndex] = useState<number | null>(null);
 	const [sizes, setSizes] = useState<number[]>([]);
 
 	const panels = useMemo(
@@ -312,7 +345,10 @@ const CustomSplitter: SplitterComponent = ({
 		direction: 'start' | 'end',
 	) => {
 		const panel = panels[panelIndex];
-		if (!panel?.props.collapsible) {
+		const config = getCollapsibleConfig(panel?.props.collapsible);
+		const isAllowed = direction === 'start' ? config.start : config.end;
+
+		if (!isAllowed || config.showCollapsibleIcon === false) {
 			return null;
 		}
 
@@ -336,11 +372,24 @@ const CustomSplitter: SplitterComponent = ({
 					: DownOutlined;
 
 		const isHorizontal = resolvedOrientation === 'horizontal';
+		const isAlwaysShow = config.showCollapsibleIcon === true;
+		const isHoveredOrDragging = hoveredIndex === draggerIndex || draggingIndex === draggerIndex;
+		const opacity = isAlwaysShow || isHoveredOrDragging ? 1 : 0;
+		const pointerEvents = isAlwaysShow || isHoveredOrDragging ? 'auto' : 'none';
+
+		const buttonTitle =
+			resolvedOrientation === 'horizontal'
+				? direction === 'start'
+					? '折叠左侧面板'
+					: '折叠右侧面板'
+				: direction === 'start'
+					? '折叠上方面板'
+					: '折叠下方面板';
 
 		return (
 			<button
-				aria-label="折叠面板"
-				title="折叠面板"
+				aria-label={buttonTitle}
+				title={buttonTitle}
 				onClick={(event) => {
 					event.stopPropagation();
 					toggleCollapse(panelIndex, neighborIndex);
@@ -360,15 +409,19 @@ const CustomSplitter: SplitterComponent = ({
 					fontSize: 10,
 					boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
 					transition: 'all 0.2s ease',
+					opacity,
+					pointerEvents,
 				}}
 				type="button"
 				onMouseEnter={(e) => {
 					e.currentTarget.style.background = '#e5e7eb';
 					e.currentTarget.style.color = '#1f2937';
+					setHoveredCollapsePanelIndex(panelIndex);
 				}}
 				onMouseLeave={(e) => {
 					e.currentTarget.style.background = '#fff';
 					e.currentTarget.style.color = '#595959';
+					setHoveredCollapsePanelIndex(null);
 				}}
 			>
 				<Icon />
@@ -395,7 +448,12 @@ const CustomSplitter: SplitterComponent = ({
 								minWidth: 0,
 								overflow: 'hidden',
 								position: 'relative',
-								transition: draggingIndex === null ? 'flex-basis 0.2s ease' : undefined,
+								boxShadow:
+									hoveredCollapsePanelIndex === index ? 'inset 0 0 0 2px #1677ff' : undefined,
+								transition:
+									draggingIndex === null
+										? 'box-shadow 0.2s ease, flex-basis 0.2s ease'
+										: undefined,
 								...panel.props.style,
 							}}
 						>
@@ -471,7 +529,7 @@ const CustomSplitter: SplitterComponent = ({
 									/>
 								)}
 
-								{/* 未折叠状态下呈现折叠按钮（鼠标移动到拖拽区域时显示，左右并排） */}
+								{/* 未折叠状态下呈现折叠按钮 */}
 								{!isAnyCollapsed && (
 									<div
 										style={{
@@ -484,15 +542,31 @@ const CustomSplitter: SplitterComponent = ({
 											alignItems: 'center',
 											justifyContent: 'center',
 											gap: 2,
-											opacity: hoveredIndex === index || draggingIndex === index ? 1 : 0,
-											pointerEvents:
-												hoveredIndex === index || draggingIndex === index ? 'auto' : 'none',
-											transition: 'opacity 0.15s ease',
 											zIndex: 5,
 										}}
 									>
-										{renderCollapseButton(index, index, 'start')}
-										{renderCollapseButton(index, index + 1, 'end')}
+										<div
+											style={{
+												alignItems: 'center',
+												display: 'flex',
+												justifyContent: 'flex-end',
+												minHeight: resolvedOrientation === 'horizontal' ? undefined : 14,
+												minWidth: resolvedOrientation === 'horizontal' ? 14 : undefined,
+											}}
+										>
+											{renderCollapseButton(index, index, 'start')}
+										</div>
+										<div
+											style={{
+												alignItems: 'center',
+												display: 'flex',
+												justifyContent: 'flex-start',
+												minHeight: resolvedOrientation === 'horizontal' ? undefined : 14,
+												minWidth: resolvedOrientation === 'horizontal' ? 14 : undefined,
+											}}
+										>
+											{renderCollapseButton(index, index + 1, 'end')}
+										</div>
 									</div>
 								)}
 
@@ -518,6 +592,13 @@ const CustomSplitter: SplitterComponent = ({
 										}}
 									>
 										{(() => {
+											const targetIndex = isLeftOrTopCollapsed ? index : index + 1;
+											const targetPanel = panels[targetIndex];
+											const config = getCollapsibleConfig(targetPanel?.props.collapsible);
+											if (config.showCollapsibleIcon === false) {
+												return null;
+											}
+
 											const ExpandIcon =
 												resolvedOrientation === 'horizontal'
 													? isLeftOrTopCollapsed
@@ -527,14 +608,22 @@ const CustomSplitter: SplitterComponent = ({
 														? DownOutlined
 														: UpOutlined;
 
-											const targetIndex = isLeftOrTopCollapsed ? index : index + 1;
 											const neighborIndex = isLeftOrTopCollapsed ? index + 1 : index;
 											const isHorizontal = resolvedOrientation === 'horizontal';
 
+											const expandTitle =
+												resolvedOrientation === 'horizontal'
+													? isLeftOrTopCollapsed
+														? '展开左侧面板'
+														: '展开右侧面板'
+													: isLeftOrTopCollapsed
+														? '展开上方面板'
+														: '展开下方面板';
+
 											return (
 												<button
-													aria-label="展开面板"
-													title="展开面板"
+													aria-label={expandTitle}
+													title={expandTitle}
 													onClick={(event) => {
 														event.stopPropagation();
 														toggleCollapse(targetIndex, neighborIndex);
@@ -559,10 +648,12 @@ const CustomSplitter: SplitterComponent = ({
 													onMouseEnter={(e) => {
 														e.currentTarget.style.background = '#e5e7eb';
 														e.currentTarget.style.color = '#1f2937';
+														setHoveredCollapsePanelIndex(targetIndex);
 													}}
 													onMouseLeave={(e) => {
 														e.currentTarget.style.background = '#f3f4f6';
 														e.currentTarget.style.color = '#595959';
+														setHoveredCollapsePanelIndex(null);
 													}}
 												>
 													<ExpandIcon />

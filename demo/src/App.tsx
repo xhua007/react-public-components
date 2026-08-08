@@ -59,7 +59,25 @@ export default function App() {
 				</section>
 
 				<section>
-					<h2>6. Splitter · 垂直分屏</h2>
+					<h2>6. Splitter · 三面板水平分屏（全面板可折叠）</h2>
+					<Splitter style={{ height: 360 }}>
+						<Splitter.Panel collapsible={{ start: true, end: true, showCollapsibleIcon: true }}>
+							<h3>左侧面板</h3>
+							<p>可拖动分隔条调整宽度，点击分隔条上的按钮可折叠。</p>
+						</Splitter.Panel>
+						<Splitter.Panel collapsible={{ start: true, end: true, showCollapsibleIcon: true }}>
+							<h3>中侧面板</h3>
+							<p>双击分隔条可重置为初始尺寸。</p>
+						</Splitter.Panel>
+						<Splitter.Panel collapsible={{ start: true, end: true, showCollapsibleIcon: true }}>
+							<h3>右侧面板</h3>
+							<p>双击分隔条可重置为初始尺寸。</p>	
+						</Splitter.Panel>
+					</Splitter>
+				</section>
+
+				<section>
+					<h2>7. Splitter · 垂直分屏</h2>
 					<Splitter orientation="vertical" style={{ height: 360 }}>
 						<Splitter.Panel defaultSize="30%" min="10%" collapsible>
 							<h3>上方面板</h3>
@@ -67,6 +85,7 @@ export default function App() {
 						</Splitter.Panel>
 						<Splitter.Panel collapsible>
 							<h3>下方面板</h3>
+							<p>双击分隔条可重置为初始尺寸。</p>
 						</Splitter.Panel>
 					</Splitter>
 				</section>

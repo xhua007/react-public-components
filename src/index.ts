@@ -10,6 +10,7 @@ export { default as Splitter } from '../Splitter';
 export type {
 	SplitterProps,
 	SplitterPanelProps,
+	SplitterCollapsible,
 	SplitterSize,
 	SplitterOrientation,
 } from '../Splitter';

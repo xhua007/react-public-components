@@ -101,7 +101,7 @@ import { Splitter } from 'react-public-components';
 | `defaultSize` | `number \| '${number}%'` | -       | 初始尺寸（未设置时按剩余空间平均分配）                    |
 | `min`         | `number \| '${number}%'` | `0`     | 最小尺寸                                                  |
 | `max`         | `number \| '${number}%'` | -       | 最大尺寸                                                  |
-| `collapsible` | `boolean`                | `false` | 是否显示折叠按钮                                          |
+| `collapsible` | `boolean \| { start?: boolean; end?: boolean; showCollapsibleIcon?: boolean \| 'auto' }` | `false` | 是否允许折叠面板。支持配置指定折叠方向（`start`/`end`）及图标显示策略（`showCollapsibleIcon`） |
 | `resizable`   | `boolean`                | `true`  | 是否允许拖拽调整（两侧任一为 `false` 都会禁用对应分隔条） |
 | `style`       | `CSSProperties`          | -       | 面板自定义样式                                            |
 
