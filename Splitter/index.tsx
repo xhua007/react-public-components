@@ -58,6 +58,7 @@ export type SplitterProps = {
 	className?: string;
 	draggerSize?: number;
 	lazy?: boolean;
+	onCollapse?: (collapsed: boolean[], sizes: number[]) => void;
 	onResize?: (sizes: number[]) => void;
 	onResizeEnd?: (sizes: number[]) => void;
 	onResizeStart?: (sizes: number[]) => void;
@@ -107,6 +108,7 @@ const CustomSplitter: SplitterComponent = ({
 	onResize,
 	onResizeEnd,
 	onResizeStart,
+	onCollapse,
 	orientation,
 	style,
 	vertical = false,
@@ -292,7 +294,13 @@ const CustomSplitter: SplitterComponent = ({
 			if (lazy) {
 				updateSizes(latestSizes, true);
 			}
-			onResizeEnd?.(roundSizes(sizesRef.current));
+			const currentSizes = roundSizes(sizesRef.current);
+			const currentCollapsed = sizesRef.current.map((size) => size <= 1);
+			const startCollapsed = startSizes.map((size) => size <= 1);
+			if (currentCollapsed.some((c, i) => c !== startCollapsed[i])) {
+				onCollapse?.(currentCollapsed, currentSizes);
+			}
+			onResizeEnd?.(currentSizes);
 		};
 
 		document.addEventListener('pointermove', handlePointerMove);
@@ -316,13 +324,22 @@ const CustomSplitter: SplitterComponent = ({
 		}
 
 		updateSizes(nextSizes);
-		onResizeEnd?.(roundSizes(sizesRef.current));
+		const currentSizes = roundSizes(sizesRef.current);
+		const currentCollapsed = sizesRef.current.map((size) => size <= 1);
+		onCollapse?.(currentCollapsed, currentSizes);
+		onResizeEnd?.(currentSizes);
 	};
 
 	const resetSizes = () => {
+		const previousCollapsed = sizesRef.current.map((size) => size <= 1);
 		const nextSizes = buildInitialSizes();
 		updateSizes(nextSizes);
-		onResizeEnd?.(roundSizes(nextSizes));
+		const currentSizes = roundSizes(sizesRef.current);
+		const currentCollapsed = sizesRef.current.map((size) => size <= 1);
+		if (currentCollapsed.some((c, i) => c !== previousCollapsed[i])) {
+			onCollapse?.(currentCollapsed, currentSizes);
+		}
+		onResizeEnd?.(currentSizes);
 	};
 
 	const rootStyle: CSSProperties = {

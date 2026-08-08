@@ -60,7 +60,12 @@ export default function App() {
 
 				<section>
 					<h2>6. Splitter · 三面板水平分屏（全面板可折叠）</h2>
-					<Splitter style={{ height: 360 }}>
+					<Splitter
+						style={{ height: 360 }}
+						onCollapse={(collapsed, sizes) => {
+							console.log('onCollapse collapsed status:', collapsed, 'sizes:', sizes);
+						}}
+					>
 						<Splitter.Panel collapsible={{ start: true, end: true, showCollapsibleIcon: true }}>
 							<h3>左侧面板</h3>
 							<p>可拖动分隔条调整宽度，点击分隔条上的按钮可折叠。</p>
