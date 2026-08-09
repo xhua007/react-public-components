@@ -18,15 +18,58 @@ export type SplitterCollapsible =
 			showCollapsibleIcon?: boolean | 'auto';
 	  };
 
+/**
+ * Splitter.Panel 子面板组件属性
+ */
 export type SplitterPanelProps = {
+	/** 面板内容节点 */
 	children?: ReactNode;
+	/**
+	 * 折叠配置：
+	 * - `boolean`: 是否允许两端折叠
+	 * - `Object`: `{ start?: boolean; end?: boolean; showCollapsibleIcon?: boolean | 'auto' }`
+	 */
 	collapsible?: SplitterCollapsible;
+	/** 面板初始默认尺寸（支持数字 px 或百分比字符串如 '40%'） */
 	defaultSize?: SplitterSize;
+	/** 面板最大允许尺寸限制 */
 	max?: SplitterSize;
+	/** 面板最小允许尺寸限制 */
 	min?: SplitterSize;
+	/** 是否允许通过分隔条拖拽调整大小（默认 true） */
 	resizable?: boolean;
+	/** 面板受控尺寸 */
 	size?: SplitterSize;
+	/** 面板自定义 CSS 样式 */
 	style?: CSSProperties;
+};
+
+/**
+ * Splitter 根容器组件属性
+ */
+export type SplitterProps = {
+	/** 面板集合（必须为 Splitter.Panel） */
+	children: ReactNode;
+	/** 容器根节点自定义类名 */
+	className?: string;
+	/** 拖拽分隔条的宽度/高度（单位 px，默认 4） */
+	draggerSize?: number;
+	/** 是否在拖拽结束时才更新视图（默认 false） */
+	lazy?: boolean;
+	/** 面板展开或折叠状态改变时的回调 */
+	onCollapse?: (collapsed: boolean[], sizes: number[]) => void;
+	/** 拖拽过程中的实时尺寸变化回调 */
+	onResize?: (sizes: number[]) => void;
+	/** 拖拽结束、重置尺寸或折叠完成时的回调 */
+	onResizeEnd?: (sizes: number[]) => void;
+	/** 开始拖拽分隔条时的回调 */
+	onResizeStart?: (sizes: number[]) => void;
+	/** 分屏方向：'horizontal'（水平分屏）| 'vertical'（垂直分屏），默认 'horizontal' */
+	orientation?: SplitterOrientation;
+	/** 容器根节点自定义 CSS 样式 */
+	style?: CSSProperties;
+	/** 是否垂直分屏（orientation="vertical" 的简写形式） */
+	vertical?: boolean;
 };
 
 export interface ResolvedCollapsible {
@@ -51,20 +94,6 @@ const getCollapsibleConfig = (collapsible?: SplitterCollapsible): ResolvedCollap
 		end: collapsible.end ?? false,
 		showCollapsibleIcon: collapsible.showCollapsibleIcon ?? true,
 	};
-};
-
-export type SplitterProps = {
-	children: ReactNode;
-	className?: string;
-	draggerSize?: number;
-	lazy?: boolean;
-	onCollapse?: (collapsed: boolean[], sizes: number[]) => void;
-	onResize?: (sizes: number[]) => void;
-	onResizeEnd?: (sizes: number[]) => void;
-	onResizeStart?: (sizes: number[]) => void;
-	orientation?: SplitterOrientation;
-	style?: CSSProperties;
-	vertical?: boolean;
 };
 
 type SplitterComponent = React.FC<SplitterProps> & {
@@ -468,9 +497,7 @@ const CustomSplitter: SplitterComponent = ({
 								boxShadow:
 									hoveredCollapsePanelIndex === index ? 'inset 0 0 0 2px #1677ff' : undefined,
 								transition:
-									draggingIndex === null
-										? 'box-shadow 0.2s ease, flex-basis 0.2s ease'
-										: undefined,
+									draggingIndex === null ? 'box-shadow 0.2s ease, flex-basis 0.2s ease' : undefined,
 								...panel.props.style,
 							}}
 						>
@@ -513,14 +540,9 @@ const CustomSplitter: SplitterComponent = ({
 								style={{
 									alignItems: 'center',
 									background:
-										hoveredIndex === index || draggingIndex === index
-											? '#e6f4ff'
-											: '#f5f5f5',
+										hoveredIndex === index || draggingIndex === index ? '#e6f4ff' : '#f5f5f5',
 									boxSizing: 'border-box',
-									cursor:
-										resolvedOrientation === 'horizontal'
-											? 'col-resize'
-											: 'row-resize',
+									cursor: resolvedOrientation === 'horizontal' ? 'col-resize' : 'row-resize',
 									display: 'flex',
 									flex: `0 0 ${draggerSize}px`,
 									justifyContent: 'center',
@@ -536,9 +558,7 @@ const CustomSplitter: SplitterComponent = ({
 									<div
 										style={{
 											background:
-												hoveredIndex === index || draggingIndex === index
-													? '#1677ff'
-													: '#d9d9d9',
+												hoveredIndex === index || draggingIndex === index ? '#1677ff' : '#d9d9d9',
 											borderRadius: 2,
 											height: resolvedOrientation === 'horizontal' ? 40 : 2,
 											width: resolvedOrientation === 'horizontal' ? 2 : 40,
@@ -592,10 +612,30 @@ const CustomSplitter: SplitterComponent = ({
 									<div
 										style={{
 											position: 'absolute',
-											top: resolvedOrientation === 'horizontal' ? '50%' : isLeftOrTopCollapsed ? 0 : undefined,
-											bottom: resolvedOrientation === 'horizontal' ? undefined : isRightOrBottomCollapsed ? 0 : undefined,
-											left: resolvedOrientation === 'horizontal' ? (isLeftOrTopCollapsed ? 0 : undefined) : '50%',
-											right: resolvedOrientation === 'horizontal' ? (isRightOrBottomCollapsed ? 0 : undefined) : undefined,
+											top:
+												resolvedOrientation === 'horizontal'
+													? '50%'
+													: isLeftOrTopCollapsed
+														? 0
+														: undefined,
+											bottom:
+												resolvedOrientation === 'horizontal'
+													? undefined
+													: isRightOrBottomCollapsed
+														? 0
+														: undefined,
+											left:
+												resolvedOrientation === 'horizontal'
+													? isLeftOrTopCollapsed
+														? 0
+														: undefined
+													: '50%',
+											right:
+												resolvedOrientation === 'horizontal'
+													? isRightOrBottomCollapsed
+														? 0
+														: undefined
+													: undefined,
 											display: 'flex',
 											alignItems: 'center',
 											justifyContent: 'center',

@@ -80,30 +80,31 @@ import { Splitter } from 'react-public-components';
 
 ### Splitter Props
 
-| 属性            | 类型                                   | 默认值         | 说明                                   |
-| --------------- | -------------------------------------- | -------------- | -------------------------------------- |
-| `children`      | `ReactNode`（必须为 `Splitter.Panel`） | -              | 面板集合，建议 2 个及以上              |
-| `className`     | `string`                               | -              | 根节点自定义类名                       |
-| `style`         | `CSSProperties`                        | -              | 根节点自定义样式                       |
-| `orientation`   | `'horizontal' \| 'vertical'`           | `'horizontal'` | 分屏方向（优先级高于 `vertical`）      |
-| `vertical`      | `boolean`                              | `false`        | 是否垂直分屏（兼容写法）               |
-| `lazy`          | `boolean`                              | `false`        | 是否在拖拽结束时才更新视图（提升性能） |
-| `onResizeStart` | `(sizes: number[]) => void`            | -              | 拖拽开始回调                           |
-| `onResize`      | `(sizes: number[]) => void`            | -              | 拖拽过程中尺寸变化回调                 |
-| `onResizeEnd`   | `(sizes: number[]) => void`            | -              | 拖拽/折叠/重置结束回调                 |
+| 属性            | 类型                                              | 默认值         | 说明                                   |
+| --------------- | ------------------------------------------------- | -------------- | -------------------------------------- |
+| `children`      | `ReactNode`（必须为 `Splitter.Panel`）            | -              | 面板集合，建议 2 个及以上              |
+| `className`     | `string`                                          | -              | 根节点自定义类名                       |
+| `style`         | `CSSProperties`                                   | -              | 根节点自定义样式                       |
+| `orientation`   | `'horizontal' \| 'vertical'`                      | `'horizontal'` | 分屏方向（优先级高于 `vertical`）      |
+| `vertical`      | `boolean`                                         | `false`        | 是否垂直分屏（兼容写法）               |
+| `lazy`          | `boolean`                                         | `false`        | 是否在拖拽结束时才更新视图（提升性能） |
+| `onResizeStart` | `(sizes: number[]) => void`                       | -              | 拖拽开始回调                           |
+| `onResize`      | `(sizes: number[]) => void`                       | -              | 拖拽过程中尺寸变化回调                 |
+| `onResizeEnd`   | `(sizes: number[]) => void`                       | -              | 拖拽/折叠/重置结束回调                 |
+| `onCollapse`    | `(collapsed: boolean[], sizes: number[]) => void` | -              | 面板展开或折叠状态发生变化时的回调     |
 
 ### Splitter.Panel Props
 
-| 属性          | 类型                     | 默认值  | 说明                                                      |
-| ------------- | ------------------------ | ------- | --------------------------------------------------------- |
-| `children`    | `ReactNode`              | -       | 面板内容                                                  |
-| `size`        | `number \| '${number}%'` | -       | 受控尺寸                                                  |
-| `defaultSize` | `number \| '${number}%'` | -       | 初始尺寸（未设置时按剩余空间平均分配）                    |
-| `min`         | `number \| '${number}%'` | `0`     | 最小尺寸                                                  |
-| `max`         | `number \| '${number}%'` | -       | 最大尺寸                                                  |
+| 属性          | 类型                                                                                     | 默认值  | 说明                                                                                           |
+| ------------- | ---------------------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `children`    | `ReactNode`                                                                              | -       | 面板内容                                                                                       |
+| `size`        | `number \| '${number}%'`                                                                 | -       | 受控尺寸                                                                                       |
+| `defaultSize` | `number \| '${number}%'`                                                                 | -       | 初始尺寸（未设置时按剩余空间平均分配）                                                         |
+| `min`         | `number \| '${number}%'`                                                                 | `0`     | 最小尺寸                                                                                       |
+| `max`         | `number \| '${number}%'`                                                                 | -       | 最大尺寸                                                                                       |
 | `collapsible` | `boolean \| { start?: boolean; end?: boolean; showCollapsibleIcon?: boolean \| 'auto' }` | `false` | 是否允许折叠面板。支持配置指定折叠方向（`start`/`end`）及图标显示策略（`showCollapsibleIcon`） |
-| `resizable`   | `boolean`                | `true`  | 是否允许拖拽调整（两侧任一为 `false` 都会禁用对应分隔条） |
-| `style`       | `CSSProperties`          | -       | 面板自定义样式                                            |
+| `resizable`   | `boolean`                                                                                | `true`  | 是否允许拖拽调整（两侧任一为 `false` 都会禁用对应分隔条）                                      |
+| `style`       | `CSSProperties`                                                                          | -       | 面板自定义样式                                                                                 |
 
 ### 基础用法
 
@@ -170,10 +171,13 @@ export default function Demo() {
 ### 1. 前置准备
 
 1. **登录 npm**：确保已注册 npm 账号，并在终端中完成登录：
+
    ```bash
    npm login --auth-type=web
    ```
-   *检查当前登录状态：*
+
+   _检查当前登录状态：_
+
    ```bash
    npm whoami
    ```
@@ -218,10 +222,9 @@ npm publish
 ```
 
 > **自动化保障**：本项目已在 `package.json` 中配置了 `"prepublishOnly": "npm run build"` 生命周期钩子。即便你忘记手动运行 `npm run build`，在直接执行 `npm publish` 时，npm 也会**自动先帮你打包构建**，确保发布的始终是最新代码。
-> 
+>
 > **提示**：如果是首发公开包，可显式指定访问级别：
+>
 > ```bash
 > npm publish --access public
 > ```
-
-
