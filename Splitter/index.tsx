@@ -32,6 +32,8 @@ export type SplitterPanelProps = {
 	collapsible?: SplitterCollapsible;
 	/** 面板初始默认尺寸（支持数字 px 或百分比字符串如 '40%'） */
 	defaultSize?: SplitterSize;
+	/** 折叠/隐藏时是否销毁面板内容节点（可覆盖 Splitter 根容器上的 destroyOnHidden 属性） */
+	destroyOnHidden?: boolean;
 	/** 面板最大允许尺寸限制 */
 	max?: SplitterSize;
 	/** 面板最小允许尺寸限制 */
@@ -52,6 +54,8 @@ export type SplitterProps = {
 	children: ReactNode;
 	/** 容器根节点自定义类名 */
 	className?: string;
+	/** 折叠/隐藏时是否销毁面板内容节点（默认 false，保留组件状态） */
+	destroyOnHidden?: boolean;
 	/** 拖拽分隔条的宽度/高度（单位 px，默认 4） */
 	draggerSize?: number;
 	/** 是否在拖拽结束时才更新视图（默认 false） */
@@ -134,6 +138,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(Math.max(val
 const CustomSplitter: SplitterComponent = ({
 	children,
 	className,
+	destroyOnHidden = false,
 	draggerIcon,
 	draggerSize = DEFAULT_DRAGGER_SIZE,
 	lazy = false,
@@ -485,6 +490,8 @@ const CustomSplitter: SplitterComponent = ({
 				const isLeftOrTopCollapsed = (sizes[index] ?? 0) <= 1;
 				const isRightOrBottomCollapsed = (sizes[index + 1] ?? 0) <= 1;
 				const isAnyCollapsed = isLeftOrTopCollapsed || isRightOrBottomCollapsed;
+				const panelDestroyOnHidden = panel.props.destroyOnHidden ?? destroyOnHidden;
+				const shouldRenderContent = !isHidden || !panelDestroyOnHidden;
 
 				return (
 					<React.Fragment key={index}>
@@ -504,10 +511,11 @@ const CustomSplitter: SplitterComponent = ({
 								...panel.props.style,
 							}}
 						>
-							{!isHidden && (
+							{shouldRenderContent && (
 								<div
 									style={{
 										boxSizing: 'border-box',
+										display: isHidden ? 'none' : 'block',
 										height: '100%',
 										overflow: 'auto',
 										padding: (sizes[index] ?? 0) < 32 ? 0 : 16,

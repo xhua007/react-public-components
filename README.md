@@ -91,21 +91,23 @@ import { Splitter } from 'react-public-components';
 | `onResizeStart` | `(sizes: number[]) => void`                       | -              | 拖拽开始回调                           |
 | `onResize`      | `(sizes: number[]) => void`                       | -              | 拖拽过程中尺寸变化回调                 |
 | `onResizeEnd`   | `(sizes: number[]) => void`                       | -              | 拖拽/折叠/重置结束回调                 |
-| `onCollapse`    | `(collapsed: boolean[], sizes: number[]) => void` | -              | 面板展开或折叠状态发生变化时的回调     |
-| `draggerIcon`   | `ReactNode`                                       | -              | 自定义拖拽手柄指示图标节点             |
+| `onCollapse`      | `(collapsed: boolean[], sizes: number[]) => void` | -              | 面板展开或折叠状态发生变化时的回调     |
+| `draggerIcon`     | `ReactNode`                                       | -              | 自定义拖拽手柄指示图标节点             |
+| `destroyOnHidden` | `boolean`                                         | `false`        | 折叠/隐藏时是否销毁所有面板内容节点    |
 
 ### Splitter.Panel Props
 
-| 属性          | 类型                                                                                     | 默认值  | 说明                                                                                           |
-| ------------- | ---------------------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
-| `children`    | `ReactNode`                                                                              | -       | 面板内容                                                                                       |
-| `size`        | `number \| '${number}%'`                                                                 | -       | 受控尺寸                                                                                       |
-| `defaultSize` | `number \| '${number}%'`                                                                 | -       | 初始尺寸（未设置时按剩余空间平均分配）                                                         |
-| `min`         | `number \| '${number}%'`                                                                 | `0`     | 最小尺寸                                                                                       |
-| `max`         | `number \| '${number}%'`                                                                 | -       | 最大尺寸                                                                                       |
-| `collapsible` | `boolean \| { start?: boolean; end?: boolean; showCollapsibleIcon?: boolean \| 'auto' }` | `false` | 是否允许折叠面板。支持配置指定折叠方向（`start`/`end`）及图标显示策略（`showCollapsibleIcon`） |
-| `resizable`   | `boolean`                                                                                | `true`  | 是否允许拖拽调整（两侧任一为 `false` 都会禁用对应分隔条）                                      |
-| `style`       | `CSSProperties`                                                                          | -       | 面板自定义样式                                                                                 |
+| 属性              | 类型                                                                                     | 默认值  | 说明                                                                                           |
+| ----------------- | ---------------------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `children`        | `ReactNode`                                                                              | -       | 面板内容                                                                                       |
+| `size`            | `number \| '${number}%'`                                                                 | -       | 受控尺寸                                                                                       |
+| `defaultSize`     | `number \| '${number}%'`                                                                 | -       | 初始尺寸（未设置时按剩余空间平均分配）                                                         |
+| `min`             | `number \| '${number}%'`                                                                 | `0`     | 最小尺寸                                                                                       |
+| `max`             | `number \| '${number}%'`                                                                 | -       | 最大尺寸                                                                                       |
+| `collapsible`     | `boolean \| { start?: boolean; end?: boolean; showCollapsibleIcon?: boolean \| 'auto' }` | `false` | 是否允许折叠面板。支持配置指定折叠方向（`start`/`end`）及图标显示策略（`showCollapsibleIcon`） |
+| `destroyOnHidden` | `boolean`                                                                                | -       | 折叠/隐藏时是否销毁当前面板内容节点（可覆盖 Splitter 根属性）                                  |
+| `resizable`       | `boolean`                                                                                | `true`  | 是否允许拖拽调整（两侧任一为 `false` 都会禁用对应分隔条）                                      |
+| `style`           | `CSSProperties`                                                                          | -       | 面板自定义样式                                                                                 |
 
 ### 基础用法
 
