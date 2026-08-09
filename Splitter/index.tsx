@@ -70,6 +70,8 @@ export type SplitterProps = {
 	style?: CSSProperties;
 	/** 是否垂直分屏（orientation="vertical" 的简写形式） */
 	vertical?: boolean;
+	/** 自定义拖拽手柄图标/节点 */
+	draggerIcon?: ReactNode;
 };
 
 export interface ResolvedCollapsible {
@@ -132,6 +134,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(Math.max(val
 const CustomSplitter: SplitterComponent = ({
 	children,
 	className,
+	draggerIcon,
 	draggerSize = DEFAULT_DRAGGER_SIZE,
 	lazy = false,
 	onResize,
@@ -553,18 +556,35 @@ const CustomSplitter: SplitterComponent = ({
 								}}
 								tabIndex={0}
 							>
-								{/* 呈现拖拽指示线 */}
-								{(hoveredIndex === index || draggingIndex === index || !isAnyCollapsed) && (
-									<div
-										style={{
-											background:
-												hoveredIndex === index || draggingIndex === index ? '#1677ff' : '#d9d9d9',
-											borderRadius: 2,
-											height: resolvedOrientation === 'horizontal' ? 40 : 2,
-											width: resolvedOrientation === 'horizontal' ? 2 : 40,
-										}}
-									/>
-								)}
+								{/* 呈现拖拽指示线/图标 */}
+								{(hoveredIndex === index || draggingIndex === index || !isAnyCollapsed) &&
+									(draggerIcon ? (
+										<div
+											style={{
+												alignItems: 'center',
+												color:
+													hoveredIndex === index || draggingIndex === index ? '#1677ff' : '#8c8c8c',
+												display: 'flex',
+												fontSize: 12,
+												justifyContent: 'center',
+												pointerEvents: 'none',
+												transition: 'color 0.2s ease',
+												userSelect: 'none',
+											}}
+										>
+											{draggerIcon}
+										</div>
+									) : (
+										<div
+											style={{
+												background:
+													hoveredIndex === index || draggingIndex === index ? '#1677ff' : '#d9d9d9',
+												borderRadius: 2,
+												height: resolvedOrientation === 'horizontal' ? 40 : 2,
+												width: resolvedOrientation === 'horizontal' ? 2 : 40,
+											}}
+										/>
+									))}
 
 								{/* 未折叠状态下呈现折叠按钮 */}
 								{!isAnyCollapsed && (

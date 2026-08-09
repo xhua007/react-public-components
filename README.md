@@ -92,6 +92,7 @@ import { Splitter } from 'react-public-components';
 | `onResize`      | `(sizes: number[]) => void`                       | -              | 拖拽过程中尺寸变化回调                 |
 | `onResizeEnd`   | `(sizes: number[]) => void`                       | -              | 拖拽/折叠/重置结束回调                 |
 | `onCollapse`    | `(collapsed: boolean[], sizes: number[]) => void` | -              | 面板展开或折叠状态发生变化时的回调     |
+| `draggerIcon`   | `ReactNode`                                       | -              | 自定义拖拽手柄指示图标节点             |
 
 ### Splitter.Panel Props
 
