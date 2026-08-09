@@ -90,6 +90,9 @@ export default function App() {
 					onCollapse={(collapsed, sizes) => {
 						console.log('onCollapse collapsed status:', collapsed, 'sizes:', sizes);
 					}}
+					onDraggerDoubleClick={(index) => {
+						console.log('onDraggerDoubleClick dragger index:', index);
+					}}
 				>
 					<Splitter.Panel
 						collapsible={{ start: true, end: true, showCollapsibleIcon: showIconMode }}

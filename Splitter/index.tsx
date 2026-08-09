@@ -68,6 +68,8 @@ export type SplitterProps = {
 	onResizeEnd?: (sizes: number[]) => void;
 	/** 开始拖拽分隔条时的回调 */
 	onResizeStart?: (sizes: number[]) => void;
+	/** 双击拖拽条回调 */
+	onDraggerDoubleClick?: (index: number) => void;
 	/** 分屏方向：'horizontal'（水平分屏）| 'vertical'（垂直分屏），默认 'horizontal' */
 	orientation?: SplitterOrientation;
 	/** 容器根节点自定义 CSS 样式 */
@@ -146,6 +148,7 @@ const CustomSplitter: SplitterComponent = ({
 	onResizeEnd,
 	onResizeStart,
 	onCollapse,
+	onDraggerDoubleClick,
 	orientation,
 	style,
 	vertical = false,
@@ -448,6 +451,9 @@ const CustomSplitter: SplitterComponent = ({
 					event.stopPropagation();
 					toggleCollapse(panelIndex, neighborIndex);
 				}}
+				onDoubleClick={(event) => {
+					event.stopPropagation();
+				}}
 				style={{
 					alignItems: 'center',
 					background: '#fff',
@@ -530,7 +536,10 @@ const CustomSplitter: SplitterComponent = ({
 						{index < panels.length - 1 && (
 							<div
 								aria-orientation={resolvedOrientation}
-								onDoubleClick={resetSizes}
+								onDoubleClick={() => {
+									onDraggerDoubleClick?.(index);
+									resetSizes();
+								}}
 								onKeyDown={(event) => {
 									const step = event.shiftKey ? 40 : 10;
 									const directionMap =
@@ -712,6 +721,9 @@ const CustomSplitter: SplitterComponent = ({
 													onClick={(event) => {
 														event.stopPropagation();
 														toggleCollapse(targetIndex, neighborIndex);
+													}}
+													onDoubleClick={(event) => {
+														event.stopPropagation();
 													}}
 													style={{
 														alignItems: 'center',
