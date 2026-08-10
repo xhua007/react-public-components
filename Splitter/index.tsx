@@ -350,11 +350,25 @@ const CustomSplitter: SplitterComponent = (props) => {
 		[getPanelMax, getPanelMin, normalizeToTrack],
 	);
 
+	const getInitialLockedIndex = useCallback(
+		(sourceSizes: number[], startIndex: number, delta: number) => {
+			if (sourceSizes[startIndex] <= 1 && delta < 0 && startIndex > 0) {
+				return startIndex - 1;
+			}
+			if (sourceSizes[startIndex + 1] <= 1 && delta > 0 && startIndex < sourceSizes.length - 2) {
+				return startIndex + 1;
+			}
+			return startIndex;
+		},
+		[],
+	);
+
 	const resizePair = useCallback(
 		(index: number, delta: number, notify = true) => {
-			updateSizes(getResizedPair(sizesRef.current, index, delta), notify);
+			const targetIndex = getInitialLockedIndex(sizesRef.current, index, delta);
+			updateSizes(getResizedPair(sizesRef.current, targetIndex, delta), notify);
 		},
-		[getResizedPair, updateSizes],
+		[getInitialLockedIndex, getResizedPair, updateSizes],
 	);
 
 	const startResize = (index: number, event: ReactPointerEvent<HTMLDivElement>) => {
@@ -366,13 +380,22 @@ const CustomSplitter: SplitterComponent = (props) => {
 		const startPosition = getPointerPosition(event, resolvedOrientation);
 		const startSizes = [...sizesRef.current];
 		let latestSizes = startSizes;
+		let lockedIndex: number | null = null;
 
 		setDraggingIndex(index);
 		onResizeStart?.(roundSizes(startSizes));
 
 		const handlePointerMove = (moveEvent: PointerEvent) => {
 			const delta = getPointerPosition(moveEvent, resolvedOrientation) - startPosition;
-			latestSizes = getResizedPair(startSizes, index, delta);
+			if (delta === 0) {
+				return;
+			}
+
+			if (lockedIndex === null) {
+				lockedIndex = getInitialLockedIndex(startSizes, index, delta);
+			}
+
+			latestSizes = getResizedPair(startSizes, lockedIndex, delta);
 			if (!lazy) {
 				updateSizes(latestSizes, true);
 			}
@@ -626,6 +649,14 @@ const CustomSplitter: SplitterComponent = (props) => {
 									display: 'flex',
 									flex: `0 0 ${draggerSize}px`,
 									justifyContent: 'center',
+									marginLeft:
+										index > 0 && (sizes[index] ?? 0) <= 1 && resolvedOrientation === 'horizontal'
+											? -draggerSize
+											: undefined,
+									marginTop:
+										index > 0 && (sizes[index] ?? 0) <= 1 && resolvedOrientation === 'vertical'
+											? -draggerSize
+											: undefined,
 									outline: 'none',
 									position: 'relative',
 									userSelect: 'none',

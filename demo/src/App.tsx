@@ -123,6 +123,10 @@ export default function App() {
 						<p>可拖动分隔条调整高度。</p>
 					</Splitter.Panel>
 					<Splitter.Panel collapsible>
+						<h3>中间面板</h3>
+						<p>可拖动分隔条调整高度。</p>
+					</Splitter.Panel>
+					<Splitter.Panel collapsible>
 						<h3>下方面板</h3>
 						<p>双击分隔条可重置为初始尺寸。</p>
 					</Splitter.Panel>
