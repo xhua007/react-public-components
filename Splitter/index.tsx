@@ -46,6 +46,17 @@ export type SplitterPanelProps = {
 	style?: CSSProperties;
 };
 
+export type SplitterSemanticDOM = 'root' | 'panel' | 'dragger';
+/** 语义化 DOM 结构标识 */
+export type SemanticDOM = SplitterSemanticDOM;
+
+export type SplitterStyle =
+	| CSSProperties
+	| Partial<Record<SplitterSemanticDOM, CSSProperties>>
+	| ((info: {
+			props: SplitterProps;
+	  }) => Partial<Record<SplitterSemanticDOM, CSSProperties>> | CSSProperties);
+
 /**
  * Splitter 根容器组件属性
  */
@@ -72,8 +83,8 @@ export type SplitterProps = {
 	onDraggerDoubleClick?: (index: number) => void;
 	/** 分屏方向：'horizontal'（水平分屏）| 'vertical'（垂直分屏），默认 'horizontal' */
 	orientation?: SplitterOrientation;
-	/** 容器根节点自定义 CSS 样式 */
-	style?: CSSProperties;
+	/** 容器根节点及各语义化结构（root、panel、dragger）自定义 CSS 样式，支持对象或函数 */
+	style?: SplitterStyle;
 	/** 是否垂直分屏（orientation="vertical" 的简写形式） */
 	vertical?: boolean;
 	/** 自定义拖拽手柄图标/节点 */
@@ -137,22 +148,45 @@ const getPointerPosition = (
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
-const CustomSplitter: SplitterComponent = ({
-	children,
-	className,
-	destroyOnHidden = false,
-	draggerIcon,
-	draggerSize = DEFAULT_DRAGGER_SIZE,
-	lazy = false,
-	onResize,
-	onResizeEnd,
-	onResizeStart,
-	onCollapse,
-	onDraggerDoubleClick,
-	orientation,
-	style,
-	vertical = false,
-}) => {
+const resolveSemanticStyles = (
+	style: SplitterStyle | undefined,
+	infoProps: SplitterProps,
+): Partial<Record<SplitterSemanticDOM, CSSProperties>> => {
+	if (!style) {
+		return {};
+	}
+
+	const resolved = typeof style === 'function' ? style({ props: infoProps }) : style;
+	if (!resolved) {
+		return {};
+	}
+
+	const hasSemanticKey = 'root' in resolved || 'panel' in resolved || 'dragger' in resolved;
+
+	if (hasSemanticKey) {
+		return resolved as Partial<Record<SplitterSemanticDOM, CSSProperties>>;
+	}
+
+	return { root: resolved as CSSProperties };
+};
+
+const CustomSplitter: SplitterComponent = (props) => {
+	const {
+		children,
+		className,
+		destroyOnHidden = false,
+		draggerIcon,
+		draggerSize = DEFAULT_DRAGGER_SIZE,
+		lazy = false,
+		onResize,
+		onResizeEnd,
+		onResizeStart,
+		onCollapse,
+		onDraggerDoubleClick,
+		orientation,
+		style,
+		vertical = false,
+	} = props;
 	const resolvedOrientation = orientation ?? (vertical ? 'vertical' : 'horizontal');
 	const rootRef = useRef<HTMLDivElement>(null);
 	const sizesRef = useRef<number[]>([]);
@@ -161,6 +195,8 @@ const CustomSplitter: SplitterComponent = ({
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const [hoveredCollapsePanelIndex, setHoveredCollapsePanelIndex] = useState<number | null>(null);
 	const [sizes, setSizes] = useState<number[]>([]);
+
+	const semanticStyles = useMemo(() => resolveSemanticStyles(style, props), [style, props]);
 
 	const panels = useMemo(
 		() =>
@@ -393,7 +429,7 @@ const CustomSplitter: SplitterComponent = ({
 		overflow: 'hidden',
 		position: 'relative',
 		width: '100%',
-		...style,
+		...semanticStyles.root,
 	};
 
 	const renderCollapseButton = (
@@ -514,6 +550,7 @@ const CustomSplitter: SplitterComponent = ({
 									hoveredCollapsePanelIndex === index ? 'inset 0 0 0 2px #1677ff' : undefined,
 								transition:
 									draggingIndex === null ? 'box-shadow 0.2s ease, flex-basis 0.2s ease' : undefined,
+								...semanticStyles.panel,
 								...panel.props.style,
 							}}
 						>
@@ -570,6 +607,7 @@ const CustomSplitter: SplitterComponent = ({
 									position: 'relative',
 									userSelect: 'none',
 									zIndex: isAnyCollapsed ? 2 : 1,
+									...semanticStyles.dragger,
 								}}
 								tabIndex={0}
 							>

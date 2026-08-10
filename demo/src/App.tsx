@@ -128,6 +128,26 @@ export default function App() {
 					</Splitter.Panel>
 				</Splitter>
 			</section>
+
+			<section>
+				<h2>8. Splitter · 语义化结构样式（Semantic DOM style）</h2>
+				<Splitter
+					style={(info) => ({
+						root: { border: '2px dashed #1677ff', borderRadius: 12 },
+						panel: { background: '#f6ffed' },
+						dragger: { background: info.props.vertical ? '#ffd591' : '#bae0ff' },
+					})}
+				>
+					<Splitter.Panel defaultSize="40%" collapsible>
+						<h3>左侧面板 (root/panel/dragger 语义化样式)</h3>
+						<p>演示通过函数形式动态配置 root、panel、dragger 的行内 style。</p>
+					</Splitter.Panel>
+					<Splitter.Panel collapsible>
+						<h3>右侧面板</h3>
+						<p>具有自定义背景和分隔条样式。</p>
+					</Splitter.Panel>
+				</Splitter>
+			</section>
 		</div>
 	);
 }
