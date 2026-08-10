@@ -80,27 +80,30 @@ import { Splitter } from 'react-public-components';
 
 ### Splitter Props
 
-| 属性                   | 类型                                                                                                               | 默认值         | 说明                                                                                   |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------- | -------------------------------------------------------------------------------------- |
-| `children`             | `ReactNode`（必须为 `Splitter.Panel`）                                                                             | -              | 面板集合，建议 2 个及以上                                                              |
-| `className`            | `string`                                                                                                           | -              | 根节点自定义类名                                                                       |
-| `style`                | `CSSProperties \| Record<SemanticDOM, CSSProperties> \| ((info: { props }) => Record<SemanticDOM, CSSProperties>)` | -              | 自定义组件内部各语义化结构（`root` / `panel` / `dragger`）的行内 style，支持对象或函数 |
-| `orientation`          | `'horizontal' \| 'vertical'`                                                                                       | `'horizontal'` | 分屏方向（优先级高于 `vertical`）                                                      |
-| `vertical`             | `boolean`                                                                                                          | `false`        | 是否垂直分屏（兼容写法）                                                               |
-| `lazy`                 | `boolean`                                                                                                          | `false`        | 是否在拖拽结束时才更新视图（提升性能）                                                 |
-| `onResizeStart`        | `(sizes: number[]) => void`                                                                                        | -              | 拖拽开始回调                                                                           |
-| `onResize`             | `(sizes: number[]) => void`                                                                                        | -              | 拖拽过程中尺寸变化回调                                                                 |
-| `onResizeEnd`          | `(sizes: number[]) => void`                                                                                        | -              | 拖拽/折叠/重置结束回调                                                                 |
-| `onCollapse`           | `(collapsed: boolean[], sizes: number[]) => void`                                                                  | -              | 面板展开或折叠状态发生变化时的回调                                                     |
-| `onDraggerDoubleClick` | `(index: number) => void`                                                                                          | -              | 双击拖拽条回调                                                                         |
-| `draggerIcon`          | `ReactNode`                                                                                                        | -              | 自定义拖拽手柄指示图标节点                                                             |
-| `destroyOnHidden`      | `boolean`                                                                                                          | `false`        | 折叠/隐藏时是否销毁所有面板内容节点                                                    |
+| 属性                   | 类型                                                                                                                | 默认值         | 说明                                                                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------- |
+| `children`             | `ReactNode`（建议传入 `Splitter.Panel`）                                                                            | -              | 面板集合，建议 2 个及以上                                                             |
+| `className`            | `string`                                                                                                            | -              | 根节点自定义类名                                                                      |
+| `classNames`           | `Partial<Record<SemanticDOM, string>> \| ((info: { props }) => Partial<Record<SemanticDOM, string>>)`               | -              | 自定义组件内部各语义化结构（`root` / `panel` / `dragger`）的类名，支持对象或函数      |
+| `style`                | `CSSProperties`                                                                                                     | -              | 根节点自定义 CSS 样式                                                                 |
+| `styles`               | `Partial<Record<SemanticDOM, CSSProperties>> \| ((info: { props }) => Partial<Record<SemanticDOM, CSSProperties>>)` | -              | 自定义组件内部各语义化结构（`root` / `panel` / `dragger`）的 CSS 样式，支持对象或函数 |
+| `orientation`          | `'horizontal' \| 'vertical'`                                                                                        | `'horizontal'` | 分屏方向（优先级高于 `vertical`）                                                     |
+| `vertical`             | `boolean`                                                                                                           | `false`        | 是否垂直分屏（兼容写法）                                                              |
+| `lazy`                 | `boolean`                                                                                                           | `false`        | 是否在拖拽结束时才更新视图（提升性能）                                                |
+| `onResizeStart`        | `(sizes: number[]) => void`                                                                                         | -              | 拖拽开始回调                                                                          |
+| `onResize`             | `(sizes: number[]) => void`                                                                                         | -              | 拖拽过程中尺寸变化回调                                                                |
+| `onResizeEnd`          | `(sizes: number[]) => void`                                                                                         | -              | 拖拽/折叠/重置结束回调                                                                |
+| `onCollapse`           | `(collapsed: boolean[], sizes: number[]) => void`                                                                   | -              | 面板展开或折叠状态发生变化时的回调                                                    |
+| `onDraggerDoubleClick` | `(index: number) => void`                                                                                           | -              | 双击拖拽条回调                                                                        |
+| `draggerIcon`          | `ReactNode`                                                                                                         | -              | 自定义拖拽手柄指示图标节点                                                            |
+| `destroyOnHidden`      | `boolean`                                                                                                           | `false`        | 折叠/隐藏时是否销毁所有面板内容节点                                                   |
 
 ### Splitter.Panel Props
 
 | 属性              | 类型                                                                                     | 默认值  | 说明                                                                                           |
 | ----------------- | ---------------------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
 | `children`        | `ReactNode`                                                                              | -       | 面板内容                                                                                       |
+| `className`       | `string`                                                                                 | -       | 面板自定义类名                                                                                 |
 | `size`            | `number \| '${number}%'`                                                                 | -       | 受控尺寸                                                                                       |
 | `defaultSize`     | `number \| '${number}%'`                                                                 | -       | 初始尺寸（未设置时按剩余空间平均分配）                                                         |
 | `min`             | `number \| '${number}%'`                                                                 | `0`     | 最小尺寸                                                                                       |
@@ -153,7 +156,7 @@ export default function Demo() {
 ### 依赖说明
 
 - `react`（含 hooks、Children API）
-- `@ant-design/icons`（折叠方向图标）
+- 零第三方 UI 库依赖（内部采用原生内联 SVG 图标组件）
 
 ---
 

@@ -24,6 +24,8 @@ export type SplitterCollapsible =
 export type SplitterPanelProps = {
 	/** 面板内容节点 */
 	children?: ReactNode;
+	/** 面板自定义类名 */
+	className?: string;
 	/**
 	 * 折叠配置：
 	 * - `boolean`: 是否允许两端折叠
@@ -50,21 +52,24 @@ export type SplitterSemanticDOM = 'root' | 'panel' | 'dragger';
 /** 语义化 DOM 结构标识 */
 export type SemanticDOM = SplitterSemanticDOM;
 
-export type SplitterStyle =
-	| CSSProperties
+export type SplitterStyles =
 	| Partial<Record<SplitterSemanticDOM, CSSProperties>>
-	| ((info: {
-			props: SplitterProps;
-	  }) => Partial<Record<SplitterSemanticDOM, CSSProperties>> | CSSProperties);
+	| ((info: { props: SplitterProps }) => Partial<Record<SplitterSemanticDOM, CSSProperties>>);
+
+export type SplitterClassNames =
+	| Partial<Record<SplitterSemanticDOM, string>>
+	| ((info: { props: SplitterProps }) => Partial<Record<SplitterSemanticDOM, string>>);
 
 /**
  * Splitter 根容器组件属性
  */
 export type SplitterProps = {
-	/** 面板集合（必须为 Splitter.Panel） */
-	children: ReactNode;
+	/** 面板集合（建议传入 Splitter.Panel） */
+	children?: ReactNode;
 	/** 容器根节点自定义类名 */
 	className?: string;
+	/** 用于自定义组件内部各语义化结构（root、panel、dragger）的 class，支持对象或函数 */
+	classNames?: SplitterClassNames;
 	/** 折叠/隐藏时是否销毁面板内容节点（默认 false，保留组件状态） */
 	destroyOnHidden?: boolean;
 	/** 拖拽分隔条的宽度/高度（单位 px，默认 4） */
@@ -83,8 +88,10 @@ export type SplitterProps = {
 	onDraggerDoubleClick?: (index: number) => void;
 	/** 分屏方向：'horizontal'（水平分屏）| 'vertical'（垂直分屏），默认 'horizontal' */
 	orientation?: SplitterOrientation;
+	/** 容器根节点自定义 CSS 样式 */
+	style?: CSSProperties;
 	/** 容器根节点及各语义化结构（root、panel、dragger）自定义 CSS 样式，支持对象或函数 */
-	style?: SplitterStyle;
+	styles?: SplitterStyles;
 	/** 是否垂直分屏（orientation="vertical" 的简写形式） 排列方向，与 orientation 同时存在，以 orientation 优先 */
 	vertical?: boolean;
 	/** 自定义拖拽手柄图标/节点 */
@@ -149,31 +156,34 @@ const getPointerPosition = (
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
 const resolveSemanticStyles = (
-	style: SplitterStyle | undefined,
+	styles: SplitterStyles | undefined,
 	infoProps: SplitterProps,
 ): Partial<Record<SplitterSemanticDOM, CSSProperties>> => {
-	if (!style) {
+	if (!styles) {
 		return {};
 	}
 
-	const resolved = typeof style === 'function' ? style({ props: infoProps }) : style;
-	if (!resolved) {
+	const resolved = typeof styles === 'function' ? styles({ props: infoProps }) : styles;
+	return resolved || {};
+};
+
+const resolveSemanticClassNames = (
+	classNames: SplitterClassNames | undefined,
+	infoProps: SplitterProps,
+): Partial<Record<SplitterSemanticDOM, string>> => {
+	if (!classNames) {
 		return {};
 	}
 
-	const hasSemanticKey = 'root' in resolved || 'panel' in resolved || 'dragger' in resolved;
-
-	if (hasSemanticKey) {
-		return resolved as Partial<Record<SplitterSemanticDOM, CSSProperties>>;
-	}
-
-	return { root: resolved as CSSProperties };
+	const resolved = typeof classNames === 'function' ? classNames({ props: infoProps }) : classNames;
+	return resolved || {};
 };
 
 const CustomSplitter: SplitterComponent = (props) => {
 	const {
 		children,
 		className,
+		classNames,
 		destroyOnHidden = false,
 		draggerIcon,
 		draggerSize = DEFAULT_DRAGGER_SIZE,
@@ -185,6 +195,7 @@ const CustomSplitter: SplitterComponent = (props) => {
 		onDraggerDoubleClick,
 		orientation,
 		style,
+		styles,
 		vertical = false,
 	} = props;
 	const resolvedOrientation = orientation ?? (vertical ? 'vertical' : 'horizontal');
@@ -196,7 +207,11 @@ const CustomSplitter: SplitterComponent = (props) => {
 	const [hoveredCollapsePanelIndex, setHoveredCollapsePanelIndex] = useState<number | null>(null);
 	const [sizes, setSizes] = useState<number[]>([]);
 
-	const semanticStyles = useMemo(() => resolveSemanticStyles(style, props), [style, props]);
+	const semanticStyles = useMemo(() => resolveSemanticStyles(styles, props), [styles, props]);
+	const semanticClassNames = useMemo(
+		() => resolveSemanticClassNames(classNames, props),
+		[classNames, props],
+	);
 
 	const panels = useMemo(
 		() =>
@@ -430,6 +445,7 @@ const CustomSplitter: SplitterComponent = (props) => {
 		position: 'relative',
 		width: '100%',
 		...semanticStyles.root,
+		...style,
 	};
 
 	const renderCollapseButton = (
@@ -525,8 +541,10 @@ const CustomSplitter: SplitterComponent = (props) => {
 		);
 	};
 
+	const rootClassName = [className, semanticClassNames.root].filter(Boolean).join(' ') || undefined;
+
 	return (
-		<div className={className} ref={rootRef} style={rootStyle}>
+		<div className={rootClassName} ref={rootRef} style={rootStyle}>
 			{panels.map((panel, index) => {
 				const isHidden = sizes[index] <= 1;
 				const isLeftOrTopCollapsed = (sizes[index] ?? 0) <= 1;
@@ -538,6 +556,10 @@ const CustomSplitter: SplitterComponent = (props) => {
 				return (
 					<React.Fragment key={index}>
 						<div
+							className={
+								[semanticClassNames.panel, panel.props.className].filter(Boolean).join(' ') ||
+								undefined
+							}
 							style={{
 								background: index % 2 ? '#fff' : '#fafafa',
 								boxSizing: 'border-box',
@@ -573,6 +595,7 @@ const CustomSplitter: SplitterComponent = (props) => {
 						{index < panels.length - 1 && (
 							<div
 								aria-orientation={resolvedOrientation}
+								className={semanticClassNames.dragger}
 								onDoubleClick={() => {
 									onDraggerDoubleClick?.(index);
 									resetSizes();
