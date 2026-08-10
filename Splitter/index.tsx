@@ -85,7 +85,7 @@ export type SplitterProps = {
 	orientation?: SplitterOrientation;
 	/** 容器根节点及各语义化结构（root、panel、dragger）自定义 CSS 样式，支持对象或函数 */
 	style?: SplitterStyle;
-	/** 是否垂直分屏（orientation="vertical" 的简写形式） */
+	/** 是否垂直分屏（orientation="vertical" 的简写形式） 排列方向，与 orientation 同时存在，以 orientation 优先 */
 	vertical?: boolean;
 	/** 自定义拖拽手柄图标/节点 */
 	draggerIcon?: ReactNode;
