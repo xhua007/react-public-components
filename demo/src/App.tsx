@@ -54,11 +54,11 @@ export default function App() {
 			<section>
 				<h2>5. Splitter · 水平分屏（可折叠）</h2>
 				<Splitter style={{ height: 360 }}>
-					<Splitter.Panel defaultSize="40%" min="20%" collapsible>
+					<Splitter.Panel defaultSize="40%" min="20%">
 						<h3>左侧面板</h3>
 						<p>可拖动分隔条调整宽度，点击分隔条上的按钮可折叠。</p>
 					</Splitter.Panel>
-					<Splitter.Panel collapsible>
+					<Splitter.Panel>
 						<h3>右侧面板</h3>
 						<p>双击分隔条可重置为初始尺寸。</p>
 					</Splitter.Panel>
@@ -117,7 +117,7 @@ export default function App() {
 
 			<section>
 				<h2>7. Splitter · 垂直分屏</h2>
-				<Splitter orientation="vertical" style={{ height: 360 }}>
+				<Splitter orientation="vertical" style={{ height: 400 }}>
 					<Splitter.Panel defaultSize="30%" min="10%" collapsible>
 						<h3>上方面板</h3>
 						<p>可拖动分隔条调整高度。</p>

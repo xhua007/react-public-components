@@ -462,7 +462,7 @@ const CustomSplitter: SplitterComponent = (props) => {
 		boxSizing: 'border-box',
 		display: 'flex',
 		flexDirection: resolvedOrientation === 'horizontal' ? 'row' : 'column',
-		height: 360,
+		height: '100%',
 		minHeight: 0,
 		overflow: 'hidden',
 		position: 'relative',
@@ -666,34 +666,34 @@ const CustomSplitter: SplitterComponent = (props) => {
 								tabIndex={0}
 							>
 								{/* 呈现拖拽指示线/图标 */}
-								{(hoveredIndex === index || draggingIndex === index || !isAnyCollapsed) &&
-									(draggerIcon ? (
-										<div
-											style={{
-												alignItems: 'center',
-												color:
-													hoveredIndex === index || draggingIndex === index ? '#1677ff' : '#8c8c8c',
-												display: 'flex',
-												fontSize: 12,
-												justifyContent: 'center',
-												pointerEvents: 'none',
-												transition: 'color 0.2s ease',
-												userSelect: 'none',
-											}}
-										>
-											{draggerIcon}
-										</div>
-									) : (
-										<div
-											style={{
-												background:
-													hoveredIndex === index || draggingIndex === index ? '#1677ff' : '#d9d9d9',
-												borderRadius: 2,
-												height: resolvedOrientation === 'horizontal' ? 40 : 2,
-												width: resolvedOrientation === 'horizontal' ? 2 : 40,
-											}}
-										/>
-									))}
+								{draggerIcon ? (
+									<div
+										style={{
+											alignItems: 'center',
+											color:
+												hoveredIndex === index || draggingIndex === index ? '#1677ff' : '#8c8c8c',
+											display: 'flex',
+											fontSize: 12,
+											justifyContent: 'center',
+											pointerEvents: 'none',
+											transition: 'color 0.2s ease',
+											userSelect: 'none',
+										}}
+									>
+										{draggerIcon}
+									</div>
+								) : (
+									<div
+										style={{
+											background:
+												hoveredIndex === index || draggingIndex === index ? '#1677ff' : '#d9d9d9',
+											borderRadius: 2,
+											height: resolvedOrientation === 'horizontal' ? 40 : 2,
+											transition: 'background 0.2s ease',
+											width: resolvedOrientation === 'horizontal' ? 2 : 40,
+										}}
+									/>
+								)}
 
 								{/* 未折叠状态下呈现折叠按钮 */}
 								{!isAnyCollapsed && (
@@ -736,7 +736,7 @@ const CustomSplitter: SplitterComponent = (props) => {
 									</div>
 								)}
 
-								{/* 折叠状态下呈现展开按钮（常态保持显示，精准垂直居中） */}
+								{/* 折叠状态下呈现展开按钮（必须包含 collapsible 允许方可渲染） */}
 								{isAnyCollapsed && (
 									<div
 										style={{
@@ -778,10 +778,13 @@ const CustomSplitter: SplitterComponent = (props) => {
 										}}
 									>
 										{(() => {
-											const targetIndex = isLeftOrTopCollapsed ? index : index + 1;
+											const isStart = isLeftOrTopCollapsed;
+											const targetIndex = isStart ? index : index + 1;
 											const targetPanel = panels[targetIndex];
 											const config = getCollapsibleConfig(targetPanel?.props.collapsible);
-											if (config.showCollapsibleIcon === false) {
+											const isAllowed = isStart ? config.start : config.end;
+
+											if (!isAllowed || config.showCollapsibleIcon === false) {
 												return null;
 											}
 
