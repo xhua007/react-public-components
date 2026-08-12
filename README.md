@@ -2,10 +2,11 @@
 
 封装 react 常用的组件，欢迎更多同学提出大众化普遍存在的业务场景。
 
-本仓库包含两个独立的 React 组件：
+本仓库包含三个独立的 React 组件：
 
 1. **CollapseBox** — 可折叠的内容容器组件
 2. **Splitter** — 可拖拽调整、可折叠的分屏面板组件
+3. **DisabledBox** — 禁用态包装容器组件（带锁图标及拦截事件）
 
 ---
 
@@ -160,20 +161,60 @@ export default function Demo() {
 
 ---
 
-## 三、目录结构
+## 三、DisabledBox 禁用容器
+
+### 简介
+
+`DisabledBox` 是一个处理禁用态内容的包装容器组件。当处于禁用状态（`disabled={true}`）时，会自动显示锁图标、将文字颜色设为禁用灰色，并在捕获阶段拦截点击事件，同时保持 `mouseenter`/`mouseleave` 等 hover 事件正常响应（以保证 Tooltip 等提示浮层正常工作）。
+
+### 引入方式
+
+```tsx
+import { DisabledBox } from 'react-public-components';
+```
+
+### Props
+
+| 属性        | 类型                | 默认值   | 说明                                                   |
+| ----------- | ------------------- | -------- | ------------------------------------------------------ |
+| `children`  | `ReactNode`         | -        | 容器包裹的主体内容                                     |
+| `title`     | `ReactNode`         | -        | 标题或替代内容（当未传入 `children` 时生效）           |
+| `disabled`  | `boolean`           | `false`  | 是否禁用，禁用时显示锁图标、文字呈现灰色且拦截点击事件 |
+| `iconAlign` | `'left' \| 'right'` | `'left'` | 锁图标的对齐位置                                       |
+
+### 基础用法
+
+```tsx
+import { DisabledBox } from 'react-public-components';
+
+export default function Demo() {
+	return (
+		<DisabledBox disabled={true}>
+			<p>受保护的不可点击内容</p>
+		</DisabledBox>
+	);
+}
+```
+
+---
+
+## 四、目录结构
 
 ```
 .
 ├── CollapseBox/
 │   ├── index.tsx
 │   └── index.less
-└── Splitter/
-    └── index.tsx
+├── Splitter/
+│   └── index.tsx
+└── DisabledBox/
+    ├── index.tsx
+    └── index.less
 ```
 
 ---
 
-## 四、发布到 npm
+## 五、发布到 npm
 
 ### 1. 前置准备
 

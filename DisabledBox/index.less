@@ -1,0 +1,43 @@
+.disabled_box_container {
+	display: flex;
+	// 不破坏父级 flex 布局：参与父级 flex 计算，允许子元素省略号生效
+	flex: 1;
+	gap: 2px;
+	align-items: center;
+	justify-content: flex-start;
+	min-width: 0;
+	// 通用组件强制禁用态颜色，使用者无需关心
+	color: rgba(0, 0, 0, 0.35);
+
+	.disabled_box_title {
+		// 延续 flex 链路：span 默认非 flex 容器，需显式声明，保证内部子元素省略号生效
+		display: flex;
+		flex: 1;
+		min-width: 0;
+		margin: 0 !important;
+		padding: 0 !important;
+		overflow: hidden;
+	}
+
+	.disabled_box_icon {
+		flex-shrink: 0;
+		margin-right: 2px;
+		font-size: 12px;
+		&:last-child {
+			margin-right: 0;
+			margin-left: 2px;
+		}
+	}
+}
+
+.disabled_box_disabled {
+	// 通用组件强制禁用态颜色，使用者无需关心
+	color: rgba(0, 0, 0, 0.35) !important;
+	cursor: not-allowed;
+
+	// 强制所有后代继承禁用态颜色，覆盖子元素自身的 color（如 .menu_link 的 #1f1f1f）
+	// 否则子元素自身设置的 color 会优先于父级继承的 !important
+	* {
+		color: inherit !important;
+	}
+}

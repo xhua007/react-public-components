@@ -75,3 +75,19 @@ export const DownOutlined = ({ style, className }: IconProps) => (
 		<path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 37 17.6 49.8 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" />
 	</svg>
 );
+
+export const LockOutlined = ({ style, className }: IconProps) => (
+	<svg
+		viewBox="64 64 896 896"
+		focusable="false"
+		data-icon="lock"
+		width="1em"
+		height="1em"
+		fill="currentColor"
+		aria-hidden="true"
+		style={{ ...baseStyle, ...style }}
+		className={className}
+	>
+		<path d="M928 224H704v-64c0-88.4-71.6-160-160-160s-160 71.6-160 160v64H160c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h768c17.7 0 32-14.3 32-32V256c0-17.7-14.3-32-32-32zM456 160c0-44.2 35.8-80 80-80s80 35.8 80 80v64H456v-64zm408 696H224V296h640v560zM496 448c-30.9 0-56 25.1-56 56 0 24.7 16.1 45.6 38.4 52.7V680c0 9.7 7.8 17.5 17.6 17.5h32c9.7 0 17.6-7.8 17.6-17.5V556.7c22.3-7.1 38.4-28 38.4-52.7 0-30.9-25.1-56-56-56z" />
+	</svg>
+);

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CollapseBox from '../../CollapseBox';
 import Splitter from '../../Splitter';
+import DisabledBox from '../../DisabledBox';
 
 export default function App() {
 	const [showIconMode, setShowIconMode] = useState<boolean | 'auto'>(true);
@@ -151,6 +152,12 @@ export default function App() {
 						<p>具有自定义背景和分隔条样式。</p>
 					</Splitter.Panel>
 				</Splitter>
+			</section>
+			<section>
+				<h2>9. DisabledBox</h2>
+				<DisabledBox disabled={true}>
+					<p style={{ margin: 0, padding: 0 }}>这里是受保护的内容。</p>
+				</DisabledBox>
 			</section>
 		</div>
 	);

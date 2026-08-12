@@ -14,3 +14,6 @@ export type {
 	SplitterSize,
 	SplitterOrientation,
 } from '../Splitter';
+
+export { default as DisabledBox } from '../DisabledBox';
+export type { DisabledBoxProps } from '../DisabledBox';
