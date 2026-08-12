@@ -1,33 +1,38 @@
 .collapsible-wrapper {
 	position: relative;
+	box-sizing: border-box;
 
 	&.horizontal {
-		display: flex;
+		display: inline-flex;
 		align-items: stretch;
 	}
 
 	&.vertical {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
 	}
 }
 
 .collapsible-container {
 	position: relative;
+	box-sizing: border-box;
 	min-width: 0;
 	min-height: 0;
 	overflow: hidden;
-	background-color: white;
+	background-color: #ffffff;
 	border: 1px solid #d1d5db;
 	border-radius: 8px;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 	transition:
-		width 0.3s ease-in-out,
-		height 0.3s ease-in-out;
+		width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 	&.align-right {
 		margin-left: auto;
+	}
+
+	&.align-bottom {
+		margin-top: auto;
 	}
 }
 
@@ -55,9 +60,6 @@
 .collapsible-content {
 	box-sizing: border-box;
 	padding: 16px;
-	transition:
-		max-height 0.3s ease-in-out,
-		padding 0.3s ease-in-out;
 }
 
 .toggle-button {
@@ -71,44 +73,47 @@
 	border: 1px solid #e5e7eb;
 	border-radius: 3px;
 	cursor: pointer;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-	transition: all 0.2s ease;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease,
+		border-color 0.2s ease;
 	font-size: 10px;
 
 	&:hover {
 		background-color: #e5e7eb;
-		color: #4b5563;
+		color: #1f2937;
 		border-color: #d1d5db;
 	}
 
 	&.button-right {
 		top: 50%;
-		right: -7px;
-		transform: translateY(-50%);
+		right: 0;
+		transform: translate(50%, -50%);
 		width: 14px;
 		height: 48px;
 	}
 
 	&.button-left {
 		top: 50%;
-		left: -7px;
-		transform: translateY(-50%);
+		left: 0;
+		transform: translate(-50%, -50%);
 		width: 14px;
 		height: 48px;
 	}
 
 	&.button-bottom {
-		bottom: -7px;
+		bottom: 0;
 		left: 50%;
-		transform: translateX(-50%);
+		transform: translate(-50%, 50%);
 		width: 48px;
 		height: 14px;
 	}
 
 	&.button-top {
-		top: -7px;
+		top: 0;
 		left: 50%;
-		transform: translateX(-50%);
+		transform: translate(-50%, -50%);
 		width: 48px;
 		height: 14px;
 	}

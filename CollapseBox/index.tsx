@@ -57,79 +57,61 @@ const CollapsibleBox = ({
 		if (direction === 'horizontal') {
 			if (buttonPosition === 'right') {
 				return isExpanded ? <ChevronRight /> : <ChevronLeft />;
-			} else {
-				return isExpanded ? <ChevronLeft /> : <ChevronRight />;
 			}
-		} else {
-			if (buttonPosition === 'bottom') {
-				return isExpanded ? <ChevronUp /> : <ChevronDown />;
-			} else {
-				return isExpanded ? <ChevronDown /> : <ChevronUp />;
-			}
+			return isExpanded ? <ChevronLeft /> : <ChevronRight />;
 		}
+		if (buttonPosition === 'bottom') {
+			return isExpanded ? <ChevronDown /> : <ChevronUp />;
+		}
+		return isExpanded ? <ChevronUp /> : <ChevronDown />;
 	};
 
 	const getButtonClass = () => {
 		if (direction === 'horizontal') {
 			return buttonPosition === 'right' ? 'button-right' : 'button-left';
-		} else {
-			return buttonPosition === 'bottom' ? 'button-bottom' : 'button-top';
 		}
+		return buttonPosition === 'bottom' ? 'button-bottom' : 'button-top';
 	};
 
 	const getContainerStyle = (): CSSProperties => {
-		const resolvedHeight = formatDimension(defaultHeight);
-		const resolvedWidth = formatDimension(defaultWidth);
 		if (direction === 'horizontal') {
 			return {
-				width: isExpanded ? resolvedWidth : '0px',
-				height: resolvedHeight,
-				minWidth: 0,
-			};
-		} else {
-			return {
-				height: isExpanded ? resolvedHeight : '0px',
-				width: resolvedWidth,
-				minHeight: 0,
+				width: isExpanded ? '100%' : '0px',
+				height: '100%',
 			};
 		}
+		return {
+			height: isExpanded ? '100%' : '0px',
+			width: '100%',
+		};
 	};
 
 	const baseWrapperClass =
 		direction === 'horizontal' ? 'collapsible-wrapper horizontal' : 'collapsible-wrapper vertical';
 	const wrapperClass = className ? `${baseWrapperClass} ${className}` : baseWrapperClass;
 
-	const containerClass =
-		direction === 'horizontal' && buttonPosition === 'right'
-			? 'collapsible-container align-right'
-			: 'collapsible-container';
+	const containerClass = [
+		'collapsible-container',
+		direction === 'horizontal' && buttonPosition === 'right' ? 'align-right' : '',
+		direction === 'vertical' && buttonPosition === 'bottom' ? 'align-bottom' : '',
+	]
+		.filter(Boolean)
+		.join(' ');
+
 	const height = getContentMaxHeight();
 	const contentStyle: CSSProperties = {
 		maxHeight: direction === 'vertical' ? (isExpanded ? height : '0px') : height,
 		overflowY: 'auto',
-		padding: direction === 'vertical' && !isExpanded ? '0px' : contentPadding,
+		padding: contentPadding,
 		boxSizing: 'border-box',
 	};
 
-	// 折叠时（纵向 + 底部按钮）：按钮需切换为 top:0 定位，使其显示在折叠线下方
-	const buttonStyle: CSSProperties =
-		direction === 'vertical' && buttonPosition === 'bottom' && !isExpanded
-			? { top: '0px', bottom: 'auto' }
-			: {};
-
-	// 让 wrapper 高度跟随容器，确保 bottom:0 的按钮贴住容器底部
-	// 折叠时 wrapper 高度为 0，配合按钮的 translateY(-100%) 让按钮显示在折叠线上方
 	const formattedWidth = formatDimension(defaultWidth);
 	const formattedHeight = formatDimension(defaultHeight);
-	const wrapperStyle: CSSProperties | undefined =
-		direction === 'vertical'
-			? isExpanded
-				? {
-						height: formattedHeight,
-						width: formattedWidth,
-					}
-				: { height: 0, width: formattedWidth }
-			: undefined;
+	const wrapperStyle: CSSProperties = {
+		width: formattedWidth,
+		height: formattedHeight,
+	};
 
 	return (
 		<div className={wrapperClass} style={wrapperStyle}>
@@ -148,7 +130,6 @@ const CollapsibleBox = ({
 			<div
 				onClick={() => setIsExpanded(!isExpanded)}
 				className={`toggle-button ${getButtonClass()}`}
-				style={buttonStyle}
 				title={isExpanded ? '隐藏' : '展开'}
 			>
 				{getIcon()}
