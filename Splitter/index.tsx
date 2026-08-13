@@ -605,7 +605,8 @@ const CustomSplitter: SplitterComponent = (props) => {
 										boxSizing: 'border-box',
 										display: isHidden ? 'none' : 'block',
 										height: '100%',
-										overflow: 'auto',
+										overflowX: 'hidden',
+										overflowY: 'auto',
 										padding: (sizes[index] ?? 0) < 32 ? 0 : 16,
 										width: '100%',
 									}}
