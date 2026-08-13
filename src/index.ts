@@ -17,3 +17,14 @@ export type {
 
 export { default as DisabledBox } from '../DisabledBox';
 export type { DisabledBoxProps } from '../DisabledBox';
+
+export { default as Masonry } from '../Masonry';
+export type {
+	MasonryProps,
+	MasonryItem,
+	MasonrySemanticDOM,
+	MasonryClassNames,
+	MasonryStyles,
+	Gap,
+	Breakpoint,
+} from '../Masonry';

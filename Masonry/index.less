@@ -1,0 +1,16 @@
+.masonry_root {
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.masonry_item {
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	transition:
+		transform 0.3s cubic-bezier(0.2, 0, 0, 1),
+		opacity 0.3s cubic-bezier(0.2, 0, 0, 1);
+	will-change: transform;
+}

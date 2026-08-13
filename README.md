@@ -2,11 +2,12 @@
 
 封装 react 常用的组件，欢迎更多同学提出大众化普遍存在的业务场景。
 
-本仓库包含三个独立的 React 组件：
+本仓库包含四个独立的 React 组件：
 
 1. **CollapseBox** — 可折叠的内容容器组件
 2. **Splitter** — 可拖拽调整、可折叠的分屏面板组件
 3. **DisabledBox** — 禁用态包装容器组件（带锁图标及拦截事件）
+4. **Masonry** — 瀑布流布局组件（一比一复刻 Ant Design V6 规范）
 
 ---
 
@@ -198,7 +199,65 @@ export default function Demo() {
 
 ---
 
-## 四、目录结构
+## 四、Masonry 瀑布流组件
+
+### 简介
+
+`Masonry` 是一个符合 Ant Design V6 规范的瀑布流布局组件。支持固定或响应式列数配置（`columns`）、水平垂直间距配置（`gutter`）、持续监听子项尺寸变化（`fresh`）、自定义语义化结构样式/类名（`styles`/`classNames`）以及列排序回调（`onLayoutChange`）。
+
+### 引入方式
+
+```tsx
+import { Masonry } from 'react-public-components';
+```
+
+### Masonry Props
+
+| 参数             | 说明                                         | 类型                                                                                                        | 默认值  |
+| ---------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------- |
+| `classNames`     | 自定义内部语义化结构 class，支持对象或函数   | `Record<'root' \| 'item', string> \| ((info: { props }) => Record<'root' \| 'item', string>)`               | `-`     |
+| `columns`        | 列数，固定数字或响应式配置                   | `number \| { xs?: number; sm?: number; md?: number; lg?: number; xl?: number; xxl?: number }`               | `3`     |
+| `fresh`          | 是否持续监听子项尺寸变化                     | `boolean`                                                                                                   | `false` |
+| `gutter`         | 间距，固定数字、响应式配置或水平垂直间距配置 | `Gap \| [Gap, Gap]`                                                                                         | `0`     |
+| `items`          | 瀑布流数据项                                 | `MasonryItem[]`                                                                                             | `-`     |
+| `itemRender`     | 自定义数据项渲染函数                         | `(item: MasonryItem) => ReactNode`                                                                          | `-`     |
+| `styles`         | 语义化结构 style，支持对象和函数形式         | `Record<'root' \| 'item', CSSProperties> \| ((info: { props }) => Record<'root' \| 'item', CSSProperties>)` | `-`     |
+| `onLayoutChange` | 列排序计算完成回调                           | `(layout: { key: React.Key; column: number }[]) => void`                                                    | `-`     |
+
+### MasonryItem 属性
+
+| 参数       | 说明                                             | 类型               | 默认值 |
+| ---------- | ------------------------------------------------ | ------------------ | ------ |
+| `children` | 自定义展示内容，相对 `itemRender` 具有更高优先级 | `ReactNode`        | `-`    |
+| `column`   | 自定义指定放置列（0-indexed）                    | `number`           | `-`    |
+| `data`     | 自定义存储数据                                   | `T`                | `-`    |
+| `height`   | 高度（手指定时优先使用）                         | `number`           | `-`    |
+| `key`      | 唯一标识                                         | `string \| number` | `-`    |
+
+### 基础用法
+
+```tsx
+import { Masonry } from 'react-public-components';
+
+export default function Demo() {
+	return (
+		<Masonry
+			columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+			gutter={[16, 16]}
+			fresh={true}
+			items={[
+				{ key: '1', height: 120, children: <div>卡片 1</div> },
+				{ key: '2', height: 180, children: <div>卡片 2</div> },
+				{ key: '3', height: 150, children: <div>卡片 3</div> },
+			]}
+		/>
+	);
+}
+```
+
+---
+
+## 五、目录结构
 
 ```
 .
@@ -207,14 +266,17 @@ export default function Demo() {
 │   └── index.less
 ├── Splitter/
 │   └── index.tsx
-└── DisabledBox/
+├── DisabledBox/
+│   ├── index.tsx
+│   └── index.less
+└── Masonry/
     ├── index.tsx
     └── index.less
 ```
 
 ---
 
-## 五、发布到 npm
+## 六、发布到 npm
 
 ### 1. 前置准备
 
