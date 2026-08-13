@@ -181,6 +181,12 @@ const ColorPicker = (props: ColorPickerProps) => {
 		[activeMode, gradientStops, activeStopIndex, value, onChange, onChangeComplete],
 	);
 
+	const currentColorRef = useRef<Color>(currentColor);
+	currentColorRef.current = currentColor;
+
+	const updateColorRef = useRef(updateColor);
+	updateColorRef.current = updateColor;
+
 	// 点击外部关闭
 	useEffect(() => {
 		if (!isOpen) return;
@@ -208,15 +214,18 @@ const ColorPicker = (props: ColorPickerProps) => {
 			const s = Math.round((x / rect.width) * 100);
 			const b = Math.round((1 - y / rect.height) * 100);
 
+			const curr = currentColorRef.current;
+			const targetAlpha = curr.a === 0 ? 1 : curr.a;
+
 			const newColor = new Color({
-				h: currentColor.h,
+				h: curr.h,
 				s,
 				b,
-				a: currentColor.a,
+				a: targetAlpha,
 			});
-			updateColor(newColor);
+			updateColorRef.current(newColor);
 		},
-		[currentColor, updateColor],
+		[],
 	);
 
 	const handlePaletteMouseDown = (e: ReactMouseEvent) => {
@@ -233,7 +242,7 @@ const ColorPicker = (props: ColorPickerProps) => {
 		const handleMouseUp = () => {
 			if (isDraggingRef.current) {
 				isDraggingRef.current = false;
-				onChangeComplete?.(currentColor);
+				onChangeComplete?.(currentColorRef.current);
 			}
 			window.removeEventListener('mousemove', handleMouseMove);
 			window.removeEventListener('mouseup', handleMouseUp);
@@ -251,15 +260,18 @@ const ColorPicker = (props: ColorPickerProps) => {
 			const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
 			const h = Math.round((x / rect.width) * 360);
 
+			const curr = currentColorRef.current;
+			const targetAlpha = curr.a === 0 ? 1 : curr.a;
+
 			const newColor = new Color({
 				h: h === 360 ? 0 : h,
-				s: currentColor.s,
-				b: currentColor.b,
-				a: currentColor.a,
+				s: curr.s,
+				b: curr.b,
+				a: targetAlpha,
 			});
-			updateColor(newColor);
+			updateColorRef.current(newColor);
 		},
-		[currentColor, updateColor],
+		[],
 	);
 
 	const handleHueMouseDown = (e: ReactMouseEvent) => {
@@ -271,7 +283,7 @@ const ColorPicker = (props: ColorPickerProps) => {
 		};
 
 		const handleMouseUp = () => {
-			onChangeComplete?.(currentColor);
+			onChangeComplete?.(currentColorRef.current);
 			window.removeEventListener('mousemove', handleMouseMove);
 			window.removeEventListener('mouseup', handleMouseUp);
 		};
@@ -288,15 +300,17 @@ const ColorPicker = (props: ColorPickerProps) => {
 			const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
 			const a = Number((x / rect.width).toFixed(2));
 
+			const curr = currentColorRef.current;
+
 			const newColor = new Color({
-				h: currentColor.h,
-				s: currentColor.s,
-				b: currentColor.b,
+				h: curr.h,
+				s: curr.s,
+				b: curr.b,
 				a,
 			});
-			updateColor(newColor);
+			updateColorRef.current(newColor);
 		},
-		[currentColor, updateColor],
+		[],
 	);
 
 	const handleAlphaMouseDown = (e: ReactMouseEvent) => {
@@ -308,7 +322,7 @@ const ColorPicker = (props: ColorPickerProps) => {
 		};
 
 		const handleMouseUp = () => {
-			onChangeComplete?.(currentColor);
+			onChangeComplete?.(currentColorRef.current);
 			window.removeEventListener('mousemove', handleMouseMove);
 			window.removeEventListener('mouseup', handleMouseUp);
 		};
@@ -390,25 +404,43 @@ const ColorPicker = (props: ColorPickerProps) => {
 
 		return (
 			<div className="react-public-color-picker-panel-body">
-				{/* Mode Segmented 选项卡 */}
-				{modeOptions.length > 1 && (
-					<div className="react-public-color-picker-mode-segmented">
-						<div
-							className={`react-public-color-picker-mode-option ${
-								activeMode === 'single' ? 'active' : ''
-							}`}
-							onClick={() => setActiveMode('single')}
-						>
-							单色
-						</div>
-						<div
-							className={`react-public-color-picker-mode-option ${
-								activeMode === 'gradient' ? 'active' : ''
-							}`}
-							onClick={() => setActiveMode('gradient')}
-						>
-							渐变
-						</div>
+				{/* 顶部 Header：模式切换与右上角清除按钮 */}
+				{(modeOptions.length > 1 || (allowClear && !disabled)) && (
+					<div className="react-public-color-picker-panel-header">
+						{modeOptions.length > 1 ? (
+							<div className="react-public-color-picker-mode-segmented">
+								<div
+									className={`react-public-color-picker-mode-option ${
+										activeMode === 'single' ? 'active' : ''
+									}`}
+									onClick={() => setActiveMode('single')}
+								>
+									单色
+								</div>
+								<div
+									className={`react-public-color-picker-mode-option ${
+										activeMode === 'gradient' ? 'active' : ''
+									}`}
+									onClick={() => setActiveMode('gradient')}
+								>
+									渐变
+								</div>
+							</div>
+						) : (
+							<div />
+						)}
+
+						{allowClear && !disabled && (
+							<div
+								className="react-public-color-picker-panel-clear-btn"
+								onClick={handleClearClick}
+								title="清除颜色"
+							>
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="none">
+									<line x1="4" y1="4" x2="20" y2="20" stroke="#ff4d4f" strokeWidth="2.5" strokeLinecap="round" />
+								</svg>
+							</div>
+						)}
 					</div>
 				)}
 
