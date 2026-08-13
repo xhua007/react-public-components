@@ -1,0 +1,424 @@
+.react-public-color-picker-trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 4px;
+	border: 1px solid #d9d9d9;
+	border-radius: 6px;
+	background: #ffffff;
+	cursor: pointer;
+	user-select: none;
+	transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+	box-sizing: border-box;
+
+	&:hover:not(.react-public-color-picker-disabled) {
+		border-color: #4096ff;
+	}
+
+	&.react-public-color-picker-size-small {
+		height: 24px;
+		padding: 2px 6px;
+		font-size: 12px;
+	}
+
+	&.react-public-color-picker-size-middle {
+		height: 32px;
+		padding: 4px 8px;
+		font-size: 14px;
+	}
+
+	&.react-public-color-picker-size-large {
+		height: 40px;
+		padding: 6px 12px;
+		font-size: 16px;
+	}
+
+	&.react-public-color-picker-disabled {
+		background: #f5f5f5;
+		border-color: #d9d9d9;
+		cursor: not-allowed;
+		opacity: 0.65;
+	}
+}
+
+.react-public-color-picker-color-block {
+	position: relative;
+	width: 18px;
+	height: 18px;
+	border-radius: 4px;
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+	background-image: conic-gradient(#eee 0 25%, #fff 0 50%, #eee 0 75%, #fff 0 100%);
+	background-size: 8px 8px;
+}
+
+.react-public-color-picker-color-inner {
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+}
+
+.react-public-color-picker-clear-icon {
+	color: #bfbfbf;
+	font-size: 12px;
+	transition: color 0.2s;
+	display: inline-flex;
+	align-items: center;
+
+	&:hover {
+		color: #595959;
+	}
+}
+
+/* Popover Panel */
+.react-public-color-picker-popover {
+	position: absolute;
+	z-index: 1050;
+	padding: 12px;
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow:
+		0 6px 16px 0 rgba(0, 0, 0, 0.08),
+		0 3px 6px -4px rgba(0, 0, 0, 0.12),
+		0 9px 28px 8px rgba(0, 0, 0, 0.05);
+	width: max-content;
+	min-width: 250px;
+	max-width: 90vw;
+	box-sizing: border-box;
+	user-select: none;
+	animation: react-public-color-picker-fade-in 0.2s ease;
+}
+
+@keyframes react-public-color-picker-fade-in {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Mode Select Segmented */
+.react-public-color-picker-mode-segmented {
+	display: flex;
+	background: #f5f5f5;
+	padding: 2px;
+	border-radius: 6px;
+	margin-bottom: 12px;
+}
+
+.react-public-color-picker-mode-option {
+	flex: 1;
+	text-align: center;
+	padding: 4px 0;
+	font-size: 12px;
+	border-radius: 4px;
+	cursor: pointer;
+	color: #595959;
+	transition: all 0.2s;
+
+	&.active {
+		background: #ffffff;
+		color: #1677ff;
+		font-weight: 500;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+	}
+}
+
+/* Gradient Slider Rail */
+.react-public-color-picker-gradient-slider {
+	position: relative;
+	height: 14px;
+	border-radius: 7px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	background-image: conic-gradient(#eee 0 25%, #fff 0 50%, #eee 0 75%, #fff 0 100%);
+	background-size: 8px 8px;
+}
+
+.react-public-color-picker-gradient-bg {
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+}
+
+.react-public-color-picker-gradient-stop-handle {
+	position: absolute;
+	top: 50%;
+	width: 14px;
+	height: 14px;
+	border: 2px solid #ffffff;
+	border-radius: 50%;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+	transform: translate(-50%, -50%);
+	cursor: grab;
+	box-sizing: border-box;
+	transition: border-color 0.15s;
+
+	&.active {
+		border-color: #1677ff;
+		box-shadow:
+			0 0 0 2px rgba(22, 119, 255, 0.3),
+			0 0 4px rgba(0, 0, 0, 0.4);
+	}
+}
+
+/* Arrow */
+.react-public-color-picker-arrow {
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	background: #ffffff;
+	transform: rotate(45deg);
+	box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.react-public-color-picker-popover-bottomLeft .react-public-color-picker-arrow {
+	top: -4px;
+	left: 16px;
+}
+
+.react-public-color-picker-popover-bottomRight .react-public-color-picker-arrow {
+	top: -4px;
+	right: 16px;
+}
+
+.react-public-color-picker-popover-topLeft .react-public-color-picker-arrow {
+	bottom: -4px;
+	left: 16px;
+}
+
+.react-public-color-picker-popover-topRight .react-public-color-picker-arrow {
+	bottom: -4px;
+	right: 16px;
+}
+
+/* Picker Wrapper Width */
+.react-public-color-picker-panel-body {
+	width: 240px;
+	box-sizing: border-box;
+}
+
+/* SV Palette Box */
+.react-public-color-picker-palette {
+	position: relative;
+	width: 100%;
+	height: 150px;
+	border-radius: 6px;
+	cursor: crosshair;
+	overflow: hidden;
+	margin-bottom: 12px;
+}
+
+.react-public-color-picker-saturation-bg {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to right, #fff, transparent);
+}
+
+.react-public-color-picker-brightness-bg {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to top, #000, transparent);
+}
+
+.react-public-color-picker-handler {
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	border: 2px solid #ffffff;
+	border-radius: 50%;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+	box-sizing: border-box;
+}
+
+/* Sliders Bar & Side Color Block */
+.react-public-color-picker-slider-container {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.react-public-color-picker-slider-group {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.react-public-color-picker-side-block {
+	position: relative;
+	width: 26px;
+	height: 26px;
+	border-radius: 6px;
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+	flex-shrink: 0;
+	background-image: conic-gradient(#eee 0 25%, #fff 0 50%, #eee 0 75%, #fff 0 100%);
+	background-size: 8px 8px;
+}
+
+.react-public-color-picker-slider {
+	position: relative;
+	height: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.react-public-color-picker-hue-slider {
+	background: linear-gradient(
+		to right,
+		#ff0000 0%,
+		#ffff00 17%,
+		#00ff00 33%,
+		#00ffff 50%,
+		#0000ff 67%,
+		#ff00ff 83%,
+		#ff0000 100%
+	);
+}
+
+.react-public-color-picker-alpha-slider {
+	background-image: conic-gradient(#eee 0 25%, #fff 0 50%, #eee 0 75%, #fff 0 100%);
+	background-size: 8px 8px;
+}
+
+.react-public-color-picker-alpha-bg {
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+}
+
+.react-public-color-picker-slider-handler {
+	position: absolute;
+	top: 50%;
+	width: 14px;
+	height: 14px;
+	border: 2px solid #ffffff;
+	border-radius: 50%;
+	background: transparent;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+	box-sizing: border-box;
+}
+
+/* Inputs Format Section */
+.react-public-color-picker-inputs {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.react-public-color-picker-format-select {
+	width: 58px;
+	height: 28px;
+	padding: 0 2px;
+	border: 1px solid #d9d9d9;
+	border-radius: 4px;
+	background: #fff;
+	font-size: 12px;
+	cursor: pointer;
+	outline: none;
+	flex-shrink: 0;
+
+	&:focus {
+		border-color: #4096ff;
+	}
+}
+
+.react-public-color-picker-input-field {
+	flex: 1;
+	min-width: 0;
+	height: 28px;
+	padding: 0 6px;
+	border: 1px solid #d9d9d9;
+	border-radius: 4px;
+	font-size: 12px;
+	outline: none;
+	box-sizing: border-box;
+
+	&:focus {
+		border-color: #4096ff;
+	}
+}
+
+.react-public-color-picker-alpha-input {
+	width: 44px;
+	height: 28px;
+	padding: 0 2px;
+	border: 1px solid #d9d9d9;
+	border-radius: 4px;
+	font-size: 12px;
+	text-align: center;
+	outline: none;
+	box-sizing: border-box;
+	flex-shrink: 0;
+
+	&:focus {
+		border-color: #4096ff;
+	}
+}
+
+/* Presets Section */
+.react-public-color-picker-presets {
+	padding-top: 4px;
+}
+
+.react-public-color-picker-presets-standalone {
+	border-top: 1px solid #f0f0f0;
+	padding-top: 10px;
+	margin-top: 4px;
+}
+
+.react-public-color-picker-preset-title {
+	font-size: 12px;
+	color: #595959;
+	margin-bottom: 6px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	cursor: pointer;
+	user-select: none;
+
+	&:hover {
+		color: #1677ff;
+	}
+}
+
+.react-public-color-picker-preset-colors {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	max-width: 220px;
+	margin-bottom: 6px;
+}
+
+.react-public-color-picker-preset-item {
+	position: relative;
+	width: 18px;
+	height: 18px;
+	border-radius: 4px;
+	cursor: pointer;
+	overflow: hidden;
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+	transition: transform 0.1s ease;
+	background-image: conic-gradient(#eee 0 25%, #fff 0 50%, #eee 0 75%, #fff 0 100%);
+	background-size: 8px 8px;
+
+	&:hover {
+		transform: scale(1.15);
+	}
+}
+
+.react-public-color-picker-preset-item-inner {
+	width: 100%;
+	height: 100%;
+}

@@ -31,3 +31,14 @@ export type {
 
 export { default as BorderBeam } from '../BorderBeam';
 export type { BorderBeamProps, BorderBeamColorStop } from '../BorderBeam';
+
+export { default as ColorPicker } from '../ColorPicker';
+export { Color, generateColor } from '../ColorPicker/Color';
+export type {
+	ColorPickerProps,
+	ColorPresetItem,
+	ColorFormat,
+	ColorMode,
+	HsbColor,
+	RgbColor,
+} from '../ColorPicker';

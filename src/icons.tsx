@@ -91,3 +91,24 @@ export const LockOutlined = ({ style, className }: IconProps) => (
 		<path d="M928 224H704v-64c0-88.4-71.6-160-160-160s-160 71.6-160 160v64H160c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h768c17.7 0 32-14.3 32-32V256c0-17.7-14.3-32-32-32zM456 160c0-44.2 35.8-80 80-80s80 35.8 80 80v64H456v-64zm408 696H224V296h640v560zM496 448c-30.9 0-56 25.1-56 56 0 24.7 16.1 45.6 38.4 52.7V680c0 9.7 7.8 17.5 17.6 17.5h32c9.7 0 17.6-7.8 17.6-17.5V556.7c22.3-7.1 38.4-28 38.4-52.7 0-30.9-25.1-56-56-56z" />
 	</svg>
 );
+
+export const CloseCircleFilled = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+	<svg
+		viewBox="64 64 896 896"
+		focusable="false"
+		data-icon="close-circle"
+		width="1em"
+		height="1em"
+		fill="currentColor"
+		aria-hidden="true"
+		style={{ ...baseStyle, ...style }}
+		className={className}
+		onClick={onClick}
+	>
+		<path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-66L512 516.8l-99.4 99.4-66-66L446 450.8 346.6 351.4l66-66L512 384.8l99.4-99.4 66 66L578 450.8l99.4 99.4z" />
+	</svg>
+);

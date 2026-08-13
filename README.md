@@ -2,13 +2,14 @@
 
 封装 react 常用的组件，欢迎更多同学提出大众化普遍存在的业务场景。
 
-本仓库包含五个独立的 React 组件：
+本仓库包含六个独立的 React 组件：
 
 1. **CollapseBox** — 可折叠的内容容器组件
 2. **Splitter** — 可拖拽调整、可折叠的分屏面板组件
-3. **DisabledBox** — 禁用态包装容器组件（带锁图标及拦截事件）
+3. **DisabledBox** — 禁用态遮罩容器组件
 4. **Masonry** — 瀑布流布局组件（一比一复刻 Ant Design V6 规范）
 5. **BorderBeam** — 边框流光组件
+6. **ColorPicker** — 颜色选择器组件（一比一复刻 Ant Design V6 规范）
 
 ---
 
@@ -301,7 +302,72 @@ export default function Demo() {
 
 ---
 
-## 六、目录结构
+## 六、ColorPicker 颜色选择器组件
+
+### 简介
+
+`ColorPicker` 是一个符合 Ant Design V6 规范的颜色选择器组件。零第三方 UI 库依赖，支持二维 SV 画板调色、Hue 色相滑块、Alpha 透明度调节、HEX/RGB/HSB 格式转换、预设调色板与自定义 PopOver / 触发器。
+
+### 引入方式
+
+```tsx
+import { ColorPicker, Color } from 'react-public-components';
+```
+
+### ColorPicker API
+
+| 参数               | 说明                           | 类型                                                                                          | 默认值                                     |
+| ------------------ | ------------------------------ | --------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `allowClear`       | 允许清除选择的颜色             | `boolean`                                                                                     | `false`                                    |
+| `arrow`            | 配置弹出的箭头                 | `boolean \| { pointAtCenter?: boolean }`                                                      | `true`                                     |
+| `children`         | 颜色选择器的触发器             | `ReactNode`                                                                                   | `-`                                        |
+| `defaultValue`     | 颜色默认的值                   | `string \| Color`                                                                             | `-`                                        |
+| `defaultFormat`    | 颜色格式默认的值               | `'hex' \| 'rgb' \| 'hsb'`                                                                     | `'hex'`                                    |
+| `disabled`         | 禁用颜色选择器                 | `boolean`                                                                                     | `false`                                    |
+| `disabledAlpha`    | 禁用透明度                     | `boolean`                                                                                     | `false`                                    |
+| `disabledFormat`   | 禁用选择颜色格式               | `boolean`                                                                                     | `false`                                    |
+| `destroyOnHidden`  | 关闭后是否销毁弹窗             | `boolean`                                                                                     | `false`                                    |
+| `format`           | 颜色格式                       | `'hex' \| 'rgb' \| 'hsb'`                                                                     | `-`                                        |
+| `mode`             | 选择器模式，用于配置单色与渐变 | `'single' \| 'gradient' \| ('single' \| 'gradient')[]`                                        | `'single'`                                 |
+| `open`             | 是否显示弹出窗口               | `boolean`                                                                                     | `-`                                        |
+| `presets`          | 预设的颜色                     | `{ label: ReactNode; colors: (string \| Color)[]; defaultOpen?: boolean; key?: React.Key }[]` | `-`                                        |
+| `placement`        | 弹出窗口的位置                 | `'top' \| 'topLeft' \| 'topRight'                                                             | 'bottom' \| 'bottomLeft' \| 'bottomRight'` | `'bottomLeft'` |
+| `panelRender`      | 自定义渲染面板                 | `(panel: ReactNode, extra: { components: { Picker: FC; Presets: FC } }) => ReactNode`         | `-`                                        |
+| `showText`         | 显示颜色文本                   | `boolean \| ((color: Color) => ReactNode)`                                                    | `-`                                        |
+| `size`             | 设置触发器大小                 | `'large' \| 'middle' \| 'small'`                                                              | `'middle'`                                 |
+| `trigger`          | 颜色选择器的触发模式           | `'hover' \| 'click'`                                                                          | `'click'`                                  |
+| `value`            | 颜色的值                       | `string \| Color`                                                                             | `-`                                        |
+| `onChange`         | 颜色变化的回调                 | `(value: Color, css: string) => void`                                                         | `-`                                        |
+| `onChangeComplete` | 颜色选择完成的回调             | `(value: Color) => void`                                                                      | `-`                                        |
+| `onFormatChange`   | 颜色格式变化的回调             | `(format: 'hex' \| 'rgb' \| 'hsb') => void`                                                   | `-`                                        |
+| `onOpenChange`     | 当 open 被改变时的回调         | `(open: boolean) => void`                                                                     | `-`                                        |
+| `onClear`          | 清除的回调                     | `() => void`                                                                                  | `-`                                        |
+
+### Color 对象方法
+
+| 参数          | 说明                                                         | 类型                                                   |
+| ------------- | ------------------------------------------------------------ | ------------------------------------------------------ |
+| `toCssString` | 转换成 CSS 支持的格式                                        | `() => string`                                         |
+| `toHex`       | 转换成 hex 格式字符，返回格式如：`1677ff`                    | `() => string`                                         |
+| `toHexString` | 转换成 hex 格式颜色字符串，返回格式如：`#1677ff`             | `() => string`                                         |
+| `toHsb`       | 转换成 hsb 对象                                              | `() => { h: number; s: number; b: number; a: number }` |
+| `toHsbString` | 转换成 hsb 格式颜色字符串，返回格式如：`hsb(215, 91%, 100%)` | `() => string`                                         |
+| `toRgb`       | 转换成 rgb 对象                                              | `() => { r: number; g: number; b: number; a: number }` |
+| `toRgbString` | 转换成 rgb 格式颜色字符串，返回格式如：`rgb(22, 119, 255)`   | `() => string`                                         |
+
+### 基础用法
+
+```tsx
+import { ColorPicker } from 'react-public-components';
+
+export default function Demo() {
+	return <ColorPicker defaultValue="#1677ff" showText allowClear />;
+}
+```
+
+---
+
+## 七、目录结构
 
 ```
 .
@@ -316,14 +382,18 @@ export default function Demo() {
 ├── Masonry/
 │   ├── index.tsx
 │   └── index.less
-└── BorderBeam/
+├── BorderBeam/
+│   ├── index.tsx
+│   └── index.less
+└── ColorPicker/
+    ├── Color.ts
     ├── index.tsx
     └── index.less
 ```
 
 ---
 
-## 七、发布到 npm
+## 八、发布到 npm
 
 ### 1. 前置准备
 
