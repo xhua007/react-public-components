@@ -257,7 +257,50 @@ export default function Demo() {
 
 ---
 
-## 五、目录结构
+## 五、BorderBeam 边框流光组件
+
+### 简介
+
+`BorderBeam` 是一个给任意容器边框添加持续流动高亮效果的组件。使用现代 CSS Mask 遮罩与 CSS Motion Path 动画，支持单色与多点渐变色配置、多条流光均匀分布、流光尺寸与线宽调节，以及贴合自定义宿主容器。
+
+### 引入方式
+
+```tsx
+import { BorderBeam } from 'react-public-components';
+```
+
+### API
+
+| 参数        | 说明                                                                                                                  | 类型                                             | 默认值 | 版本  | 全局配置 |
+| ----------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ------ | ----- | -------- |
+| `children`  | 装饰内容                                                                                                              | `ReactNode`                                      | `-`    | 6.4.0 | ×        |
+| `color`     | 流光颜色配置，支持单色字符串或渐变停靠点数组。`percent` 使用 `0 ~ 100` 的输入区间，组件会在内部为尾部透明过渡预留空间 | `string \| { color: string; percent: number }[]` | `-`    | 6.4.0 | ×        |
+| `count`     | 流光数量                                                                                                              | `number`                                         | `1`    | 6.6.0 | ×        |
+| `duration`  | 流光完成一圈动画的时间，单位秒                                                                                        | `number`                                         | `6`    | 6.5.0 | ×        |
+| `lineWidth` | 流光线宽，数字类型按像素处理                                                                                          | `number \| string`                               | `1px`  | 6.5.0 | ×        |
+| `outset`    | 流光层相对容器边缘的外扩距离，遇到裁剪容器时可设为 `0`                                                                | `number \| string`                               | `-`    | 6.4.0 | ×        |
+| `size`      | 流光可见段的尺寸，数字类型按像素处理                                                                                  | `number \| string`                               | `100`  | 6.5.0 | ×        |
+
+### 基础用法
+
+```tsx
+import { BorderBeam } from 'react-public-components';
+
+export default function Demo() {
+	return (
+		<BorderBeam size={100} duration={6} color="#1677ff">
+			<div style={{ padding: 24, borderRadius: 12, border: '1px solid #eee' }}>
+				<h3>Workspace overview</h3>
+				<p>Review task status, deployment health, and recent automation activity in one panel.</p>
+			</div>
+		</BorderBeam>
+	);
+}
+```
+
+---
+
+## 六、目录结构
 
 ```
 .
@@ -269,14 +312,17 @@ export default function Demo() {
 ├── DisabledBox/
 │   ├── index.tsx
 │   └── index.less
-└── Masonry/
+├── Masonry/
+│   ├── index.tsx
+│   └── index.less
+└── BorderBeam/
     ├── index.tsx
     └── index.less
 ```
 
 ---
 
-## 六、发布到 npm
+## 七、发布到 npm
 
 ### 1. 前置准备
 

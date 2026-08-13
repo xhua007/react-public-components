@@ -1,0 +1,52 @@
+.react-public-border-beam-container {
+	position: relative;
+}
+
+.react-public-border-beam-mask {
+	position: absolute;
+	pointer-events: none;
+	box-sizing: border-box;
+	border-radius: inherit;
+
+	/* 边框线宽 */
+	border: var(--border-beam-line-width, 1px) solid transparent;
+
+	/* 定位与 outset 外扩 */
+	top: calc(-1 * var(--border-beam-outset, 0px));
+	left: calc(-1 * var(--border-beam-outset, 0px));
+	right: calc(-1 * var(--border-beam-outset, 0px));
+	bottom: calc(-1 * var(--border-beam-outset, 0px));
+
+	/* WebKit 遮罩兼容 (Chrome, Safari, Edge) */
+	-webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+	-webkit-mask-clip: padding-box, border-box;
+	-webkit-mask-composite: destination-out;
+
+	/* 标准 CSS 遮罩 (Firefox, Modern Chrome) */
+	mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+	mask-clip: padding-box, border-box;
+	mask-composite: exclude;
+}
+
+.react-public-border-beam-item {
+	position: absolute;
+	width: var(--border-beam-size, 100px);
+	height: var(--border-beam-size, 100px);
+	background: var(--border-beam-gradient);
+
+	/* 沿矩形路径轨迹移动 */
+	offset-path: rect(0% 100% 100% 0% round var(--border-beam-radius, 12px));
+	offset-anchor: 100% 50%;
+
+	will-change: offset-distance;
+	animation: react-public-border-beam-spin var(--border-beam-duration, 6s) linear infinite;
+}
+
+@keyframes react-public-border-beam-spin {
+	0% {
+		offset-distance: 0%;
+	}
+	100% {
+		offset-distance: 100%;
+	}
+}

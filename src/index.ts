@@ -28,3 +28,6 @@ export type {
 	Gap,
 	Breakpoint,
 } from '../Masonry';
+
+export { default as BorderBeam } from '../BorderBeam';
+export type { BorderBeamProps, BorderBeamColorStop } from '../BorderBeam';
