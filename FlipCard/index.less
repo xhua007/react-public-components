@@ -1,0 +1,43 @@
+.rpc_flip_card {
+	perspective: 1000px;
+	box-sizing: border-box;
+	display: inline-block;
+
+	&_inner {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+		transform-style: preserve-3d;
+	}
+
+	&_flipped_horizontal {
+		transform: rotateY(180deg);
+	}
+
+	&_flipped_vertical {
+		transform: rotateX(180deg);
+	}
+
+	&_front,
+	&_back {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		border-radius: 12px;
+		box-sizing: border-box;
+		overflow: hidden;
+	}
+
+	&_back_horizontal {
+		transform: rotateY(180deg);
+	}
+
+	&_back_vertical {
+		transform: rotateX(180deg);
+	}
+}

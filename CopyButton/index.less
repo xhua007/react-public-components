@@ -1,0 +1,144 @@
+.rpc_copy_button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	box-sizing: border-box;
+	font-size: 14px;
+	line-height: 1.5714;
+	font-family: inherit;
+	cursor: pointer;
+	user-select: none;
+	transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+	position: relative;
+	white-space: nowrap;
+
+	// 按钮形态
+	&_button {
+		height: 32px;
+		padding: 4px 15px;
+		border-radius: 6px;
+		border: 1px solid #d9d9d9;
+		background: #ffffff;
+		color: #262626;
+
+		&:hover:not(&_disabled) {
+			color: #4096ff;
+			border-color: #4096ff;
+		}
+
+		&:active:not(&_disabled) {
+			color: #0958d9;
+			border-color: #0958d9;
+		}
+
+		&.rpc_copy_button_primary {
+			background: #1677ff;
+			border-color: #1677ff;
+			color: #ffffff;
+
+			&:hover:not(.rpc_copy_button_disabled) {
+				background: #4096ff;
+				border-color: #4096ff;
+				color: #ffffff;
+			}
+		}
+
+		&.rpc_copy_button_copied {
+			color: #52c41a;
+			border-color: #b7eb8f;
+			background: #f6ffed;
+
+			&.rpc_copy_button_primary {
+				background: #52c41a;
+				border-color: #52c41a;
+				color: #ffffff;
+			}
+		}
+	}
+
+	// 纯图标形态
+	&_icon {
+		padding: 4px;
+		border: none;
+		background: transparent;
+		color: #8c8c8c;
+		border-radius: 4px;
+
+		&:hover:not(&_disabled) {
+			color: #1677ff;
+			background: rgba(0, 0, 0, 0.04);
+		}
+
+		&.rpc_copy_button_copied {
+			color: #52c41a;
+		}
+	}
+
+	// 内联形态
+	&_inline {
+		padding: 0 4px;
+		border: none;
+		background: transparent;
+		color: #1677ff;
+
+		&:hover:not(&_disabled) {
+			color: #4096ff;
+			text-decoration: underline;
+		}
+
+		&.rpc_copy_button_copied {
+			color: #52c41a;
+		}
+	}
+
+	// 禁用状态
+	&_disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
+	// 图标动效
+	&_icon_wrap {
+		display: inline-flex;
+		align-items: center;
+		transition: transform 0.2s ease;
+	}
+
+	// 内置 Tooltip
+	&_tooltip {
+		position: absolute;
+		bottom: calc(100% + 6px);
+		left: 50%;
+		transform: translateX(-50%) translateY(4px);
+		background: rgba(0, 0, 0, 0.85);
+		color: #ffffff;
+		padding: 4px 8px;
+		border-radius: 4px;
+		font-size: 12px;
+		line-height: 1.4;
+		white-space: nowrap;
+		pointer-events: none;
+		opacity: 0;
+		transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+		z-index: 1000;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+			border: 4px solid transparent;
+			border-top-color: rgba(0, 0, 0, 0.85);
+		}
+	}
+
+	&:hover &_tooltip_hover,
+	&_tooltip_visible {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+}

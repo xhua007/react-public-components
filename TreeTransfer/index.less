@@ -1,0 +1,74 @@
+.rpc_tree_transfer {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	box-sizing: border-box;
+	user-select: none;
+
+	&_panel {
+		width: 240px;
+		height: 300px;
+		border: 1px solid #d9d9d9;
+		border-radius: 8px;
+		background: #ffffff;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	&_header {
+		padding: 8px 12px;
+		border-bottom: 1px solid #f0f0f0;
+		font-size: 13px;
+		font-weight: 600;
+		color: #262626;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background: #fafafa;
+	}
+
+	&_body {
+		flex: 1;
+		overflow-y: auto;
+		padding: 8px 12px;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		font-size: 13px;
+	}
+
+	&_tree_item {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	&_tree_child {
+		padding-left: 18px;
+	}
+
+	&_target_item {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 4px 6px;
+		border-radius: 4px;
+
+		&:hover {
+			background: #fafafa;
+		}
+	}
+
+	&_del_btn {
+		background: none;
+		border: none;
+		color: #8c8c8c;
+		cursor: pointer;
+		font-size: 12px;
+
+		&:hover {
+			color: #ff4d4f;
+		}
+	}
+}

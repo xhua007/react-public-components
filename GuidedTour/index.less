@@ -1,0 +1,119 @@
+.rpc_guided_tour {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 2500;
+	pointer-events: auto;
+	box-sizing: border-box;
+
+	// 镂空高亮遮罩
+	&_mask {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		pointer-events: none;
+	}
+
+	&_highlight_box {
+		position: absolute;
+		border-radius: 6px;
+		box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.65);
+		transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+		pointer-events: none;
+		border: 2px solid #1677ff;
+	}
+
+	// 引导提示气泡卡片
+	&_popover {
+		position: absolute;
+		width: 320px;
+		background: #ffffff;
+		border-radius: 10px;
+		box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2);
+		padding: 18px 20px;
+		z-index: 2510;
+		box-sizing: border-box;
+		transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+		animation: rpcTourFadeIn 0.2s ease-out;
+		font-family: inherit;
+	}
+
+	&_header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 8px;
+	}
+
+	&_title {
+		font-size: 15px;
+		font-weight: 600;
+		color: #1f1f1f;
+	}
+
+	&_description {
+		font-size: 13px;
+		line-height: 1.6;
+		color: #595959;
+		margin-bottom: 16px;
+	}
+
+	&_footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&_progress {
+		font-size: 12px;
+		color: #8c8c8c;
+	}
+
+	&_actions {
+		display: flex;
+		gap: 8px;
+	}
+
+	&_btn {
+		padding: 4px 12px;
+		border-radius: 6px;
+		font-size: 12px;
+		cursor: pointer;
+		border: 1px solid #d9d9d9;
+		background: #ffffff;
+		color: #595959;
+		transition: all 0.15s;
+
+		&:hover {
+			border-color: #1677ff;
+			color: #1677ff;
+		}
+
+		&_primary {
+			background: #1677ff;
+			border-color: #1677ff;
+			color: #ffffff;
+
+			&:hover {
+				background: #4096ff;
+				border-color: #4096ff;
+				color: #ffffff;
+			}
+		}
+	}
+}
+
+@keyframes rpcTourFadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}

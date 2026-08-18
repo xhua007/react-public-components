@@ -1,0 +1,107 @@
+.rpc_marquee {
+	position: relative;
+	display: flex;
+	overflow: hidden;
+	user-select: none;
+	width: 100%;
+	box-sizing: border-box;
+
+	&_container {
+		display: flex;
+		flex-direction: row;
+		width: max-content;
+		will-change: transform;
+	}
+
+	&_vertical {
+		flex-direction: column;
+		height: 100%;
+
+		.rpc_marquee_container {
+			flex-direction: column;
+			height: max-content;
+			width: 100%;
+		}
+	}
+
+	&_content {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: space-around;
+		gap: var(--rpc-marquee-gap, 24px);
+		min-width: 100%;
+	}
+
+	&_vertical .rpc_marquee_content {
+		flex-direction: column;
+		min-height: 100%;
+		min-width: unset;
+	}
+
+	// 悬浮暂停
+	&_pause_on_hover:hover &_container {
+		animation-play-state: paused !important;
+	}
+
+	// 左右边缘渐变遮罩
+	&_gradient {
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 48px;
+			z-index: 2;
+			pointer-events: none;
+		}
+
+		&::before {
+			left: 0;
+			background: linear-gradient(to right, var(--rpc-marquee-gradient-color, #ffffff), transparent);
+		}
+
+		&::after {
+			right: 0;
+			background: linear-gradient(to left, var(--rpc-marquee-gradient-color, #ffffff), transparent);
+		}
+	}
+}
+
+// 动画关键帧
+@keyframes rpcMarqueeLeft {
+	0% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+@keyframes rpcMarqueeRight {
+	0% {
+		transform: translateX(-50%);
+	}
+	100% {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes rpcMarqueeUp {
+	0% {
+		transform: translateY(0%);
+	}
+	100% {
+		transform: translateY(-50%);
+	}
+}
+
+@keyframes rpcMarqueeDown {
+	0% {
+		transform: translateY(-50%);
+	}
+	100% {
+		transform: translateY(0%);
+	}
+}

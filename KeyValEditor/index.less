@@ -1,0 +1,80 @@
+.rpc_key_val_editor {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	box-sizing: border-box;
+	user-select: none;
+
+	&_row {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	&_checkbox {
+		cursor: pointer;
+	}
+
+	&_input {
+		flex: 1;
+		padding: 6px 10px;
+		border: 1px solid #d9d9d9;
+		border-radius: 6px;
+		font-size: 13px;
+		color: #262626;
+		outline: none;
+		transition: all 0.15s;
+
+		&:focus {
+			border-color: #1677ff;
+			box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1);
+		}
+
+		&:disabled {
+			background: #f5f5f5;
+			color: #bfbfbf;
+		}
+	}
+
+	&_btn_icon {
+		background: none;
+		border: none;
+		color: #8c8c8c;
+		cursor: pointer;
+		font-size: 14px;
+		padding: 4px;
+		display: flex;
+		align-items: center;
+		transition: color 0.15s;
+
+		&:hover {
+			color: #ff4d4f;
+		}
+	}
+
+	&_footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 4px;
+	}
+
+	&_add_btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 4px 12px;
+		border: 1px dashed #d9d9d9;
+		border-radius: 6px;
+		background: #ffffff;
+		color: #595959;
+		font-size: 12px;
+		cursor: pointer;
+		transition: all 0.15s;
+
+		&:hover {
+			border-color: #1677ff;
+			color: #1677ff;
+		}
+	}
+}

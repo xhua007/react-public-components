@@ -1,0 +1,141 @@
+.rpc_photo_viewer {
+	display: flex;
+	flex-direction: column;
+	background: #0f1117;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 14px;
+	overflow: hidden;
+	box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+	user-select: none;
+	box-sizing: border-box;
+
+	// 顶部轻量工具与标题栏
+	&_top_bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 10px 16px;
+		background: rgba(255, 255, 255, 0.03);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+		color: #ffffff;
+		font-size: 13px;
+	}
+
+	&_top_title {
+		font-weight: 500;
+		color: #e6e6e6;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	&_counter {
+		font-size: 12px;
+		color: #8c8c8c;
+		font-family: monospace;
+		background: rgba(255, 255, 255, 0.08);
+		padding: 2px 8px;
+		border-radius: 10px;
+	}
+
+	// 主图预览区
+	&_main_wrap {
+		position: relative;
+		width: 100%;
+		height: 380px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: radial-gradient(circle at center, #1a1d26 0%, #0b0c10 100%);
+		overflow: hidden;
+	}
+
+	&_main_img {
+		max-width: 92%;
+		max-height: 90%;
+		object-fit: contain;
+		border-radius: 8px;
+		box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+		transition: opacity 0.25s ease, transform 0.25s ease;
+	}
+
+	// 左右翻页按钮
+	&_nav_btn {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 42px;
+		height: 42px;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.12);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		color: #ffffff;
+		font-size: 20px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+		z-index: 10;
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.25);
+			transform: translateY(-50%) scale(1.08);
+			box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+		}
+
+		&_prev {
+			left: 16px;
+		}
+
+		&_next {
+			right: 16px;
+		}
+	}
+
+	// 底部缩略图导航栏
+	&_thumbs_wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		padding: 12px 18px;
+		background: #090a0d;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		overflow-x: auto;
+	}
+
+	&_thumb {
+		width: 68px;
+		height: 44px;
+		border-radius: 6px;
+		overflow: hidden;
+		cursor: pointer;
+		opacity: 0.38;
+		border: 2px solid transparent;
+		transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+		flex-shrink: 0;
+		background: #14161f;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+
+		&:hover {
+			opacity: 0.75;
+			transform: translateY(-2px);
+		}
+
+		&_active {
+			opacity: 1 !important;
+			border-color: #1677ff;
+			transform: translateY(-2px);
+			box-shadow: 0 0 12px rgba(22, 119, 255, 0.6);
+		}
+	}
+}

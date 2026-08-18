@@ -1,0 +1,47 @@
+.rpc_num_stepper {
+	display: inline-flex;
+	align-items: center;
+	border: 1px solid #d9d9d9;
+	border-radius: 6px;
+	background: #ffffff;
+	overflow: hidden;
+	user-select: none;
+	box-sizing: border-box;
+
+	&_btn {
+		width: 32px;
+		height: 32px;
+		border: none;
+		background: #fafafa;
+		color: #595959;
+		font-size: 16px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.15s;
+
+		&:hover:not(:disabled) {
+			background: #f0f0f0;
+			color: #1677ff;
+		}
+
+		&:disabled {
+			color: #bfbfbf;
+			cursor: not-allowed;
+		}
+	}
+
+	&_input {
+		width: 48px;
+		height: 32px;
+		border: none;
+		border-left: 1px solid #f0f0f0;
+		border-right: 1px solid #f0f0f0;
+		text-align: center;
+		font-size: 13px;
+		font-weight: 600;
+		color: #262626;
+		outline: none;
+	}
+}

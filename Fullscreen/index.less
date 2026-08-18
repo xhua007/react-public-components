@@ -1,0 +1,104 @@
+.rpc_fullscreen_container {
+	position: relative;
+	box-sizing: border-box;
+
+	// Web 页面内模拟全屏模式（样式置顶占满视口）
+	&_web_fullscreen {
+		position: fixed !important;
+		top: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		bottom: 0 !important;
+		width: 100vw !important;
+		height: 100vh !important;
+		z-index: 9999 !important;
+		background: #ffffff;
+		overflow: auto !important;
+		border-radius: 0 !important;
+		margin: 0 !important;
+	}
+
+	// 快捷全屏触发按钮
+	&_action_btn {
+		position: absolute;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		padding: 0;
+		border-radius: 6px;
+		background: rgba(255, 255, 255, 0.85);
+		backdrop-filter: blur(8px);
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		color: #595959;
+		cursor: pointer;
+		font-size: 15px;
+		z-index: 10;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+		transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+		&:hover {
+			color: #1677ff;
+			background: #ffffff;
+			border-color: #1677ff;
+			box-shadow: 0 4px 12px rgba(22, 119, 255, 0.15);
+		}
+
+		&_top_right {
+			top: 12px;
+			right: 12px;
+		}
+
+		&_top_left {
+			top: 12px;
+			left: 12px;
+		}
+
+		&_bottom_right {
+			bottom: 12px;
+			right: 12px;
+		}
+
+		&_bottom_left {
+			bottom: 12px;
+			left: 12px;
+		}
+	}
+}
+
+// 独立按钮形态
+.rpc_fullscreen_btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	height: 32px;
+	padding: 4px 15px;
+	border-radius: 6px;
+	border: 1px solid #d9d9d9;
+	background: #ffffff;
+	color: #262626;
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 1.5714;
+	user-select: none;
+	transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+	&:hover {
+		color: #4096ff;
+		border-color: #4096ff;
+	}
+
+	&_active {
+		color: #1677ff;
+		border-color: #1677ff;
+		background: #e6f4ff;
+	}
+
+	&_icon_only {
+		padding: 4px;
+		width: 32px;
+		height: 32px;
+	}
+}

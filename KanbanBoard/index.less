@@ -1,0 +1,88 @@
+.rpc_kanban_board {
+	display: flex;
+	gap: 16px;
+	overflow-x: auto;
+	padding-bottom: 8px;
+	box-sizing: border-box;
+	user-select: none;
+
+	&_column {
+		flex: 1;
+		min-width: 280px;
+		max-width: 360px;
+		background: #f7f8fa;
+		border-radius: 10px;
+		display: flex;
+		flex-direction: column;
+		padding: 12px;
+		box-sizing: border-box;
+		border: 1px solid #ebedf0;
+		transition: background-color 0.2s;
+
+		&_dragover {
+			background: #e6f4ff;
+			border-color: #91caff;
+		}
+	}
+
+	&_column_header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-bottom: 10px;
+		margin-bottom: 8px;
+		border-bottom: 1px solid #f0f0f0;
+	}
+
+	&_column_title_wrap {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-weight: 600;
+		font-size: 14px;
+		color: #1f1f1f;
+	}
+
+	&_column_dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+	}
+
+	&_column_count {
+		font-size: 12px;
+		color: #8c8c8c;
+		background: #e8e8e8;
+		padding: 1px 6px;
+		border-radius: 10px;
+		font-weight: normal;
+	}
+
+	&_column_body {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		min-height: 120px;
+	}
+
+	&_card {
+		background: #ffffff;
+		border-radius: 8px;
+		padding: 12px;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+		border: 1px solid #e8e8e8;
+		cursor: grab;
+		transition: all 0.15s ease;
+
+		&:hover {
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			border-color: #d9d9d9;
+		}
+
+		&_dragging {
+			opacity: 0.4;
+			border-style: dashed;
+		}
+	}
+}

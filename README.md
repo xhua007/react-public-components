@@ -1,457 +1,227 @@
 # react-public-components
 
-封装 react 常用的组件，欢迎更多同学提出大众化普遍存在的业务场景。
+[![npm version](https://img.shields.io/npm/v/react-public-components.svg)](https://www.npmjs.com/package/react-public-components)
+[![license](https://img.shields.io/npm/l/react-public-components.svg)](https://github.com/xhua007/react-public-components)
 
-本仓库包含六个独立的 React 组件：
-
-1. **CollapseBox** — 可折叠的内容容器组件
-2. **Splitter** — 可拖拽调整、可折叠的分屏面板组件
-3. **DisabledBox** — 禁用态遮罩容器组件
-4. **Masonry** — 瀑布流布局组件（一比一复刻 Ant Design V6 规范）
-5. **BorderBeam** — 边框流光组件
-6. **ColorPicker** — 颜色选择器组件（一比一复刻 Ant Design V6 规范）
+📦 **企业级现代 React 通用核心组件库**。零沉重 UI 库绑定，开箱即用，提供 64 款真正高频、极客质感的中后台与现代 Web 应用组件。
 
 ---
 
-## 一、CollapseBox 可折叠容器
+## 🌟 特性亮点
 
-### 简介
+- 💎 **精炼通用**：涵盖中后台与 SaaS 产品的通用、布局导航、数据录入、数据展示、反馈 5 大类别共 64 款高频组件。
+- ⚡ **轻量零依赖**：不强制依赖 Ant Design 等庞大第三方 UI 库，体积小巧，按需引入。
+- 🛡️ **工业级防御**：核心安全组件（如 `Watermark`）采用原生 DOM 脱离 VDOM 注入防篡改架构，支持毫秒自愈与防审查元素删除。
+- 🎨 **极客质感**：现代设计语言，自带平滑微动效、毛玻璃（Glassmorphism）、硬件加速流光与暗色模式适配。
+- 📦 **开箱即用**：原生支持 TypeScript 类型定义、ESM、CommonJS 与样式自动构建。
 
-`CollapseBox` 是一个带切换按钮的可折叠容器。支持水平（左右收起）与垂直（上下收起）两种方向，按钮可放置在容器四条边的任意一侧，适合用作侧边栏、详情面板等可隐藏区域。
+---
 
-### 引入方式
+## 快速安装
+
+```bash
+npm install react-public-components
+# 或使用 pnpm
+pnpm add react-public-components
+# 或使用 yarn
+yarn add react-public-components
+```
+
+在项目入口文件中引入全局样式：
 
 ```tsx
-import { CollapseBox } from 'react-public-components';
-// 导入组件样式
 import 'react-public-components/styles.css';
 ```
 
-### Props
+---
 
-| 属性             | 类型                                     | 默认值         | 说明                                                                               |
-| ---------------- | ---------------------------------------- | -------------- | ---------------------------------------------------------------------------------- |
-| `children`       | `ReactNode`                              | -              | 容器内部渲染的内容                                                                 |
-| `title`          | `string`                                 | `'内容区域'`   | 标题（当前版本内部隐藏渲染，仅作为占位属性保留）                                   |
-| `direction`      | `'horizontal' \| 'vertical'`             | `'horizontal'` | 折叠方向：`horizontal` 沿 X 轴收起，`vertical` 沿 Y 轴收起                         |
-| `buttonPosition` | `'right' \| 'left' \| 'top' \| 'bottom'` | `'right'`      | 切换按钮位置。`horizontal` 时建议 `left`/`right`，`vertical` 时建议 `top`/`bottom` |
-| `defaultWidth`   | `number \| string`                       | `600`          | 容器宽度（支持像素数字如 `500` 或百分比字符串如 `'50%'`）                          |
-| `defaultHeight`  | `number \| string`                       | `300`          | 容器高度（支持像素数字如 `300` 或百分比字符串如 `'50%'`）                          |
-| `contentPadding` | `string`                                 | `'16px'`       | 内容区内边距                                                                       |
-| `headerHeight`   | `number`                                 | `16`           | 头部预留高度，用于计算内容区最大高度                                               |
-| `className`      | `string`                                 | -              | 根节点自定义类名                                                                   |
+## 🧩 组件全览（64 款核心高频组件）
 
-### 基础用法
-
-```tsx
-import { CollapseBox } from 'react-public-components';
-
-export default function Demo() {
-	return (
-		<CollapseBox
-			direction="horizontal"
-			buttonPosition="right"
-			defaultWidth="50%"
-			defaultHeight={400}
-		>
-			<p>这里是折叠容器中的内容。</p>
-		</CollapseBox>
-	);
-}
-```
-
-### 垂直方向示例
-
-```tsx
-<CollapseBox direction="vertical" buttonPosition="bottom" defaultHeight={300}>
-	<p>上下方向折叠的内容。</p>
-</CollapseBox>
-```
+### 1. 通用 General (9 款)
+| 组件名 | 中文名称 | 特性与场景说明 |
+| :--- | :--- | :--- |
+| **`CodeSnippet`** | 极客代码块 | Mac 终端风格代码块卡片，带红黄绿圆点、语言标签与一键平滑复制。 |
+| **`Watermark`** | 防篡改水印 | 动态防截屏安全水印，基于原生 DOM 独立注入与 ComputedStyle 校验，毫秒自愈防 F12 审查元素删除/隐藏。 |
+| **`QrCodeCard`** | 二维码卡片 | 多功能扫码登录/支付卡片，支持 Logo 嵌入、失效过期遮罩、高清下载与精致 Loading。 |
+| **`GuidedTour`** | 漫游引导 | 新手引导步进器，带智能镂空高亮遮罩、步骤弹窗与状态持久化。 |
+| **`FilePreviewer`** | 文件预览 | 多格式文件与媒体统一弹窗预览器，支持图片、音视频、PDF、代码与一键下载。 |
+| **`FloatingActionBar`** | 悬浮操作栏 | 表格与列表多选时从屏幕底部浮出的毛玻璃操作栏，内置统计与批量动作。 |
+| **`Fullscreen`** | 全屏容器 | 支持局部元素原生全屏与网页内最大化置顶切换，支持快捷悬浮按钮与 Render Props。 |
+| **`CopyButton`** | 复制按钮 | 提供点击复制到剪贴板功能，支持纯图标、带文字按钮与内联文本，内置 Tooltip 动效。 |
+| **`ContextMenu`** | 右键菜单 | 为任意区域或列表行提供右键上下文菜单，支持视口防溢出翻转、二级子菜单与快捷键。 |
 
 ---
 
-## 二、Splitter 分屏面板
+### 2. 布局与导航 Layout & Nav (9 款)
+| 组件名 | 中文名称 | 特性与场景说明 |
+| :--- | :--- | :--- |
+| **`CascadeDrawer`** | 级联下钻抽屉 | 多层级无限下钻抽屉容器，带顶部面包屑返回导航与平滑推拉动效。 |
+| **`KanbanBoard`** | 任务看板 | 轻量任务看板与泳道管理，基于原生 HTML5 Drag & Drop 跨列平滑拖拽。 |
+| **`DragSortList`** | 拖拽排序列表 | 纯原生轻量拖拽重排序列表，支持平滑占位与阴影反馈。 |
+| **`Marquee`** | 无缝跑马灯 | 基于硬件加速的无缝平滑滚动 Logo 墙与广播通知条，支持悬停暂停与边缘渐变。 |
+| **`ScrollTracker`** | 滚动与吸顶 | 阅读进度条（ScrollTracker）与智能吸顶容器（StickyHeader，带毛玻璃与阴影）。 |
+| **`InfiniteScrollList`** | 无限滚动列表 | 触底自动触发异步加载的无限滚动列表容器，内置加载骨架与到底提示。 |
+| **`CollapseBox`** | 折叠容器 | 支持水平与垂直方向折叠的弹性容器组件，支持自定义按钮位置与默认尺寸。 |
+| **`Splitter`** | 分隔面板 | 支持多面板拖拽调整尺寸、折叠与双击重置的可定制分隔面板组件。 |
+| **`Masonry`** | 瀑布流 | 基于列优先的高性能响应式瀑布流布局组件，遵循 AntD 规范。 |
 
-### 简介
+---
 
-`Splitter` 是一个支持拖拽调整大小、可折叠、可重置的分屏面板组件，灵感来自 Ant Design 的 Splitter，但提供了更精细的折叠按钮交互。支持 `horizontal`（左右分屏）与 `vertical`（上下分屏）两种方向。
+### 3. 数据录入 Data Entry (16 款)
+| 组件名 | 中文名称 | 特性与场景说明 |
+| :--- | :--- | :--- |
+| **`DualRangeSlider`** | 双滑块区间选择器 | 双向双滑块区间选择器，支持数值/价格跨度筛选与防交叉穿透。 |
+| **`FilterChips`** | 已选筛选胶囊栏 | 多维已选筛选项胶囊汇总栏，支持单项删除与一键清空全部。 |
+| **`FileDropZone`** | 拖拽上传容器 | 现代极客拖拽上传虚线容器，支持流光呼吸高亮与剪贴板截图粘贴。 |
+| **`TreeTransfer`** | 树形穿梭框 | 树形层级穿梭框，左侧目录树级联勾选与右侧平铺已选列表。 |
+| **`NumberStepper`** | 平滑数字步进器 | 长按连续加减数字步进器，支持步长控制与上下限保护。 |
+| **`CountdownButton`** | 验证码倒计时按钮 | 短信验证码 60s 倒计时按钮，支持异步前置检查与防刷锁定。 |
+| **`KeyValEditor`** | 键值对编辑器 | 动态增删 API Headers 与环境变量配置项，支持密码掩码与单行禁用。 |
+| **`QuickDateRange`** | 快捷日期筛选 | 今日/近7天/本月等预设日期胶囊标签与自定义日期范围双向联动。 |
+| **`TreeFilterPanel`** | 树形平铺筛选 | 多级分类平铺联动筛选器，支持多选、快捷全部、分类汇总与一键清空。 |
+| **`NumericRangeInput`** | 数值区间输入 | 价格与数值区间范围输入框，自带双向联动校验与快捷区间预设标签。 |
+| **`CronPicker`** | Cron 选择器 | 定时任务 Cron 表达式可视化生成器，支持按天/周/月多周期配置与中文人话翻译。 |
+| **`TagInput`** | 标签输入器 | 自由标签输入组件，支持回车/逗号打标签、退格删除、双击编辑与正则校验。 |
+| **`PasswordStrength`** | 密码强度检测 | 多维度密码复杂度实时评分与 4 段彩色进度条可视化指示器。 |
+| **`ImageCropper`** | 图片裁剪 | 轻量原生 Canvas 图片裁剪器，支持拖拽、滚轮缩放、90° 旋转、圆形头像裁剪与 Modal 弹窗。 |
+| **`DebounceSelect`** | 防抖下拉框 | 防抖异步搜索选择器，内置时序竞态保护、单选/多选 Tags 模式与加载态。 |
+| **`ColorPicker`** | 颜色选择器 | 支持 HEX、HSB、RGB 及渐变色模式的高级颜色选择与调色板组件。 |
 
-### 引入方式
+---
+
+### 4. 数据展示 Display (27 款)
+| 组件名 | 中文名称 | 特性与场景说明 |
+| :--- | :--- | :--- |
+| **`JsonDiffViewer`** | JSON 差异比对器 | JSON 结构体增删改差异彩色高亮探查，支持新旧值对照。 |
+| **`JsonTree`** | JSON 树状探查器 | 树状无限折叠展开的 JSON 探查器，支持数据类型高亮与路径探查。 |
+| **`MiniSparkline`** | 单行微趋势折线图 | 指标卡与表格专用的极简微折线走势图，纯 SVG 贝塞尔曲线平滑绘制。 |
+| **`SegmentedProgress`** | 分段多色进度条 | 单条轨道并列展示多色分段比例，支持存储空间占比与图例。 |
+| **`TrendIndicator`** | KPI 趋势升降胶囊 | 微型 KPI 指标变动升降胶囊，自动根据正负值判断涨跌并支持红绿反转。 |
+| **`PhotoViewer`** | 相册画廊查看器 | 全功能多图画廊查看器，支持左右键盘按键切图与缩略图底栏联动。 |
+| **`DiffTable`** | 两期差异对比表格 | 两期数据差异对比表格，自动计算增减差值与百分比红绿高亮。 |
+| **`StatusTimeline`** | 审批流时间轴 | 高级审批流与动态耗时时间轴，包含节点状态徽标、经办人与流转耗时。 |
+| **`GradientText`** | 流光渐变文字 | 现代 SaaS 霓虹横向流光渐变文字，支持背景平滑滚动动画。 |
+| **`VideoPlayer`** | 视频播放器 | 轻量现代化视频播放器，暗黑毛玻璃控制条、快进快退 10s、0.75x~2.0x 倍速与画中画。 |
+| **`PdfViewer`** | PDF 在线阅读器 | 轻量 Web PDF 阅读器，支持缩放 Zoom、90° 顺时针旋转与一键下载。 |
+| **`BadgeRibbon`** | 斜角丝带角标 | 卡片左上/右上 45° 倾斜缎带徽章，支持 HOT/PRO 推荐与渐变色。 |
+| **`ShimmerSkeleton`** | 流光骨架屏 | 高质感渐变流光掠过骨架屏，支持卡片、列表、头像与多行文本。 |
+| **`FlipCard`** | 3D 翻转卡片 | 3D 正反面翻转卡片，鼠标悬停或点击触发 180° 平滑翻转展示详情。 |
+| **`VirtualList`** | 虚拟列表 | 零依赖轻量虚拟滚动列表，万级海量数据 60FPS 极速渲染不卡顿。 |
+| **`MetricCard`** | KPI 指标卡 | Dashboard 看板指标卡片，集成 CountUp 数字跳动、环比升降趋势与微折线 Sparkline。 |
+| **`ActivityLog`** | 操作审计日志 | 中后台业务操作与审批流动态时间轴，支持操作人头像、相对时间与变动详情折叠。 |
+| **`AudioPlayer`** | 音频播放条 | 轻量客服录音与语音回放条，支持 Seek 拖拽、倍速切换与一键下载。 |
+| **`TiltCard`** | 3D 倾斜卡片 | 鼠标悬停 3D 景深物理倾斜与流光高光跟随卡片。 |
+| **`SpotlightCard`** | 聚光灯卡片 | 鼠标光晕聚光灯实时追踪跟随卡片，具备前沿极客科技感与暗色模式。 |
+| **`SensitiveMask`** | 敏感脱敏 | 手机号/身份证/银行卡/邮箱等敏感数据脱敏展示，支持点击眼睛解密与复制。 |
+| **`DiffViewer`** | 差异比对 | 轻量文本与代码行级差异比对器，支持分栏 Split 与行内 Unified 模式。 |
+| **`JsonEditor`** | JSON 查看与编辑 | 轻量免外部依赖的 JSON 语法高亮查看与编辑器，支持格式化、单行压缩与错误定位。 |
+| **`CountUp`** | 数字滚动 | 基于高质量缓动算法的平滑数字跳动动画组件，支持前缀后缀与命令式 Ref 控制。 |
+| **`TextEllipsis`** | 文本省略 | 支持单行/多行文本截断、展开/收起切换、溢出智能 Tooltip 与一键复制。 |
+| **`BorderBeam`** | 边框流光 | 为卡片或容器边框添加流动高亮与自定义渐变动画的特效组件。 |
+| **`DisabledBox`** | 禁用遮罩 | 为子级元素或复杂区域提供统一的禁用态透明遮罩与防交互保护。 |
+
+---
+
+### 5. 反馈 Feedback (3 款)
+| 组件名 | 中文名称 | 特性与场景说明 |
+| :--- | :--- | :--- |
+| **`AnnouncementBar`** | 广播通知横幅 | 页面顶部吸顶渐变广播横幅，支持可配置关闭与持久化记忆。 |
+| **`HoverCard`** | 悬浮资料卡 | Twitter / GitHub 风格悬浮信息卡片，防误触延迟与视口防溢出。 |
+| **`EnvBadge`** | 环境防误触角标 | 醒目的环境状态标识胶囊，点击查看构建版本详情并支持多环境跳转。 |
+
+---
+
+## 💻 典型用法示例
+
+### 1. Watermark 防篡改水印
+
+```tsx
+import { Watermark } from 'react-public-components';
+
+export default function App() {
+  return (
+    <Watermark
+      content={['内部机密 严禁外传', 'alex.chen 2026-08-18']}
+      color="rgba(0, 0, 0, 0.10)"
+      antiTamper
+    >
+      <div style={{ padding: 32, height: 400 }}>
+        <h2>核心财务分析报告</h2>
+        <p>即便在控制台尝试删除 DOM 或在 Styles 面板取消勾选属性，水印也会毫秒自愈复原。</p>
+      </div>
+    </Watermark>
+  );
+}
+```
+
+### 2. Splitter 分隔面板
 
 ```tsx
 import { Splitter } from 'react-public-components';
-```
 
-### Splitter Props
-
-| 属性                   | 类型                                                                                                                | 默认值         | 说明                                                                                  |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------- |
-| `children`             | `ReactNode`（建议传入 `Splitter.Panel`）                                                                            | -              | 面板集合，建议 2 个及以上                                                             |
-| `className`            | `string`                                                                                                            | -              | 根节点自定义类名                                                                      |
-| `classNames`           | `Partial<Record<SemanticDOM, string>> \| ((info: { props }) => Partial<Record<SemanticDOM, string>>)`               | -              | 自定义组件内部各语义化结构（`root` / `panel` / `dragger`）的类名，支持对象或函数      |
-| `style`                | `CSSProperties`                                                                                                     | -              | 根节点自定义 CSS 样式                                                                 |
-| `styles`               | `Partial<Record<SemanticDOM, CSSProperties>> \| ((info: { props }) => Partial<Record<SemanticDOM, CSSProperties>>)` | -              | 自定义组件内部各语义化结构（`root` / `panel` / `dragger`）的 CSS 样式，支持对象或函数 |
-| `orientation`          | `'horizontal' \| 'vertical'`                                                                                        | `'horizontal'` | 分屏方向（优先级高于 `vertical`）                                                     |
-| `vertical`             | `boolean`                                                                                                           | `false`        | 是否垂直分屏（兼容写法）                                                              |
-| `lazy`                 | `boolean`                                                                                                           | `false`        | 是否在拖拽结束时才更新视图（提升性能）                                                |
-| `onResizeStart`        | `(sizes: number[]) => void`                                                                                         | -              | 拖拽开始回调                                                                          |
-| `onResize`             | `(sizes: number[]) => void`                                                                                         | -              | 拖拽过程中尺寸变化回调                                                                |
-| `onResizeEnd`          | `(sizes: number[]) => void`                                                                                         | -              | 拖拽/折叠/重置结束回调                                                                |
-| `onCollapse`           | `(collapsed: boolean[], sizes: number[]) => void`                                                                   | -              | 面板展开或折叠状态发生变化时的回调                                                    |
-| `onDraggerDoubleClick` | `(index: number) => void`                                                                                           | -              | 双击拖拽条回调                                                                        |
-| `draggerIcon`          | `ReactNode`                                                                                                         | -              | 自定义拖拽手柄指示图标节点                                                            |
-| `destroyOnHidden`      | `boolean`                                                                                                           | `false`        | 折叠/隐藏时是否销毁所有面板内容节点                                                   |
-
-### Splitter.Panel Props
-
-| 属性              | 类型                                                                                     | 默认值  | 说明                                                                                           |
-| ----------------- | ---------------------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
-| `children`        | `ReactNode`                                                                              | -       | 面板内容                                                                                       |
-| `className`       | `string`                                                                                 | -       | 面板自定义类名                                                                                 |
-| `size`            | `number \| '${number}%'`                                                                 | -       | 受控尺寸                                                                                       |
-| `defaultSize`     | `number \| '${number}%'`                                                                 | -       | 初始尺寸（未设置时按剩余空间平均分配）                                                         |
-| `min`             | `number \| '${number}%'`                                                                 | `0`     | 最小尺寸                                                                                       |
-| `max`             | `number \| '${number}%'`                                                                 | -       | 最大尺寸                                                                                       |
-| `collapsible`     | `boolean \| { start?: boolean; end?: boolean; showCollapsibleIcon?: boolean \| 'auto' }` | `false` | 是否允许折叠面板。支持配置指定折叠方向（`start`/`end`）及图标显示策略（`showCollapsibleIcon`） |
-| `destroyOnHidden` | `boolean`                                                                                | -       | 折叠/隐藏时是否销毁当前面板内容节点（可覆盖 Splitter 根属性）                                  |
-| `resizable`       | `boolean`                                                                                | `true`  | 是否允许拖拽调整（两侧任一为 `false` 都会禁用对应分隔条）                                      |
-| `style`           | `CSSProperties`                                                                          | -       | 面板自定义样式                                                                                 |
-
-### 基础用法
-
-```tsx
-import { Splitter } from 'react-public-components';
-
-export default function Demo() {
-	return (
-		<Splitter style={{ height: 400 }}>
-			<Splitter.Panel defaultSize="40%" min="20%">
-				<p>左侧面板</p>
-			</Splitter.Panel>
-			<Splitter.Panel>
-				<p>右侧面板</p>
-			</Splitter.Panel>
-		</Splitter>
-	);
+export default function App() {
+  return (
+    <Splitter style={{ height: 400 }}>
+      <Splitter.Panel defaultSize="30%" min="15%" collapsible>
+        <div style={{ padding: 16 }}>左侧导航树</div>
+      </Splitter.Panel>
+      <Splitter.Panel>
+        <div style={{ padding: 16 }}>主体工作区内容</div>
+      </Splitter.Panel>
+    </Splitter>
+  );
 }
 ```
 
-### 可折叠 + 受控尺寸示例
+### 3. CodeSnippet 极客代码块
 
 ```tsx
-<Splitter orientation="vertical" onResizeEnd={(sizes) => console.log('最终尺寸:', sizes)}>
-	<Splitter.Panel defaultSize="30%" collapsible min="10%">
-		<p>上方面板（可折叠）</p>
-	</Splitter.Panel>
-	<Splitter.Panel collapsible>
-		<p>下方面板（可折叠）</p>
-	</Splitter.Panel>
-</Splitter>
-```
+import { CodeSnippet } from 'react-public-components';
 
-### 交互说明
-
-- **拖拽调整**：在两个面板之间的分隔条上按下鼠标拖动即可调整两侧尺寸。
-- **折叠**：分隔条上会渲染两个折叠按钮，分别用于折叠左/上面板与右/下面板。
-- **重置**：双击分隔条可重置为初始尺寸。
-- **键盘控制**：分隔条聚焦后使用方向键调整（`Shift + 方向键` 步长放大）。
-- **百分比/像素**：`size`、`defaultSize`、`min`、`max` 均支持数字（px）或 `'${number}%'` 字符串。
-
-### 依赖说明
-
-- `react`（含 hooks、Children API）
-- 零第三方 UI 库依赖（内部采用原生内联 SVG 图标组件）
-
----
-
-## 三、DisabledBox 禁用容器
-
-### 简介
-
-`DisabledBox` 是一个处理禁用态内容的包装容器组件。当处于禁用状态（`disabled={true}`）时，会自动显示锁图标、将文字颜色设为禁用灰色，并在捕获阶段拦截点击事件，同时保持 `mouseenter`/`mouseleave` 等 hover 事件正常响应（以保证 Tooltip 等提示浮层正常工作）。
-
-### 引入方式
-
-```tsx
-import { DisabledBox } from 'react-public-components';
-```
-
-### Props
-
-| 属性        | 类型                | 默认值   | 说明                                                   |
-| ----------- | ------------------- | -------- | ------------------------------------------------------ |
-| `children`  | `ReactNode`         | -        | 容器包裹的主体内容                                     |
-| `title`     | `ReactNode`         | -        | 标题或替代内容（当未传入 `children` 时生效）           |
-| `disabled`  | `boolean`           | `false`  | 是否禁用，禁用时显示锁图标、文字呈现灰色且拦截点击事件 |
-| `iconAlign` | `'left' \| 'right'` | `'left'` | 锁图标的对齐位置                                       |
-
-### 基础用法
-
-```tsx
-import { DisabledBox } from 'react-public-components';
-
-export default function Demo() {
-	return (
-		<DisabledBox disabled={true}>
-			<p>受保护的不可点击内容</p>
-		</DisabledBox>
-	);
+export default function App() {
+  return (
+    <CodeSnippet
+      language="typescript"
+      code={`const greeting: string = "Hello, react-public-components!";\nconsole.log(greeting);`}
+      showLineNumbers
+    />
+  );
 }
 ```
 
 ---
 
-## 四、Masonry 瀑布流组件
+## 🛠️ 本地开发与预览
 
-### 简介
-
-`Masonry` 是一个符合 Ant Design V6 规范的瀑布流布局组件。支持固定或响应式列数配置（`columns`）、水平垂直间距配置（`gutter`）、持续监听子项尺寸变化（`fresh`）、自定义语义化结构样式/类名（`styles`/`classNames`）以及列排序回调（`onLayoutChange`）。
-
-### 引入方式
-
-```tsx
-import { Masonry } from 'react-public-components';
-```
-
-### Masonry Props
-
-| 参数             | 说明                                         | 类型                                                                                                        | 默认值  |
-| ---------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------- |
-| `classNames`     | 自定义内部语义化结构 class，支持对象或函数   | `Record<'root' \| 'item', string> \| ((info: { props }) => Record<'root' \| 'item', string>)`               | `-`     |
-| `columns`        | 列数，固定数字或响应式配置                   | `number \| { xs?: number; sm?: number; md?: number; lg?: number; xl?: number; xxl?: number }`               | `3`     |
-| `fresh`          | 是否持续监听子项尺寸变化                     | `boolean`                                                                                                   | `false` |
-| `gutter`         | 间距，固定数字、响应式配置或水平垂直间距配置 | `Gap \| [Gap, Gap]`                                                                                         | `0`     |
-| `items`          | 瀑布流数据项                                 | `MasonryItem[]`                                                                                             | `-`     |
-| `itemRender`     | 自定义数据项渲染函数                         | `(item: MasonryItem) => ReactNode`                                                                          | `-`     |
-| `styles`         | 语义化结构 style，支持对象和函数形式         | `Record<'root' \| 'item', CSSProperties> \| ((info: { props }) => Record<'root' \| 'item', CSSProperties>)` | `-`     |
-| `onLayoutChange` | 列排序计算完成回调                           | `(layout: { key: React.Key; column: number }[]) => void`                                                    | `-`     |
-
-### MasonryItem 属性
-
-| 参数       | 说明                                             | 类型               | 默认值 |
-| ---------- | ------------------------------------------------ | ------------------ | ------ |
-| `children` | 自定义展示内容，相对 `itemRender` 具有更高优先级 | `ReactNode`        | `-`    |
-| `column`   | 自定义指定放置列（0-indexed）                    | `number`           | `-`    |
-| `data`     | 自定义存储数据                                   | `T`                | `-`    |
-| `height`   | 高度（手指定时优先使用）                         | `number`           | `-`    |
-| `key`      | 唯一标识                                         | `string \| number` | `-`    |
-
-### 基础用法
-
-```tsx
-import { Masonry } from 'react-public-components';
-
-export default function Demo() {
-	return (
-		<Masonry
-			columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-			gutter={[16, 16]}
-			fresh={true}
-			items={[
-				{ key: '1', height: 120, children: <div>卡片 1</div> },
-				{ key: '2', height: 180, children: <div>卡片 2</div> },
-				{ key: '3', height: 150, children: <div>卡片 3</div> },
-			]}
-		/>
-	);
-}
-```
-
----
-
-## 五、BorderBeam 边框流光组件
-
-### 简介
-
-`BorderBeam` 是一个给任意容器边框添加持续流动高亮效果的组件。使用现代 CSS Mask 遮罩与 CSS Motion Path 动画，支持单色与多点渐变色配置、多条流光均匀分布、流光尺寸与线宽调节，以及贴合自定义宿主容器。
-
-### 引入方式
-
-```tsx
-import { BorderBeam } from 'react-public-components';
-```
-
-### API
-
-| 参数        | 说明                                                                                                                  | 类型                                             | 默认值 | 版本  | 全局配置 |
-| ----------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ------ | ----- | -------- |
-| `children`  | 装饰内容                                                                                                              | `ReactNode`                                      | `-`    | 6.4.0 | ×        |
-| `color`     | 流光颜色配置，支持单色字符串或渐变停靠点数组。`percent` 使用 `0 ~ 100` 的输入区间，组件会在内部为尾部透明过渡预留空间 | `string \| { color: string; percent: number }[]` | `-`    | 6.4.0 | ×        |
-| `count`     | 流光数量                                                                                                              | `number`                                         | `1`    | 6.6.0 | ×        |
-| `duration`  | 流光完成一圈动画的时间，单位秒                                                                                        | `number`                                         | `6`    | 6.5.0 | ×        |
-| `lineWidth` | 流光线宽，数字类型按像素处理                                                                                          | `number \| string`                               | `1px`  | 6.5.0 | ×        |
-| `outset`    | 流光层相对容器边缘的外扩距离，遇到裁剪容器时可设为 `0`                                                                | `number \| string`                               | `-`    | 6.4.0 | ×        |
-| `size`      | 流光可见段的尺寸，数字类型按像素处理                                                                                  | `number \| string`                               | `100`  | 6.5.0 | ×        |
-
-### 基础用法
-
-```tsx
-import { BorderBeam } from 'react-public-components';
-
-export default function Demo() {
-	return (
-		<BorderBeam size={100} duration={6} color="#1677ff">
-			<div style={{ padding: 24, borderRadius: 12, border: '1px solid #eee' }}>
-				<h3>Workspace overview</h3>
-				<p>Review task status, deployment health, and recent automation activity in one panel.</p>
-			</div>
-		</BorderBeam>
-	);
-}
-```
-
----
-
-## 六、ColorPicker 颜色选择器组件
-
-### 简介
-
-`ColorPicker` 是一个符合 Ant Design V6 规范的颜色选择器组件。零第三方 UI 库依赖，支持二维 SV 画板调色、Hue 色相滑块、Alpha 透明度调节、HEX/RGB/HSB 格式转换、预设调色板与自定义 PopOver / 触发器。
-
-### 引入方式
-
-```tsx
-import { ColorPicker, Color } from 'react-public-components';
-```
-
-### ColorPicker API
-
-| 参数               | 说明                           | 类型                                                                                          | 默认值                                     |
-| ------------------ | ------------------------------ | --------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| `allowClear`       | 允许清除选择的颜色             | `boolean`                                                                                     | `false`                                    |
-| `arrow`            | 配置弹出的箭头                 | `boolean \| { pointAtCenter?: boolean }`                                                      | `true`                                     |
-| `children`         | 颜色选择器的触发器             | `ReactNode`                                                                                   | `-`                                        |
-| `defaultValue`     | 颜色默认的值                   | `string \| Color`                                                                             | `-`                                        |
-| `defaultFormat`    | 颜色格式默认的值               | `'hex' \| 'rgb' \| 'hsb'`                                                                     | `'hex'`                                    |
-| `disabled`         | 禁用颜色选择器                 | `boolean`                                                                                     | `false`                                    |
-| `disabledAlpha`    | 禁用透明度                     | `boolean`                                                                                     | `false`                                    |
-| `disabledFormat`   | 禁用选择颜色格式               | `boolean`                                                                                     | `false`                                    |
-| `destroyOnHidden`  | 关闭后是否销毁弹窗             | `boolean`                                                                                     | `false`                                    |
-| `format`           | 颜色格式                       | `'hex' \| 'rgb' \| 'hsb'`                                                                     | `-`                                        |
-| `mode`             | 选择器模式，用于配置单色与渐变 | `'single' \| 'gradient' \| ('single' \| 'gradient')[]`                                        | `'single'`                                 |
-| `open`             | 是否显示弹出窗口               | `boolean`                                                                                     | `-`                                        |
-| `presets`          | 预设的颜色                     | `{ label: ReactNode; colors: (string \| Color)[]; defaultOpen?: boolean; key?: React.Key }[]` | `-`                                        |
-| `placement`        | 弹出窗口的位置                 | `'top' \| 'topLeft' \| 'topRight'                                                             | 'bottom' \| 'bottomLeft' \| 'bottomRight'` | `'bottomLeft'` |
-| `panelRender`      | 自定义渲染面板                 | `(panel: ReactNode, extra: { components: { Picker: FC; Presets: FC } }) => ReactNode`         | `-`                                        |
-| `showText`         | 显示颜色文本                   | `boolean \| ((color: Color) => ReactNode)`                                                    | `-`                                        |
-| `size`             | 设置触发器大小                 | `'large' \| 'middle' \| 'small'`                                                              | `'middle'`                                 |
-| `trigger`          | 颜色选择器的触发模式           | `'hover' \| 'click'`                                                                          | `'click'`                                  |
-| `value`            | 颜色的值                       | `string \| Color`                                                                             | `-`                                        |
-| `onChange`         | 颜色变化的回调                 | `(value: Color, css: string) => void`                                                         | `-`                                        |
-| `onChangeComplete` | 颜色选择完成的回调             | `(value: Color) => void`                                                                      | `-`                                        |
-| `onFormatChange`   | 颜色格式变化的回调             | `(format: 'hex' \| 'rgb' \| 'hsb') => void`                                                   | `-`                                        |
-| `onOpenChange`     | 当 open 被改变时的回调         | `(open: boolean) => void`                                                                     | `-`                                        |
-| `onClear`          | 清除的回调                     | `() => void`                                                                                  | `-`                                        |
-
-### Color 对象方法
-
-| 参数          | 说明                                                         | 类型                                                   |
-| ------------- | ------------------------------------------------------------ | ------------------------------------------------------ |
-| `toCssString` | 转换成 CSS 支持的格式                                        | `() => string`                                         |
-| `toHex`       | 转换成 hex 格式字符，返回格式如：`1677ff`                    | `() => string`                                         |
-| `toHexString` | 转换成 hex 格式颜色字符串，返回格式如：`#1677ff`             | `() => string`                                         |
-| `toHsb`       | 转换成 hsb 对象                                              | `() => { h: number; s: number; b: number; a: number }` |
-| `toHsbString` | 转换成 hsb 格式颜色字符串，返回格式如：`hsb(215, 91%, 100%)` | `() => string`                                         |
-| `toRgb`       | 转换成 rgb 对象                                              | `() => { r: number; g: number; b: number; a: number }` |
-| `toRgbString` | 转换成 rgb 格式颜色字符串，返回格式如：`rgb(22, 119, 255)`   | `() => string`                                         |
-
-### 基础用法
-
-```tsx
-import { ColorPicker } from 'react-public-components';
-
-export default function Demo() {
-	return <ColorPicker defaultValue="#1677ff" showText allowClear />;
-}
-```
-
----
-
-## 七、目录结构
-
-```
-.
-├── CollapseBox/
-│   ├── index.tsx
-│   └── index.less
-├── Splitter/
-│   └── index.tsx
-├── DisabledBox/
-│   ├── index.tsx
-│   └── index.less
-├── Masonry/
-│   ├── index.tsx
-│   └── index.less
-├── BorderBeam/
-│   ├── index.tsx
-│   └── index.less
-└── ColorPicker/
-    ├── Color.ts
-    ├── index.tsx
-    └── index.less
-```
-
----
-
-## 八、发布到 npm
-
-### 1. 前置准备
-
-1. **登录 npm**：确保已注册 npm 账号，并在终端中完成登录：
-
-   ```bash
-   npm login --auth-type=web
-   ```
-
-   _检查当前登录状态：_
-
-   ```bash
-   npm whoami
-   ```
-
-2. **检查镜像源**：发布必须使用 npm 官方镜像源，如果使用了国内镜像源（如淘宝/npmmirror），请切换回官方源：
-   ```bash
-   # 查看当前镜像源
-   npm config get registry
-
-   # 切换为官方源
-   npm config set registry https://registry.npmjs.org/
-   ```
-
-### 2. 更新版本号
-
-根据 [语义化版本 (SemVer)](https://semver.org/lang/zh-CN/) 规范更新 `package.json` 中的版本号：
+克隆本仓库并在本地启动全功能交互 Demo 预览站点：
 
 ```bash
-# 小修复（Patch）：0.1.1 -> 0.1.2
-npm version patch
+# 安装依赖
+npm install
 
-# 新功能（Minor）：0.1.1 -> 0.2.0
-npm version minor
-
-# 破坏性更新（Major）：0.1.1 -> 1.0.0
-npm version major
+# 启动本地开发与组件预览站点（基于 Vite）
+npm run dev
 ```
 
-### 3. 构建与发布
+浏览器打开 `http://localhost:5173` 即可浏览全部 64 款组件的实时效果、代码与参数调节面板。
 
-推荐先在本地手动运行构建命令验证代码无误，再运行发布命令：
+---
+
+## 📦 发布与构建
 
 ```bash
-# 1. 手动构建打包（验证代码是否有编译错误）
+# 1. 构建全量产物（dist/ ESM, CJS, DTS 与 CSS）
 npm run build
 
-# 2. （可选）预览发布内容，检查打入包的文件列表
-npm publish --dry-run
+# 2. 构建 Demo 预览站点
+npm run build:demo
 
-# 3. 正式发布（注意是 npm publish，不需要加 run）
-npm publish
+# 3. 发布到 npm
+npm publish --access public
 ```
 
-> **自动化保障**：本项目已在 `package.json` 中配置了 `"prepublishOnly": "npm run build"` 生命周期钩子。即便你忘记手动运行 `npm run build`，在直接执行 `npm publish` 时，npm 也会**自动先帮你打包构建**，确保发布的始终是最新代码。
->
-> **提示**：如果是首发公开包，可显式指定访问级别：
->
-> ```bash
-> npm publish --access public
-> ```
+---
+
+## 📄 开源许可
+
+[MIT License](LICENSE)

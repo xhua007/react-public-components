@@ -1,0 +1,67 @@
+.rpc_json_tree {
+	font-family: monospace;
+	font-size: 13px;
+	line-height: 1.6;
+	background: #1e1e1e;
+	color: #d4d4d4;
+	padding: 12px 16px;
+	border-radius: 8px;
+	overflow-x: auto;
+	box-sizing: border-box;
+	user-select: text;
+
+	&_node {
+		margin-left: 14px;
+	}
+
+	&_toggle {
+		cursor: pointer;
+		display: inline-block;
+		width: 14px;
+		color: #858585;
+		user-select: none;
+		transition: transform 0.15s;
+
+		&_collapsed {
+			transform: rotate(-90deg);
+		}
+	}
+
+	&_key {
+		color: #9cdcfe;
+		font-weight: 500;
+	}
+
+	&_colon {
+		color: #d4d4d4;
+		margin-right: 6px;
+	}
+
+	&_string {
+		color: #ce9178;
+	}
+
+	&_number {
+		color: #b5cea8;
+	}
+
+	&_boolean {
+		color: #569cd6;
+		font-weight: 600;
+	}
+
+	&_null {
+		color: #808080;
+		font-style: italic;
+	}
+
+	&_bracket {
+		color: #d4d4d4;
+	}
+
+	&_count {
+		color: #6a9955;
+		font-size: 11px;
+		margin-left: 6px;
+	}
+}

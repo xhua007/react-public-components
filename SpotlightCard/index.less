@@ -1,0 +1,38 @@
+.rpc_spotlight_card {
+	position: relative;
+	box-sizing: border-box;
+	border-radius: 12px;
+	background: #ffffff;
+	border: 1px solid #f0f0f0;
+	overflow: hidden;
+	transition: border-color 0.2s, box-shadow 0.2s;
+
+	// 聚光灯跟随层
+	&_spotlight {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		z-index: 1;
+	}
+
+	&:hover &_spotlight {
+		opacity: 1;
+	}
+
+	&_content {
+		position: relative;
+		z-index: 2;
+	}
+
+	// 暗黑模式主题
+	&_dark {
+		background: #18181b;
+		border-color: #27272a;
+		color: #ffffff;
+	}
+}

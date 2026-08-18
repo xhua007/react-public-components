@@ -1,0 +1,118 @@
+.rpc_audio_player {
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 16px;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	border-radius: 24px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+	box-sizing: border-box;
+	user-select: none;
+	width: 100%;
+	max-width: 480px;
+
+	&_play_btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 34px;
+		height: 34px;
+		border-radius: 50%;
+		background: #1677ff;
+		color: #ffffff;
+		cursor: pointer;
+		font-size: 18px;
+		transition: all 0.2s;
+		flex-shrink: 0;
+
+		&:hover {
+			background: #4096ff;
+			transform: scale(1.05);
+		}
+	}
+
+	&_info {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		flex: 1;
+		min-width: 0;
+	}
+
+	&_title_row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 12px;
+	}
+
+	&_title {
+		font-weight: 500;
+		color: #262626;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	&_time {
+		color: #8c8c8c;
+		font-family: monospace;
+		font-size: 11px;
+	}
+
+	// 进度条滑块
+	&_progress_bar {
+		position: relative;
+		width: 100%;
+		height: 6px;
+		background: #f0f0f0;
+		border-radius: 3px;
+		cursor: pointer;
+		overflow: hidden;
+	}
+
+	&_progress_fill {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		background: #1677ff;
+		border-radius: 3px;
+		transition: width 0.1s linear;
+	}
+
+	// 倍速与下载
+	&_extra {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		flex-shrink: 0;
+	}
+
+	&_speed_btn {
+		padding: 2px 6px;
+		border-radius: 4px;
+		border: 1px solid #d9d9d9;
+		background: #fafafa;
+		font-size: 11px;
+		color: #595959;
+		cursor: pointer;
+
+		&:hover {
+			border-color: #1677ff;
+			color: #1677ff;
+		}
+	}
+
+	&_download_btn {
+		color: #8c8c8c;
+		cursor: pointer;
+		font-size: 15px;
+		transition: color 0.15s;
+
+		&:hover {
+			color: #1677ff;
+		}
+	}
+}

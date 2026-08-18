@@ -1,0 +1,74 @@
+.rpc_tree_filter_panel {
+	background: #ffffff;
+	border: 1px solid #f0f0f0;
+	border-radius: 8px;
+	padding: 16px;
+	box-sizing: border-box;
+	user-select: none;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+
+	&_row {
+		display: flex;
+		align-items: flex-start;
+		font-size: 13px;
+		line-height: 1.6;
+	}
+
+	&_label {
+		width: 80px;
+		flex-shrink: 0;
+		color: #8c8c8c;
+		font-weight: 500;
+		padding-top: 2px;
+	}
+
+	&_options {
+		flex: 1;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	&_item {
+		padding: 2px 10px;
+		border-radius: 4px;
+		cursor: pointer;
+		color: #595959;
+		transition: all 0.15s;
+
+		&:hover {
+			color: #1677ff;
+		}
+
+		&_active {
+			background: #e6f4ff;
+			color: #1677ff;
+			font-weight: 500;
+		}
+	}
+
+	&_footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 10px;
+		border-top: 1px dashed #f0f0f0;
+		font-size: 12px;
+		color: #8c8c8c;
+	}
+
+	&_clear_btn {
+		color: #1677ff;
+		cursor: pointer;
+		background: none;
+		border: none;
+		padding: 0;
+		font-size: 12px;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

@@ -1,0 +1,117 @@
+.rpc_json_editor {
+	position: relative;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	background: #1e1e1e;
+	color: #d4d4d4;
+	border-radius: 8px;
+	border: 1px solid #333333;
+	font-family: 'Fira Code', Consolas, Monaco, 'Courier New', monospace;
+	font-size: 13px;
+	line-height: 1.6;
+	overflow: hidden;
+
+	// 顶部工具栏
+	&_toolbar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 8px 14px;
+		background: #252526;
+		border-bottom: 1px solid #333333;
+		user-select: none;
+	}
+
+	&_title {
+		font-size: 12px;
+		color: #9cdcfe;
+		font-weight: 500;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	&_actions {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	&_btn {
+		padding: 3px 10px;
+		border-radius: 4px;
+		background: #333333;
+		border: 1px solid #444444;
+		color: #cccccc;
+		font-size: 12px;
+		cursor: pointer;
+		transition: all 0.15s;
+
+		&:hover {
+			background: #444444;
+			color: #ffffff;
+			border-color: #1677ff;
+		}
+	}
+
+	// 主体编辑区
+	&_body {
+		position: relative;
+		display: flex;
+		flex: 1;
+		min-height: 180px;
+		overflow: hidden;
+	}
+
+	// 行号区域
+	&_line_numbers {
+		padding: 12px 10px;
+		background: #1e1e1e;
+		color: #858585;
+		text-align: right;
+		user-select: none;
+		border-right: 1px solid #2d2d2d;
+		font-size: 12px;
+		min-width: 32px;
+		box-sizing: border-box;
+	}
+
+	// 文本输入区
+	&_textarea {
+		flex: 1;
+		padding: 12px 14px;
+		background: transparent;
+		color: #d4d4d4;
+		border: none;
+		outline: none;
+		resize: none;
+		font-family: inherit;
+		font-size: inherit;
+		line-height: inherit;
+		tab-size: 2;
+		white-space: pre;
+		overflow: auto;
+		box-sizing: border-box;
+
+		&::selection {
+			background: #264f78;
+		}
+	}
+
+	// 底部状态栏 / 错误提示
+	&_status_bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 4px 14px;
+		background: #007acc;
+		color: #ffffff;
+		font-size: 11px;
+		line-height: 1.4;
+
+		&_error {
+			background: #d32f2f;
+		}
+	}
+}

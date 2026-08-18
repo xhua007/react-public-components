@@ -1,0 +1,135 @@
+.rpc_activity_log {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	box-sizing: border-box;
+
+	&_item {
+		display: flex;
+		gap: 14px;
+		position: relative;
+		padding-bottom: 20px;
+
+		&:last-child {
+			padding-bottom: 0;
+
+			.rpc_activity_log_line {
+				display: none;
+			}
+		}
+	}
+
+	&_avatar_col {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		position: relative;
+	}
+
+	&_avatar {
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		background: #e6f4ff;
+		color: #1677ff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 13px;
+		font-weight: 600;
+		flex-shrink: 0;
+		z-index: 2;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	// 纵向连接轴线
+	&_line {
+		position: absolute;
+		top: 32px;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 2px;
+		background: #f0f0f0;
+	}
+
+	&_content {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		min-width: 0;
+	}
+
+	&_header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		font-size: 13px;
+	}
+
+	&_operator_row {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		flex-wrap: wrap;
+	}
+
+	&_operator {
+		font-weight: 600;
+		color: #1f1f1f;
+	}
+
+	&_role {
+		font-size: 11px;
+		padding: 1px 6px;
+		border-radius: 4px;
+		background: #f5f5f5;
+		color: #8c8c8c;
+	}
+
+	&_action {
+		color: #595959;
+	}
+
+	&_target {
+		color: #1677ff;
+		font-weight: 500;
+	}
+
+	&_time {
+		font-size: 12px;
+		color: #bfbfbf;
+		flex-shrink: 0;
+	}
+
+	// 变动详情面板
+	&_detail {
+		background: #fafafa;
+		border: 1px solid #f0f0f0;
+		border-radius: 6px;
+		padding: 8px 12px;
+		font-size: 12px;
+		color: #595959;
+		line-height: 1.6;
+	}
+
+	&_toggle_btn {
+		color: #1677ff;
+		font-size: 12px;
+		cursor: pointer;
+		align-self: flex-start;
+		user-select: none;
+
+		&:hover {
+			color: #4096ff;
+		}
+	}
+}

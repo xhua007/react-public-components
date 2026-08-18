@@ -1,0 +1,100 @@
+.rpc_diff_viewer {
+	position: relative;
+	box-sizing: border-box;
+	border-radius: 8px;
+	border: 1px solid #d9d9d9;
+	background: #ffffff;
+	font-family: 'Fira Code', Consolas, Monaco, 'Courier New', monospace;
+	font-size: 12px;
+	line-height: 1.6;
+	overflow: hidden;
+
+	// 头部工具栏
+	&_header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 8px 16px;
+		background: #f5f5f5;
+		border-bottom: 1px solid #e8e8e8;
+		font-family: sans-serif;
+	}
+
+	&_title {
+		font-weight: 600;
+		color: #1f1f1f;
+		font-size: 13px;
+	}
+
+	&_mode_toggle {
+		display: inline-flex;
+		border: 1px solid #d9d9d9;
+		border-radius: 4px;
+		overflow: hidden;
+		background: #ffffff;
+	}
+
+	&_mode_btn {
+		padding: 2px 10px;
+		border: none;
+		background: transparent;
+		font-size: 12px;
+		cursor: pointer;
+		color: #595959;
+
+		&_active {
+			background: #1677ff;
+			color: #ffffff;
+		}
+	}
+
+	// 差异内容表格
+	&_table {
+		width: 100%;
+		border-collapse: collapse;
+		table-layout: fixed;
+	}
+
+	&_row {
+		&:hover {
+			background: rgba(0, 0, 0, 0.02);
+		}
+
+		&_added {
+			background: #e6ffed !important;
+			color: #135200;
+		}
+
+		&_removed {
+			background: #ffeef0 !important;
+			color: #a8071a;
+		}
+
+		&_empty {
+			background: #f9f9f9;
+		}
+	}
+
+	&_gutter {
+		width: 40px;
+		padding: 0 8px;
+		text-align: right;
+		user-select: none;
+		color: #8c8c8c;
+		border-right: 1px solid #f0f0f0;
+		font-size: 11px;
+	}
+
+	&_marker {
+		width: 20px;
+		text-align: center;
+		user-select: none;
+		font-weight: 600;
+	}
+
+	&_code {
+		padding: 0 10px;
+		white-space: pre-wrap;
+		word-break: break-all;
+	}
+}

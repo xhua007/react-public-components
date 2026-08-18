@@ -1,0 +1,44 @@
+.rpc_dual_slider {
+	position: relative;
+	width: 100%;
+	padding: 10px 0;
+	box-sizing: border-box;
+	user-select: none;
+
+	&_track {
+		position: relative;
+		height: 6px;
+		background: #f0f0f0;
+		border-radius: 3px;
+	}
+
+	&_highlight {
+		position: absolute;
+		top: 0;
+		height: 100%;
+		background: #1677ff;
+		border-radius: 3px;
+	}
+
+	&_thumb {
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		background: #ffffff;
+		border: 2px solid #1677ff;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+		cursor: grab;
+		transition: transform 0.1s;
+
+		&:hover {
+			transform: translate(-50%, -50%) scale(1.15);
+		}
+
+		&:active {
+			cursor: grabbing;
+		}
+	}
+}

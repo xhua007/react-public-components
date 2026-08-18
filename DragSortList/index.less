@@ -1,0 +1,45 @@
+.rpc_drag_sort_list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	box-sizing: border-box;
+	user-select: none;
+
+	&_item {
+		display: flex;
+		align-items: center;
+		padding: 10px 14px;
+		background: #ffffff;
+		border: 1px solid #e8e8e8;
+		border-radius: 6px;
+		cursor: grab;
+		transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+		box-sizing: border-box;
+
+		&:hover {
+			border-color: #91caff;
+		}
+
+		&:active {
+			cursor: grabbing;
+		}
+
+		&_dragging {
+			opacity: 0.4;
+			border: 1px dashed #1677ff !important;
+			background: #e6f4ff !important;
+		}
+
+		&_over {
+			border-top: 2px solid #1677ff;
+		}
+	}
+
+	&_handle {
+		margin-right: 12px;
+		color: #bfbfbf;
+		font-size: 16px;
+		cursor: grab;
+		user-select: none;
+	}
+}

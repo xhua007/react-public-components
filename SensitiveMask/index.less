@@ -1,0 +1,28 @@
+.rpc_sensitive_mask {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	box-sizing: border-box;
+	font-family: inherit;
+	font-size: 14px;
+	color: inherit;
+	vertical-align: middle;
+
+	&_text {
+		font-variant-numeric: tabular-nums;
+		font-family: monospace, inherit;
+	}
+
+	&_action_btn {
+		display: inline-flex;
+		align-items: center;
+		color: #8c8c8c;
+		cursor: pointer;
+		font-size: 14px;
+		transition: color 0.15s;
+
+		&:hover {
+			color: #1677ff;
+		}
+	}
+}

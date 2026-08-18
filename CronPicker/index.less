@@ -1,0 +1,103 @@
+.rpc_cron_picker {
+	box-sizing: border-box;
+	background: #ffffff;
+	border: 1px solid #d9d9d9;
+	border-radius: 8px;
+	padding: 16px;
+	font-size: 14px;
+	color: #262626;
+
+	&_tabs {
+		display: flex;
+		gap: 6px;
+		margin-bottom: 16px;
+		border-bottom: 1px solid #f0f0f0;
+		padding-bottom: 8px;
+		flex-wrap: wrap;
+	}
+
+	&_tab_btn {
+		padding: 4px 12px;
+		border-radius: 4px;
+		border: 1px solid transparent;
+		background: transparent;
+		color: #595959;
+		cursor: pointer;
+		font-size: 13px;
+		transition: all 0.15s;
+
+		&:hover {
+			color: #1677ff;
+		}
+
+		&_active {
+			background: #e6f4ff;
+			color: #1677ff;
+			font-weight: 600;
+			border-color: #91caff;
+		}
+	}
+
+	&_panel {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		min-height: 80px;
+	}
+
+	&_field_row {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	&_select,
+	&_input {
+		padding: 5px 10px;
+		border: 1px solid #d9d9d9;
+		border-radius: 6px;
+		font-size: 13px;
+		outline: none;
+		background: #ffffff;
+
+		&:focus {
+			border-color: #1677ff;
+		}
+	}
+
+	// 底部输出与人话翻译
+	&_footer {
+		margin-top: 16px;
+		padding-top: 14px;
+		border-top: 1px dashed #e8e8e8;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	&_cron_badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	&_cron_code {
+		font-family: monospace;
+		font-size: 14px;
+		font-weight: 600;
+		color: #1677ff;
+		background: #f0f5ff;
+		padding: 2px 8px;
+		border-radius: 4px;
+		border: 1px solid #adc6ff;
+	}
+
+	&_human_desc {
+		font-size: 13px;
+		color: #52c41a;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+}

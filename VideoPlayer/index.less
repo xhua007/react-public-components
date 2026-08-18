@@ -1,0 +1,133 @@
+.rpc_video_player {
+	position: relative;
+	background: #000000;
+	border-radius: 10px;
+	overflow: hidden;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+
+	&_video {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	// 悬浮大播放按钮
+	&_big_play_btn {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 56px;
+		height: 56px;
+		border-radius: 50%;
+		background: rgba(0, 0, 0, 0.6);
+		color: #ffffff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 28px;
+		cursor: pointer;
+		backdrop-filter: blur(4px);
+		transition: all 0.2s;
+		z-index: 5;
+
+		&:hover {
+			background: #1677ff;
+			transform: translate(-50%, -50%) scale(1.1);
+		}
+	}
+
+	// 底部控制栏
+	&_controls {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 8px 16px;
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		color: #ffffff;
+		z-index: 10;
+		transition: opacity 0.3s ease;
+
+		&_hidden {
+			opacity: 0;
+			pointer-events: none;
+		}
+	}
+
+	// 进度条
+	&_progress_wrap {
+		width: 100%;
+		height: 6px;
+		background: rgba(255, 255, 255, 0.25);
+		border-radius: 3px;
+		cursor: pointer;
+		position: relative;
+		transition: height 0.15s;
+
+		&:hover {
+			height: 8px;
+		}
+	}
+
+	&_progress_fill {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		background: #1677ff;
+		border-radius: 3px;
+	}
+
+	&_bar_row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 13px;
+	}
+
+	&_left_btns,
+	&_right_btns {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	&_btn {
+		background: transparent;
+		border: none;
+		color: #ffffff;
+		font-size: 16px;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		padding: 2px 4px;
+		opacity: 0.85;
+		transition: opacity 0.15s;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&_time {
+		font-size: 12px;
+		font-family: monospace;
+		opacity: 0.9;
+	}
+
+	&_speed_btn {
+		font-size: 12px;
+		padding: 1px 6px;
+		border: 1px solid rgba(255, 255, 255, 0.4);
+		border-radius: 4px;
+	}
+}

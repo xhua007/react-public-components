@@ -1,0 +1,110 @@
+.rpc_text_ellipsis {
+	position: relative;
+	box-sizing: border-box;
+	line-height: 1.5714;
+	color: inherit;
+	display: inline-flex;
+	max-width: 100%;
+	vertical-align: bottom;
+
+	&_content_wrap {
+		display: inline-block;
+		max-width: 100%;
+		vertical-align: bottom;
+	}
+
+	// 单行截断
+	&_single_line {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		display: block;
+	}
+
+	// 多行截断
+	&_multi_line {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		word-break: break-all;
+	}
+
+	// 展开态
+	&_expanded {
+		display: block;
+		overflow: visible;
+		-webkit-line-clamp: unset !important;
+		white-space: normal;
+	}
+
+	// 操作按钮（展开/收起）
+	&_action_btn {
+		display: inline-flex;
+		align-items: center;
+		margin-left: 6px;
+		color: #1677ff;
+		cursor: pointer;
+		font-size: 13px;
+		user-select: none;
+		transition: color 0.2s ease;
+		white-space: nowrap;
+
+		&:hover {
+			color: #4096ff;
+			text-decoration: underline;
+		}
+	}
+
+	// 前缀与后缀
+	&_prefix {
+		margin-right: 4px;
+		display: inline-flex;
+		align-items: center;
+		flex-shrink: 0;
+	}
+
+	&_suffix {
+		margin-left: 4px;
+		display: inline-flex;
+		align-items: center;
+		flex-shrink: 0;
+	}
+
+	// 智能 Tooltip
+	&_tooltip {
+		position: absolute;
+		bottom: calc(100% + 8px);
+		left: 50%;
+		transform: translateX(-50%) translateY(4px);
+		background: rgba(0, 0, 0, 0.85);
+		color: #ffffff;
+		padding: 6px 10px;
+		border-radius: 6px;
+		font-size: 12px;
+		line-height: 1.5;
+		max-width: 320px;
+		word-break: break-all;
+		white-space: normal;
+		pointer-events: none;
+		opacity: 0;
+		transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+		z-index: 1000;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+			border: 4px solid transparent;
+			border-top-color: rgba(0, 0, 0, 0.85);
+		}
+	}
+
+	&:hover &_tooltip_visible {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+}

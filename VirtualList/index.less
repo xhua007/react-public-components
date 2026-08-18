@@ -1,0 +1,27 @@
+.rpc_virtual_list {
+	position: relative;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	box-sizing: border-box;
+	border: 1px solid #f0f0f0;
+	border-radius: 8px;
+	background: #ffffff;
+
+	&_content {
+		position: relative;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	&_item {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid #f9f9f9;
+		padding: 0 16px;
+
+		&:hover {
+			background: #fafafa;
+		}
+	}
+}
