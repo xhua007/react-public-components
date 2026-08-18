@@ -268,33 +268,63 @@ export const ShareAltOutlined = ({ style, className }: IconProps) => (
 
 export const FullscreenOutlined = ({ style, className }: IconProps) => (
 	<svg
-		viewBox="64 64 896 896"
+		viewBox="0 0 1024 1024"
 		focusable="false"
 		data-icon="fullscreen"
 		width="1em"
 		height="1em"
-		fill="currentColor"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="88"
+		strokeLinecap="round"
+		strokeLinejoin="round"
 		aria-hidden="true"
 		style={{ ...baseStyle, ...style }}
 		className={className}
 	>
-		<path d="M290 236h120c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H170c-22.1 0-40 17.9-40 40v240c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V324l202.6 202.6c3.1 3.1 8.2 3.1 11.3 0l39.6-39.6c3.1-3.1 3.1-8.2 0-11.3L290 236zm564 0c0-22.1-17.9-40-40-40H614c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h120v120c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V248c0-6.6-5.4-12-12-12zm-39.6 449.4L611.8 482.8c-3.1-3.1-8.2-3.1-11.3 0l-39.6 39.6c-3.1 3.1-3.1 8.2 0 11.3L763.5 736H644c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h240c22.1 0 40-17.9 40-40V568c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v120L614.4 685.4zM236 788h120c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H236V596c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v240c0 22.1 17.9 40 40 40h240c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H236v-56z" />
+		{/* 左上角 ↖ */}
+		<path d="M380 180H180v200" />
+		<path d="M180 180l240 240" />
+		{/* 右上角 ↗ */}
+		<path d="M644 180h200v200" />
+		<path d="M844 180L604 420" />
+		{/* 左下角 ↙ */}
+		<path d="M180 644v200h200" />
+		<path d="M180 844l240-240" />
+		{/* 右下角 ↘ */}
+		<path d="M844 644v200H644" />
+		<path d="M844 844L604 604" />
 	</svg>
 );
 
 export const FullscreenExitOutlined = ({ style, className }: IconProps) => (
 	<svg
-		viewBox="64 64 896 896"
+		viewBox="0 0 1024 1024"
 		focusable="false"
 		data-icon="fullscreen-exit"
 		width="1em"
 		height="1em"
-		fill="currentColor"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="88"
+		strokeLinecap="round"
+		strokeLinejoin="round"
 		aria-hidden="true"
 		style={{ ...baseStyle, ...style }}
 		className={className}
 	>
-		<path d="M391 312H271c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h240c22.1 0 40-17.9 40-40V144c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v120L290.4 85.4c-3.1-3.1-8.2-3.1-11.3 0l-39.6 39.6c-3.1 3.1-3.1 8.2 0 11.3L391 312zm242 0l151.6-175.7c3.1-3.1 3.1-8.2 0-11.3l-39.6-39.6c-3.1-3.1-8.2-3.1-11.3 0L582.1 261V144c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v200c0 22.1 17.9 40 40 40h240c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H633zm120 400H633l151.6 175.7c3.1 3.1 3.1 8.2 0 11.3l39.6 39.6c3.1 3.1 8.2 3.1 11.3 0L787.9 763v117c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V680c0-22.1-17.9-40-40-40H579c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h120l-151.6 151.6zM391 712L239.4 863.6c-3.1 3.1-3.1 8.2 0 11.3l39.6 39.6c3.1 3.1 8.2 3.1 11.3 0L442.1 763v117c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V680c0-22.1-17.9-40-40-40H271c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h120z" />
+		{/* 左上角内聚 ↘ */}
+		<path d="M180 420h240V180" />
+		<path d="M420 420L180 180" />
+		{/* 右上角内聚 ↙ */}
+		<path d="M844 420H604V180" />
+		<path d="M604 420l240-240" />
+		{/* 左下角内聚 ↗ */}
+		<path d="M180 604h240v240" />
+		<path d="M420 604L180 844" />
+		{/* 右下角内聚 ↖ */}
+		<path d="M844 604H604v240" />
+		<path d="M604 604l240 240" />
 	</svg>
 );
 

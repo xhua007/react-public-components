@@ -2,6 +2,18 @@
 	position: relative;
 	box-sizing: border-box;
 
+	// 原生浏览器全屏状态下的根容器背景与尺寸支持
+	&:fullscreen,
+	&:-webkit-full-screen,
+	&:-moz-full-screen,
+	&:-ms-fullscreen {
+		background-color: #ffffff !important;
+		width: 100% !important;
+		height: 100% !important;
+		overflow: auto !important;
+		box-sizing: border-box !important;
+	}
+
 	// Web 页面内模拟全屏模式（样式置顶占满视口）
 	&_web_fullscreen {
 		position: fixed !important;
@@ -12,7 +24,7 @@
 		width: 100vw !important;
 		height: 100vh !important;
 		z-index: 9999 !important;
-		background: #ffffff;
+		background-color: #ffffff !important;
 		overflow: auto !important;
 		border-radius: 0 !important;
 		margin: 0 !important;
