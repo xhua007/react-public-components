@@ -1,7 +1,7 @@
 {
 	"name": "react-public-components",
-	"version": "1.1.19",
-	"description": "React 折叠容器（CollapseBox）与分屏面板（Splitter）组件，零 UI 库依赖",
+	"version": "1.2.0",
+	"description": "企业级现代 React 通用核心组件库，零 UI 库依赖，开箱即用",
 	"type": "module",
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
