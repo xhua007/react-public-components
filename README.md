@@ -207,17 +207,56 @@ npm run dev
 
 ---
 
-## 📦 发布与构建
+## 📦 标准化发布流程 (Release Workflow)
 
+本项目已配置 `"prepublishOnly": "npm run build"` 自动化钩子，每次执行 `npm publish` 时会自动先执行全量类型与产物打包构建。
+
+### 1. 前置准备与环境检查
 ```bash
-# 1. 构建全量产物（dist/ ESM, CJS, DTS 与 CSS）
+# 检查当前 npm 源是否为官方镜像源（若不是需切换）
+npm config get registry
+# 切换为 npm 官方源（发布必须使用官方源）
+npm config set registry https://registry.npmjs.org/
+
+# 登录 npm 账号（会自动唤起网页完成 2FA / Web 授权）
+npm login --auth-type=web
+```
+
+### 2. 更新版本号 (遵循 SemVer 规范)
+```bash
+# 小修复与优化（Patch）：1.2.0 -> 1.2.1
+npm version patch
+
+# 新功能与组件迭代（Minor）：1.2.0 -> 1.3.0
+npm version minor
+
+# 架构破坏性更新（Major）：1.2.0 -> 2.0.0
+npm version major
+```
+
+### 3. 构建与本地验证
+```bash
+# 验证组件库核心打包（生成 dist/ 产物）
 npm run build
 
-# 2. 构建 Demo 预览站点
+# 验证 Demo 演示站编译
 npm run build:demo
+```
 
-# 3. 发布到 npm
+### 4. 提交代码与推送到 GitHub
+```bash
+git add .
+git commit -m "chore(release): bump version to x.x.x"
+git push
+```
+
+### 5. 正式发布到 npm
+```bash
+# 执行发布（自动触发 prepublishOnly 构建）
 npm publish --access public
+
+# 验证发布状态
+npm view react-public-components version
 ```
 
 ---
