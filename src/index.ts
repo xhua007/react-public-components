@@ -78,9 +78,6 @@ export type { ScrollTrackerProps, StickyHeaderProps } from '../ScrollTracker';
 export { default as FilePreviewer, inferFileType } from '../FilePreviewer';
 export type { FilePreviewerProps, FileItem, FileType } from '../FilePreviewer';
 
-export { default as FloatingActionBar } from '../FloatingActionBar';
-export type { FloatingActionBarProps, FloatingActionItem } from '../FloatingActionBar';
-
 export { default as TagInput } from '../TagInput';
 export type { TagInputProps } from '../TagInput';
 
@@ -194,9 +191,6 @@ export type { PhotoViewerProps, PhotoItem } from '../PhotoViewer';
 
 export { default as TrendIndicator } from '../TrendIndicator';
 export type { TrendIndicatorProps } from '../TrendIndicator';
-
-export { default as CountdownButton } from '../CountdownButton';
-export type { CountdownButtonProps } from '../CountdownButton';
 
 export { default as SegmentedProgress } from '../SegmentedProgress';
 export type { SegmentedProgressProps, ProgressSegment } from '../SegmentedProgress';

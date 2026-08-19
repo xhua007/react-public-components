@@ -2,6 +2,13 @@
 	perspective: 1000px;
 	box-sizing: border-box;
 	display: inline-block;
+	user-select: none;
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
 
 	&_inner {
 		position: relative;
@@ -31,6 +38,7 @@
 		border-radius: 12px;
 		box-sizing: border-box;
 		overflow: hidden;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 	}
 
 	&_back_horizontal {

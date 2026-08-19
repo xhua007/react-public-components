@@ -213,9 +213,12 @@ const Fullscreen = forwardRef<FullscreenRef, FullscreenProps>(
 			<div
 				ref={containerRef}
 				className={`rpc_fullscreen_container ${
-					isWebFsActive ? 'rpc_fullscreen_container_web_fullscreen' : ''
-				} ${className}`}
-				style={style}
+					isFullscreen ? 'rpc_fullscreen_container_fullscreen' : ''
+				} ${isWebFsActive ? 'rpc_fullscreen_container_web_fullscreen' : ''} ${className}`}
+				style={{
+					...(isFullscreen ? { backgroundColor: '#ffffff' } : {}),
+					...style,
+				}}
 			>
 				{/* 右上角/指定角落的快捷切换按钮 */}
 				{showButton && (

@@ -19,12 +19,14 @@ export default function FlipCardDemo() {
 								style={{
 									width: '100%',
 									height: '100%',
+									boxSizing: 'border-box',
 									background: 'linear-gradient(135deg, #1677ff 0%, #0958d9 100%)',
 									color: '#ffffff',
 									padding: 20,
 									display: 'flex',
 									flexDirection: 'column',
 									justifyContent: 'space-between',
+									borderRadius: 12,
 								}}
 							>
 								<div>
@@ -41,6 +43,7 @@ export default function FlipCardDemo() {
 								style={{
 									width: '100%',
 									height: '100%',
+									boxSizing: 'border-box',
 									background: '#1f1f1f',
 									color: '#52c41a',
 									padding: 20,
@@ -50,6 +53,7 @@ export default function FlipCardDemo() {
 									flexDirection: 'column',
 									justifyContent: 'center',
 									gap: 6,
+									borderRadius: 12,
 								}}
 							>
 								<div>IP: 192.168.1.108</div>
@@ -71,12 +75,14 @@ export default function FlipCardDemo() {
 								style={{
 									width: '100%',
 									height: '100%',
+									boxSizing: 'border-box',
 									background: 'linear-gradient(135deg, #722ed1 0%, #531dab 100%)',
 									color: '#ffffff',
 									padding: 20,
 									display: 'flex',
 									flexDirection: 'column',
 									justifyContent: 'space-between',
+									borderRadius: 12,
 								}}
 							>
 								<div>
@@ -93,8 +99,10 @@ export default function FlipCardDemo() {
 								style={{
 									width: '100%',
 									height: '100%',
+									boxSizing: 'border-box',
 									background: '#ffffff',
-									border: '1px solid #d9d9d9',
+									border: '1px solid #e8e8e8',
+									borderRadius: 12,
 									color: '#262626',
 									padding: 20,
 									display: 'flex',

@@ -13,48 +13,53 @@ export default function FullscreenDemo() {
 				<h3 style={{ fontSize: 16, marginBottom: 12 }}>1. 局部元素/容器全屏（原生浏览器模式）</h3>
 				<div style={{ maxWidth: 640 }}>
 					<Fullscreen showButton buttonPosition="top-right">
-						<div
-							style={{
-								background: '#ffffff',
-								border: '1px solid #e8e8e8',
-								borderRadius: 12,
-								padding: 24,
-								boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-							}}
-						>
-							<h4 style={{ margin: '0 0 12px 0', fontSize: 18, color: '#1677ff' }}>
-								📊 销售业绩看板 (Analytics Dashboard)
-							</h4>
-							<p style={{ color: '#595959', lineHeight: 1.6, margin: '0 0 16px 0' }}>
-								点击右上角全屏图标可使当前卡片进入全屏沉浸式演示。按 ESC 键或再次点击即可退出。
-							</p>
-
+						{({ isFullscreen }) => (
 							<div
 								style={{
-									display: 'grid',
-									gridTemplateColumns: 'repeat(3, 1fr)',
-									gap: 12,
-									marginTop: 16,
+									background: '#ffffff',
+									border: isFullscreen ? 'none' : '1px solid #e8e8e8',
+									borderRadius: isFullscreen ? 0 : 12,
+									padding: isFullscreen ? '40px 48px' : 24,
+									boxShadow: isFullscreen ? 'none' : '0 2px 8px rgba(0,0,0,0.04)',
+									minHeight: isFullscreen ? '100vh' : 'auto',
+									boxSizing: 'border-box',
 								}}
 							>
-								<div style={{ background: '#f5f5f5', padding: 12, borderRadius: 6, textAlign: 'center' }}>
-									<div style={{ color: '#8c8c8c', fontSize: 12 }}>今日访问量</div>
-									<div style={{ fontSize: 20, fontWeight: 700, marginTop: 4 }}>12,840</div>
-								</div>
-								<div style={{ background: '#f5f5f5', padding: 12, borderRadius: 6, textAlign: 'center' }}>
-									<div style={{ color: '#8c8c8c', fontSize: 12 }}>转化率</div>
-									<div style={{ fontSize: 20, fontWeight: 700, color: '#52c41a', marginTop: 4 }}>
-										4.68%
+								<h4 style={{ margin: '0 0 12px 0', fontSize: isFullscreen ? 22 : 18, color: '#1677ff' }}>
+									📊 销售业绩看板 (Analytics Dashboard)
+								</h4>
+								<p style={{ color: '#595959', lineHeight: 1.6, margin: '0 0 16px 0' }}>
+									点击右上角全屏图标可使当前卡片进入全屏沉浸式演示。按 ESC 键或再次点击即可退出。
+								</p>
+
+								<div
+									style={{
+										display: 'grid',
+										gridTemplateColumns: 'repeat(3, 1fr)',
+										gap: isFullscreen ? 20 : 12,
+										marginTop: 20,
+										maxWidth: isFullscreen ? 900 : '100%',
+									}}
+								>
+									<div style={{ background: '#f5f5f5', padding: isFullscreen ? 20 : 12, borderRadius: 8, textAlign: 'center' }}>
+										<div style={{ color: '#8c8c8c', fontSize: isFullscreen ? 14 : 12 }}>今日访问量</div>
+										<div style={{ fontSize: isFullscreen ? 26 : 20, fontWeight: 700, marginTop: 6 }}>12,840</div>
 									</div>
-								</div>
-								<div style={{ background: '#f5f5f5', padding: 12, borderRadius: 6, textAlign: 'center' }}>
-									<div style={{ color: '#8c8c8c', fontSize: 12 }}>客单价</div>
-									<div style={{ fontSize: 20, fontWeight: 700, color: '#1677ff', marginTop: 4 }}>
-										¥ 389.0
+									<div style={{ background: '#f5f5f5', padding: isFullscreen ? 20 : 12, borderRadius: 8, textAlign: 'center' }}>
+										<div style={{ color: '#8c8c8c', fontSize: isFullscreen ? 14 : 12 }}>转化率</div>
+										<div style={{ fontSize: isFullscreen ? 26 : 20, fontWeight: 700, color: '#52c41a', marginTop: 6 }}>
+											4.68%
+										</div>
+									</div>
+									<div style={{ background: '#f5f5f5', padding: isFullscreen ? 20 : 12, borderRadius: 8, textAlign: 'center' }}>
+										<div style={{ color: '#8c8c8c', fontSize: isFullscreen ? 14 : 12 }}>客单价</div>
+										<div style={{ fontSize: isFullscreen ? 26 : 20, fontWeight: 700, color: '#1677ff', marginTop: 6 }}>
+											¥ 389.0
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						)}
 					</Fullscreen>
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>

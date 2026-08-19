@@ -2,16 +2,30 @@
 	position: relative;
 	box-sizing: border-box;
 
-	// 原生浏览器全屏状态下的根容器背景与尺寸支持
-	&:fullscreen,
-	&:-webkit-full-screen,
-	&:-moz-full-screen,
-	&:-ms-fullscreen {
+	// 原生浏览器全屏状态下的根容器背景与尺寸支持（必须分开独立编写，防止跨浏览器伪类导致选择器整体失效）
+	&:fullscreen {
 		background-color: #ffffff !important;
-		width: 100% !important;
-		height: 100% !important;
+		width: 100vw !important;
+		height: 100vh !important;
 		overflow: auto !important;
 		box-sizing: border-box !important;
+
+		&::backdrop {
+			background-color: #ffffff !important;
+		}
+	}
+
+	&:-webkit-full-screen {
+		background-color: #ffffff !important;
+		width: 100vw !important;
+		height: 100vh !important;
+		overflow: auto !important;
+		box-sizing: border-box !important;
+	}
+
+	// 状态驱动的全屏样式（双重保障）
+	&_fullscreen {
+		background-color: #ffffff !important;
 	}
 
 	// Web 页面内模拟全屏模式（样式置顶占满视口）

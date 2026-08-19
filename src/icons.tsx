@@ -203,18 +203,22 @@ export const CloseOutlined = ({
 	onClick,
 }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
-		viewBox="64 64 896 896"
+		viewBox="0 0 1024 1024"
 		focusable="false"
 		data-icon="close"
 		width="1em"
 		height="1em"
-		fill="currentColor"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="84"
+		strokeLinecap="round"
+		strokeLinejoin="round"
 		aria-hidden="true"
 		style={{ ...baseStyle, ...style }}
 		className={className}
 		onClick={onClick}
 	>
-		<path d="M563.8 512l262.5-262.5c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L518.5 466.7 256 204.2c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L473.2 512 210.7 774.5c-12.5 12.5-12.5 32.8 0 45.3 6.2 6.2 14.4 9.4 22.6 9.4s16.4-3.1 22.6-9.4L518.5 557.3l262.5 262.5c6.2 6.2 14.4 9.4 22.6 9.4s16.4-3.1 22.6-9.4c12.5-12.5 12.5-32.8 0-45.3L563.8 512z" />
+		<path d="M260 260l504 504M764 260L260 764" />
 	</svg>
 );
 
@@ -328,67 +332,104 @@ export const FullscreenExitOutlined = ({ style, className }: IconProps) => (
 	</svg>
 );
 
-export const RotateRightOutlined = ({ style, className }: IconProps) => (
+export const RotateRightOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
-		viewBox="64 64 896 896"
+		viewBox="0 0 1024 1024"
 		focusable="false"
 		data-icon="rotate-right"
 		width="1em"
 		height="1em"
-		fill="currentColor"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="80"
+		strokeLinecap="round"
+		strokeLinejoin="round"
 		aria-hidden="true"
 		style={{ ...baseStyle, ...style }}
 		className={className}
+		onClick={onClick}
 	>
-		<path d="M780.3 440a32 32 0 00-32 32 236 236 0 11-69.1-166.9l-58.4 58.4a8 8 0 005.7 13.7H836a8 8 0 008-8V159.7a8 8 0 00-13.7-5.7l-56.1 56.1A299.7 299.7 0 00512 120a300 300 0 10300 300 32 32 0 00-31.7-32z" />
+		{/* 顺时针旋转主体圆弧 */}
+		<path d="M896 512a384 384 0 1 1-112.5-271.5L896 341" />
+		{/* 顺时针旋转折线箭头 */}
+		<path d="M896 128v213h-213" />
 	</svg>
 );
 
 export const ZoomInOutlined = ({ style, className }: IconProps) => (
 	<svg
-		viewBox="64 64 896 896"
+		viewBox="0 0 1024 1024"
 		focusable="false"
 		data-icon="zoom-in"
 		width="1em"
 		height="1em"
-		fill="currentColor"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="76"
+		strokeLinecap="round"
+		strokeLinejoin="round"
 		aria-hidden="true"
 		style={{ ...baseStyle, ...style }}
 		className={className}
 	>
-		<path d="M637 443H519V325c0-4.4-3.6-8-8-8h-54c-4.4 0-8 3.6-8 8v118H331c-4.4 0-8 3.6-8 8v54c0 4.4 3.6 8 8 8h118v118c0 4.4 3.6 8 8 8h54c4.4 0 8-3.6 8-8V505h118c4.4 0 8-3.6 8-8v-54c0-4.4-3.6-8-8-8zm269.5 427.7l-200.6-200.7A396.9 396.9 0 00800 400c0-220.9-179.1-400-400-400S0 179.1 0 400s179.1 400 400 400c92.8 0 177.9-31.7 245.9-85.1l200.7 200.6c3.1 3.1 8.2 3.1 11.3 0l48.6-48.6c3.1-3.1 3.1-8.2 0-11.3zM400 712c-172.3 0-312-139.7-312-312s139.7-312 312-312 312 139.7 312 312-139.7 312-312 312z" />
+		{/* 放大镜圆镜框 */}
+		<circle cx="440" cy="440" r="280" />
+		{/* 放大镜手柄 */}
+		<path d="M640 640l220 220" strokeWidth="88" />
+		{/* 放大镜内部清晰加号 */}
+		<path d="M440 320v240M320 440h240" strokeWidth="80" />
 	</svg>
 );
 
 export const ZoomOutOutlined = ({ style, className }: IconProps) => (
 	<svg
-		viewBox="64 64 896 896"
+		viewBox="0 0 1024 1024"
 		focusable="false"
 		data-icon="zoom-out"
 		width="1em"
 		height="1em"
-		fill="currentColor"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="76"
+		strokeLinecap="round"
+		strokeLinejoin="round"
 		aria-hidden="true"
 		style={{ ...baseStyle, ...style }}
 		className={className}
 	>
-		<path d="M637 443H331c-4.4 0-8 3.6-8 8v54c0 4.4 3.6 8 8 8h306c4.4 0 8-3.6 8-8v-54c0-4.4-3.6-8-8-8zm269.5 427.7l-200.6-200.7A396.9 396.9 0 00800 400c0-220.9-179.1-400-400-400S0 179.1 0 400s179.1 400 400 400c92.8 0 177.9-31.7 245.9-85.1l200.7 200.6c3.1 3.1 8.2 3.1 11.3 0l48.6-48.6c3.1-3.1 3.1-8.2 0-11.3zM400 712c-172.3 0-312-139.7-312-312s139.7-312 312-312 312 139.7 312 312-139.7 312-312 312z" />
+		{/* 放大镜圆镜框 */}
+		<circle cx="440" cy="440" r="280" />
+		{/* 放大镜手柄 */}
+		<path d="M640 640l220 220" strokeWidth="88" />
+		{/* 放大镜内部清晰减号 */}
+		<path d="M320 440h240" strokeWidth="80" />
 	</svg>
 );
 
 export const DownloadOutlined = ({ style, className }: IconProps) => (
 	<svg
-		viewBox="64 64 896 896"
+		viewBox="0 0 1024 1024"
 		focusable="false"
 		data-icon="download"
 		width="1em"
 		height="1em"
-		fill="currentColor"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="76"
+		strokeLinecap="round"
+		strokeLinejoin="round"
 		aria-hidden="true"
 		style={{ ...baseStyle, ...style }}
 		className={className}
 	>
-		<path d="M505.7 661a8 8 0 0012.6 0l112-122c4.8-5.3 1-13.7-6.3-13.7H544V160c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v365.3h-80c-7.3 0-11.1 8.4-6.3 13.7l112 122zM880 704h-56c-4.4 0-8 3.6-8 8v120H208V712c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v160c0 17.7 14.3 32 32 32h704c17.7 0 32-14.3 32-32V712c0-4.4-3.6-8-8-8z" />
+		{/* 下载向下箭头 */}
+		<path d="M512 160v460M330 450l182 182 182-182" />
+		{/* 底部托盘 */}
+		<path d="M200 680v160h624V680" />
 	</svg>
 );
 
