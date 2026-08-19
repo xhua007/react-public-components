@@ -3,13 +3,13 @@
 [![npm version](https://img.shields.io/npm/v/react-public-components.svg)](https://www.npmjs.com/package/react-public-components)
 [![license](https://img.shields.io/npm/l/react-public-components.svg)](https://github.com/xhua007/react-public-components)
 
-📦 **企业级现代 React 通用核心组件库**。零沉重 UI 库绑定，开箱即用，提供 64 款真正高频、极客质感的中后台与现代 Web 应用组件。
+📦 **企业级现代 React 通用核心组件库**。零沉重 UI 库绑定，开箱即用，提供 63 款真正高频、极客质感的中后台与现代 Web 应用组件。
 
 ---
 
 ## 🌟 特性亮点
 
-- 💎 **精炼通用**：涵盖中后台与 SaaS 产品的通用、布局导航、数据录入、数据展示、反馈 5 大类别共 64 款高频组件。
+- 💎 **精炼通用**：涵盖中后台与 SaaS 产品的通用、布局导航、数据录入、数据展示、反馈 5 大类别共 63 款高频组件。
 - ⚡ **轻量零依赖**：不强制依赖 Ant Design 等庞大第三方 UI 库，体积小巧，按需引入。
 - 🛡️ **工业级防御**：核心安全组件（如 `Watermark`）采用原生 DOM 脱离 VDOM 注入防篡改架构，支持毫秒自愈与防审查元素删除。
 - 🎨 **极客质感**：现代设计语言，自带平滑微动效、毛玻璃（Glassmorphism）、硬件加速流光与暗色模式适配。
@@ -35,7 +35,7 @@ import 'react-public-components/styles.css';
 
 ---
 
-## 🧩 组件全览（64 款核心高频组件）
+## 🧩 组件全览（63 款核心高频组件）
 
 ### 1. 通用 General (9 款)
 | 组件名 | 中文名称 | 特性与场景说明 |
@@ -89,7 +89,7 @@ import 'react-public-components/styles.css';
 
 ---
 
-### 4. 数据展示 Display (27 款)
+### 4. 数据展示 Display (26 款)
 | 组件名 | 中文名称 | 特性与场景说明 |
 | :--- | :--- | :--- |
 | **`JsonDiffViewer`** | JSON 差异比对器 | JSON 结构体增删改差异彩色高亮探查，支持新旧值对照。 |
@@ -98,7 +98,6 @@ import 'react-public-components/styles.css';
 | **`SegmentedProgress`** | 分段多色进度条 | 单条轨道并列展示多色分段比例，支持存储空间占比与图例。 |
 | **`TrendIndicator`** | KPI 趋势升降胶囊 | 微型 KPI 指标变动升降胶囊，自动根据正负值判断涨跌并支持红绿反转。 |
 | **`PhotoViewer`** | 相册画廊查看器 | 全功能多图画廊查看器，支持左右键盘按键切图与缩略图底栏联动。 |
-| **`DiffTable`** | 两期差异对比表格 | 两期数据差异对比表格，自动计算增减差值与百分比红绿高亮。 |
 | **`StatusTimeline`** | 审批流时间轴 | 高级审批流与动态耗时时间轴，包含节点状态徽标、经办人与流转耗时。 |
 | **`GradientText`** | 流光渐变文字 | 现代 SaaS 霓虹横向流光渐变文字，支持背景平滑滚动动画。 |
 | **`VideoPlayer`** | 视频播放器 | 轻量现代化视频播放器，暗黑毛玻璃控制条、快进快退 10s、0.75x~2.0x 倍速与画中画。 |
@@ -203,7 +202,7 @@ npm install
 npm run dev
 ```
 
-浏览器打开 `http://localhost:5173` 即可浏览全部 64 款组件的实时效果、代码与参数调节面板。
+浏览器打开 `http://localhost:5173` 即可浏览全部 63 款组件的实时效果、代码与参数调节面板。
 
 ---
 

@@ -189,9 +189,6 @@ export type { KeyValEditorProps, KeyValItem } from '../KeyValEditor';
 export { default as QuickDateRange } from '../QuickDateRange';
 export type { QuickDateRangeProps, ShortcutItem } from '../QuickDateRange';
 
-export { default as DiffTable } from '../DiffTable';
-export type { DiffTableProps, DiffColumn } from '../DiffTable';
-
 export { default as PhotoViewer } from '../PhotoViewer';
 export type { PhotoViewerProps, PhotoItem } from '../PhotoViewer';
 

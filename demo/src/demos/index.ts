@@ -45,7 +45,6 @@ export { default as StatusTimelineDemo } from './StatusTimelineDemo';
 export { default as GradientTextDemo } from './GradientTextDemo';
 export { default as KeyValEditorDemo } from './KeyValEditorDemo';
 export { default as QuickDateRangeDemo } from './QuickDateRangeDemo';
-export { default as DiffTableDemo } from './DiffTableDemo';
 export { default as PhotoViewerDemo } from './PhotoViewerDemo';
 export { default as TrendIndicatorDemo } from './TrendIndicatorDemo';
 export { default as CountdownButtonDemo } from './CountdownButtonDemo';

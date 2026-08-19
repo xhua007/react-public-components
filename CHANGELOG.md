@@ -19,8 +19,8 @@
   - 同步升级了 `QrCodeCard`、`InfiniteScrollList`、`DebounceSelect`、`CountdownButton` 等所有带有 Loading 态组件的视觉质感。
 
 ### 🧹 组件库精炼与聚焦
-- 经过多轮高频通用性与业务落地价值评估，彻底移除了低频、玩具型或过度垂直的组件，全库精准保留 **64 款** 真正高复用、高质感的中后台与 Web 通用组件。
-- 完善并统一了全库 64 款组件的 TypeScript 类型定义、ESM / CommonJS 构建导出与 Demo 预览映射。
+- 经过多轮高频通用性与业务落地价值评估，彻底移除了低频、玩具型或过度垂直的组件，全库精准保留 **63 款** 真正高复用、高质感的中后台与 Web 通用组件。
+- 完善并统一了全库 63 款组件的 TypeScript 类型定义、ESM / CommonJS 构建导出与 Demo 预览映射。
 
 ---
 
