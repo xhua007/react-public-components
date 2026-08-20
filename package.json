@@ -1,6 +1,6 @@
 {
 	"name": "react-public-components",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "企业级现代 React 通用核心组件库，零 UI 库依赖，开箱即用",
 	"type": "module",
 	"main": "./dist/index.cjs",
