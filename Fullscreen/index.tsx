@@ -166,7 +166,9 @@ const Fullscreen = forwardRef<FullscreenRef, FullscreenProps>(
 					(document as any).msFullscreenElement;
 
 				const targetEl = getTargetElement();
-				const isActive = currentFsEl !== null && (currentFsEl === targetEl || targetEl === document.documentElement);
+				const isActive =
+					currentFsEl !== null &&
+					(currentFsEl === targetEl || targetEl === document.documentElement);
 
 				if (!isControlled) {
 					setInternalFullscreen(isActive);

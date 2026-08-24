@@ -31,7 +31,9 @@ export default function TiltCardDemo() {
 								justifyContent: 'space-between',
 							}}
 						>
-							<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+							<div
+								style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+							>
 								<span style={{ fontSize: 16, fontWeight: 700, letterSpacing: 1 }}>BLACK CARD</span>
 								<span style={{ fontSize: 20 }}>💎</span>
 							</div>
@@ -40,7 +42,14 @@ export default function TiltCardDemo() {
 								8888 •••• •••• 2026
 							</div>
 
-							<div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#8c8c8c' }}>
+							<div
+								style={{
+									display: 'flex',
+									justifyContent: 'space-between',
+									fontSize: 12,
+									color: '#8c8c8c',
+								}}
+							>
 								<span>CARDHOLDER: ALEX CHEN</span>
 								<span>EXP: 12/28</span>
 							</div>

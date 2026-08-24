@@ -4,7 +4,7 @@ import Splitter from '../../../Splitter';
 export default function SplitterDemo() {
 	const [showIconMode, setShowIconMode] = useState<boolean | 'auto'>(true);
 
-	const options = [
+	const options: Array<{ label: string; value: boolean | 'auto' }> = [
 		{ label: 'true (常态显示)', value: true },
 		{ label: 'false (不显示)', value: false },
 		{ label: "'auto' (悬停显示)", value: 'auto' },
@@ -13,9 +13,7 @@ export default function SplitterDemo() {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
-					5. Splitter · 水平分屏（可折叠）
-				</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>5. Splitter · 水平分屏（可折叠）</h3>
 				<Splitter style={{ height: 360 }}>
 					<Splitter.Panel defaultSize="40%" min="20%">
 						<h3>左侧面板</h3>

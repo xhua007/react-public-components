@@ -121,21 +121,24 @@ const navCategories: ComponentCategory[] = [
 				name: 'Fullscreen',
 				title: '全屏容器',
 				tag: '1.2.0',
-				description: '支持局部元素原生全屏与网页内最大化置顶切换，支持快捷悬浮按钮与 Render Props。',
+				description:
+					'支持局部元素原生全屏与网页内最大化置顶切换，支持快捷悬浮按钮与 Render Props。',
 			},
 			{
 				key: 'CopyButton',
 				name: 'CopyButton',
 				title: '复制按钮',
 				tag: '1.2.0',
-				description: '提供点击复制到剪贴板功能，支持纯图标、带文字按钮与内联文本，内置 Tooltip 动效。',
+				description:
+					'提供点击复制到剪贴板功能，支持纯图标、带文字按钮与内联文本，内置 Tooltip 动效。',
 			},
 			{
 				key: 'ContextMenu',
 				name: 'ContextMenu',
 				title: '右键菜单',
 				tag: '1.2.0',
-				description: '为任意区域或列表行提供右键上下文菜单，支持视口防溢出翻转、二级子菜单与快捷键。',
+				description:
+					'为任意区域或列表行提供右键上下文菜单，支持视口防溢出翻转、二级子菜单与快捷键。',
 			},
 		],
 	},
@@ -299,7 +302,8 @@ const navCategories: ComponentCategory[] = [
 				name: 'ImageCropper',
 				title: '图片裁剪',
 				tag: '1.2.0',
-				description: '轻量原生 Canvas 图片裁剪器，支持拖拽、滚轮缩放、90° 旋转、圆形头像裁剪与 Modal 弹窗。',
+				description:
+					'轻量原生 Canvas 图片裁剪器，支持拖拽、滚轮缩放、90° 旋转、圆形头像裁剪与 Modal 弹窗。',
 			},
 			{
 				key: 'DebounceSelect',
@@ -381,7 +385,8 @@ const navCategories: ComponentCategory[] = [
 				name: 'VideoPlayer',
 				title: '视频播放器',
 				tag: '1.3.0',
-				description: '轻量现代化视频播放器，暗黑毛玻璃控制条、快进快退 10s、0.75x~2.0x 倍速与画中画。',
+				description:
+					'轻量现代化视频播放器，暗黑毛玻璃控制条、快进快退 10s、0.75x~2.0x 倍速与画中画。',
 			},
 			{
 				key: 'PdfViewer',
@@ -423,7 +428,8 @@ const navCategories: ComponentCategory[] = [
 				name: 'MetricCard',
 				title: 'KPI 指标卡',
 				tag: '1.2.0',
-				description: 'Dashboard 看板指标卡片，集成 CountUp 数字跳动、环比升降趋势与微折线 Sparkline。',
+				description:
+					'Dashboard 看板指标卡片，集成 CountUp 数字跳动、环比升降趋势与微折线 Sparkline。',
 			},
 			{
 				key: 'ActivityLog',
@@ -533,72 +539,126 @@ const navCategories: ComponentCategory[] = [
 ];
 
 // 组件与对应的 Demo 组件映射表
-const demoComponentsMap: Record<
-	string,
-	{ name: string; title: string; component: ComponentType }
-> = {
-	JsonDiffViewer: { name: 'JsonDiffViewer', title: 'JSON 差异比对器', component: JsonDiffViewerDemo },
-	CascadeDrawer: { name: 'CascadeDrawer', title: '级联下钻抽屉', component: CascadeDrawerDemo },
-	DualRangeSlider: { name: 'DualRangeSlider', title: '双滑块区间选择器', component: DualRangeSliderDemo },
-	FilterChips: { name: 'FilterChips', title: '已选筛选胶囊栏', component: FilterChipsDemo },
-	AnnouncementBar: { name: 'AnnouncementBar', title: '广播通知横幅', component: AnnouncementBarDemo },
-	JsonTree: { name: 'JsonTree', title: 'JSON 树状探查器', component: JsonTreeDemo },
-	CodeSnippet: { name: 'CodeSnippet', title: '极客代码块', component: CodeSnippetDemo },
-	MiniSparkline: { name: 'MiniSparkline', title: '单行微趋势折线图', component: MiniSparklineDemo },
-	FileDropZone: { name: 'FileDropZone', title: '拖拽上传容器', component: FileDropZoneDemo },
-	SegmentedProgress: { name: 'SegmentedProgress', title: '分段多色进度条', component: SegmentedProgressDemo },
-	HoverCard: { name: 'HoverCard', title: '悬浮资料卡', component: HoverCardDemo },
-	TreeTransfer: { name: 'TreeTransfer', title: '树形穿梭框', component: TreeTransferDemo },
-	NumberStepper: { name: 'NumberStepper', title: '平滑数字步进器', component: NumberStepperDemo },
-	TrendIndicator: { name: 'TrendIndicator', title: 'KPI 趋势升降胶囊', component: TrendIndicatorDemo },
-	KeyValEditor: { name: 'KeyValEditor', title: '键值对编辑器', component: KeyValEditorDemo },
-	QuickDateRange: { name: 'QuickDateRange', title: '快捷日期筛选', component: QuickDateRangeDemo },
-	PhotoViewer: { name: 'PhotoViewer', title: '相册画廊查看器', component: PhotoViewerDemo },
-	StatusTimeline: { name: 'StatusTimeline', title: '审批流时间轴', component: StatusTimelineDemo },
-	GradientText: { name: 'GradientText', title: '流光渐变文字', component: GradientTextDemo },
-	KanbanBoard: { name: 'KanbanBoard', title: '任务看板', component: KanbanBoardDemo },
-	TreeFilterPanel: { name: 'TreeFilterPanel', title: '树形平铺筛选', component: TreeFilterPanelDemo },
-	EnvBadge: { name: 'EnvBadge', title: '环境防误触角标', component: EnvBadgeDemo },
-	VideoPlayer: { name: 'VideoPlayer', title: '视频播放器', component: VideoPlayerDemo },
-	PdfViewer: { name: 'PdfViewer', title: 'PDF 在线阅读器', component: PdfViewerDemo },
-	BadgeRibbon: { name: 'BadgeRibbon', title: '斜角丝带角标', component: BadgeRibbonDemo },
-	ShimmerSkeleton: { name: 'ShimmerSkeleton', title: '流光骨架屏', component: ShimmerSkeletonDemo },
-	FlipCard: { name: 'FlipCard', title: '3D 翻转卡片', component: FlipCardDemo },
-	VirtualList: { name: 'VirtualList', title: '虚拟列表', component: VirtualListDemo },
-	Watermark: { name: 'Watermark', title: '防篡改水印', component: WatermarkDemo },
-	NumericRangeInput: { name: 'NumericRangeInput', title: '数值区间输入', component: NumericRangeInputDemo },
-	MetricCard: { name: 'MetricCard', title: 'KPI 指标卡', component: MetricCardDemo },
-	AudioPlayer: { name: 'AudioPlayer', title: '音频播放条', component: AudioPlayerDemo },
-	QrCodeCard: { name: 'QrCodeCard', title: '二维码卡片', component: QrCodeCardDemo },
-	ActivityLog: { name: 'ActivityLog', title: '操作审计日志', component: ActivityLogDemo },
-	DragSortList: { name: 'DragSortList', title: '拖拽排序列表', component: DragSortListDemo },
-	TiltCard: { name: 'TiltCard', title: '3D 倾斜卡片', component: TiltCardDemo },
-	GuidedTour: { name: 'GuidedTour', title: '漫游引导', component: GuidedTourDemo },
-	Marquee: { name: 'Marquee', title: '无缝跑马灯', component: MarqueeDemo },
-	SpotlightCard: { name: 'SpotlightCard', title: '聚光灯卡片', component: SpotlightCardDemo },
-	SensitiveMask: { name: 'SensitiveMask', title: '敏感脱敏', component: SensitiveMaskDemo },
-	DiffViewer: { name: 'DiffViewer', title: '差异比对', component: DiffViewerDemo },
-	CronPicker: { name: 'CronPicker', title: 'Cron 选择器', component: CronPickerDemo },
-	FilePreviewer: { name: 'FilePreviewer', title: '通用文件预览弹窗', component: FilePreviewerDemo },
-	Fullscreen: { name: 'Fullscreen', title: '全屏容器', component: FullscreenDemo },
-	ImageCropper: { name: 'ImageCropper', title: '图片裁剪', component: ImageCropperDemo },
-	ScrollTracker: { name: 'ScrollTracker', title: '滚动与吸顶', component: ScrollTrackerDemo },
-	TagInput: { name: 'TagInput', title: '标签输入器', component: TagInputDemo },
-	PasswordStrength: { name: 'PasswordStrength', title: '密码强度检测', component: PasswordStrengthDemo },
-	JsonEditor: { name: 'JsonEditor', title: 'JSON 查看与编辑', component: JsonEditorDemo },
-	InfiniteScrollList: { name: 'InfiniteScrollList', title: '无限滚动列表', component: InfiniteScrollListDemo },
-	CopyButton: { name: 'CopyButton', title: '复制按钮', component: CopyButtonDemo },
-	ContextMenu: { name: 'ContextMenu', title: '右键菜单', component: ContextMenuDemo },
-	CollapseBox: { name: 'CollapseBox', title: '折叠容器', component: CollapseBoxDemo },
-	Splitter: { name: 'Splitter', title: '分隔面板', component: SplitterDemo },
-	Masonry: { name: 'Masonry', title: '瀑布流', component: MasonryDemo },
-	DebounceSelect: { name: 'DebounceSelect', title: '防抖下拉框', component: DebounceSelectDemo },
-	ColorPicker: { name: 'ColorPicker', title: '颜色选择器', component: ColorPickerDemo },
-	CountUp: { name: 'CountUp', title: '数字滚动', component: CountUpDemo },
-	TextEllipsis: { name: 'TextEllipsis', title: '文本省略', component: TextEllipsisDemo },
-	BorderBeam: { name: 'BorderBeam', title: '边框流光', component: BorderBeamDemo },
-	DisabledBox: { name: 'DisabledBox', title: '禁用遮罩', component: DisabledBoxDemo },
-};
+const demoComponentsMap: Record<string, { name: string; title: string; component: ComponentType }> =
+	{
+		JsonDiffViewer: {
+			name: 'JsonDiffViewer',
+			title: 'JSON 差异比对器',
+			component: JsonDiffViewerDemo,
+		},
+		CascadeDrawer: { name: 'CascadeDrawer', title: '级联下钻抽屉', component: CascadeDrawerDemo },
+		DualRangeSlider: {
+			name: 'DualRangeSlider',
+			title: '双滑块区间选择器',
+			component: DualRangeSliderDemo,
+		},
+		FilterChips: { name: 'FilterChips', title: '已选筛选胶囊栏', component: FilterChipsDemo },
+		AnnouncementBar: {
+			name: 'AnnouncementBar',
+			title: '广播通知横幅',
+			component: AnnouncementBarDemo,
+		},
+		JsonTree: { name: 'JsonTree', title: 'JSON 树状探查器', component: JsonTreeDemo },
+		CodeSnippet: { name: 'CodeSnippet', title: '极客代码块', component: CodeSnippetDemo },
+		MiniSparkline: {
+			name: 'MiniSparkline',
+			title: '单行微趋势折线图',
+			component: MiniSparklineDemo,
+		},
+		FileDropZone: { name: 'FileDropZone', title: '拖拽上传容器', component: FileDropZoneDemo },
+		SegmentedProgress: {
+			name: 'SegmentedProgress',
+			title: '分段多色进度条',
+			component: SegmentedProgressDemo,
+		},
+		HoverCard: { name: 'HoverCard', title: '悬浮资料卡', component: HoverCardDemo },
+		TreeTransfer: { name: 'TreeTransfer', title: '树形穿梭框', component: TreeTransferDemo },
+		NumberStepper: { name: 'NumberStepper', title: '平滑数字步进器', component: NumberStepperDemo },
+		TrendIndicator: {
+			name: 'TrendIndicator',
+			title: 'KPI 趋势升降胶囊',
+			component: TrendIndicatorDemo,
+		},
+		KeyValEditor: { name: 'KeyValEditor', title: '键值对编辑器', component: KeyValEditorDemo },
+		QuickDateRange: {
+			name: 'QuickDateRange',
+			title: '快捷日期筛选',
+			component: QuickDateRangeDemo,
+		},
+		PhotoViewer: { name: 'PhotoViewer', title: '相册画廊查看器', component: PhotoViewerDemo },
+		StatusTimeline: {
+			name: 'StatusTimeline',
+			title: '审批流时间轴',
+			component: StatusTimelineDemo,
+		},
+		GradientText: { name: 'GradientText', title: '流光渐变文字', component: GradientTextDemo },
+		KanbanBoard: { name: 'KanbanBoard', title: '任务看板', component: KanbanBoardDemo },
+		TreeFilterPanel: {
+			name: 'TreeFilterPanel',
+			title: '树形平铺筛选',
+			component: TreeFilterPanelDemo,
+		},
+		EnvBadge: { name: 'EnvBadge', title: '环境防误触角标', component: EnvBadgeDemo },
+		VideoPlayer: { name: 'VideoPlayer', title: '视频播放器', component: VideoPlayerDemo },
+		PdfViewer: { name: 'PdfViewer', title: 'PDF 在线阅读器', component: PdfViewerDemo },
+		BadgeRibbon: { name: 'BadgeRibbon', title: '斜角丝带角标', component: BadgeRibbonDemo },
+		ShimmerSkeleton: {
+			name: 'ShimmerSkeleton',
+			title: '流光骨架屏',
+			component: ShimmerSkeletonDemo,
+		},
+		FlipCard: { name: 'FlipCard', title: '3D 翻转卡片', component: FlipCardDemo },
+		VirtualList: { name: 'VirtualList', title: '虚拟列表', component: VirtualListDemo },
+		Watermark: { name: 'Watermark', title: '防篡改水印', component: WatermarkDemo },
+		NumericRangeInput: {
+			name: 'NumericRangeInput',
+			title: '数值区间输入',
+			component: NumericRangeInputDemo,
+		},
+		MetricCard: { name: 'MetricCard', title: 'KPI 指标卡', component: MetricCardDemo },
+		AudioPlayer: { name: 'AudioPlayer', title: '音频播放条', component: AudioPlayerDemo },
+		QrCodeCard: { name: 'QrCodeCard', title: '二维码卡片', component: QrCodeCardDemo },
+		ActivityLog: { name: 'ActivityLog', title: '操作审计日志', component: ActivityLogDemo },
+		DragSortList: { name: 'DragSortList', title: '拖拽排序列表', component: DragSortListDemo },
+		TiltCard: { name: 'TiltCard', title: '3D 倾斜卡片', component: TiltCardDemo },
+		GuidedTour: { name: 'GuidedTour', title: '漫游引导', component: GuidedTourDemo },
+		Marquee: { name: 'Marquee', title: '无缝跑马灯', component: MarqueeDemo },
+		SpotlightCard: { name: 'SpotlightCard', title: '聚光灯卡片', component: SpotlightCardDemo },
+		SensitiveMask: { name: 'SensitiveMask', title: '敏感脱敏', component: SensitiveMaskDemo },
+		DiffViewer: { name: 'DiffViewer', title: '差异比对', component: DiffViewerDemo },
+		CronPicker: { name: 'CronPicker', title: 'Cron 选择器', component: CronPickerDemo },
+		FilePreviewer: {
+			name: 'FilePreviewer',
+			title: '通用文件预览弹窗',
+			component: FilePreviewerDemo,
+		},
+		Fullscreen: { name: 'Fullscreen', title: '全屏容器', component: FullscreenDemo },
+		ImageCropper: { name: 'ImageCropper', title: '图片裁剪', component: ImageCropperDemo },
+		ScrollTracker: { name: 'ScrollTracker', title: '滚动与吸顶', component: ScrollTrackerDemo },
+		TagInput: { name: 'TagInput', title: '标签输入器', component: TagInputDemo },
+		PasswordStrength: {
+			name: 'PasswordStrength',
+			title: '密码强度检测',
+			component: PasswordStrengthDemo,
+		},
+		JsonEditor: { name: 'JsonEditor', title: 'JSON 查看与编辑', component: JsonEditorDemo },
+		InfiniteScrollList: {
+			name: 'InfiniteScrollList',
+			title: '无限滚动列表',
+			component: InfiniteScrollListDemo,
+		},
+		CopyButton: { name: 'CopyButton', title: '复制按钮', component: CopyButtonDemo },
+		ContextMenu: { name: 'ContextMenu', title: '右键菜单', component: ContextMenuDemo },
+		CollapseBox: { name: 'CollapseBox', title: '折叠容器', component: CollapseBoxDemo },
+		Splitter: { name: 'Splitter', title: '分隔面板', component: SplitterDemo },
+		Masonry: { name: 'Masonry', title: '瀑布流', component: MasonryDemo },
+		DebounceSelect: { name: 'DebounceSelect', title: '防抖下拉框', component: DebounceSelectDemo },
+		ColorPicker: { name: 'ColorPicker', title: '颜色选择器', component: ColorPickerDemo },
+		CountUp: { name: 'CountUp', title: '数字滚动', component: CountUpDemo },
+		TextEllipsis: { name: 'TextEllipsis', title: '文本省略', component: TextEllipsisDemo },
+		BorderBeam: { name: 'BorderBeam', title: '边框流光', component: BorderBeamDemo },
+		DisabledBox: { name: 'DisabledBox', title: '禁用遮罩', component: DisabledBoxDemo },
+	};
 
 export default function App() {
 	const [activeKey, setActiveKey] = useState<string>('CollapseBox');
@@ -871,45 +931,43 @@ export default function App() {
 
 				{/* 动态渲染选中组件的 Demo */}
 				<div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
-					{activeKey === 'ALL' ? (
-						Object.entries(demoComponentsMap).map(([key, info]) => {
-							const TargetDemo = info.component;
-							return (
-								<section
-									key={key}
-									style={{
-										display: 'flex',
-										flexDirection: 'column',
-										gap: 24,
-										padding: 24,
-										borderRadius: 12,
-										border: '1px solid #f0f0f0',
-									}}
-								>
-									<h2
+					{activeKey === 'ALL'
+						? Object.entries(demoComponentsMap).map(([key, info]) => {
+								const TargetDemo = info.component;
+								return (
+									<section
+										key={key}
 										style={{
-											margin: 0,
-											fontSize: 20,
-											borderBottom: '1px solid #f0f0f0',
-											paddingBottom: 12,
+											display: 'flex',
+											flexDirection: 'column',
+											gap: 24,
+											padding: 24,
+											borderRadius: 12,
+											border: '1px solid #f0f0f0',
 										}}
 									>
-										{info.name} {info.title}
-									</h2>
-									<TargetDemo />
+										<h2
+											style={{
+												margin: 0,
+												fontSize: 20,
+												borderBottom: '1px solid #f0f0f0',
+												paddingBottom: 12,
+											}}
+										>
+											{info.name} {info.title}
+										</h2>
+										<TargetDemo />
+									</section>
+								);
+							})
+						: demoComponentsMap[activeKey] && (
+								<section>
+									{(() => {
+										const TargetDemo = demoComponentsMap[activeKey].component;
+										return <TargetDemo />;
+									})()}
 								</section>
-							);
-						})
-					) : (
-						demoComponentsMap[activeKey] && (
-							<section>
-								{(() => {
-									const TargetDemo = demoComponentsMap[activeKey].component;
-									return <TargetDemo />;
-								})()}
-							</section>
-						)
-					)}
+							)}
 				</div>
 			</main>
 		</div>

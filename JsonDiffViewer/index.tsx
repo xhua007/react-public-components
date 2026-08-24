@@ -68,10 +68,10 @@ const JsonDiffViewer: React.FC<JsonDiffViewerProps> = ({
 					row.type === 'added'
 						? '+'
 						: row.type === 'removed'
-						? '-'
-						: row.type === 'modified'
-						? '~'
-						: ' ';
+							? '-'
+							: row.type === 'modified'
+								? '~'
+								: ' ';
 
 				return (
 					<div key={row.key} className={`rpc_json_diff_row rpc_json_diff_row_${row.type}`}>

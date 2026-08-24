@@ -50,25 +50,20 @@ export interface CountUpRef {
 
 // 默认 EaseOutExpo 缓动函数
 function easeOutExpo(t: number, b: number, c: number, d: number): number {
-	return t === d ? b + c : c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024 / 1023 + b;
+	return t === d ? b + c : (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b;
 }
 
 // 格式化数字字符串
-function formatNumber(
-	num: number,
-	decimals: number,
-	decimal: string,
-	separator: string,
-): string {
+function formatNumber(num: number, decimals: number, decimal: string, separator: string): string {
 	const fixed = Math.abs(num).toFixed(decimals);
 	const [intPart, decPart] = fixed.split('.');
 
-	const formattedInt = separator
-		? intPart.replace(/\B(?=(\d{3})+(?!\d))/g, separator)
-		: intPart;
+	const formattedInt = separator ? intPart.replace(/\B(?=(\d{3})+(?!\d))/g, separator) : intPart;
 
 	const sign = num < 0 ? '-' : '';
-	return decPart !== undefined ? `${sign}${formattedInt}${decimal}${decPart}` : `${sign}${formattedInt}`;
+	return decPart !== undefined
+		? `${sign}${formattedInt}${decimal}${decPart}`
+		: `${sign}${formattedInt}`;
 }
 
 const CountUp = forwardRef<CountUpRef, CountUpProps>(

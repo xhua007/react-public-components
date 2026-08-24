@@ -48,7 +48,7 @@ export default function MetricCardDemo() {
 						suffix="%"
 						trend="down"
 						trendValue="-0.04%"
-						chartData={[0.18, 0.15, 0.16, 0.12, 0.10, 0.08]}
+						chartData={[0.18, 0.15, 0.16, 0.12, 0.1, 0.08]}
 						chartColor="#ff4d4f"
 						footer="SLA 服务可用性保持在 99.98%"
 					/>

@@ -30,11 +30,7 @@ export default function DiffViewerDemo() {
 					1. 代码与文本 Diff 差异对比（支持分栏 Split 与行内 Unified 切换）
 				</h3>
 				<div style={{ maxWidth: 720 }}>
-					<DiffViewer
-						oldValue={oldConfigCode}
-						newValue={newConfigCode}
-						title="server.config.ts"
-					/>
+					<DiffViewer oldValue={oldConfigCode} newValue={newConfigCode} title="server.config.ts" />
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
 					纯原生轻量行级 LCS Diff 算法，零任何外部重型库依赖，清晰展示增删改行。

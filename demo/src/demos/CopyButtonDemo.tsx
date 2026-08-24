@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import CopyButton from '../../../CopyButton';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function CopyButtonDemo() {
 	const [copyCount, setCopyCount] = useState<number>(0);
@@ -45,7 +47,8 @@ export default function CopyButtonDemo() {
 					</div>
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
-					支持 `button`（常规与主色按钮）、`icon`（纯图标按钮）以及 `inline`（内联文字高亮）三种形态。
+					支持 `button`（常规与主色按钮）、`icon`（纯图标按钮）以及
+					`inline`（内联文字高亮）三种形态。
 				</p>
 			</div>
 
@@ -119,6 +122,79 @@ export default function CopyButtonDemo() {
 					可通过 `tooltip` 自定义气泡文字或禁用气泡，通过 `duration` 调整成功反馈高亮时长。
 				</p>
 			</div>
+
+			{/* 示例代码 */}
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet
+						language="typescript"
+						code={`import { CopyButton } from 'react-public-components';
+
+export default function App() {
+  return (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      {/* 按钮形态 */}
+      <CopyButton text="npm install react-public-components" type="primary">
+        复制安装命令
+      </CopyButton>
+
+      {/* 纯图标形态 */}
+      <CopyButton text="https://github.com/xhua007/react-public-components" mode="icon" />
+
+      {/* 行内文本形态 */}
+      <CopyButton text="ORDER_20260815_0099" mode="inline">
+        ORDER_20260815_0099
+      </CopyButton>
+    </div>
+  );
+}`}
+					/>
+				</div>
+			</div>
+
+			<ApiTable
+				data={[
+					{ name: 'text', desc: '静态复制目标文本', type: 'string', default: '-' },
+					{
+						name: 'getText',
+						desc: '动态/异步获取目标复制文本函数',
+						type: '() => string | Promise<string>',
+						default: '-',
+					},
+					{
+						name: 'mode',
+						desc: "复制展示形态：'button' 按钮 / 'icon' 纯图标 / 'inline' 行内文本",
+						type: "'button' | 'icon' | 'inline'",
+						default: "'button'",
+					},
+					{
+						name: 'type',
+						desc: "按钮类型（仅在 mode='button' 有效）：'default' | 'primary'",
+						type: "'default' | 'primary'",
+						default: "'default'",
+					},
+					{
+						name: 'tooltip',
+						desc: '复制成功后的 Tooltip 气泡提示配置（传 false 禁用）',
+						type: 'boolean | ReactNode',
+						default: 'true',
+					},
+					{
+						name: 'duration',
+						desc: '复制成功后高亮与勾选状态持续时间（毫秒）',
+						type: 'number',
+						default: '2000',
+					},
+					{ name: 'disabled', desc: '是否禁用复制按钮', type: 'boolean', default: 'false' },
+					{
+						name: 'onCopy',
+						desc: '成功复制到剪贴板后的回调函数',
+						type: '(text: string) => void',
+						default: '-',
+					},
+				]}
+			/>
 		</div>
 	);
 }

@@ -1,20 +1,90 @@
 .rpc_code_snippet {
-	background: #141414;
 	border-radius: 8px;
-	border: 1px solid #303030;
 	overflow: hidden;
-	font-family: monospace;
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		'Liberation Mono',
+		'Courier New',
+		monospace;
 	font-size: 13px;
 	box-sizing: border-box;
 	user-select: text;
+	transition: all 0.2s ease;
+
+	// 暗色主题（默认）
+	&_dark {
+		background: #141414;
+		border: 1px solid #303030;
+
+		.rpc_code_snippet_top_bar {
+			background: #1f1f1f;
+			border-bottom: 1px solid #303030;
+		}
+
+		.rpc_code_snippet_lang {
+			color: #8c8c8c;
+		}
+
+		.rpc_code_snippet_copy_btn {
+			color: #8c8c8c;
+
+			&:hover {
+				color: #ffffff;
+			}
+		}
+
+		.rpc_code_snippet_content {
+			color: #e6e6e6;
+		}
+
+		.rpc_code_snippet_line_no {
+			color: #595959;
+			border-right: 1px solid #303030;
+		}
+	}
+
+	// 亮色主题
+	&_light {
+		background: #ffffff;
+		border: 1px solid #e8e8e8;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+		.rpc_code_snippet_top_bar {
+			background: #fafafa;
+			border-bottom: 1px solid #e8e8e8;
+		}
+
+		.rpc_code_snippet_lang {
+			color: #595959;
+		}
+
+		.rpc_code_snippet_copy_btn {
+			color: #595959;
+
+			&:hover {
+				color: #1677ff;
+			}
+		}
+
+		.rpc_code_snippet_content {
+			color: #1f1f1f;
+		}
+
+		.rpc_code_snippet_line_no {
+			color: #bfbfbf;
+			border-right: 1px solid #f0f0f0;
+		}
+	}
 
 	&_top_bar {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding: 8px 12px;
-		background: #1f1f1f;
-		border-bottom: 1px solid #303030;
 		user-select: none;
 	}
 
@@ -28,35 +98,57 @@
 		height: 10px;
 		border-radius: 50%;
 
-		&_red { background: #ff5f56; }
-		&_yellow { background: #ffbd2e; }
-		&_green { background: #27c93f; }
+		&_red {
+			background: #ff5f56;
+		}
+		&_yellow {
+			background: #ffbd2e;
+		}
+		&_green {
+			background: #27c93f;
+		}
 	}
 
 	&_lang {
 		font-size: 11px;
-		color: #8c8c8c;
 		text-transform: uppercase;
 		font-weight: 600;
+		letter-spacing: 0.5px;
 	}
 
 	&_copy_btn {
 		background: none;
 		border: none;
-		color: #8c8c8c;
 		cursor: pointer;
 		font-size: 12px;
-		transition: color 0.15s;
+		padding: 2px 6px;
+		border-radius: 4px;
+		transition: all 0.15s;
+	}
 
-		&:hover {
-			color: #ffffff;
-		}
+	&_body {
+		display: flex;
+		overflow-x: auto;
+	}
+
+	&_line_numbers {
+		display: flex;
+		flex-direction: column;
+		padding: 12px 0;
+		user-select: none;
+		text-align: right;
+	}
+
+	&_line_no {
+		padding: 0 12px;
+		font-size: 12px;
+		line-height: 1.5;
 	}
 
 	&_content {
+		flex: 1;
 		padding: 12px 16px;
 		overflow-x: auto;
-		color: #e6e6e6;
 		line-height: 1.5;
 		margin: 0;
 	}

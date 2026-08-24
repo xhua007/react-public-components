@@ -16,12 +16,7 @@ export interface KanbanBoardProps<T> {
 	/** 自定义渲染单个卡片 */
 	renderCard: (item: T, columnId: string) => ReactNode;
 	/** 卡片拖拽移动完成回调 */
-	onCardMove?: (
-		cardId: string,
-		sourceColId: string,
-		targetColId: string,
-		newIndex: number,
-	) => void;
+	onCardMove?: (cardId: string, sourceColId: string, targetColId: string, newIndex: number) => void;
 	/** 自定义类名 */
 	className?: string;
 	/** 自定义样式 */
@@ -40,11 +35,7 @@ function KanbanBoard<T>({
 	const [sourceColumnId, setSourceColumnId] = useState<string | null>(null);
 	const [dragOverColumnId, setDragOverColumnId] = useState<string | null>(null);
 
-	const handleDragStart = (
-		e: React.DragEvent<HTMLDivElement>,
-		cardId: string,
-		colId: string,
-	) => {
+	const handleDragStart = (e: React.DragEvent<HTMLDivElement>, cardId: string, colId: string) => {
 		setDraggingCardId(cardId);
 		setSourceColumnId(colId);
 		e.dataTransfer.setData('text/plain', JSON.stringify({ cardId, colId }));
@@ -74,7 +65,8 @@ function KanbanBoard<T>({
 		if (!draggingCardId || !sourceColumnId) return;
 
 		const targetColumn = columns.find((c) => c.id === targetColId);
-		const newIdx = targetIndex !== undefined ? targetIndex : targetColumn ? targetColumn.items.length : 0;
+		const newIdx =
+			targetIndex !== undefined ? targetIndex : targetColumn ? targetColumn.items.length : 0;
 
 		onCardMove?.(draggingCardId, sourceColumnId, targetColId, newIdx);
 		handleDragEnd();
@@ -105,9 +97,7 @@ function KanbanBoard<T>({
 								)}
 								<span>{col.title}</span>
 							</div>
-							<span className="rpc_kanban_board_column_count">
-								{col.items.length}
-							</span>
+							<span className="rpc_kanban_board_column_count">{col.items.length}</span>
 						</div>
 
 						{/* 卡片列表 */}

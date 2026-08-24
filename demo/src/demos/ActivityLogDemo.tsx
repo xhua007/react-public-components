@@ -51,7 +51,15 @@ export default function ActivityLogDemo() {
 				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
 					1. 中后台操作审计日志 / 业务动态流（操作人头像 + 角色标签 + 时间线 + 详情折叠）
 				</h3>
-				<div style={{ maxWidth: 640, background: '#ffffff', border: '1px solid #f0f0f0', borderRadius: 8, padding: 20 }}>
+				<div
+					style={{
+						maxWidth: 640,
+						background: '#ffffff',
+						border: '1px solid #f0f0f0',
+						borderRadius: 8,
+						padding: 20,
+					}}
+				>
 					<ActivityLog items={logItems} />
 				</div>
 			</div>

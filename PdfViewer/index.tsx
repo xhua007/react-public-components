@@ -1,5 +1,10 @@
 import React, { useState, ReactNode, CSSProperties } from 'react';
-import { ZoomInOutlined, ZoomOutOutlined, RotateRightOutlined, DownloadOutlined } from '../src/icons';
+import {
+	ZoomInOutlined,
+	ZoomOutOutlined,
+	RotateRightOutlined,
+	DownloadOutlined,
+} from '../src/icons';
 import './index.less';
 
 export interface PdfViewerProps {
@@ -60,7 +65,12 @@ const PdfViewer: React.FC<PdfViewerProps> = ({
 						<ZoomInOutlined />
 					</button>
 
-					<button type="button" className="rpc_pdf_viewer_btn" onClick={handleRotate} title="顺时针旋转 90°">
+					<button
+						type="button"
+						className="rpc_pdf_viewer_btn"
+						onClick={handleRotate}
+						title="顺时针旋转 90°"
+					>
 						<RotateRightOutlined />
 					</button>
 

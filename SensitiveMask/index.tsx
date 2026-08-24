@@ -49,20 +49,35 @@ export function maskSensitiveText(
 			return raw.slice(0, 6) + maskSymbol.repeat(Math.max(1, raw.length - 10)) + raw.slice(-4);
 		case 'bankcard':
 			if (raw.length <= 8) return raw;
-			return raw.slice(0, 4) + ' ' + maskSymbol.repeat(4) + ' ' + maskSymbol.repeat(4) + ' ' + raw.slice(-4);
+			return (
+				raw.slice(0, 4) +
+				' ' +
+				maskSymbol.repeat(4) +
+				' ' +
+				maskSymbol.repeat(4) +
+				' ' +
+				raw.slice(-4)
+			);
 		case 'email': {
 			const atIndex = raw.indexOf('@');
 			if (atIndex <= 1) return raw;
 			const name = raw.slice(0, atIndex);
 			const domain = raw.slice(atIndex);
-			const maskedName = name[0] + maskSymbol.repeat(Math.max(1, name.length - 2)) + (name.length > 2 ? name.slice(-1) : '');
+			const maskedName =
+				name[0] +
+				maskSymbol.repeat(Math.max(1, name.length - 2)) +
+				(name.length > 2 ? name.slice(-1) : '');
 			return maskedName + domain;
 		}
 		case 'custom': {
 			const start = startCount !== undefined ? startCount : 2;
 			const end = endCount !== undefined ? endCount : 2;
 			if (raw.length <= start + end) return raw;
-			return raw.slice(0, start) + maskSymbol.repeat(Math.max(1, raw.length - start - end)) + raw.slice(-end);
+			return (
+				raw.slice(0, start) +
+				maskSymbol.repeat(Math.max(1, raw.length - start - end)) +
+				raw.slice(-end)
+			);
 		}
 		default:
 			return raw;
@@ -105,7 +120,11 @@ const SensitiveMask: React.FC<SensitiveMaskProps> = ({
 			<span className="rpc_sensitive_mask_text">{displayText}</span>
 
 			{toggleable && (
-				<span className="rpc_sensitive_mask_action_btn" onClick={handleToggle} title={masked ? '点击查看明文' : '点击隐藏'}>
+				<span
+					className="rpc_sensitive_mask_action_btn"
+					onClick={handleToggle}
+					title={masked ? '点击查看明文' : '点击隐藏'}
+				>
 					{masked ? <EyeOutlined /> : <EyeInvisibleOutlined />}
 				</span>
 			)}

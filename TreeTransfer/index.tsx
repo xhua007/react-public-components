@@ -111,11 +111,19 @@ const TreeTransfer: React.FC<TreeTransferProps> = ({
 			{/* 右侧平铺已选面板 */}
 			<div className="rpc_tree_transfer_panel">
 				<div className="rpc_tree_transfer_header">
-					<span>{targetTitle} ({targetKeys.length})</span>
+					<span>
+						{targetTitle} ({targetKeys.length})
+					</span>
 					{targetKeys.length > 0 && (
 						<button
 							type="button"
-							style={{ background: 'none', border: 'none', color: '#1677ff', cursor: 'pointer', fontSize: 12 }}
+							style={{
+								background: 'none',
+								border: 'none',
+								color: '#1677ff',
+								cursor: 'pointer',
+								fontSize: 12,
+							}}
 							onClick={() => triggerChange([])}
 						>
 							清空

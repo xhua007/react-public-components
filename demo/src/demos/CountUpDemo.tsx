@@ -69,7 +69,9 @@ export default function CountUpDemo() {
 
 			{/* 2. 命令式 Ref 控制 & 动态更新 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>2. 命令式 Ref 控制（重放 / 重置 / 动态更新）</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
+					2. 命令式 Ref 控制（重放 / 重置 / 动态更新）
+				</h3>
 				<div
 					style={{
 						background: '#fafafa',

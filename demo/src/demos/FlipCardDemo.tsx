@@ -87,9 +87,7 @@ export default function FlipCardDemo() {
 							>
 								<div>
 									<div style={{ fontSize: 12, opacity: 0.8 }}>CLICK TO FLIP</div>
-									<div style={{ fontSize: 18, fontWeight: 600, marginTop: 4 }}>
-										兑换券礼包卡
-									</div>
+									<div style={{ fontSize: 18, fontWeight: 600, marginTop: 4 }}>兑换券礼包卡</div>
 								</div>
 								<div style={{ fontSize: 12 }}>👆 点击垂直翻转至背面</div>
 							</div>

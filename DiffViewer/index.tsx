@@ -182,14 +182,22 @@ const DiffViewer: React.FC<DiffViewerProps> = ({
 										{/* 左侧旧版 */}
 										<td
 											className={`rpc_diff_viewer_gutter ${
-												isDel ? 'rpc_diff_viewer_row_removed' : isAdd ? 'rpc_diff_viewer_row_empty' : ''
+												isDel
+													? 'rpc_diff_viewer_row_removed'
+													: isAdd
+														? 'rpc_diff_viewer_row_empty'
+														: ''
 											}`}
 										>
 											{line.oldLineNumber || ''}
 										</td>
 										<td
 											className={`rpc_diff_viewer_code ${
-												isDel ? 'rpc_diff_viewer_row_removed' : isAdd ? 'rpc_diff_viewer_row_empty' : ''
+												isDel
+													? 'rpc_diff_viewer_row_removed'
+													: isAdd
+														? 'rpc_diff_viewer_row_empty'
+														: ''
 											}`}
 										>
 											{isDel || line.type === 'unchanged' ? line.text || ' ' : ''}
@@ -198,14 +206,22 @@ const DiffViewer: React.FC<DiffViewerProps> = ({
 										{/* 右侧新版 */}
 										<td
 											className={`rpc_diff_viewer_gutter ${
-												isAdd ? 'rpc_diff_viewer_row_added' : isDel ? 'rpc_diff_viewer_row_empty' : ''
+												isAdd
+													? 'rpc_diff_viewer_row_added'
+													: isDel
+														? 'rpc_diff_viewer_row_empty'
+														: ''
 											}`}
 										>
 											{line.newLineNumber || ''}
 										</td>
 										<td
 											className={`rpc_diff_viewer_code ${
-												isAdd ? 'rpc_diff_viewer_row_added' : isDel ? 'rpc_diff_viewer_row_empty' : ''
+												isAdd
+													? 'rpc_diff_viewer_row_added'
+													: isDel
+														? 'rpc_diff_viewer_row_empty'
+														: ''
 											}`}
 										>
 											{isAdd || line.type === 'unchanged' ? line.text || ' ' : ''}

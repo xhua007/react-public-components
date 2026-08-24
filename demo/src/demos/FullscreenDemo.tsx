@@ -1,6 +1,8 @@
 import { useState, useRef } from 'react';
 import Fullscreen, { FullscreenRef } from '../../../Fullscreen';
 import { FullscreenOutlined, FullscreenExitOutlined } from '../../../src/icons';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function FullscreenDemo() {
 	const [webFsActive, setWebFsActive] = useState<boolean>(false);
@@ -25,7 +27,13 @@ export default function FullscreenDemo() {
 									boxSizing: 'border-box',
 								}}
 							>
-								<h4 style={{ margin: '0 0 12px 0', fontSize: isFullscreen ? 22 : 18, color: '#1677ff' }}>
+								<h4
+									style={{
+										margin: '0 0 12px 0',
+										fontSize: isFullscreen ? 22 : 18,
+										color: '#1677ff',
+									}}
+								>
 									📊 销售业绩看板 (Analytics Dashboard)
 								</h4>
 								<p style={{ color: '#595959', lineHeight: 1.6, margin: '0 0 16px 0' }}>
@@ -41,19 +49,60 @@ export default function FullscreenDemo() {
 										maxWidth: isFullscreen ? 900 : '100%',
 									}}
 								>
-									<div style={{ background: '#f5f5f5', padding: isFullscreen ? 20 : 12, borderRadius: 8, textAlign: 'center' }}>
-										<div style={{ color: '#8c8c8c', fontSize: isFullscreen ? 14 : 12 }}>今日访问量</div>
-										<div style={{ fontSize: isFullscreen ? 26 : 20, fontWeight: 700, marginTop: 6 }}>12,840</div>
+									<div
+										style={{
+											background: '#f5f5f5',
+											padding: isFullscreen ? 20 : 12,
+											borderRadius: 8,
+											textAlign: 'center',
+										}}
+									>
+										<div style={{ color: '#8c8c8c', fontSize: isFullscreen ? 14 : 12 }}>
+											今日访问量
+										</div>
+										<div
+											style={{ fontSize: isFullscreen ? 26 : 20, fontWeight: 700, marginTop: 6 }}
+										>
+											12,840
+										</div>
 									</div>
-									<div style={{ background: '#f5f5f5', padding: isFullscreen ? 20 : 12, borderRadius: 8, textAlign: 'center' }}>
+									<div
+										style={{
+											background: '#f5f5f5',
+											padding: isFullscreen ? 20 : 12,
+											borderRadius: 8,
+											textAlign: 'center',
+										}}
+									>
 										<div style={{ color: '#8c8c8c', fontSize: isFullscreen ? 14 : 12 }}>转化率</div>
-										<div style={{ fontSize: isFullscreen ? 26 : 20, fontWeight: 700, color: '#52c41a', marginTop: 6 }}>
+										<div
+											style={{
+												fontSize: isFullscreen ? 26 : 20,
+												fontWeight: 700,
+												color: '#52c41a',
+												marginTop: 6,
+											}}
+										>
 											4.68%
 										</div>
 									</div>
-									<div style={{ background: '#f5f5f5', padding: isFullscreen ? 20 : 12, borderRadius: 8, textAlign: 'center' }}>
+									<div
+										style={{
+											background: '#f5f5f5',
+											padding: isFullscreen ? 20 : 12,
+											borderRadius: 8,
+											textAlign: 'center',
+										}}
+									>
 										<div style={{ color: '#8c8c8c', fontSize: isFullscreen ? 14 : 12 }}>客单价</div>
-										<div style={{ fontSize: isFullscreen ? 26 : 20, fontWeight: 700, color: '#1677ff', marginTop: 6 }}>
+										<div
+											style={{
+												fontSize: isFullscreen ? 26 : 20,
+												fontWeight: 700,
+												color: '#1677ff',
+												marginTop: 6,
+											}}
+										>
 											¥ 389.0
 										</div>
 									</div>
@@ -71,11 +120,7 @@ export default function FullscreenDemo() {
 			<div>
 				<h3 style={{ fontSize: 16, marginBottom: 12 }}>2. 网页内全屏/最大化模式 (mode="web")</h3>
 				<div style={{ maxWidth: 640 }}>
-					<Fullscreen
-						mode="web"
-						fullscreen={webFsActive}
-						onChange={(val) => setWebFsActive(val)}
-					>
+					<Fullscreen mode="web" fullscreen={webFsActive} onChange={(val) => setWebFsActive(val)}>
 						<div
 							style={{
 								background: webFsActive ? '#ffffff' : '#fafafa',
@@ -125,7 +170,9 @@ export default function FullscreenDemo() {
 									lineHeight: 1.6,
 								}}
 							>
-								<span style={{ color: '#6a9955' }}>// 网页内全屏不会黑屏遮挡，直接在当前页面置顶铺满</span>
+								<span style={{ color: '#6a9955' }}>
+									// 网页内全屏不会黑屏遮挡，直接在当前页面置顶铺满
+								</span>
 								<br />
 								<span style={{ color: '#569cd6' }}>const</span> app = express();
 								<br />
@@ -137,7 +184,8 @@ export default function FullscreenDemo() {
 					</Fullscreen>
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
-					`mode="web"` 在当前浏览器页面内通过 fixed 置顶占满屏幕，非常适合嵌入 iframe、内部富文本或编辑器。
+					`mode="web"` 在当前浏览器页面内通过 fixed 置顶占满屏幕，非常适合嵌入
+					iframe、内部富文本或编辑器。
 				</p>
 			</div>
 
@@ -163,7 +211,13 @@ export default function FullscreenDemo() {
 									<div style={{ fontSize: 16, fontWeight: 600 }}>
 										状态：{isFullscreen ? '沉浸全屏模式中 🌙' : '普通窗口模式 ☀️'}
 									</div>
-									<div style={{ fontSize: 13, color: isFullscreen ? '#8c8c8c' : '#595959', marginTop: 4 }}>
+									<div
+										style={{
+											fontSize: 13,
+											color: isFullscreen ? '#8c8c8c' : '#595959',
+											marginTop: 4,
+										}}
+									>
 										通过 children 接收 isFullscreen 状态与 toggle 方法
 									</div>
 								</div>
@@ -187,6 +241,74 @@ export default function FullscreenDemo() {
 					</Fullscreen>
 				</div>
 			</div>
+
+			{/* 示例代码 */}
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet
+						language="typescript"
+						code={`import { Fullscreen } from 'react-public-components';
+
+export default function App() {
+  return (
+    <Fullscreen mode="web">
+      {({ isFullscreen, toggle }) => (
+        <div style={{ height: 320, padding: 24, background: '#f5f5f5', borderRadius: 8 }}>
+          <h3>数据可视化看板</h3>
+          <button onClick={toggle}>
+            {isFullscreen ? '退出网页最大化' : '网页全屏最大化'}
+          </button>
+        </div>
+      )}
+    </Fullscreen>
+  );
+}`}
+					/>
+				</div>
+			</div>
+
+			<ApiTable
+				data={[
+					{
+						name: 'mode',
+						desc: "全屏模式：'browser' 浏览器原生全屏 / 'web' 网页内最大化置顶",
+						type: "'browser' | 'web'",
+						default: "'browser'",
+					},
+					{
+						name: 'showButton',
+						desc: '是否在容器角落显示快捷悬浮全屏切换按钮',
+						type: 'boolean',
+						default: 'false',
+					},
+					{
+						name: 'buttonPosition',
+						desc: "悬浮按钮位置：'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'",
+						type: 'string',
+						default: "'top-right'",
+					},
+					{
+						name: 'target',
+						desc: '自定义目标全屏元素（若不传默认全屏当前容器）',
+						type: 'HTMLElement | (() => HTMLElement | null)',
+						default: '-',
+					},
+					{ name: 'fullscreen', desc: '受控全屏状态', type: 'boolean', default: '-' },
+					{
+						name: 'onChange',
+						desc: '全屏状态发生改变时的回调',
+						type: '(isFullscreen: boolean) => void',
+						default: '-',
+					},
+					{
+						name: 'children',
+						desc: '子元素或 Render Props 函数，接收 isFullscreen, enter, exit, toggle',
+						type: 'ReactNode | ((props) => ReactNode)',
+						default: '-',
+					},
+				]}
+			/>
 		</div>
 	);
 }

@@ -46,9 +46,7 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
 	style,
 }) => {
 	const expandConfig = typeof expandable === 'object' ? expandable : {};
-	const [expanded, setExpanded] = useState<boolean>(
-		expandConfig.defaultExpanded ?? false,
-	);
+	const [expanded, setExpanded] = useState<boolean>(expandConfig.defaultExpanded ?? false);
 	const [isOverflow, setIsOverflow] = useState<boolean>(false);
 	const [isHovered, setIsHovered] = useState<boolean>(false);
 	const textRef = useRef<HTMLDivElement>(null);
@@ -80,14 +78,18 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
 	};
 
 	// 提取纯文本用于复制和默认 Tooltip
-	const rawText = typeof children === 'string' || typeof children === 'number' ? String(children) : '';
+	const rawText =
+		typeof children === 'string' || typeof children === 'number' ? String(children) : '';
 
 	// 判断是否展示 Tooltip
 	const shouldShowTooltip =
 		!expanded &&
-		(tooltip === true || (tooltip === 'auto' && isOverflow) || (typeof tooltip === 'string' && tooltip.length > 0));
+		(tooltip === true ||
+			(tooltip === 'auto' && isOverflow) ||
+			(typeof tooltip === 'string' && tooltip.length > 0));
 
-	const tooltipText = typeof tooltip === 'string' || React.isValidElement(tooltip) ? tooltip : rawText;
+	const tooltipText =
+		typeof tooltip === 'string' || React.isValidElement(tooltip) ? tooltip : rawText;
 
 	const collapsedBtnText = expandConfig.collapsedText ?? '展开';
 	const expandedBtnText = expandConfig.expandedText ?? '收起';

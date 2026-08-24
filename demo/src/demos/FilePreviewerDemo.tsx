@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import FilePreviewer, { FileItem } from '../../../FilePreviewer';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function FilePreviewerDemo() {
 	const [activeFile, setActiveFile] = useState<FileItem | null>(null);
@@ -47,7 +49,9 @@ export default function FilePreviewerDemo() {
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			{/* 1. 声明式多格式文件列表预览 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>1. 多格式文件统一弹窗预览 (FilePreviewer)</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
+					1. 多格式文件统一弹窗预览 (FilePreviewer)
+				</h3>
 				<div
 					style={{
 						display: 'grid',
@@ -106,13 +110,16 @@ export default function FilePreviewerDemo() {
 					onCancel={() => setActiveFile(null)}
 				/>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
-					点击任意卡片即可弹出对应格式的专用预览器（图片缩放/旋转、音视频播放、PDF 渲染、文本排版或通用兜底）。
+					点击任意卡片即可弹出对应格式的专用预览器（图片缩放/旋转、音视频播放、PDF
+					渲染、文本排版或通用兜底）。
 				</p>
 			</div>
 
 			{/* 2. 命令式调用方法 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>2. 命令式单行调用 FilePreviewer.preview(...)</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
+					2. 命令式单行调用 FilePreviewer.preview(...)
+				</h3>
 				<button
 					onClick={() => {
 						FilePreviewer.preview({
@@ -134,6 +141,68 @@ export default function FilePreviewerDemo() {
 					通过 JavaScript 函数直接唤起预览
 				</button>
 			</div>
+
+			{/* 示例代码 */}
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 720 }}>
+					<CodeSnippet
+						language="typescript"
+						code={`import { useState } from 'react';
+import { FilePreviewer } from 'react-public-components';
+
+export default function App() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>预览文件</button>
+      <FilePreviewer
+        open={open}
+        file={{
+          url: 'https://example.com/demo.pdf',
+          name: '产品说明书.pdf',
+          size: '2.4 MB',
+        }}
+        onCancel={() => setOpen(false)}
+      />
+    </>
+  );
+}`}
+					/>
+				</div>
+			</div>
+
+			<ApiTable
+				data={[
+					{ name: 'open', desc: '是否打开预览弹窗', type: 'boolean', required: true },
+					{
+						name: 'file',
+						desc: '当前预览的文件对象或 URL 字符串（支持图片、音视频、PDF、文本、压缩包等）',
+						type: 'FileItem | string | null',
+						required: true,
+					},
+					{ name: 'onCancel', desc: '点击关闭/取消按钮时的回调', type: '() => void', default: '-' },
+					{
+						name: 'onDownload',
+						desc: '自定义下载回调处理函数',
+						type: '(file: FileItem) => void',
+						default: '默认浏览器下载',
+					},
+					{
+						name: 'extraActions',
+						desc: '弹窗标题栏右侧自定义额外操作区节点',
+						type: 'ReactNode',
+						default: '-',
+					},
+					{
+						name: 'FilePreviewer.preview(...)',
+						desc: '静态命令式调用方法，支持直接通过 JS 函数唤起独立预览弹窗',
+						type: '(file: FileItem | string) => void',
+						default: '-',
+					},
+				]}
+			/>
 		</div>
 	);
 }

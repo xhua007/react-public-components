@@ -10,9 +10,7 @@ export default function GradientTextDemo() {
 
 				<div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
 					<div style={{ fontSize: 32 }}>
-						<GradientText>
-							打造下一代企业级 Web 公共组件库
-						</GradientText>
+						<GradientText>打造下一代企业级 Web 公共组件库</GradientText>
 					</div>
 
 					<div style={{ fontSize: 24 }}>

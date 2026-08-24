@@ -21,8 +21,17 @@ export default function ImageCropperDemo() {
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			{/* 1. 内联裁剪器与实时预览 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>1. 内嵌图片裁剪器 (4:3 比例 / 滚轮缩放 / 拖拽)</h3>
-				<div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 24, alignItems: 'start' }}>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
+					1. 内嵌图片裁剪器 (4:3 比例 / 滚轮缩放 / 拖拽)
+				</h3>
+				<div
+					style={{
+						display: 'grid',
+						gridTemplateColumns: '1.4fr 1fr',
+						gap: 24,
+						alignItems: 'start',
+					}}
+				>
 					<div>
 						<ImageCropper
 							ref={cropperRef}
@@ -61,7 +70,9 @@ export default function ImageCropperDemo() {
 							justifyContent: 'center',
 						}}
 					>
-						<div style={{ fontSize: 13, color: '#8c8c8c', marginBottom: 12 }}>实时裁剪生成结果：</div>
+						<div style={{ fontSize: 13, color: '#8c8c8c', marginBottom: 12 }}>
+							实时裁剪生成结果：
+						</div>
 						{croppedResult ? (
 							<div style={{ textAlign: 'center' }}>
 								<img
@@ -91,7 +102,9 @@ export default function ImageCropperDemo() {
 
 			{/* 2. Modal 弹窗头像裁剪模式 (1:1 圆形裁剪) */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>2. Modal 头像圆形裁剪弹窗 (shape="round")</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
+					2. Modal 头像圆形裁剪弹窗 (shape="round")
+				</h3>
 				<div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
 					<button
 						onClick={() => setModalOpen(true)}

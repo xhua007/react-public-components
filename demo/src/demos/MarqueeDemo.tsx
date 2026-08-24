@@ -58,7 +58,9 @@ export default function MarqueeDemo() {
 
 			{/* 2. 反向滚动与广播条 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>2. 广播通知条（反向流动 direction="right"）</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
+					2. 广播通知条（反向流动 direction="right"）
+				</h3>
 				<div
 					style={{
 						background: '#fffbe6',

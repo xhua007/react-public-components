@@ -132,10 +132,7 @@ const PasswordStrength: React.FC<PasswordStrengthProps> = ({
 			{showText && (
 				<div className="rpc_password_strength_label">
 					<span>密码安全性</span>
-					<span
-						className="rpc_password_strength_level_text"
-						style={{ color: currentInfo.color }}
-					>
+					<span className="rpc_password_strength_level_text" style={{ color: currentInfo.color }}>
 						{password ? currentInfo.text : '未输入密码'}
 					</span>
 				</div>

@@ -43,10 +43,7 @@ export default function NumericRangeInputDemo() {
 						max={120}
 					/>
 
-					<NumericRangeInput
-						defaultValue={[50, 20]}
-						suffix="人"
-					/>
+					<NumericRangeInput defaultValue={[50, 20]} suffix="人" />
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
 					当最小值大于最大值时（如右侧 50 ~ 20），外边框自动高亮红色警告。

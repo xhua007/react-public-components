@@ -204,29 +204,26 @@ const ColorPicker = (props: ColorPickerProps) => {
 	}, [isOpen, handleOpenChange]);
 
 	// SV 画板拖拽逻辑
-	const handlePaletteDrag = useCallback(
-		(e: MouseEvent | ReactMouseEvent) => {
-			if (!paletteRef.current) return;
-			const rect = paletteRef.current.getBoundingClientRect();
-			const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
-			const y = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+	const handlePaletteDrag = useCallback((e: MouseEvent | ReactMouseEvent) => {
+		if (!paletteRef.current) return;
+		const rect = paletteRef.current.getBoundingClientRect();
+		const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+		const y = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
 
-			const s = Math.round((x / rect.width) * 100);
-			const b = Math.round((1 - y / rect.height) * 100);
+		const s = Math.round((x / rect.width) * 100);
+		const b = Math.round((1 - y / rect.height) * 100);
 
-			const curr = currentColorRef.current;
-			const targetAlpha = curr.a === 0 ? 1 : curr.a;
+		const curr = currentColorRef.current;
+		const targetAlpha = curr.a === 0 ? 1 : curr.a;
 
-			const newColor = new Color({
-				h: curr.h,
-				s,
-				b,
-				a: targetAlpha,
-			});
-			updateColorRef.current(newColor);
-		},
-		[],
-	);
+		const newColor = new Color({
+			h: curr.h,
+			s,
+			b,
+			a: targetAlpha,
+		});
+		updateColorRef.current(newColor);
+	}, []);
 
 	const handlePaletteMouseDown = (e: ReactMouseEvent) => {
 		e.preventDefault();
@@ -253,26 +250,23 @@ const ColorPicker = (props: ColorPickerProps) => {
 	};
 
 	// Hue 拖拽逻辑
-	const handleHueDrag = useCallback(
-		(e: MouseEvent | ReactMouseEvent) => {
-			if (!hueSliderRef.current) return;
-			const rect = hueSliderRef.current.getBoundingClientRect();
-			const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
-			const h = Math.round((x / rect.width) * 360);
+	const handleHueDrag = useCallback((e: MouseEvent | ReactMouseEvent) => {
+		if (!hueSliderRef.current) return;
+		const rect = hueSliderRef.current.getBoundingClientRect();
+		const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+		const h = Math.round((x / rect.width) * 360);
 
-			const curr = currentColorRef.current;
-			const targetAlpha = curr.a === 0 ? 1 : curr.a;
+		const curr = currentColorRef.current;
+		const targetAlpha = curr.a === 0 ? 1 : curr.a;
 
-			const newColor = new Color({
-				h: h === 360 ? 0 : h,
-				s: curr.s,
-				b: curr.b,
-				a: targetAlpha,
-			});
-			updateColorRef.current(newColor);
-		},
-		[],
-	);
+		const newColor = new Color({
+			h: h === 360 ? 0 : h,
+			s: curr.s,
+			b: curr.b,
+			a: targetAlpha,
+		});
+		updateColorRef.current(newColor);
+	}, []);
 
 	const handleHueMouseDown = (e: ReactMouseEvent) => {
 		e.preventDefault();
@@ -293,25 +287,22 @@ const ColorPicker = (props: ColorPickerProps) => {
 	};
 
 	// Alpha 拖拽逻辑
-	const handleAlphaDrag = useCallback(
-		(e: MouseEvent | ReactMouseEvent) => {
-			if (!alphaSliderRef.current) return;
-			const rect = alphaSliderRef.current.getBoundingClientRect();
-			const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
-			const a = Number((x / rect.width).toFixed(2));
+	const handleAlphaDrag = useCallback((e: MouseEvent | ReactMouseEvent) => {
+		if (!alphaSliderRef.current) return;
+		const rect = alphaSliderRef.current.getBoundingClientRect();
+		const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+		const a = Number((x / rect.width).toFixed(2));
 
-			const curr = currentColorRef.current;
+		const curr = currentColorRef.current;
 
-			const newColor = new Color({
-				h: curr.h,
-				s: curr.s,
-				b: curr.b,
-				a,
-			});
-			updateColorRef.current(newColor);
-		},
-		[],
-	);
+		const newColor = new Color({
+			h: curr.h,
+			s: curr.s,
+			b: curr.b,
+			a,
+		});
+		updateColorRef.current(newColor);
+	}, []);
 
 	const handleAlphaMouseDown = (e: ReactMouseEvent) => {
 		e.preventDefault();
@@ -437,7 +428,15 @@ const ColorPicker = (props: ColorPickerProps) => {
 								title="清除颜色"
 							>
 								<svg viewBox="0 0 24 24" width="14" height="14" fill="none">
-									<line x1="4" y1="4" x2="20" y2="20" stroke="#ff4d4f" strokeWidth="2.5" strokeLinecap="round" />
+									<line
+										x1="4"
+										y1="4"
+										x2="20"
+										y2="20"
+										stroke="#ff4d4f"
+										strokeWidth="2.5"
+										strokeLinecap="round"
+									/>
 								</svg>
 							</div>
 						)}

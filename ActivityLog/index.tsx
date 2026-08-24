@@ -65,10 +65,7 @@ const ActivityLogItem: React.FC<{ item: ActivityItem }> = ({ item }) => {
 
 				{item.detail && (
 					<>
-						<span
-							className="rpc_activity_log_toggle_btn"
-							onClick={() => setExpanded(!expanded)}
-						>
+						<span className="rpc_activity_log_toggle_btn" onClick={() => setExpanded(!expanded)}>
 							{expanded ? '收起详情 ▲' : '查看变动详情 ▼'}
 						</span>
 

@@ -164,14 +164,7 @@ export const LoadingOutlined = ({ style, className }: IconProps) => (
 		<style>
 			{`@keyframes rpc-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}
 		</style>
-		<circle
-			cx="512"
-			cy="512"
-			r="380"
-			stroke="currentColor"
-			strokeWidth="96"
-			strokeOpacity="0.2"
-		/>
+		<circle cx="512" cy="512" r="380" stroke="currentColor" strokeWidth="96" strokeOpacity="0.2" />
 		<path
 			d="M512 132c209.9 0 380 170.1 380 380"
 			stroke="currentColor"
@@ -497,7 +490,11 @@ export const FileTextOutlined = ({ style, className }: IconProps) => (
 	</svg>
 );
 
-export const EyeOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const EyeOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -514,7 +511,11 @@ export const EyeOutlined = ({ style, className, onClick }: IconProps & { onClick
 	</svg>
 );
 
-export const EyeInvisibleOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const EyeInvisibleOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -531,7 +532,11 @@ export const EyeInvisibleOutlined = ({ style, className, onClick }: IconProps & 
 	</svg>
 );
 
-export const PlayCircleOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const PlayCircleOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -548,7 +553,11 @@ export const PlayCircleOutlined = ({ style, className, onClick }: IconProps & { 
 	</svg>
 );
 
-export const PauseCircleOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const PauseCircleOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -565,7 +574,11 @@ export const PauseCircleOutlined = ({ style, className, onClick }: IconProps & {
 	</svg>
 );
 
-export const UndoOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const UndoOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -582,7 +595,11 @@ export const UndoOutlined = ({ style, className, onClick }: IconProps & { onClic
 	</svg>
 );
 
-export const RedoOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const RedoOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -599,7 +616,11 @@ export const RedoOutlined = ({ style, className, onClick }: IconProps & { onClic
 	</svg>
 );
 
-export const ReloadOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const ReloadOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -632,7 +653,11 @@ export const SoundOutlined = ({ style, className }: IconProps) => (
 	</svg>
 );
 
-export const SendOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const SendOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -649,7 +674,11 @@ export const SendOutlined = ({ style, className, onClick }: IconProps & { onClic
 	</svg>
 );
 
-export const LikeOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const LikeOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -666,7 +695,11 @@ export const LikeOutlined = ({ style, className, onClick }: IconProps & { onClic
 	</svg>
 );
 
-export const DislikeOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const DislikeOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -683,7 +716,11 @@ export const DislikeOutlined = ({ style, className, onClick }: IconProps & { onC
 	</svg>
 );
 
-export const StarFilled = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const StarFilled = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -699,11 +736,3 @@ export const StarFilled = ({ style, className, onClick }: IconProps & { onClick?
 		<path d="M908.1 353.1l-253.9-36.9L540.7 86.6c-9.7-19.7-37.7-19.7-47.4 0L379.8 316.2l-253.9 36.9c-21.9 3.2-30.6 30-14.7 45.5l183.7 179-43.4 252.9c-3.7 21.8 19.1 38.4 38.8 28.1L512 740l221.7 116.6c19.7 10.4 42.5-6.3 38.8-28.1l-43.4-252.9 183.7-179c15.9-15.5 7.2-42.3-14.7-45.5z" />
 	</svg>
 );
-
-
-
-
-
-
-
-

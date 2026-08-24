@@ -48,9 +48,7 @@ const TrendIndicator: React.FC<TrendIndicatorProps> = ({
 			className={`rpc_trend_indicator rpc_trend_indicator_${type} rpc_trend_indicator_${statusClass} ${className}`}
 			style={style}
 		>
-			<span className="rpc_trend_indicator_arrow">
-				{isZero ? '—' : isPositive ? '▲' : '▼'}
-			</span>
+			<span className="rpc_trend_indicator_arrow">{isZero ? '—' : isPositive ? '▲' : '▼'}</span>
 			<span>
 				{prefix}
 				{sign}

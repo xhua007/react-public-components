@@ -12,13 +12,7 @@ export default function NumberStepperDemo() {
 				</h3>
 
 				<div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-					<NumberStepper
-						value={val}
-						min={1}
-						max={50}
-						step={1}
-						onChange={(v) => setVal(v)}
-					/>
+					<NumberStepper value={val} min={1} max={50} step={1} onChange={(v) => setVal(v)} />
 
 					<div style={{ fontSize: 13, color: '#595959' }}>
 						当前值：<b style={{ color: '#1677ff' }}>{val}</b> (可按住 + 或 - 体验长按极速步进)

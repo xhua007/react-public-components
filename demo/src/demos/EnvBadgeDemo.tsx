@@ -12,10 +12,18 @@ export default function EnvBadgeDemo() {
 				</h3>
 
 				<div style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
-					<button type="button" onClick={() => setEnv('dev')}>切换至 DEV (开发)</button>
-					<button type="button" onClick={() => setEnv('uat')}>切换至 UAT (验收)</button>
-					<button type="button" onClick={() => setEnv('staging')}>切换至 STAGING (预发)</button>
-					<button type="button" onClick={() => setEnv('prod')}>切换至 PROD (生产报警)</button>
+					<button type="button" onClick={() => setEnv('dev')}>
+						切换至 DEV (开发)
+					</button>
+					<button type="button" onClick={() => setEnv('uat')}>
+						切换至 UAT (验收)
+					</button>
+					<button type="button" onClick={() => setEnv('staging')}>
+						切换至 STAGING (预发)
+					</button>
+					<button type="button" onClick={() => setEnv('prod')}>
+						切换至 PROD (生产报警)
+					</button>
 				</div>
 
 				<div
@@ -30,7 +38,8 @@ export default function EnvBadgeDemo() {
 					}}
 				>
 					<p style={{ color: '#595959', fontSize: 14 }}>
-						👉 查看当前模拟容器右上角的动态悬浮标签，点击可展开 Git Commit、构建时间、版本号及多环境一键切换。
+						👉 查看当前模拟容器右上角的动态悬浮标签，点击可展开 Git
+						Commit、构建时间、版本号及多环境一键切换。
 					</p>
 
 					<EnvBadge

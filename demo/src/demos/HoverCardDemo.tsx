@@ -42,8 +42,12 @@ export default function HoverCardDemo() {
 								</div>
 
 								<div style={{ display: 'flex', gap: 16, fontSize: 12, color: '#8c8c8c' }}>
-									<span><b>1.2k</b> 关注者</span>
-									<span><b>98</b> 开源库</span>
+									<span>
+										<b>1.2k</b> 关注者
+									</span>
+									<span>
+										<b>98</b> 开源库
+									</span>
 								</div>
 							</div>
 						}

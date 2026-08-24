@@ -49,7 +49,14 @@ export default function SensitiveMaskDemo() {
 			<div>
 				<h3 style={{ fontSize: 16, marginBottom: 12 }}>2. 自定义脱敏区间 & 异步鉴权拦截</h3>
 				<div style={{ maxWidth: 520 }}>
-					<div style={{ background: '#fafafa', padding: '12px 16px', borderRadius: 6, border: '1px solid #f0f0f0' }}>
+					<div
+						style={{
+							background: '#fafafa',
+							padding: '12px 16px',
+							borderRadius: 6,
+							border: '1px solid #f0f0f0',
+						}}
+					>
 						<span style={{ color: '#8c8c8c', marginRight: 12 }}>API 访问密钥 (前4后4)：</span>
 						<SensitiveMask
 							text="api_key_sample_98374981273948719283471"
@@ -59,7 +66,9 @@ export default function SensitiveMaskDemo() {
 							onToggle={async (nextMasked) => {
 								if (!nextMasked) {
 									// 模拟查看明文时的密码或权限二次确认
-									const ok = window.confirm('安全提示：您正在尝试查看核心 API Key 明文，是否确认？');
+									const ok = window.confirm(
+										'安全提示：您正在尝试查看核心 API Key 明文，是否确认？',
+									);
 									return ok;
 								}
 								return true;

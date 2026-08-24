@@ -93,9 +93,7 @@ export const ScrollTracker: React.FC<ScrollTrackerProps> = ({
 					background: backgroundStyle,
 				}}
 			/>
-			{showPercentage && (
-				<span className="rpc_scroll_tracker_percentage">{percent}%</span>
-			)}
+			{showPercentage && <span className="rpc_scroll_tracker_percentage">{percent}%</span>}
 		</div>
 	);
 };

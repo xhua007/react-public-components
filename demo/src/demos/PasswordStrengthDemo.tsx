@@ -35,7 +35,9 @@ export default function PasswordStrengthDemo() {
 
 			{/* 2. 包含规则清单列表 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>2. 带有密码规则实时 Checklist (showRules)</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
+					2. 带有密码规则实时 Checklist (showRules)
+				</h3>
 				<div style={{ maxWidth: 400 }}>
 					<PasswordStrength password={password} showText showRules />
 				</div>

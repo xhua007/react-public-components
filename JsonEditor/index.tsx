@@ -143,10 +143,7 @@ const JsonEditor: React.FC<JsonEditorProps> = ({
 	}, [text]);
 
 	return (
-		<div
-			className={`rpc_json_editor ${className}`}
-			style={{ height, ...style }}
-		>
+		<div className={`rpc_json_editor ${className}`} style={{ height, ...style }}>
 			{/* 顶部工具栏 */}
 			{showToolbar && (
 				<div className="rpc_json_editor_toolbar">
@@ -206,12 +203,12 @@ const JsonEditor: React.FC<JsonEditorProps> = ({
 
 			{/* 底部状态栏 */}
 			<div
-				className={`rpc_json_editor_status_bar ${
-					error ? 'rpc_json_editor_status_bar_error' : ''
-				}`}
+				className={`rpc_json_editor_status_bar ${error ? 'rpc_json_editor_status_bar_error' : ''}`}
 			>
 				<span>{error ? `⚠️ ${error}` : '✓ JSON 格式有效'}</span>
-				<span>{lineCount} 行 · {text.length} 字符</span>
+				<span>
+					{lineCount} 行 · {text.length} 字符
+				</span>
 			</div>
 		</div>
 	);

@@ -1,7 +1,8 @@
 import React, { useState, CSSProperties } from 'react';
 import './index.less';
 
-export type DateShortcutKey = 'today' | 'yesterday' | '7days' | '30days' | 'thisMonth' | 'lastMonth';
+export type DateShortcutKey =
+	'today' | 'yesterday' | '7days' | '30days' | 'thisMonth' | 'lastMonth';
 
 export interface ShortcutItem {
 	key: string;

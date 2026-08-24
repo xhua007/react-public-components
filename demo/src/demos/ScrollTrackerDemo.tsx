@@ -10,9 +10,7 @@ export default function ScrollTrackerDemo() {
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			{/* 1. 局部滚动容器进度追踪 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
-					1. 局部容器阅读进度条 (ScrollTracker)
-				</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>1. 局部容器阅读进度条 (ScrollTracker)</h3>
 				<div style={{ maxWidth: 640 }}>
 					<div
 						style={{
@@ -48,15 +46,16 @@ export default function ScrollTrackerDemo() {
 								关于 React Public Components 组件库
 							</h4>
 							<p>
-								这是一个专为中后台及现代 Web 开发打造的 React 公共组件库。它致力于补充主流 UI
-								库（如 Ant Design 等）所未提供的高频实用组件，提供开箱即用、零第三方 UI
+								这是一个专为中后台及现代 Web 开发打造的 React 公共组件库。它致力于补充主流 UI 库（如
+								Ant Design 等）所未提供的高频实用组件，提供开箱即用、零第三方 UI
 								库依赖的轻量级解决方案。
 							</p>
 							<p>
 								组件库内置了诸如折叠容器（CollapseBox）、分屏面板（Splitter）、边框流光（BorderBeam）、颜色选择器（ColorPicker）、瀑布流布局（Masonry）、禁用遮罩（DisabledBox）、一键复制（CopyButton）、智能文本截断（TextEllipsis）、防抖异步选择框（DebounceSelect）、平滑数字滚动（CountUp）、右键菜单（ContextMenu）、全屏容器（Fullscreen）、图片裁剪（ImageCropper）、滚动指示器与吸顶组件（ScrollTracker/StickyHeader）、多格式文件预览（FilePreviewer）以及底部悬浮操作栏（FloatingActionBar）等。
 							</p>
 							<p>
-								所有组件均拥有精心调校的设计美感，提供顺畅的微交互动效与严苛的 TypeScript 类型定义，助您轻松构建现代化 Web 应用。
+								所有组件均拥有精心调校的设计美感，提供顺畅的微交互动效与严苛的 TypeScript
+								类型定义，助您轻松构建现代化 Web 应用。
 							</p>
 						</div>
 					</div>

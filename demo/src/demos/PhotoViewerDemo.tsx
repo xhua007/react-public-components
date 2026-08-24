@@ -36,7 +36,8 @@ export default function PhotoViewerDemo() {
 				</div>
 
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 12 }}>
-					💡 支持按键盘左右方向键（<code>←</code> / <code>→</code>）无缝切图，底部缩略图悬浮平滑响应并带有蓝色发光光晕。
+					💡 支持按键盘左右方向键（<code>←</code> / <code>→</code>
+					）无缝切图，底部缩略图悬浮平滑响应并带有蓝色发光光晕。
 				</p>
 			</div>
 		</div>

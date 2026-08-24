@@ -48,9 +48,7 @@ const Marquee: React.FC<MarqueeProps> = ({
 	useEffect(() => {
 		const calculateDuration = () => {
 			if (!contentRef.current) return;
-			const size = isVertical
-				? contentRef.current.clientHeight
-				: contentRef.current.clientWidth;
+			const size = isVertical ? contentRef.current.clientHeight : contentRef.current.clientWidth;
 
 			if (size > 0 && speed > 0) {
 				setDuration(size / speed);

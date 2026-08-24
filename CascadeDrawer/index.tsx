@@ -4,7 +4,7 @@ import './index.less';
 export interface CascadeLevel {
 	id: string;
 	title: string;
-	content: ReactNode;
+	content: ReactNode | ((pushLevel: (level: CascadeLevel) => void) => ReactNode);
 }
 
 export interface CascadeDrawerProps {

@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import ContextMenu, { ContextMenuItem } from '../../../ContextMenu';
-import {
-	CopyOutlined,
-	EditOutlined,
-	DeleteOutlined,
-	ShareAltOutlined,
-} from '../../../src/icons';
+import { CopyOutlined, EditOutlined, DeleteOutlined, ShareAltOutlined } from '../../../src/icons';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function ContextMenuDemo() {
 	const [lastAction, setLastAction] = useState<string>('暂无操作');
@@ -72,7 +69,9 @@ export default function ContextMenuDemo() {
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			{/* 1. 基础右键菜单 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>1. 基础右键区域（包含图标、快捷键与二级子菜单）</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
+					1. 基础右键区域（包含图标、快捷键与二级子菜单）
+				</h3>
 				<div style={{ maxWidth: 600 }}>
 					<ContextMenu items={menuItems}>
 						<div
@@ -182,6 +181,60 @@ export default function ContextMenuDemo() {
 					可在列表或表格行中无缝包裹使用，精准传递当前行的数据上下文。
 				</p>
 			</div>
+
+			{/* 示例代码 */}
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet
+						language="typescript"
+						code={`import { ContextMenu } from 'react-public-components';
+
+export default function App() {
+  const menuItems = [
+    { key: 'edit', label: '编辑', shortcut: '⌘ E', onClick: () => console.log('编辑') },
+    { key: 'copy', label: '复制', shortcut: '⌘ C', onClick: () => console.log('复制') },
+    { key: 'd1', type: 'divider' as const },
+    { key: 'delete', label: '删除', danger: true, onClick: () => console.log('删除') },
+  ];
+
+  return (
+    <ContextMenu items={menuItems}>
+      <div style={{ padding: 32, background: '#fafafa', border: '1px dashed #d9d9d9', borderRadius: 8 }}>
+        在此区域点击鼠标右键唤起菜单
+      </div>
+    </ContextMenu>
+  );
+}`}
+					/>
+				</div>
+			</div>
+
+			<ApiTable
+				data={[
+					{
+						name: 'items',
+						desc: '右键菜单项配置列表（支持 icon, shortcut, danger, disabled, children, divider）',
+						type: 'ContextMenuItem[]',
+						required: true,
+					},
+					{
+						name: 'children',
+						desc: '触发右键上下文菜单的目标子容器/组件',
+						type: 'ReactNode',
+						required: true,
+					},
+					{ name: 'disabled', desc: '是否全局禁用右键菜单弹出', type: 'boolean', default: 'false' },
+					{
+						name: 'onOpenChange',
+						desc: '菜单显隐打开状态改变时的回调函数',
+						type: '(open: boolean) => void',
+						default: '-',
+					},
+					{ name: 'menuClassName', desc: '弹出菜单的自定义类名', type: 'string', default: '-' },
+					{ name: 'className', desc: '外层包裹容器的自定义类名', type: 'string', default: '-' },
+				]}
+			/>
 		</div>
 	);
 }

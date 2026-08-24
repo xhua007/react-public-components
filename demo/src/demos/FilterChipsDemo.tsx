@@ -42,11 +42,7 @@ export default function FilterChipsDemo() {
 							</button>
 						</div>
 					) : (
-						<FilterChips
-							chips={chips}
-							onRemove={handleRemove}
-							onClearAll={handleClearAll}
-						/>
+						<FilterChips chips={chips} onRemove={handleRemove} onClearAll={handleClearAll} />
 					)}
 				</div>
 			</div>

@@ -44,7 +44,10 @@ export default function DebounceSelectDemo() {
 					/>
 				</div>
 				<div style={{ marginTop: 8, fontSize: 13, color: '#595959' }}>
-					当前选中值：<code style={{ background: '#f5f5f5', padding: '2px 6px' }}>{JSON.stringify(singleValue)}</code>
+					当前选中值：
+					<code style={{ background: '#f5f5f5', padding: '2px 6px' }}>
+						{JSON.stringify(singleValue)}
+					</code>
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
 					内置 300ms 防抖，自动处理竞态时序请求，并自带清空与 Loading 转圈。
@@ -65,7 +68,10 @@ export default function DebounceSelectDemo() {
 					/>
 				</div>
 				<div style={{ marginTop: 8, fontSize: 13, color: '#595959' }}>
-					当前选中值：<code style={{ background: '#f5f5f5', padding: '2px 6px' }}>{JSON.stringify(multiValue)}</code>
+					当前选中值：
+					<code style={{ background: '#f5f5f5', padding: '2px 6px' }}>
+						{JSON.stringify(multiValue)}
+					</code>
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
 					多选模式下以 Tag 形式展示已选项目，支持单独快速删除和一键清空。
@@ -74,7 +80,9 @@ export default function DebounceSelectDemo() {
 
 			{/* 3. 禁用状态与自定义防抖时长 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>3. 禁用状态 (disabled) & 自定义 800ms 防抖</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
+					3. 禁用状态 (disabled) & 自定义 800ms 防抖
+				</h3>
 				<div style={{ display: 'flex', gap: 16, maxWidth: 600 }}>
 					<div style={{ flex: 1 }}>
 						<DebounceSelect

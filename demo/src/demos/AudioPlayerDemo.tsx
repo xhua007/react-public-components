@@ -12,10 +12,7 @@ export default function AudioPlayerDemo() {
 					1. 客服质检录音 / AI 对话播放条（支持 Seek 拖拽、倍速切换与一键下载）
 				</h3>
 				<div style={{ maxWidth: 460 }}>
-					<AudioPlayer
-						src={sampleAudio}
-						title="质检录音-20260815-订单售后.mp3"
-					/>
+					<AudioPlayer src={sampleAudio} title="质检录音-20260815-订单售后.mp3" />
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
 					点击左侧播放/暂停，点击右侧倍速按钮可循环切换 1.0x / 1.25x / 1.5x / 2.0x 播放倍速。

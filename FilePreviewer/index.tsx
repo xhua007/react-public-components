@@ -63,7 +63,11 @@ export function inferFileType(urlOrName: string): FileType {
 	if (['pdf'].includes(ext)) {
 		return 'pdf';
 	}
-	if (['txt', 'json', 'js', 'ts', 'jsx', 'tsx', 'html', 'css', 'less', 'md', 'log', 'xml'].includes(ext)) {
+	if (
+		['txt', 'json', 'js', 'ts', 'jsx', 'tsx', 'html', 'css', 'less', 'md', 'log', 'xml'].includes(
+			ext,
+		)
+	) {
 		return 'text';
 	}
 	return 'unknown';
@@ -71,15 +75,7 @@ export function inferFileType(urlOrName: string): FileType {
 
 const FilePreviewer: React.FC<FilePreviewerProps> & {
 	preview: (options: FileItem) => { close: () => void };
-} = ({
-	open,
-	file,
-	onCancel,
-	onDownload,
-	extraActions,
-	className = '',
-	style,
-}) => {
+} = ({ open, file, onCancel, onDownload, extraActions, className = '', style }) => {
 	// 图片控制状态
 	const [imageScale, setImageScale] = useState<number>(1);
 	const [imageRotate, setImageRotate] = useState<number>(0);
@@ -183,7 +179,8 @@ const FilePreviewer: React.FC<FilePreviewerProps> & {
 								{currentFile.name || '未知文件'}
 							</h4>
 							<p style={{ margin: 0, color: '#8c8c8c', fontSize: 13 }}>
-								该格式暂不支持直接在线预览，请下载后在本地查看。{currentFile.size ? `(${currentFile.size})` : ''}
+								该格式暂不支持直接在线预览，请下载后在本地查看。
+								{currentFile.size ? `(${currentFile.size})` : ''}
 							</p>
 						</div>
 						<button
@@ -289,10 +286,7 @@ FilePreviewer.preview = (options: FileItem) => {
 		div.remove();
 	};
 
-	ReactDOM.render(
-		<FilePreviewer open={true} file={options} onCancel={close} />,
-		div,
-	);
+	ReactDOM.render(<FilePreviewer open={true} file={options} onCancel={close} />, div);
 
 	return { close };
 };

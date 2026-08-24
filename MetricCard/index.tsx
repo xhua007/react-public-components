@@ -70,7 +70,9 @@ const MetricCard: React.FC<MetricCardProps> = ({
 	style,
 }) => {
 	const isNumeric = typeof value === 'number';
-	const { linePath, fillPath } = chartData ? generateSparklinePath(chartData) : { linePath: '', fillPath: '' };
+	const { linePath, fillPath } = chartData
+		? generateSparklinePath(chartData)
+		: { linePath: '', fillPath: '' };
 
 	return (
 		<div className={`rpc_metric_card ${className}`} style={style}>
@@ -94,7 +96,9 @@ const MetricCard: React.FC<MetricCardProps> = ({
 					<div className={`rpc_metric_card_trend rpc_metric_card_trend_${trend}`}>
 						<span>{trend === 'up' ? '▲' : '▼'}</span>
 						<span>{trendValue}</span>
-						{trendLabel && <span style={{ color: '#8c8c8c', fontWeight: 400, marginLeft: 2 }}>{trendLabel}</span>}
+						{trendLabel && (
+							<span style={{ color: '#8c8c8c', fontWeight: 400, marginLeft: 2 }}>{trendLabel}</span>
+						)}
 					</div>
 				)}
 			</div>
@@ -110,7 +114,14 @@ const MetricCard: React.FC<MetricCardProps> = ({
 							</linearGradient>
 						</defs>
 						<path d={fillPath} fill={`url(#grad-${chartColor})`} />
-						<path d={linePath} fill="none" stroke={chartColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+						<path
+							d={linePath}
+							fill="none"
+							stroke={chartColor}
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
 					</svg>
 				</div>
 			)}

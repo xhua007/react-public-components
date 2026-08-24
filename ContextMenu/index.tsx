@@ -167,23 +167,24 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
 		);
 	};
 
-	const menuContent = visible && typeof document !== 'undefined' ? (
-		ReactDOM.createPortal(
-			<div
-				ref={menuRef}
-				className={`rpc_context_menu_panel ${menuClassName}`}
-				style={{
-					left: `${position.x}px`,
-					top: `${position.y}px`,
-					...menuStyle,
-				}}
-				onContextMenu={(e) => e.preventDefault()}
-			>
-				{items.map((item) => renderMenuItem(item))}
-			</div>,
-			document.body,
-		)
-	) : null;
+	const menuContent =
+		visible && typeof document !== 'undefined'
+			? ReactDOM.createPortal(
+					<div
+						ref={menuRef}
+						className={`rpc_context_menu_panel ${menuClassName}`}
+						style={{
+							left: `${position.x}px`,
+							top: `${position.y}px`,
+							...menuStyle,
+						}}
+						onContextMenu={(e) => e.preventDefault()}
+					>
+						{items.map((item) => renderMenuItem(item))}
+					</div>,
+					document.body,
+				)
+			: null;
 
 	return (
 		<div

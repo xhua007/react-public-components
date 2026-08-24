@@ -1,5 +1,11 @@
 import React, { useState, useRef, useEffect, useMemo, ReactNode, CSSProperties } from 'react';
-import { LoadingOutlined, SearchOutlined, CloseCircleFilled, DownOutlined, CheckOutlined } from '../src/icons';
+import {
+	LoadingOutlined,
+	SearchOutlined,
+	CloseCircleFilled,
+	DownOutlined,
+	CheckOutlined,
+} from '../src/icons';
 import './index.less';
 
 export interface SelectOption {
@@ -10,11 +16,7 @@ export interface SelectOption {
 }
 
 export type SelectValue =
-	| string
-	| number
-	| SelectOption
-	| (string | number | SelectOption)[]
-	| undefined;
+	string | number | SelectOption | (string | number | SelectOption)[] | undefined;
 
 export interface DebounceSelectProps {
 	/** 异步拉取选项列表的函数 */
@@ -195,11 +197,7 @@ const DebounceSelect: React.FC<DebounceSelectProps> = ({
 	const showClear = allowClear && !disabled && (selectedList.length > 0 || searchValue.length > 0);
 
 	return (
-		<div
-			ref={containerRef}
-			className={`rpc_debounce_select ${className}`}
-			style={style}
-		>
+		<div ref={containerRef} className={`rpc_debounce_select ${className}`} style={style}>
 			<div
 				className={`rpc_debounce_select_selector ${
 					isOpen ? 'rpc_debounce_select_selector_focused' : ''

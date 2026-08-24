@@ -81,7 +81,9 @@ function getWatermarkCssText(url: string, zIndex: number): string {
 		transform: none !important;
 		filter: none !important;
 		clip-path: none !important;
-	`.replace(/\s+/g, ' ').trim();
+	`
+		.replace(/\s+/g, ' ')
+		.trim();
 }
 
 /** 创建全新的原生水印 DOM 节点（脱离 React 虚拟 DOM 控制，防止 DevTools 删除节点时引发 React Crash） */

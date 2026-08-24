@@ -16,8 +16,20 @@ export default function KanbanBoardDemo() {
 			title: '待处理 (To Do)',
 			color: '#faad14',
 			items: [
-				{ id: '1', title: '编写 KanbanBoard 单元测试', assignee: 'Alex', tag: '技术', tagColor: '#1677ff' },
-				{ id: '2', title: '设计多租户企业级数据大屏', assignee: 'Sarah', tag: 'UI', tagColor: '#722ed1' },
+				{
+					id: '1',
+					title: '编写 KanbanBoard 单元测试',
+					assignee: 'Alex',
+					tag: '技术',
+					tagColor: '#1677ff',
+				},
+				{
+					id: '2',
+					title: '设计多租户企业级数据大屏',
+					assignee: 'Sarah',
+					tag: 'UI',
+					tagColor: '#722ed1',
+				},
 			],
 		},
 		{
@@ -25,7 +37,13 @@ export default function KanbanBoardDemo() {
 			title: '进行中 (In Progress)',
 			color: '#1677ff',
 			items: [
-				{ id: '3', title: '优化 WebGL 3D 渲染帧率', assignee: 'Devin', tag: '性能', tagColor: '#52c41a' },
+				{
+					id: '3',
+					title: '优化 WebGL 3D 渲染帧率',
+					assignee: 'Devin',
+					tag: '性能',
+					tagColor: '#52c41a',
+				},
 			],
 		},
 		{
@@ -33,7 +51,13 @@ export default function KanbanBoardDemo() {
 			title: '已完成 (Done)',
 			color: '#52c41a',
 			items: [
-				{ id: '4', title: '发布 react-public-components v1.3.0', assignee: 'Alex', tag: '发版', tagColor: '#eb2f96' },
+				{
+					id: '4',
+					title: '发布 react-public-components v1.3.0',
+					assignee: 'Alex',
+					tag: '发版',
+					tagColor: '#eb2f96',
+				},
 			],
 		},
 	]);
@@ -92,7 +116,9 @@ export default function KanbanBoardDemo() {
 							<div style={{ fontSize: 14, fontWeight: 500, color: '#1f1f1f', marginBottom: 8 }}>
 								{task.title}
 							</div>
-							<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+							<div
+								style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+							>
 								<span
 									style={{
 										fontSize: 11,

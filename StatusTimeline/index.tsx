@@ -33,11 +33,7 @@ const statusIcons: Record<TimelineStatus, string> = {
 	wait: '○',
 };
 
-const StatusTimeline: React.FC<StatusTimelineProps> = ({
-	items = [],
-	className = '',
-	style,
-}) => {
+const StatusTimeline: React.FC<StatusTimelineProps> = ({ items = [], className = '', style }) => {
 	return (
 		<div className={`rpc_status_timeline ${className}`} style={style}>
 			{items.map((item, idx) => {

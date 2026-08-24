@@ -10,7 +10,9 @@ export default function TagInputDemo() {
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			{/* 1. 基础用法 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>1. 基础标签输入（支持回车/逗号、退格删除、双击编辑）</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
+					1. 基础标签输入（支持回车/逗号、退格删除、双击编辑）
+				</h3>
 				<div style={{ maxWidth: 480 }}>
 					<TagInput
 						value={basicTags}

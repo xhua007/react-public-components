@@ -138,15 +138,9 @@ const EnvBadge: React.FC<EnvBadgeProps> = ({
 
 					{switchList && switchList.length > 0 && (
 						<div className="rpc_env_badge_switch_wrap">
-							<span style={{ fontSize: 11, color: '#8c8c8c', width: '100%' }}>
-								切换环境：
-							</span>
+							<span style={{ fontSize: 11, color: '#8c8c8c', width: '100%' }}>切换环境：</span>
 							{switchList.map((item, idx) => (
-								<a
-									key={idx}
-									href={item.url}
-									className="rpc_env_badge_switch_btn"
-								>
+								<a key={idx} href={item.url} className="rpc_env_badge_switch_btn">
 									{item.label}
 								</a>
 							))}

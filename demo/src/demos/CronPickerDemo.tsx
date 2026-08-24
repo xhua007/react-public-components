@@ -22,10 +22,9 @@ export default function CronPickerDemo() {
 					/>
 				</div>
 				<div style={{ marginTop: 12, fontSize: 14, color: '#1f1f1f' }}>
-					当前选定周期：<code style={{ background: '#f5f5f5', padding: '2px 6px' }}>{currentCron}</code>
-					<span style={{ marginLeft: 12, color: '#52c41a', fontWeight: 500 }}>
-						({cronDesc})
-					</span>
+					当前选定周期：
+					<code style={{ background: '#f5f5f5', padding: '2px 6px' }}>{currentCron}</code>
+					<span style={{ marginLeft: 12, color: '#52c41a', fontWeight: 500 }}>({cronDesc})</span>
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
 					支持按分钟、按小时、每天、每周、每月及自定义表达式配置，右下角支持一键复制。

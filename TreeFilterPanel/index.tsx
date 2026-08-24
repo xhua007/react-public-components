@@ -164,11 +164,7 @@ const TreeFilterPanel: React.FC<TreeFilterPanelProps> = ({
 			<div className="rpc_tree_filter_panel_footer">
 				<span>已选条件：{selectedValues.length} 项</span>
 				{selectedValues.length > 0 && (
-					<button
-						type="button"
-						className="rpc_tree_filter_panel_clear_btn"
-						onClick={handleClear}
-					>
+					<button type="button" className="rpc_tree_filter_panel_clear_btn" onClick={handleClear}>
 						清空所有筛选
 					</button>
 				)}

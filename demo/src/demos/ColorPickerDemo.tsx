@@ -284,10 +284,8 @@ export default function ColorPickerDemo() {
 							]}
 							panelRender={(_, { components: { Picker, Presets } }) => (
 								<div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-									<div>{Presets()}</div>
-									<div style={{ borderLeft: '1px solid #f0f0f0', paddingLeft: 16 }}>
-										{Picker()}
-									</div>
+									<div><Presets /></div>
+									<div style={{ borderLeft: '1px solid #f0f0f0', paddingLeft: 16 }}><Picker /></div>
 								</div>
 							)}
 						/>
@@ -312,10 +310,7 @@ export default function ColorPickerDemo() {
 				<h3 style={{ fontSize: 16, marginBottom: 12 }}>12.11 受控模式</h3>
 				<div style={{ display: 'flex', alignItems: 'center', gap: 16, marginTop: 16 }}>
 					<ColorPicker value={controlledColor1} onChange={(c) => setControlledColor1(c)} />
-					<ColorPicker
-						value={controlledColor2}
-						onChangeComplete={(c) => setControlledColor2(c)}
-					/>
+					<ColorPicker value={controlledColor2} onChangeComplete={(c) => setControlledColor2(c)} />
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
 					受控模式。通过 value 和 onChange 设置组件为受控模式，如果通过 onChangeComplete

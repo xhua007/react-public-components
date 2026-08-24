@@ -121,7 +121,9 @@ const CopyButton: React.FC<CopyButtonProps> = ({
 
 	// 计算展示的图标与文案
 	const currentIcon = isCopied ? defaultCopiedIcon : defaultIcon;
-	const currentText = isCopied ? (copiedText ?? children ?? '已复制') : (children ?? (mode === 'button' ? '复制' : null));
+	const currentText = isCopied
+		? (copiedText ?? children ?? '已复制')
+		: (children ?? (mode === 'button' ? '复制' : null));
 
 	// Tooltip 提示文本计算
 	let tooltipContent: ReactNode = null;
@@ -160,7 +162,11 @@ const CopyButton: React.FC<CopyButtonProps> = ({
 			{tooltip && tooltipContent && (
 				<div
 					className={`rpc_copy_button_tooltip ${
-						isCopied ? 'rpc_copy_button_tooltip_visible' : isHovered ? 'rpc_copy_button_tooltip_hover' : ''
+						isCopied
+							? 'rpc_copy_button_tooltip_visible'
+							: isHovered
+								? 'rpc_copy_button_tooltip_hover'
+								: ''
 					}`}
 				>
 					{tooltipContent}

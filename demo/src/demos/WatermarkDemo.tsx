@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Watermark from '../../../Watermark';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function WatermarkDemo() {
 	const [tamperCount, setTamperCount] = useState(0);
@@ -44,7 +46,8 @@ export default function WatermarkDemo() {
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			<div>
 				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
-					1. 动态安全防截屏水印（内置 MutationObserver + ComputedStyle 强力防 F12 审查元素删除/隐藏）
+					1. 动态安全防截屏水印（内置 MutationObserver + ComputedStyle 强力防 F12
+					审查元素删除/隐藏）
 				</h3>
 
 				<div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
@@ -131,8 +134,9 @@ export default function WatermarkDemo() {
 						<div style={{ padding: 24 }}>
 							<h4 style={{ margin: '0 0 12px 0' }}>2026 年度核心财务报表摘要 (机密数据)</h4>
 							<p style={{ color: '#595959', fontSize: 13, lineHeight: 1.6 }}>
-								本区域包含核心经营敏感信息。即便用户尝试打开 F12 控制台在 Styles 面板取消勾选 background-image、删除水印节点、清空内联样式或设置
-								display: none 隐藏水印，系统也会在毫秒内瞬间重新注入并重建水印 DOM，防止非法截屏泄密。
+								本区域包含核心经营敏感信息。即便用户尝试打开 F12 控制台在 Styles 面板取消勾选
+								background-image、删除水印节点、清空内联样式或设置 display: none
+								隐藏水印，系统也会在毫秒内瞬间重新注入并重建水印 DOM，防止非法截屏泄密。
 							</p>
 							{tamperCount > 0 && (
 								<div
@@ -153,9 +157,50 @@ export default function WatermarkDemo() {
 					</Watermark>
 				</div>
 				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
-					💡 支持真实打开浏览器 F12 审查元素，在 Styles 面板无论取消勾选哪个属性（比如 background-image、display、opacity 等），或者在 Elements 面板删除节点，水印都会在毫秒内瞬间原地复活自愈，且绝不会导致页面白屏崩溃。
+					💡 支持真实打开浏览器 F12 审查元素，在 Styles 面板无论取消勾选哪个属性（比如
+					background-image、display、opacity 等），或者在 Elements
+					面板删除节点，水印都会在毫秒内瞬间原地复活自愈，且绝不会导致页面白屏崩溃。
 				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet
+						language="typescript"
+						code={`import { Watermark } from 'react-public-components';
+
+export default function App() {
+  return (
+    <Watermark
+      content={['内部机密 严禁外传', 'alex.chen 2026-08-24']}
+      color="rgba(0, 0, 0, 0.08)"
+      antiTamper
+    >
+      <div style={{ padding: 32, height: 320, background: '#fff', borderRadius: 8 }}>
+        <h2>核心财务分析报告</h2>
+        <p>即使在控制台尝试删除 DOM 或在 Styles 面板取消勾选属性，水印也会毫秒自愈复原。</p>
+      </div>
+    </Watermark>
+  );
+}`}
+					/>
+				</div>
+			</div>
+
+			<ApiTable
+				data={[
+					{ name: 'content', desc: '水印文本内容，传数组时按多行平铺绘制', type: 'string | string[]', required: true },
+					{ name: 'children', desc: '水印包裹的子内容节点', type: 'ReactNode', default: '-' },
+					{ name: 'antiTamper', desc: '开启防篡改防御（防 F12 审查元素删除/隐藏/修改属性毫秒自愈）', type: 'boolean', default: 'true' },
+					{ name: 'color', desc: '水印文字颜色及透明度', type: 'string', default: "'rgba(0, 0, 0, 0.12)'" },
+					{ name: 'fontSize', desc: '水印文字字号（像素）', type: 'number', default: '14' },
+					{ name: 'rotate', desc: '水印单元旋转角度（度）', type: 'number', default: '-22' },
+					{ name: 'width', desc: '单个水印单元宽度（像素）', type: 'number', default: '240' },
+					{ name: 'height', desc: '单个水印单元高度（像素）', type: 'number', default: '160' },
+					{ name: 'zIndex', desc: '水印图层层级', type: 'number', default: '9999' },
+				]}
+			/>
 		</div>
 	);
 }

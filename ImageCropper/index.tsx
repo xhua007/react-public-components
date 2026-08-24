@@ -291,10 +291,7 @@ const ImageCropper = forwardRef<ImageCropperRef, ImageCropperProps>(
 		const cropBox = getCropBoxRect();
 
 		const coreContent = (
-			<div
-				className={`rpc_image_cropper ${className}`}
-				style={{ ...style }}
-			>
+			<div className={`rpc_image_cropper ${className}`} style={{ ...style }}>
 				<div
 					ref={containerRef}
 					className="rpc_image_cropper_canvas_wrap"

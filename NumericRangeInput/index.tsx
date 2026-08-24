@@ -60,8 +60,7 @@ const NumericRangeInput: React.FC<NumericRangeInputProps> = ({
 
 	const [isFocused, setIsFocused] = useState<boolean>(false);
 
-	const isInvalid =
-		range[0] !== undefined && range[1] !== undefined && range[0] > range[1];
+	const isInvalid = range[0] !== undefined && range[1] !== undefined && range[0] > range[1];
 
 	const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const val = e.target.value === '' ? undefined : Number(e.target.value);

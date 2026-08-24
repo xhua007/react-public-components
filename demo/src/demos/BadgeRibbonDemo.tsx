@@ -4,9 +4,7 @@ export default function BadgeRibbonDemo() {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
-					1. 卡片斜角丝带 / 推荐促销缎带角标
-				</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>1. 卡片斜角丝带 / 推荐促销缎带角标</h3>
 
 				<div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
 					{/* 右上角 HOT 缎带 */}
@@ -20,9 +18,7 @@ export default function BadgeRibbonDemo() {
 								borderRadius: 8,
 							}}
 						>
-							<div style={{ fontSize: 16, fontWeight: 600, marginBottom: 6 }}>
-								专业企业版 (Pro)
-							</div>
+							<div style={{ fontSize: 16, fontWeight: 600, marginBottom: 6 }}>专业企业版 (Pro)</div>
 							<div style={{ fontSize: 22, fontWeight: 700, color: '#ff4d4f', marginBottom: 12 }}>
 								¥ 199 <span style={{ fontSize: 12, color: '#8c8c8c' }}>/月</span>
 							</div>
@@ -47,9 +43,7 @@ export default function BadgeRibbonDemo() {
 								borderRadius: 8,
 							}}
 						>
-							<div style={{ fontSize: 16, fontWeight: 600, marginBottom: 6 }}>
-								AI 智能研发助手
-							</div>
+							<div style={{ fontSize: 16, fontWeight: 600, marginBottom: 6 }}>AI 智能研发助手</div>
 							<div style={{ fontSize: 22, fontWeight: 700, color: '#1677ff', marginBottom: 12 }}>
 								免费开放
 							</div>

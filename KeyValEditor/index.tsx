@@ -116,7 +116,11 @@ const KeyValEditor: React.FC<KeyValEditorProps> = ({
 								title={item.isSecret ? '切换显示/隐藏' : '设为敏感密码'}
 							>
 								{item.isSecret ? (
-									visibleSecrets[index] ? <EyeOutlined /> : <EyeInvisibleOutlined />
+									visibleSecrets[index] ? (
+										<EyeOutlined />
+									) : (
+										<EyeInvisibleOutlined />
+									)
 								) : (
 									<span style={{ fontSize: 11, color: '#8c8c8c' }}>🔒</span>
 								)}

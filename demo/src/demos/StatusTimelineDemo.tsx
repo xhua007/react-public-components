@@ -8,7 +8,15 @@ export default function StatusTimelineDemo() {
 					1. 高级审批流与动态耗时时间轴（多状态节点 + 经办人 + 流转耗时统计）
 				</h3>
 
-				<div style={{ maxWidth: 520, background: '#ffffff', padding: 20, border: '1px solid #f0f0f0', borderRadius: 8 }}>
+				<div
+					style={{
+						maxWidth: 520,
+						background: '#ffffff',
+						padding: 20,
+						border: '1px solid #f0f0f0',
+						borderRadius: 8,
+					}}
+				>
 					<StatusTimeline
 						items={[
 							{

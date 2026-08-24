@@ -71,11 +71,7 @@ function VirtualList<T>({
 					const key = keyExtractor ? keyExtractor(item, actualIndex) : actualIndex;
 
 					return (
-						<div
-							key={key}
-							className="rpc_virtual_list_item"
-							style={{ height: itemHeight }}
-						>
+						<div key={key} className="rpc_virtual_list_item" style={{ height: itemHeight }}>
 							{renderItem(item, actualIndex)}
 						</div>
 					);

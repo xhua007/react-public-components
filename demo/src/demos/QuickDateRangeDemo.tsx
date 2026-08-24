@@ -22,7 +22,10 @@ export default function QuickDateRangeDemo() {
 					/>
 
 					<div style={{ fontSize: 13, color: '#595959' }}>
-						当前筛选区间：<code style={{ color: '#1677ff', fontWeight: 600 }}>{range[0]} ~ {range[1]}</code>
+						当前筛选区间：
+						<code style={{ color: '#1677ff', fontWeight: 600 }}>
+							{range[0]} ~ {range[1]}
+						</code>
 					</div>
 				</div>
 			</div>

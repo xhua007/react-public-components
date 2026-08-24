@@ -99,7 +99,8 @@ export default function BorderBeamDemo() {
 							>
 								<h4 style={{ margin: '0 0 12px 0', fontSize: 18 }}>Workspace overview</h4>
 								<p style={{ margin: 0, color: '#666', lineHeight: 1.6 }}>
-									Review task status, deployment health, and recent automation activity in one panel.
+									Review task status, deployment health, and recent automation activity in one
+									panel.
 								</p>
 							</div>
 						</BorderBeam>
@@ -144,9 +145,7 @@ export default function BorderBeamDemo() {
 
 			{/* 11.2 多条流光 & 自定义容器 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
-					11.2 多条流光 (count) & 自定义宿主容器
-				</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>11.2 多条流光 (count) & 自定义宿主容器</h3>
 				<div
 					style={{
 						display: 'grid',

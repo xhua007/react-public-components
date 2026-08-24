@@ -71,11 +71,7 @@ function drawQrCode(canvas: HTMLCanvasElement, text: string, size: number) {
 	for (let r = 0; r < modules; r++) {
 		for (let c = 0; c < modules; c++) {
 			// 跳过三个角的位置
-			if (
-				(r < 8 && c < 8) ||
-				(r < 8 && c >= modules - 8) ||
-				(r >= modules - 8 && c < 8)
-			) {
+			if ((r < 8 && c < 8) || (r < 8 && c >= modules - 8) || (r >= modules - 8 && c < 8)) {
 				continue;
 			}
 

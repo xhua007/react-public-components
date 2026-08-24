@@ -35,7 +35,7 @@ const SegmentedProgress: React.FC<SegmentedProgressProps> = ({
 		return segments.reduce((acc, cur) => acc + (cur.value || 0), 0);
 	}, [segments]);
 
-	const baseTotal = customTotal !== undefined ? customTotal : (sumValue || 1);
+	const baseTotal = customTotal !== undefined ? customTotal : sumValue || 1;
 
 	return (
 		<div className={`rpc_seg_progress ${className}`} style={style}>
@@ -69,7 +69,8 @@ const SegmentedProgress: React.FC<SegmentedProgressProps> = ({
 								<span className="rpc_seg_progress_dot" style={{ backgroundColor: seg.color }} />
 								<span>{seg.label}</span>
 								<b style={{ color: '#262626' }}>
-									{seg.value}{seg.suffix || ''} ({pct}%)
+									{seg.value}
+									{seg.suffix || ''} ({pct}%)
 								</b>
 							</div>
 						);

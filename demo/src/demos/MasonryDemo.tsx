@@ -4,9 +4,7 @@ export default function MasonryDemo() {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 8 }}>
-					10. Masonry 瀑布流组件 (AntD V6 规范)
-				</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 8 }}>10. Masonry 瀑布流组件 (AntD V6 规范)</h3>
 				<p style={{ color: '#666', fontSize: 13, marginBottom: 16 }}>
 					支持响应式 columns ({`{ xs: 1, sm: 2, md: 3, lg: 4 }`})、gutter 水平垂直间距、fresh
 					尺寸更新以及 onLayoutChange 回调。

@@ -7,6 +7,7 @@
 ## [1.2.0] - 2026-08-18
 
 ### 🚀 核心架构与质感重大升级
+
 - **`Watermark`（防篡改安全水印）架构级加固**：
   - 由 `SecurityWatermark` 统一更名为标准的 `Watermark`。
   - **脱离 React Virtual DOM 控制**：水印层改由原生 DOM（Direct DOM Injection）独立动态注入与挂载，彻底解决用户在浏览器 DevTools 中按 `Delete` 删除水印节点时引发 React `removeChild` 运行时崩溃（导致整页白屏只剩 `<div id="root"></div>`）的致命问题。
@@ -19,6 +20,7 @@
   - 同步升级了 `QrCodeCard`、`InfiniteScrollList`、`DebounceSelect`、`CountdownButton` 等所有带有 Loading 态组件的视觉质感。
 
 ### 🧹 组件库精炼与聚焦
+
 - 经过多轮高频通用性与业务落地价值评估，彻底移除了低频、玩具型或过度垂直的组件，全库精准保留 **61 款** 真正高复用、高质感的中后台与 Web 通用组件。
 - 完善并统一了全库 61 款组件的 TypeScript 类型定义、ESM / CommonJS 构建导出与 Demo 预览映射。
 
@@ -27,6 +29,7 @@
 ## [1.1.19] - 2026-08-15
 
 ### 💅 布局与展示组件优化
+
 - **`Fullscreen`（全屏容器）**：增强对局部元素原生全屏与网页内最大化置顶切换支持，优化悬浮快捷按钮交互与 Render Props 渲染逻辑。
 - **`CopyButton`（复制按钮）**：优化内联与按钮形态的复制反馈，支持 Tooltip 动效与异步复制状态保护。
 - **`ShimmerSkeleton`（流光骨架屏）**：优化渐变流光掠过动画的流畅度与暗黑模式适配。
@@ -37,6 +40,7 @@
 ## [1.1.0] - 2026-08-10
 
 ### ✨ 新增现代 SaaS 与中后台通用组件
+
 - **通用 General**：新增 `CodeSnippet`（极客代码块）、`QrCodeCard`（二维码卡片）、`GuidedTour`（漫游引导）、`FilePreviewer`（文件预览）、`FloatingActionBar`（悬浮操作栏）、`ContextMenu`（右键菜单）。
 - **布局与导航 Layout & Nav**：新增 `AdaptiveBreadcrumb`（自适应折叠面包屑）、`CascadeDrawer`（级联下钻抽屉）、`KanbanBoard`（任务看板）、`DragSortList`（拖拽排序列表）、`Marquee`（无缝跑马灯）、`ScrollTracker`（阅读进度与吸顶容器）、`InfiniteScrollList`（无限滚动列表）。
 - **数据录入 Data Entry**：新增 `DualRangeSlider`（双滑块区间选择器）、`FilterChips`（已选胶囊栏）、`FileDropZone`（拖拽上传容器）、`TreeTransfer`（树形穿梭框）、`NumberStepper`（平滑数字步进器）、`CountdownButton`（验证码倒计时按钮）、`KeyValEditor`（键值对编辑器）、`QuickDateRange`（快捷日期筛选）、`TreeFilterPanel`（树形平铺筛选）、`NumericRangeInput`（数值区间输入）、`CronPicker`（Cron 表达式生成器）、`TagInput`（标签输入器）、`PasswordStrength`（密码强度检测）、`ImageCropper`（Canvas 图片裁剪）、`DebounceSelect`（防抖异步搜索选择器）。
@@ -48,6 +52,7 @@
 ## [1.0.0] - 2026-08-01
 
 ### 🎉 首发核心基础组件
+
 - **`CollapseBox`**：支持水平与垂直弹性伸缩折叠的内容容器。
 - **`Splitter`**：支持多面板拖拽调整尺寸、折叠与双击重置的可定制分屏面板组件。
 - **`DisabledBox`**：为子级元素或复杂区域提供统一的禁用态透明遮罩与防交互保护。

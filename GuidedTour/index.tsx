@@ -165,10 +165,7 @@ const GuidedTour: React.FC<GuidedTourProps> = ({
 			>
 				<div className="rpc_guided_tour_header">
 					<span className="rpc_guided_tour_title">{currentStep.title}</span>
-					<CloseOutlined
-						style={{ cursor: 'pointer', color: '#8c8c8c' }}
-						onClick={handleSkip}
-					/>
+					<CloseOutlined style={{ cursor: 'pointer', color: '#8c8c8c' }} onClick={handleSkip} />
 				</div>
 
 				<div className="rpc_guided_tour_description">{currentStep.description}</div>
