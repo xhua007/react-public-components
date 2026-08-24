@@ -208,7 +208,19 @@ export { default as JsonTree } from '../JsonTree';
 export type { JsonTreeProps } from '../JsonTree';
 
 export { default as CodeSnippet } from '../CodeSnippet';
-export type { CodeSnippetProps, CodeSnippetTheme } from '../CodeSnippet';
+export {
+	openInCodeSandbox,
+	openInCodePen,
+	openInStackBlitz,
+	openInNewTab,
+} from '../CodeSnippet/sandbox';
+export type {
+	CodeSnippetProps,
+	CodeSnippetTheme,
+	CodeTabItem,
+	BuiltinAction,
+} from '../CodeSnippet';
+export type { SandboxConfig } from '../CodeSnippet/sandbox';
 
 export { default as MiniSparkline } from '../MiniSparkline';
 export type { MiniSparklineProps } from '../MiniSparkline';

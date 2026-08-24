@@ -14,11 +14,49 @@
 	box-sizing: border-box;
 	user-select: text;
 	transition: all 0.2s ease;
+	position: relative;
 
 	// 暗色主题（默认）
 	&_dark {
 		background: #141414;
 		border: 1px solid #303030;
+
+		.rpc_code_snippet_actions_bar {
+			background: #1a1a1a;
+			border-bottom: 1px solid #2a2a2a;
+		}
+
+		.rpc_code_snippet_action_btn {
+			color: #8c8c8c;
+
+			&:hover {
+				color: #ffffff;
+				background: rgba(255, 255, 255, 0.08);
+			}
+
+			&.rpc_code_snippet_action_active {
+				color: #1677ff;
+				background: rgba(22, 119, 255, 0.15);
+			}
+		}
+
+		.rpc_code_snippet_tabs_bar {
+			background: #141414;
+			border-bottom: 1px solid #262626;
+		}
+
+		.rpc_code_snippet_tab_item {
+			color: #8c8c8c;
+
+			&:hover {
+				color: #ffffff;
+			}
+
+			&.rpc_code_snippet_tab_active {
+				color: #1677ff;
+				border-bottom-color: #1677ff;
+			}
+		}
 
 		.rpc_code_snippet_top_bar {
 			background: #1f1f1f;
@@ -45,6 +83,25 @@
 			color: #595959;
 			border-right: 1px solid #303030;
 		}
+
+		.rpc_code_snippet_floating_copy {
+			color: #8c8c8c;
+
+			&:hover {
+				color: #ffffff;
+			}
+		}
+
+		.rpc_code_snippet_footer {
+			background: #1a1a1a;
+			border-top: 1px solid #262626;
+			color: #8c8c8c;
+
+			&:hover {
+				color: #1677ff;
+				background: #222222;
+			}
+		}
 	}
 
 	// 亮色主题
@@ -52,6 +109,43 @@
 		background: #ffffff;
 		border: 1px solid #e8e8e8;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+		.rpc_code_snippet_actions_bar {
+			background: #fafafa;
+			border-bottom: 1px dashed #e8e8e8;
+		}
+
+		.rpc_code_snippet_action_btn {
+			color: #8c8c8c;
+
+			&:hover {
+				color: #1677ff;
+				background: #f0f0f0;
+			}
+
+			&.rpc_code_snippet_action_active {
+				color: #1677ff;
+				background: #e6f4ff;
+			}
+		}
+
+		.rpc_code_snippet_tabs_bar {
+			background: #ffffff;
+			border-bottom: 1px solid #f0f0f0;
+		}
+
+		.rpc_code_snippet_tab_item {
+			color: #595959;
+
+			&:hover {
+				color: #1677ff;
+			}
+
+			&.rpc_code_snippet_tab_active {
+				color: #1677ff;
+				border-bottom-color: #1677ff;
+			}
+		}
 
 		.rpc_code_snippet_top_bar {
 			background: #fafafa;
@@ -78,8 +172,80 @@
 			color: #bfbfbf;
 			border-right: 1px solid #f0f0f0;
 		}
+
+		.rpc_code_snippet_floating_copy {
+			color: #8c8c8c;
+
+			&:hover {
+				color: #1677ff;
+			}
+		}
+
+		.rpc_code_snippet_footer {
+			background: #fafafa;
+			border-top: 1px solid #f0f0f0;
+			color: #595959;
+
+			&:hover {
+				color: #1677ff;
+				background: #f5f5f5;
+			}
+		}
 	}
 
+	// 1. 顶部操作栏
+	&_actions_bar {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		padding: 6px 12px;
+		user-select: none;
+	}
+
+	&_actions_list {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	&_action_btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		padding: 0;
+		border: none;
+		background: transparent;
+		border-radius: 4px;
+		cursor: pointer;
+		font-size: 15px;
+		transition: all 0.15s ease;
+		outline: none;
+	}
+
+	&_action_copied {
+		color: #52c41a !important;
+	}
+
+	// 2. Tabs 切换栏
+	&_tabs_bar {
+		display: flex;
+		padding: 0 16px;
+		gap: 20px;
+		user-select: none;
+	}
+
+	&_tab_item {
+		padding: 8px 4px;
+		cursor: pointer;
+		font-size: 13px;
+		font-weight: 500;
+		border-bottom: 2px solid transparent;
+		transition: all 0.15s ease;
+	}
+
+	// 3. 经典标题栏
 	&_top_bar {
 		display: flex;
 		align-items: center;
@@ -126,7 +292,9 @@
 		transition: all 0.15s;
 	}
 
+	// 4. 代码内容主体
 	&_body {
+		position: relative;
 		display: flex;
 		overflow-x: auto;
 	}
@@ -151,5 +319,31 @@
 		overflow-x: auto;
 		line-height: 1.5;
 		margin: 0;
+	}
+
+	&_floating_copy {
+		position: absolute;
+		top: 10px;
+		right: 14px;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		user-select: none;
+		font-size: 13px;
+		transition: all 0.15s ease;
+		background: transparent;
+	}
+
+	// 5. 底部折叠收起控制条
+	&_footer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 8px 16px;
+		font-size: 12px;
+		font-weight: 500;
+		cursor: pointer;
+		user-select: none;
+		transition: all 0.15s ease;
 	}
 }

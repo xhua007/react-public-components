@@ -15,7 +15,7 @@ const filterTree: TreeFilterNode[] = [
 					{ label: 'Next.js 15', value: 'nextjs' },
 					{ label: 'Vite 6.0', value: 'vite' },
 					{ label: 'Tailwind CSS', value: 'tailwind' },
-					{ label: 'Ant Design', value: 'antd' },
+					{ label: 'Web Components', value: 'web-components' },
 				],
 			},
 			{

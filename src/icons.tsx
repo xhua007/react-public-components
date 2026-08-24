@@ -736,3 +736,84 @@ export const StarFilled = ({
 		<path d="M908.1 353.1l-253.9-36.9L540.7 86.6c-9.7-19.7-37.7-19.7-47.4 0L379.8 316.2l-253.9 36.9c-21.9 3.2-30.6 30-14.7 45.5l183.7 179-43.4 252.9c-3.7 21.8 19.1 38.4 38.8 28.1L512 740l221.7 116.6c19.7 10.4 42.5-6.3 38.8-28.1l-43.4-252.9 183.7-179c15.9-15.5 7.2-42.3-14.7-45.5z" />
 	</svg>
 );
+
+export const CodeSandboxOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+	<svg
+		viewBox="0 0 1024 1024"
+		focusable="false"
+		width="1em"
+		height="1em"
+		fill="currentColor"
+		aria-hidden="true"
+		style={{ ...baseStyle, ...style }}
+		className={className}
+		onClick={onClick}
+	>
+		<path d="M959.8 274.7L527.9 25.5c-9.8-5.6-21.9-5.6-31.7 0L64.2 274.7c-9.9 5.7-16.1 16.3-16.1 27.7v499c0 11.4 6.1 22 16.1 27.7l432 249.2c4.9 2.8 10.4 4.3 15.9 4.3s11-1.4 15.9-4.3l432-249.2c9.9-5.7 16.1-16.3 16.1-27.7v-499c0-11.4-6.2-22-16.3-27.7zM512 100.8l363.6 209.9-146.9 84.8-363.6-209.9L512 100.8zM476 121.6v239.5L148.6 550.5V310.8L476 121.6zM112 590.2l364 210.2v240.8L112 831V590.2zM548 1041.2V800.4l364-210.2v240.8l-364 210.2zM911.4 550.5L548 339.7V100.2l363.4 209.8v240.5z" />
+	</svg>
+);
+
+export const CodePenOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+	<svg
+		viewBox="0 0 1024 1024"
+		focusable="false"
+		width="1em"
+		height="1em"
+		fill="currentColor"
+		aria-hidden="true"
+		style={{ ...baseStyle, ...style }}
+		className={className}
+		onClick={onClick}
+	>
+		<path d="M912 360L536 109.3c-14.7-9.8-35.3-9.8-50 0L112 360c-10.7 7.1-16 19.3-16 32v240c0 12.7 5.3 24.9 16 32l374 250.7c14.7 9.8 35.3 9.8 50 0l376-250.7c10.7-7.1 16-19.3 16-32V392c0-12.7-5.3-24.9-16-32zM512 195.4l280.9 187.3L670 464.6 512 359.3V195.4zM476 359.3L318 464.6 195.1 382.7 476 195.4v163.9zM160 441.2l98.5 65.7L160 572.6V441.2zM476 828.6L195.1 641.3 318 559.4 476 664.7v163.9zm36-248.8L382.8 512 512 425.8l129.2 86.2L512 579.8zm0 248.8V664.7l158-105.3 122.9 81.9L512 828.6zm352-256l-98.5-65.7 98.5-65.7v131.4z" />
+	</svg>
+);
+
+export const ThunderboltOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+	<svg
+		viewBox="64 64 896 896"
+		focusable="false"
+		width="1em"
+		height="1em"
+		fill="currentColor"
+		aria-hidden="true"
+		style={{ ...baseStyle, ...style }}
+		className={className}
+		onClick={onClick}
+	>
+		<path d="M848 359.3H627.7L825.8 109c4.1-5.3.4-13-6.3-13H436c-2.8 0-5.5 1.5-6.9 4L170 547.5c-3.1 5.3.7 12 6.9 12h174.6L183.1 915c-4.1 5.3-.4 13 6.3 13h342.7c2.8 0 5.5-1.5 6.9-4L854.9 371.3c3.1-5.3-.7-12-6.9-12z" />
+	</svg>
+);
+
+export const CodeOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+	<svg
+		viewBox="64 64 896 896"
+		focusable="false"
+		width="1em"
+		height="1em"
+		fill="currentColor"
+		aria-hidden="true"
+		style={{ ...baseStyle, ...style }}
+		className={className}
+		onClick={onClick}
+	>
+		<path d="M866.9 499.1L747.3 380.7c-6.2-6.2-16.4-6.2-22.6 0l-45.2 45.2c-6.2 6.2-6.2 16.4 0 22.6l75.4 75.4-75.4 75.4c-6.2 6.2-6.2 16.4 0 22.6l45.2 45.2c6.2 6.2 16.4 6.2 22.6 0l119.6-118.4a15.87 15.87 0 000-22.6zM344.5 448.5l-75.4-75.4c-6.2-6.2-16.4-6.2-22.6 0L126.9 491.5a15.87 15.87 0 000 22.6l119.6 118.4c6.2 6.2 16.4 6.2 22.6 0l45.2-45.2c6.2-6.2 6.2-16.4 0-22.6l-75.4-75.4 75.4-75.4c6.2-6.2 6.2-16.4 0-22.6l-45.2-45.2zM562.9 270.8c-7.9-3.2-16.9.7-20.1 8.6L378.1 729.1c-3.2 7.9.7 16.9 8.6 20.1l41.5 16.6c7.9 3.2 16.9-.7 20.1-8.6l164.7-449.7c3.2-7.9-.7-16.9-8.6-20.1l-41.5-16.6z" />
+	</svg>
+);
+
+export const ExportOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+	<svg
+		viewBox="64 64 896 896"
+		focusable="false"
+		width="1em"
+		height="1em"
+		fill="currentColor"
+		aria-hidden="true"
+		style={{ ...baseStyle, ...style }}
+		className={className}
+		onClick={onClick}
+	>
+		<path d="M868 732h-72c-4.4 0-8 3.6-8 8v84H236V200h84c4.4 0 8-3.6 8-8v-72c0-4.4-3.6-8-8-8H164c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h704c17.7 0 32-14.3 32-32V740c0-4.4-3.6-8-8-8zM884 104H628c-4.4 0-8 3.6-8 8v72c0 4.4 3.6 8 8 8h121.9L445.1 494.8a8.03 8.03 0 000 11.3l50.9 50.9c3.1 3.1 8.2 3.1 11.3 0L810 254.1V376c0 4.4 3.6 8 8 8h72c4.4 0 8-3.6 8-8V112c0-4.4-3.6-8-8-8z" />
+	</svg>
+);
+
