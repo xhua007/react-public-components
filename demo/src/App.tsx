@@ -634,9 +634,10 @@ export default function App() {
 		<div
 			style={{
 				display: 'flex',
-				height: '100vh',
-				width: '100vw',
+				height: '100%',
+				width: '100%',
 				overflow: 'hidden',
+				boxSizing: 'border-box',
 				fontFamily:
 					'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
 				color: '#262626',
@@ -809,8 +810,10 @@ export default function App() {
 			<main
 				style={{
 					flex: 1,
+					minWidth: 0,
 					height: '100%',
 					overflowY: 'auto',
+					overflowX: 'hidden',
 					padding: '32px 48px',
 					boxSizing: 'border-box',
 					background: '#ffffff',
