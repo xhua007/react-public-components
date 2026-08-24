@@ -1,28 +1,45 @@
-import type { ReactNode } from 'react';
+import React, { ReactNode, CSSProperties } from 'react';
 import { LockOutlined } from '../src/icons';
 import './index.less';
 
 export interface DisabledBoxProps {
-	title?: ReactNode;
+	/** 内容节点（优先于 title） */
 	children?: ReactNode;
-	// 是否禁用，禁用时显示锁图标 + 文字灰色 + 不可点击
+	/** 标题文案（当无 children 时作为内容） */
+	title?: ReactNode;
+	/** 是否禁用，禁用时显示锁图标 + 文字置灰 + 拦截点击事件 */
 	disabled?: boolean;
-	// 锁图标对齐方向
+	/** 锁图标对齐方向：'left' 左侧，'right' 右侧，默认为 'left' */
 	iconAlign?: 'left' | 'right';
+	/** 自定义类名 */
+	className?: string;
+	/** 自定义样式 */
+	style?: CSSProperties;
 }
 
-const DisabledBox = (props: DisabledBoxProps) => {
-	const { title, children, disabled = false, iconAlign = 'left' } = props;
+const DisabledBox: React.FC<DisabledBoxProps> = ({
+	title,
+	children,
+	disabled = false,
+	iconAlign = 'left',
+	className = '',
+	style,
+}) => {
 	const content = children ?? title;
 
-	// 未禁用时原样渲染，不加锁
+	// 未禁用时原样渲染
 	if (!disabled) {
+		if (className || style) {
+			return (
+				<div className={className} style={style}>
+					{content}
+				</div>
+			);
+		}
 		return <>{content}</>;
 	}
 
-	// disabled 时用div渲染，样式模拟disabled效果
-	// 在捕获阶段阻止click事件传播，既防止内部点击事件触发，也阻止冒泡到父组件
-	// 不阻止mouseenter/mouseleave等hover事件，保证Tooltip正常显示
+	// disabled 时在捕获阶段阻止 click 事件传播
 	const handleClickCapture = (e: React.MouseEvent) => {
 		if (disabled) {
 			e.stopPropagation();
@@ -32,7 +49,8 @@ const DisabledBox = (props: DisabledBoxProps) => {
 
 	return (
 		<div
-			className="disabled_box_container disabled_box_disabled"
+			className={`disabled_box_container disabled_box_disabled ${className}`}
+			style={style}
 			onClickCapture={handleClickCapture}
 		>
 			{iconAlign === 'left' && <LockOutlined className="disabled_box_icon" />}

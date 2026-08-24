@@ -199,6 +199,8 @@ export default function App() {
 					{ name: 'width', desc: '单个水印单元宽度（像素）', type: 'number', default: '240' },
 					{ name: 'height', desc: '单个水印单元高度（像素）', type: 'number', default: '160' },
 					{ name: 'zIndex', desc: '水印图层层级', type: 'number', default: '9999' },
+					{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+					{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 				]}
 			/>
 		</div>

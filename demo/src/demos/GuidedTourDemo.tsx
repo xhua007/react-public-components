@@ -86,6 +86,7 @@ export default function App() {
 			default: '-',
 		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];
 
 	return (

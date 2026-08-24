@@ -1,6 +1,38 @@
 import StatusTimeline from '../../../StatusTimeline';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function StatusTimelineDemo() {
+	const usageCode = `import { StatusTimeline } from 'react-public-components';
+
+export default function App() {
+  const items = [
+    {
+      title: '提交采购申请单',
+      time: '09:30',
+      status: 'finish' as const,
+      operator: { name: '张三' },
+      duration: '5分钟',
+      description: '申请 10 台 GPU 服务器'
+    },
+    {
+      title: '部门主管审批',
+      time: '11:20',
+      status: 'process' as const,
+      operator: { name: '李四' },
+      duration: '处理中'
+    }
+  ];
+
+  return <StatusTimeline items={items} />;
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'items', desc: '时间轴节点列表，每项含 title, description, time, duration, status, operator', type: 'StatusTimelineItem[]', required: true },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			<div>
@@ -44,14 +76,24 @@ export default function StatusTimelineDemo() {
 								description: '正在核对发票抬头的增值税抵扣信息与供应商报价单。',
 							},
 							{
-								title: '总经理终审放款',
+								title: '采购执行与资产入库',
 								status: 'wait',
-								operator: { name: '赵六 (CEO)' },
+								operator: { name: '行政后勤组' },
+								description: '待财务审批完成后自动触发采购流程。',
 							},
 						]}
 					/>
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

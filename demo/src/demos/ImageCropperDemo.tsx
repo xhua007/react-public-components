@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react';
 import ImageCropper, { ImageCropperRef, CropResult } from '../../../ImageCropper';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 // 内置高清测试风景图片（基于 SVG DataURL，确保开箱即用无需依赖外链）
 const demoLandscapeSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600"><defs><linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%231677ff"/><stop offset="60%" stop-color="%2391caff"/><stop offset="100%" stop-color="%23ffffff"/></linearGradient><linearGradient id="sun" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ff7a45"/><stop offset="100%" stop-color="%23ffc53d"/></linearGradient><linearGradient id="mountain" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%2352c41a"/><stop offset="100%" stop-color="%23237804"/></linearGradient></defs><rect width="800" height="600" fill="url(%23sky)"/><circle cx="620" cy="180" r="70" fill="url(%23sun)"/><polygon points="120,600 380,240 640,600" fill="url(%23mountain)" opacity="0.9"/><polygon points="340,600 580,310 820,600" fill="url(%23mountain)" opacity="0.8"/><text x="400" y="520" font-family="sans-serif" font-size="32" font-weight="bold" fill="%23ffffff" text-anchor="middle">React Public Components</text></svg>`;
@@ -155,6 +157,55 @@ export default function ImageCropperDemo() {
 					设置 `shape="round"` 和 `modal={true}` 即可直接作为高颜值用户头像上传裁剪器。
 				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet
+						language="typescript"
+						code={`import { useState } from 'react';
+import { ImageCropper } from 'react-public-components';
+
+export default function App() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>裁剪头像</button>
+      <ImageCropper
+        modal
+        open={open}
+        src="https://example.com/avatar.jpg"
+        shape="round"
+        aspectRatio={1}
+        onOk={(result) => {
+          console.log('裁剪完成 base64:', result.dataURL);
+          setOpen(false);
+        }}
+        onCancel={() => setOpen(false)}
+      />
+    </>
+  );
+}`}
+					/>
+				</div>
+			</div>
+
+			<ApiTable
+				data={[
+					{ name: 'src', desc: '待裁剪的图片源地址或 Base64 字符串', type: 'string', required: true },
+					{ name: 'aspectRatio', desc: '裁剪框宽高比（如 1 代表 1:1 正方形，16/9 代表宽屏，0 代表自由矩形）', type: 'number', default: '1' },
+					{ name: 'shape', desc: "裁剪框形状：'rect' 矩形 / 'round' 圆形（适合头像）", type: "'rect' | 'round'", default: "'rect'" },
+					{ name: 'modal', desc: '是否以 Modal 模态弹窗形式弹出展示', type: 'boolean', default: 'false' },
+					{ name: 'open', desc: 'Modal 模式下的显隐受控状态', type: 'boolean', default: 'true' },
+					{ name: 'title', desc: 'Modal 模式下的弹窗标题', type: 'ReactNode', default: "'图片裁剪'" },
+					{ name: 'onOk', desc: '点击确认裁剪完成时的回调（回传 dataURL, blob, width, height）', type: '(result: CropResult) => void', default: '-' },
+					{ name: 'onCancel', desc: '点击取消/关闭弹窗时的回调', type: '() => void', default: '-' },
+					{ name: 'height', desc: '内嵌模式下的画布固定高度（像素）', type: 'number', default: '360' },
+					{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+					{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+				]}
+			/>
 		</div>
 	);
 }

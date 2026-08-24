@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Splitter from '../../../Splitter';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function SplitterDemo() {
 	const [showIconMode, setShowIconMode] = useState<boolean | 'auto'>(true);
@@ -8,6 +10,40 @@ export default function SplitterDemo() {
 		{ label: 'true (常态显示)', value: true },
 		{ label: 'false (不显示)', value: false },
 		{ label: "'auto' (悬停显示)", value: 'auto' },
+	];
+
+	const usageCode = `import { Splitter } from 'react-public-components';
+
+export default function App() {
+  return (
+    <Splitter style={{ height: 360 }}>
+      <Splitter.Panel defaultSize="30%" min="15%" collapsible>
+        <div style={{ padding: 16 }}>左侧导航树</div>
+      </Splitter.Panel>
+      <Splitter.Panel>
+        <div style={{ padding: 16 }}>主体工作区内容</div>
+      </Splitter.Panel>
+    </Splitter>
+  );
+}`;
+
+	const splitterApiData: ApiPropItem[] = [
+		{ name: 'orientation', desc: "分屏方向：'horizontal' 水平分屏 / 'vertical' 垂直分屏", type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+		{ name: 'lazy', desc: '是否启用延迟拖拽（拖拽过程中仅移动虚线指示器，松开后生效）', type: 'boolean', default: 'false' },
+		{ name: 'children', desc: 'Splitter.Panel 子面板节点', type: 'ReactNode', required: true },
+		{ name: 'onResize', desc: '面板尺寸变化时的实时回调函数', type: '(sizes: number[]) => void', default: '-' },
+		{ name: 'onResizeEnd', desc: '拖拽调整尺寸结束时的回调函数', type: '(sizes: number[]) => void', default: '-' },
+		{ name: 'styles', desc: '语义化 DOM 样式对象或函数 (root, panel, dragger)', type: 'SplitterStyles', default: '-' },
+		{ name: 'classNames', desc: '语义化 DOM 类名对象或函数 (root, panel, dragger)', type: 'SplitterClassNames', default: '-' },
+	];
+
+	const panelApiData: ApiPropItem[] = [
+		{ name: 'defaultSize', desc: '面板初始默认尺寸（支持数字 px 或百分比字符串如 40%）', type: 'number | string', default: '-' },
+		{ name: 'min', desc: '面板最小允许尺寸限制', type: 'number | string', default: '-' },
+		{ name: 'max', desc: '面板最大允许尺寸限制', type: 'number | string', default: '-' },
+		{ name: 'collapsible', desc: '折叠配置：支持布尔值或对象 { start, end, showCollapsibleIcon }', type: 'boolean | object', default: 'false' },
+		{ name: 'resizable', desc: '是否允许通过分隔条拖拽调整该面板大小', type: 'boolean', default: 'true' },
+		{ name: 'size', desc: '受控尺寸', type: 'number | string', default: '-' },
 	];
 
 	return (
@@ -27,16 +63,19 @@ export default function SplitterDemo() {
 			</div>
 
 			<div>
-				<div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 12 }}>
-					<span style={{ fontWeight: 500 }}>ShowCollapsibleIcon: </span>
+				<div style={{ marginBottom: 12, display: 'flex', gap: 16, alignItems: 'center' }}>
+					<span style={{ fontSize: 13, fontWeight: 500, color: '#1f1f1f' }}>
+						折叠按钮展示模式 (showCollapsibleIcon):
+					</span>
 					{options.map((option) => (
 						<label
 							key={String(option.value)}
 							style={{
+								fontSize: 13,
+								cursor: 'pointer',
 								display: 'inline-flex',
 								alignItems: 'center',
-								gap: 6,
-								cursor: 'pointer',
+								gap: 4,
 							}}
 						>
 							<input
@@ -53,29 +92,37 @@ export default function SplitterDemo() {
 				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
 					6. Splitter · 三面板水平分屏（全面板可折叠）
 				</h3>
-				<Splitter
-					style={{ height: 360 }}
-					onCollapse={(collapsed, sizes) => {
-						console.log('onCollapse collapsed status:', collapsed, 'sizes:', sizes);
-					}}
-					onDraggerDoubleClick={(index) => {
-						console.log('onDraggerDoubleClick dragger index:', index);
-					}}
-				>
+				<Splitter style={{ height: 360 }}>
 					<Splitter.Panel
-						collapsible={{ start: true, end: true, showCollapsibleIcon: showIconMode }}
+						defaultSize="25%"
+						min="15%"
+						collapsible={{
+							start: true,
+							end: true,
+							showCollapsibleIcon: showIconMode,
+						}}
 					>
 						<h3>左侧面板</h3>
-						<p>可拖动分隔条调整宽度，点击分隔条上的按钮可折叠。</p>
+						<p>支持多端折叠与双击重置。</p>
 					</Splitter.Panel>
 					<Splitter.Panel
-						collapsible={{ start: true, end: true, showCollapsibleIcon: showIconMode }}
+						collapsible={{
+							start: true,
+							end: true,
+							showCollapsibleIcon: showIconMode,
+						}}
 					>
-						<h3>中侧面板</h3>
-						<p>双击分隔条可重置为初始尺寸。</p>
+						<h3>中间面板</h3>
+						<p>自适应弹性伸缩。</p>
 					</Splitter.Panel>
 					<Splitter.Panel
-						collapsible={{ start: true, end: true, showCollapsibleIcon: showIconMode }}
+						defaultSize="30%"
+						min="15%"
+						collapsible={{
+							start: true,
+							end: true,
+							showCollapsibleIcon: showIconMode,
+						}}
 					>
 						<h3>右侧面板</h3>
 						<p>双击分隔条可重置为初始尺寸。</p>
@@ -122,6 +169,16 @@ export default function SplitterDemo() {
 					</Splitter.Panel>
 				</Splitter>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable title="Splitter 属性 (Props)" data={splitterApiData} />
+			<ApiTable title="Splitter.Panel 属性 (Props)" data={panelApiData} />
 		</div>
 	);
 }

@@ -162,6 +162,7 @@ export default function App() {
 						type: '() => string | Promise<string>',
 						default: '-',
 					},
+					{ name: 'children', desc: '按钮自定义展示文案或子元素节点', type: 'ReactNode', default: '-' },
 					{
 						name: 'mode',
 						desc: "复制展示形态：'button' 按钮 / 'icon' 纯图标 / 'inline' 行内文本",
@@ -174,6 +175,9 @@ export default function App() {
 						type: "'default' | 'primary'",
 						default: "'default'",
 					},
+					{ name: 'icon', desc: '自定义默认未复制状态的图标', type: 'ReactNode', default: '<CopyOutlined />' },
+					{ name: 'copiedIcon', desc: '自定义复制成功后展示的高亮图标', type: 'ReactNode', default: '<CheckOutlined />' },
+					{ name: 'copiedText', desc: '自定义复制成功后展示的文字说明', type: 'ReactNode', default: "'已复制'" },
 					{
 						name: 'tooltip',
 						desc: '复制成功后的 Tooltip 气泡提示配置（传 false 禁用）',
@@ -193,6 +197,14 @@ export default function App() {
 						type: '(text: string) => void',
 						default: '-',
 					},
+					{
+						name: 'onError',
+						desc: '复制失败时的异常捕获回调',
+						type: '(error: unknown) => void',
+						default: '-',
+					},
+					{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+					{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 				]}
 			/>
 		</div>

@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react';
 import CountUp, { CountUpRef } from '../../../CountUp';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function CountUpDemo() {
 	const [targetValue, setTargetValue] = useState<number>(9824.5);
@@ -142,6 +144,48 @@ export default function CountUpDemo() {
 					通过 `ref` 可以调用 `start()`、`reset()`、`update(newEnd)` 动态控制动画。
 				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet
+						language="typescript"
+						code={`import { CountUp } from 'react-public-components';
+
+export default function App() {
+  return (
+    <CountUp
+      start={0}
+      end={1284560.85}
+      prefix="¥"
+      decimals={2}
+      duration={2.5}
+      separator=","
+    />
+  );
+}`}
+					/>
+				</div>
+			</div>
+
+			<ApiTable
+				data={[
+					{ name: 'end', desc: '目标终点数值', type: 'number', required: true },
+					{ name: 'start', desc: '起始数值', type: 'number', default: '0' },
+					{ name: 'duration', desc: '数字滚动动画持续时间（秒）', type: 'number', default: '2' },
+					{ name: 'decimals', desc: '保留小数位数', type: 'number', default: '0' },
+					{ name: 'prefix', desc: '数字前缀字符或节点（如 ¥、$）', type: 'ReactNode', default: '-' },
+					{ name: 'suffix', desc: '数字后缀字符或节点（如 %、人）', type: 'ReactNode', default: '-' },
+					{ name: 'decimal', desc: '小数点符号字符', type: 'string', default: "'.'" },
+					{ name: 'separator', desc: '千分位分隔符（传空字符串禁用）', type: 'string', default: "','" },
+					{ name: 'useEasing', desc: '是否使用平滑缓动曲线', type: 'boolean', default: 'true' },
+					{ name: 'autoStart', desc: '是否在挂载完成后自动开始滚动动画', type: 'boolean', default: 'true' },
+					{ name: 'onEnd', desc: '滚动动画完成时的回调函数', type: '() => void', default: '-' },
+					{ name: 'ref', desc: '支持通过 ref 获得实例调用 start(), reset(), update(val)', type: 'RefObject<CountUpRef>', default: '-' },
+					{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+					{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+				]}
+			/>
 		</div>
 	);
 }

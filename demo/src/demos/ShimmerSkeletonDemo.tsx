@@ -1,8 +1,35 @@
 import { useState } from 'react';
 import ShimmerSkeleton from '../../../ShimmerSkeleton';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function ShimmerSkeletonDemo() {
 	const [loading, setLoading] = useState<boolean>(true);
+
+	const usageCode = `import { useState } from 'react';
+import { ShimmerSkeleton } from 'react-public-components';
+
+export default function App() {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <ShimmerSkeleton type="card" loading={loading}>
+      <div style={{ padding: 16, background: '#fff', borderRadius: 8 }}>
+        <h3>真实内容已就绪</h3>
+        <p>数据加载完成后平滑淡入展示。</p>
+      </div>
+    </ShimmerSkeleton>
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'loading', desc: '是否处于加载中占位骨架屏状态', type: 'boolean', default: 'true' },
+		{ name: 'type', desc: "骨架形态类型：'text' 文本 / 'card' 卡片 / 'list' 列表 / 'avatar' 头像", type: "'text' | 'card' | 'list' | 'avatar'", default: "'card'" },
+		{ name: 'rows', desc: '文本骨架占位条数（仅在 type="text" 有效）', type: 'number', default: '3' },
+		{ name: 'children', desc: '加载完成 (loading=false) 后展示的真实业务组件', type: 'ReactNode', default: '-' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
@@ -43,7 +70,7 @@ export default function ShimmerSkeletonDemo() {
 								</div>
 								<h4 style={{ margin: '12px 0 6px 0' }}>高质感 UI 交互套件</h4>
 								<p style={{ fontSize: 13, color: '#595959', margin: 0 }}>
-									极简、现代、零沉重第三方依赖的通用 React 组件库。
+									专为高要求企业中后台打造的轻量级公共组件库。
 								</p>
 							</div>
 						</ShimmerSkeleton>
@@ -51,53 +78,38 @@ export default function ShimmerSkeletonDemo() {
 
 					{/* 列表骨架 */}
 					<div style={{ width: 320 }}>
-						<ShimmerSkeleton type="list" rows={3} loading={loading}>
-							<div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-								<div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-									<div
-										style={{
-											width: 40,
-											height: 40,
-											borderRadius: '50%',
-											background: '#52c41a',
-											color: '#fff',
-											display: 'flex',
-											alignItems: 'center',
-											justifyContent: 'center',
-										}}
-									>
-										A
-									</div>
-									<div>
-										<div style={{ fontWeight: 500 }}>Alex Chen</div>
-										<div style={{ fontSize: 12, color: '#8c8c8c' }}>主任前端架构师</div>
-									</div>
+						<ShimmerSkeleton type="list" loading={loading}>
+							<div
+								style={{
+									border: '1px solid #f0f0f0',
+									borderRadius: 8,
+									padding: 16,
+									background: '#ffffff',
+								}}
+							>
+								<div style={{ padding: '8px 0', borderBottom: '1px solid #f5f5f5' }}>
+									<b>• 生产集群负载均衡</b>
 								</div>
-								<div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-									<div
-										style={{
-											width: 40,
-											height: 40,
-											borderRadius: '50%',
-											background: '#1677ff',
-											color: '#fff',
-											display: 'flex',
-											alignItems: 'center',
-											justifyContent: 'center',
-										}}
-									>
-										S
-									</div>
-									<div>
-										<div style={{ fontWeight: 500 }}>Sarah Wang</div>
-										<div style={{ fontSize: 12, color: '#8c8c8c' }}>高级 UX 设计师</div>
-									</div>
+								<div style={{ padding: '8px 0', borderBottom: '1px solid #f5f5f5' }}>
+									<b>• 自动化部署监控</b>
+								</div>
+								<div style={{ padding: '8px 0' }}>
+									<b>• 链路追踪与告警</b>
 								</div>
 							</div>
 						</ShimmerSkeleton>
 					</div>
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

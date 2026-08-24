@@ -1,8 +1,42 @@
 import { useState } from 'react';
 import EnvBadge, { EnvType } from '../../../EnvBadge';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function EnvBadgeDemo() {
 	const [env, setEnv] = useState<EnvType>('uat');
+
+	const usageCode = `import { EnvBadge } from 'react-public-components';
+
+export default function App() {
+  return (
+    <EnvBadge
+      env="uat"
+      placement="top-right"
+      info={{
+        version: 'v2.4.0',
+        branch: 'release/20260815',
+        commit: '7fa89cd',
+        buildTime: '2026-08-15 14:20'
+      }}
+      switchList={[
+        { label: '开发环境 (DEV)', url: 'https://dev.example.com', env: 'dev' },
+        { label: '预发环境 (STAGING)', url: 'https://staging.example.com', env: 'staging' }
+      ]}
+    />
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'env', desc: "当前运行环境：'dev' | 'test' | 'uat' | 'staging' | 'prod'", type: 'EnvType', required: true },
+		{ name: 'placement', desc: "悬浮挂载位置：'top-right' | 'top-left' | 'bottom-right'", type: 'EnvPlacement', default: "'top-right'" },
+		{ name: 'label', desc: '自定义显示的标签文字（不传时展示大写的环境名称）', type: 'ReactNode', default: '-' },
+		{ name: 'info', desc: '构建与部署版本元数据，包含 version, branch, commit, buildTime, apiHost', type: 'EnvBuildInfo', default: '-' },
+		{ name: 'switchList', desc: '快捷切换至其他环境的跳转链接列表', type: 'EnvSwitchItem[]', default: '-' },
+		{ name: 'visible', desc: '是否显示环境角标', type: 'boolean', default: 'true' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
@@ -44,23 +78,30 @@ export default function EnvBadgeDemo() {
 
 					<EnvBadge
 						env={env}
-						placement="top-right"
-						style={{ position: 'absolute' }}
 						info={{
-							version: '1.3.0',
-							branch: 'release/2026-q3',
-							commit: '7fa82cd',
+							version: 'v2.4.0-build.1092',
+							branch: 'feature/rpc-v1.3',
+							commit: '7fa89cd9a',
+							buildTime: '2026-08-15 14:20:00 CST',
 							apiHost: 'https://api-uat.company.internal',
-							buildTime: '2026-08-15 22:40',
 						}}
 						switchList={[
-							{ label: '开发 DEV', url: '#', env: 'dev' },
-							{ label: '预发 STG', url: '#', env: 'staging' },
-							{ label: '生产 PROD', url: '#', env: 'prod' },
+							{ label: '开发环境 (DEV)', url: '#dev', env: 'dev' },
+							{ label: '测试验收 (UAT)', url: '#uat', env: 'uat' },
+							{ label: '预发布环境 (STAGING)', url: '#staging', env: 'staging' },
 						]}
 					/>
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

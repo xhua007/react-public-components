@@ -1,6 +1,40 @@
 import HoverCard from '../../../HoverCard';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function HoverCardDemo() {
+	const usageCode = `import { HoverCard } from 'react-public-components';
+
+export default function App() {
+  return (
+    <p>
+      欢迎咨询我们的核心架构师{' '}
+      <HoverCard
+        openDelay={200}
+        content={
+          <div style={{ padding: 8 }}>
+            <h4>Alex Johnson</h4>
+            <p>前端技术委员会负责人</p>
+          </div>
+        }
+      >
+        <span style={{ color: '#1677ff', textDecoration: 'underline', cursor: 'pointer' }}>
+          @Alex
+        </span>
+      </HoverCard>
+    </p>
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'children', desc: '触发悬浮卡片的宿主子元素节点', type: 'ReactNode', required: true },
+		{ name: 'content', desc: '鼠标悬浮时弹出的卡片详细内容', type: 'ReactNode', required: true },
+		{ name: 'openDelay', desc: '鼠标移入展开前的防误触延迟时间（毫秒）', type: 'number', default: '200' },
+		{ name: 'closeDelay', desc: '鼠标移出关闭前的平滑缓冲延迟时间（毫秒）', type: 'number', default: '200' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			<div>
@@ -43,10 +77,10 @@ export default function HoverCardDemo() {
 
 								<div style={{ display: 'flex', gap: 16, fontSize: 12, color: '#8c8c8c' }}>
 									<span>
-										<b>1.2k</b> 关注者
+										关注者 <b style={{ color: '#1f1f1f' }}>1,420</b>
 									</span>
 									<span>
-										<b>98</b> 开源库
+										开源项目 <b style={{ color: '#1f1f1f' }}>38</b>
 									</span>
 								</div>
 							</div>
@@ -56,16 +90,25 @@ export default function HoverCardDemo() {
 							style={{
 								color: '#1677ff',
 								fontWeight: 600,
+								textDecoration: 'underline',
 								cursor: 'pointer',
-								borderBottom: '1px dashed #1677ff',
 							}}
 						>
-							@alex
+							@Alex Johnson
 						</span>
 					</HoverCard>{' '}
-					主导，并在团队内部全面推广使用。鼠标悬停在用户昵称上可查看资料卡。
+					牵头负责，旨在建立企业级轻量通用组件设计标准。
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

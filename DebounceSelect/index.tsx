@@ -30,7 +30,7 @@ export interface DebounceSelectProps {
 	/** 默认选中值 */
 	defaultValue?: SelectValue;
 	/** 选中值变化回调 */
-	onChange?: (value: any, option?: SelectOption | SelectOption[]) => void;
+	onChange?: (value: SelectValue, option?: SelectOption | SelectOption[]) => void;
 	/** 输入框占位符 */
 	placeholder?: string;
 	/** 是否支持清空 */

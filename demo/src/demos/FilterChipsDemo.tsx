@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import FilterChips, { FilterChipItem } from '../../../FilterChips';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function FilterChipsDemo() {
 	const [chips, setChips] = useState<FilterChipItem[]>([
@@ -16,6 +18,33 @@ export default function FilterChipsDemo() {
 	const handleClearAll = () => {
 		setChips([]);
 	};
+
+	const usageCode = `import { useState } from 'react';
+import { FilterChips } from 'react-public-components';
+
+export default function App() {
+  const [chips, setChips] = useState([
+    { id: 'status', label: '状态', value: '已上架' },
+    { id: 'category', label: '品类', value: '数码配件' },
+  ]);
+
+  return (
+    <FilterChips
+      chips={chips}
+      onRemove={(id) => setChips(chips.filter(c => c.id !== id))}
+      onClearAll={() => setChips([])}
+    />
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'chips', desc: '筛选胶囊列表，每项包含 id, label, value', type: 'FilterChipItem[]', required: true },
+		{ name: 'onRemove', desc: '点击单个筛选项右侧关闭按钮的回调', type: '(id: string) => void', default: '-' },
+		{ name: 'onClearAll', desc: '点击末尾一键清空按钮的回调', type: '() => void', default: '-' },
+		{ name: 'clearText', desc: '清空按钮的文案', type: 'string', default: "'清空筛选'" },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
@@ -46,6 +75,15 @@ export default function FilterChipsDemo() {
 					)}
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

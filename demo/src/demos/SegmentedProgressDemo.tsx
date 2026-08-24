@@ -1,6 +1,34 @@
 import SegmentedProgress from '../../../SegmentedProgress';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function SegmentedProgressDemo() {
+	const usageCode = `import { SegmentedProgress } from 'react-public-components';
+
+export default function App() {
+  return (
+    <SegmentedProgress
+      total={512}
+      height={12}
+      segments={[
+        { label: '系统与镜像', value: 48, color: '#1677ff', suffix: 'GB' },
+        { label: '模型数据', value: 240, color: '#722ed1', suffix: 'GB' },
+        { label: '日志文件', value: 96, color: '#fa8c16', suffix: 'GB' },
+        { label: '剩余空间', value: 128, color: '#52c41a', suffix: 'GB' },
+      ]}
+    />
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'segments', desc: '分段数据列表，每项含 label, value, color, suffix', type: 'ProgressSegment[]', required: true },
+		{ name: 'total', desc: '总量基准数值（不传时自动对所有分段 value 求和）', type: 'number', default: '各分段求和' },
+		{ name: 'height', desc: '进度条高度（像素）', type: 'number', default: '10' },
+		{ name: 'showLegend', desc: '是否在进度条下方展示图例 Legend', type: 'boolean', default: 'true' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			<div>
@@ -40,6 +68,15 @@ export default function SegmentedProgressDemo() {
 					</div>
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

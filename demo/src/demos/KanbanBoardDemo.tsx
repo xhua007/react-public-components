@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import KanbanBoard, { KanbanColumn } from '../../../KanbanBoard';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 interface Task {
 	id: string;
@@ -71,7 +73,6 @@ export default function KanbanBoardDemo() {
 		setColumns((prev) => {
 			let movedCard: Task | null = null;
 
-			// 1. 从原列移除
 			const updatedCols = prev.map((col) => {
 				if (col.id === sourceColId) {
 					const remaining = col.items.filter((item) => {
@@ -88,7 +89,6 @@ export default function KanbanBoardDemo() {
 
 			if (!movedCard) return prev;
 
-			// 2. 插入目标列
 			return updatedCols.map((col) => {
 				if (col.id === targetColId) {
 					const items = [...col.items];
@@ -99,6 +99,44 @@ export default function KanbanBoardDemo() {
 			});
 		});
 	};
+
+	const usageCode = `import { useState } from 'react';
+import { KanbanBoard } from 'react-public-components';
+
+export default function App() {
+  const [columns, setColumns] = useState([
+    {
+      id: 'todo',
+      title: '待处理',
+      items: [{ id: '1', title: '需求评审' }]
+    },
+    {
+      id: 'done',
+      title: '已完成',
+      items: [{ id: '2', title: '发布上线' }]
+    }
+  ]);
+
+  return (
+    <KanbanBoard
+      columns={columns}
+      keyExtractor={(item) => item.id}
+      renderCard={(item) => <div>{item.title}</div>}
+      onCardMove={(cardId, sourceCol, targetCol, newIndex) => {
+        // 更新泳道卡片状态
+      }}
+    />
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'columns', desc: '泳道列数据数组，每项包含 id, title, items, color', type: 'KanbanColumn<T>[]', required: true },
+		{ name: 'keyExtractor', desc: '提取每张卡片唯一标识 Key 的函数', type: '(item: T) => string', required: true },
+		{ name: 'renderCard', desc: '自定义渲染单个卡片内容的函数', type: '(item: T, columnId: string) => ReactNode', required: true },
+		{ name: 'onCardMove', desc: '卡片跨列/本列拖拽放置完成后的回调函数', type: '(cardId, sourceCol, targetCol, newIndex) => void', default: '-' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
@@ -140,6 +178,15 @@ export default function KanbanBoardDemo() {
 					按住任意任务卡片拖动至其他泳道列中松开，体验流畅的看板状态流转。
 				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 720 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

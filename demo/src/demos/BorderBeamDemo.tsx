@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import BorderBeam, { BorderBeamColorStop } from '../../../BorderBeam';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 const gradientPresets: Record<
 	string,
@@ -595,6 +597,44 @@ export default function BorderBeamDemo() {
 					展示 6 组渐变流光配色，可切换查看不同效果。
 				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet
+						language="typescript"
+						code={`import { BorderBeam } from 'react-public-components';
+
+export default function App() {
+  return (
+    <BorderBeam
+      color="#1677ff"
+      size={120}
+      duration={6}
+      lineWidth={2}
+    >
+      <div style={{ padding: 24, borderRadius: 12, background: '#fff' }}>
+        <h3>发光边框卡片</h3>
+        <p>环绕流光粒子匀速环绕转动。</p>
+      </div>
+    </BorderBeam>
+  );
+}`}
+					/>
+				</div>
+			</div>
+
+			<ApiTable
+				data={[
+					{ name: 'children', desc: '被边框流光包裹的卡片内容节点', type: 'ReactNode', default: '-' },
+					{ name: 'color', desc: '流光颜色（单色字符串或渐变点数组 [{ color, percent }]）', type: 'string | BorderBeamColorStop[]', default: "'#1677ff'" },
+					{ name: 'size', desc: '流光可见光带段的长度尺寸（像素）', type: 'number | string', default: '100' },
+					{ name: 'duration', desc: '流光沿边缘完整跑完一圈的周期耗时（秒）', type: 'number', default: '6' },
+					{ name: 'lineWidth', desc: '流光光带线宽（像素）', type: 'number | string', default: "'1px'" },
+					{ name: 'count', desc: '同时环绕运行的流光粒子数量', type: 'number', default: '1' },
+					{ name: 'outset', desc: '流光层相对容器外扩偏移量', type: 'number | string', default: '-' },
+				]}
+			/>
 		</div>
 	);
 }

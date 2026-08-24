@@ -1,6 +1,42 @@
 import MetricCard from '../../../MetricCard';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function MetricCardDemo() {
+	const usageCode = `import { MetricCard } from 'react-public-components';
+
+export default function App() {
+  return (
+    <MetricCard
+      title="本月累计总营收"
+      value={1289600}
+      prefix="¥"
+      trend="up"
+      trendValue="+24.8%"
+      trendLabel="较上月"
+      chartData={[30, 45, 40, 65, 58, 80, 92]}
+      chartColor="#1677ff"
+      footer="日均销售额：¥42,980"
+    />
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'title', desc: '指标卡片标题', type: 'ReactNode', required: true },
+		{ name: 'value', desc: '核心指标数值（数字自动平滑滚动跳跃，支持字符串）', type: 'number | string', required: true },
+		{ name: 'prefix', desc: '数值前缀单位（如 ¥）', type: 'ReactNode', default: '-' },
+		{ name: 'suffix', desc: '数值后缀单位（如 人、%）', type: 'ReactNode', default: '-' },
+		{ name: 'trend', desc: "环比趋势方向：'up' 上升（绿） / 'down' 下降（红）", type: "'up' | 'down'", default: '-' },
+		{ name: 'trendValue', desc: '趋势数值标签（如 +18.5%）', type: 'ReactNode', default: '-' },
+		{ name: 'trendLabel', desc: '趋势对比说明文本（如 较上月）', type: 'ReactNode', default: '-' },
+		{ name: 'chartData', desc: '底部迷你 Sparkline 折线图数据数值数组', type: 'number[]', default: '-' },
+		{ name: 'chartColor', desc: '微折线图主题颜色', type: 'string', default: "'#1677ff'" },
+		{ name: 'footer', desc: '底部说明文本或自定义节点', type: 'ReactNode', default: '-' },
+		{ name: 'extra', desc: '卡片右上角额外操作区节点', type: 'ReactNode', default: '-' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			<div>
@@ -57,6 +93,15 @@ export default function MetricCardDemo() {
 					内置高质量 SVG Sparkline 微折线图与 CountUp 数字平滑跳动，专为 Dashboard 看板设计。
 				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 800 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

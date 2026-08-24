@@ -1,4 +1,6 @@
 import Marquee from '../../../Marquee';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 const clientLogos = [
 	{ name: 'Google Cloud', emoji: '☁️' },
@@ -11,6 +13,33 @@ const clientLogos = [
 ];
 
 export default function MarqueeDemo() {
+	const usageCode = `import { Marquee } from 'react-public-components';
+
+export default function App() {
+  return (
+    <Marquee speed={40} pauseOnHover gradient gradientColor="#ffffff">
+      <div style={{ display: 'flex', gap: 24 }}>
+        <span>🚀 极速部署</span>
+        <span>🛡️ 安全防篡改</span>
+        <span>🎨 精美设计</span>
+      </div>
+    </Marquee>
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'children', desc: '滚动的子元素内容', type: 'ReactNode', required: true },
+		{ name: 'direction', desc: "滚动方向：'left' | 'right' | 'up' | 'down'", type: 'string', default: "'left'" },
+		{ name: 'speed', desc: '滚动速度（像素/秒）', type: 'number', default: '50' },
+		{ name: 'pauseOnHover', desc: '鼠标悬停时是否自动暂停动画', type: 'boolean', default: 'true' },
+		{ name: 'gradient', desc: '是否开启两侧/上下边缘羽化渐变遮罩', type: 'boolean', default: 'false' },
+		{ name: 'gradientColor', desc: '边缘羽化渐变的遮罩颜色（需与背景色一致）', type: 'string', default: "'#ffffff'" },
+		{ name: 'gap', desc: '子项循环间距（像素）', type: 'number', default: '24' },
+		{ name: 'play', desc: '是否保持滚动播放', type: 'boolean', default: 'true' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			{/* 1. 客户 Logo 墙无缝平滑横向滚动 */}
@@ -79,6 +108,15 @@ export default function MarqueeDemo() {
 					</Marquee>
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 680 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

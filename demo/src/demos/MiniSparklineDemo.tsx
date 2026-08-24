@@ -1,6 +1,42 @@
 import MiniSparkline from '../../../MiniSparkline';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function MiniSparklineDemo() {
+	const usageCode = `import { MiniSparkline } from 'react-public-components';
+
+export default function App() {
+  return (
+    <div style={{ display: 'flex', gap: 16 }}>
+      {/* 蓝色趋势 */}
+      <MiniSparkline
+        data={[12, 18, 14, 25, 22, 34, 40, 32, 45, 52]}
+        color="#1677ff"
+        width={100}
+        height={32}
+      />
+
+      {/* 绿色平稳 */}
+      <MiniSparkline
+        data={[60, 55, 48, 42, 38, 35, 34, 32, 36, 34]}
+        color="#52c41a"
+        width={100}
+        height={32}
+      />
+    </div>
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'data', desc: '微折线数值序列数组', type: 'number[]', required: true },
+		{ name: 'color', desc: '折线与下方填充渐变的主题颜色', type: 'string', default: "'#1677ff'" },
+		{ name: 'fill', desc: '是否展示底部渐变面积填充', type: 'boolean', default: 'true' },
+		{ name: 'width', desc: 'SVG 图表宽度（像素）', type: 'number', default: '80' },
+		{ name: 'height', desc: 'SVG 图表高度（像素）', type: 'number', default: '28' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			<div>
@@ -76,6 +112,15 @@ export default function MiniSparklineDemo() {
 					</div>
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

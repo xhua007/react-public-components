@@ -1,10 +1,52 @@
 import { useState, useRef } from 'react';
 import { ScrollTracker, StickyHeader } from '../../../ScrollTracker';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function ScrollTrackerDemo() {
 	const [customPercent, setCustomPercent] = useState<number>(0);
 	const [stickyState, setStickyState] = useState<boolean>(false);
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+	const usageCode = `import { ScrollTracker, StickyHeader } from 'react-public-components';
+
+export default function App() {
+  return (
+    <>
+      {/* 页面顶部滚动进度指示条 */}
+      <ScrollTracker color={['#1677ff', '#52c41a']} height={3} showPercentage />
+
+      {/* 滚动到达顶部时智能吸顶并带毛玻璃 */}
+      <StickyHeader offsetTop={0}>
+        {(isSticky) => (
+          <nav style={{ padding: 16, background: isSticky ? 'rgba(255,255,255,0.85)' : '#fff' }}>
+            <h2>导航栏 {isSticky ? '(已吸顶)' : ''}</h2>
+          </nav>
+        )}
+      </StickyHeader>
+    </>
+  );
+}`;
+
+	const trackerApiData: ApiPropItem[] = [
+		{ name: 'position', desc: "进度条吸附位置：'top' 顶部 / 'bottom' 底部", type: "'top' | 'bottom'", default: "'top'" },
+		{ name: 'height', desc: '进度条高度（像素）', type: 'number', default: '3' },
+		{ name: 'color', desc: '进度条颜色或多段渐变色彩数组', type: 'string | string[]', default: "'#1677ff'" },
+		{ name: 'showPercentage', desc: '是否在角落显示当前已阅读百分比角标', type: 'boolean', default: 'false' },
+		{ name: 'target', desc: '监听滚动的目标 DOM 容器（不传时监听整个浏览器 window）', type: 'HTMLElement | (() => HTMLElement | null)', default: 'window' },
+		{ name: 'onChange', desc: '滚动百分比改变回调 (0 ~ 100)', type: '(percent: number) => void', default: '-' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
+	const stickyApiData: ApiPropItem[] = [
+		{ name: 'children', desc: '子内容或 Render Props 函数，接收 isSticky 状态', type: 'ReactNode | ((isSticky: boolean) => ReactNode)', required: true },
+		{ name: 'offsetTop', desc: '触发吸顶的距离顶部偏移阈值（像素）', type: 'number', default: '0' },
+		{ name: 'onStickyChange', desc: '吸顶状态切换回调', type: '(isSticky: boolean) => void', default: '-' },
+		{ name: 'target', desc: '监听滚动的外部容器', type: 'HTMLElement | (() => HTMLElement | null)', default: 'window' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
@@ -46,16 +88,10 @@ export default function ScrollTrackerDemo() {
 								关于 React Public Components 组件库
 							</h4>
 							<p>
-								这是一个专为中后台及现代 Web 开发打造的 React 公共组件库。它致力于补充主流 UI 库（如
-								Ant Design 等）所未提供的高频实用组件，提供开箱即用、零第三方 UI
-								库依赖的轻量级解决方案。
+								这是一个专为中后台及现代 Web 开发打造的 React 公共组件库。它致力于补充主流 UI 库所未提供的高频实用组件，提供开箱即用、零第三方 UI 库依赖的轻量级解决方案。
 							</p>
 							<p>
-								组件库内置了诸如折叠容器（CollapseBox）、分屏面板（Splitter）、边框流光（BorderBeam）、颜色选择器（ColorPicker）、瀑布流布局（Masonry）、禁用遮罩（DisabledBox）、一键复制（CopyButton）、智能文本截断（TextEllipsis）、防抖异步选择框（DebounceSelect）、平滑数字滚动（CountUp）、右键菜单（ContextMenu）、全屏容器（Fullscreen）、图片裁剪（ImageCropper）、滚动指示器与吸顶组件（ScrollTracker/StickyHeader）、多格式文件预览（FilePreviewer）以及底部悬浮操作栏（FloatingActionBar）等。
-							</p>
-							<p>
-								所有组件均拥有精心调校的设计美感，提供顺畅的微交互动效与严苛的 TypeScript
-								类型定义，助您轻松构建现代化 Web 应用。
+								所有组件均拥有精心调校的设计美感，提供顺畅的微交互动效与严苛的 TypeScript 类型定义，助您轻松构建现代化 Web 应用。
 							</p>
 						</div>
 					</div>
@@ -130,6 +166,16 @@ export default function ScrollTrackerDemo() {
 					当组件到达 `offsetTop` 设定阈值时，自动触发 `isSticky` 状态并平滑附加上毛玻璃滤镜与阴影。
 				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable title="ScrollTracker 属性 (Props)" data={trackerApiData} />
+			<ApiTable title="StickyHeader 属性 (Props)" data={stickyApiData} />
 		</div>
 	);
 }

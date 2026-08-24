@@ -295,6 +295,7 @@ export default function App() {
 						default: '-',
 					},
 					{ name: 'fullscreen', desc: '受控全屏状态', type: 'boolean', default: '-' },
+					{ name: 'defaultFullscreen', desc: '初始默认是否为全屏状态', type: 'boolean', default: 'false' },
 					{
 						name: 'onChange',
 						desc: '全屏状态发生改变时的回调',
@@ -307,6 +308,10 @@ export default function App() {
 						type: 'ReactNode | ((props) => ReactNode)',
 						default: '-',
 					},
+					{ name: 'enterIcon', desc: '自定义进入全屏状态的图标', type: 'ReactNode', default: '<FullscreenOutlined />' },
+					{ name: 'exitIcon', desc: '自定义退出全屏状态的图标', type: 'ReactNode', default: '<FullscreenExitOutlined />' },
+					{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+					{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 				]}
 			/>
 		</div>

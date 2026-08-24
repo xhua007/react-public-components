@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import TextEllipsis from '../../../TextEllipsis';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function TextEllipsisDemo() {
 	const [expandState, setExpandState] = useState<boolean>(false);
@@ -116,6 +118,44 @@ export default function TextEllipsisDemo() {
 					提供 `prefix`、`suffix` 前后置插槽，并支持一键 `copyable` 集成复制功能。
 				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet
+						language="typescript"
+						code={`import { TextEllipsis } from 'react-public-components';
+
+export default function App() {
+  return (
+    <TextEllipsis
+      lines={2}
+      expandable
+      copyable
+      tooltip="auto"
+      prefix="[重要通知] "
+    >
+      这是一段非常长的工作汇报正文，多余的文字将会自动展示省略号，并且支持点击展开与一键复制...
+    </TextEllipsis>
+  );
+}`}
+					/>
+				</div>
+			</div>
+
+			<ApiTable
+				data={[
+					{ name: 'children', desc: '需要文本截断的文字内容或节点', type: 'ReactNode', required: true },
+					{ name: 'lines', desc: '最大展示行数（超过自动展示省略号）', type: 'number', default: '1' },
+					{ name: 'expandable', desc: '是否支持展开/收起按钮（支持布尔值或配置对象 { collapsedText, expandedText }）', type: 'boolean | TextEllipsisExpandConfig', default: 'false' },
+					{ name: 'tooltip', desc: "悬停 Tooltip 提示：'auto' 仅溢出截断时展示 / true 始终展示 / false 禁用", type: "'auto' | boolean | ReactNode", default: "'auto'" },
+					{ name: 'copyable', desc: '是否在右侧展示一键复制完整文本按钮', type: 'boolean', default: 'false' },
+					{ name: 'prefix', desc: '前缀装饰节点', type: 'ReactNode', default: '-' },
+					{ name: 'suffix', desc: '后缀说明节点', type: 'ReactNode', default: '-' },
+					{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+					{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+				]}
+			/>
 		</div>
 	);
 }

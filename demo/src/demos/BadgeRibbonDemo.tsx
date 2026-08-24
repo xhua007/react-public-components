@@ -1,6 +1,30 @@
 import BadgeRibbon from '../../../BadgeRibbon';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function BadgeRibbonDemo() {
+	const usageCode = `import { BadgeRibbon } from 'react-public-components';
+
+export default function App() {
+  return (
+    <BadgeRibbon text="HOT 爆款" color="#ff4d4f" placement="end">
+      <div style={{ width: 240, padding: 20, background: '#fff', borderRadius: 8 }}>
+        <h3>专业企业版</h3>
+        <p>¥ 199/月</p>
+      </div>
+    </BadgeRibbon>
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'text', desc: '缎带角标上展示的文字或节点', type: 'ReactNode', required: true },
+		{ name: 'children', desc: '被包裹的卡片容器子元素', type: 'ReactNode', required: true },
+		{ name: 'color', desc: '缎带背景色或渐变色', type: 'string', default: "'#ff4d4f'" },
+		{ name: 'placement', desc: "挂载角落位置：'start' 左上角 / 'end' 右上角", type: "'start' | 'end'", default: "'end'" },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			<div>
@@ -43,17 +67,26 @@ export default function BadgeRibbonDemo() {
 								borderRadius: 8,
 							}}
 						>
-							<div style={{ fontSize: 16, fontWeight: 600, marginBottom: 6 }}>AI 智能研发助手</div>
+							<div style={{ fontSize: 16, fontWeight: 600, marginBottom: 6 }}>AI 智能代码生成器</div>
 							<div style={{ fontSize: 22, fontWeight: 700, color: '#1677ff', marginBottom: 12 }}>
-								免费开放
+								免费体验
 							</div>
 							<p style={{ fontSize: 12, color: '#595959', margin: 0 }}>
-								一键生成高质量业务组件代码，支持深度定制与自动测试。
+								输入提示词一键生成现代化 React UI 组件代码。
 							</p>
 						</div>
 					</BadgeRibbon>
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

@@ -195,6 +195,8 @@ export default function App() {
 						type: 'ReactNode',
 						default: '-',
 					},
+					{ name: 'className', desc: '弹窗遮罩外层自定义类名', type: 'string', default: '-' },
+					{ name: 'style', desc: '弹窗外层自定义行内样式', type: 'CSSProperties', default: '-' },
 					{
 						name: 'FilePreviewer.preview(...)',
 						desc: '静态命令式调用方法，支持直接通过 JS 函数唤起独立预览弹窗',

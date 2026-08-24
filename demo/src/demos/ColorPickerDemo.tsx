@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import ColorPicker, { Color } from '../../../ColorPicker';
 import { DownOutlined } from '../../../src/icons';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function ColorPickerDemo() {
 	const [controlledColor1, setControlledColor1] = useState<Color | string>('#1677ff');
@@ -317,6 +319,52 @@ export default function ColorPickerDemo() {
 					受控则会锁定展示颜色。
 				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet
+						language="typescript"
+						code={`import { useState } from 'react';
+import { ColorPicker } from 'react-public-components';
+
+export default function App() {
+  const [color, setColor] = useState('#1677ff');
+
+  return (
+    <ColorPicker
+      value={color}
+      onChange={(c) => setColor(c.toHexString())}
+      showText
+      allowClear
+      presets={[
+        { label: '品牌推荐色', colors: ['#1677ff', '#52c41a', '#faad14', '#f5222d'] }
+      ]}
+    />
+  );
+}`}
+					/>
+				</div>
+			</div>
+
+			<ApiTable
+				data={[
+					{ name: 'value', desc: '当前选中的颜色值（受控）', type: 'string | Color', default: '-' },
+					{ name: 'defaultValue', desc: '默认颜色值', type: 'string | Color', default: "'#1677ff'" },
+					{ name: 'onChange', desc: '实时拖拽调整颜色时的回调', type: '(color: Color) => void', default: '-' },
+					{ name: 'onChangeComplete', desc: '颜色拖拽松开完成时的回调', type: '(color: Color) => void', default: '-' },
+					{ name: 'showText', desc: '是否展示文本格式与色值字符串', type: 'boolean | ((color) => ReactNode)', default: 'false' },
+					{ name: 'allowClear', desc: '是否允许清除颜色', type: 'boolean', default: 'false' },
+					{ name: 'disabled', desc: '是否禁用选择器', type: 'boolean', default: 'false' },
+					{ name: 'disabledAlpha', desc: '是否禁用透明度 Alpha 通道调节', type: 'boolean', default: 'false' },
+					{ name: 'format', desc: "当前格式：'hex' | 'rgb' | 'hsb'", type: 'ColorFormat', default: "'hex'" },
+					{ name: 'mode', desc: "颜色模式：'single' 单色 / 'gradient' 渐变色", type: "'single' | 'gradient' | ColorMode[]", default: "'single'" },
+					{ name: 'presets', desc: '预设颜色预选板列表', type: 'ColorPresetItem[]', default: '-' },
+					{ name: 'panelRender', desc: '自定义渲染弹出选择面板结构', type: '(panel, { components }) => ReactNode', default: '-' },
+					{ name: 'size', desc: "触发器尺寸：'small' | 'middle' | 'large'", type: 'string', default: "'middle'" },
+					{ name: 'trigger', desc: "触发浮层方式：'click' | 'hover'", type: "'click' | 'hover'", default: "'click'" },
+				]}
+			/>
 		</div>
 	);
 }

@@ -1,6 +1,34 @@
 import SpotlightCard from '../../../SpotlightCard';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function SpotlightCardDemo() {
+	const usageCode = `import { SpotlightCard } from 'react-public-components';
+
+export default function App() {
+  return (
+    <SpotlightCard
+      dark
+      spotlightColor="rgba(114, 46, 209, 0.35)"
+      spotlightSize={400}
+    >
+      <div style={{ padding: 24 }}>
+        <h3>下一代智能组件库</h3>
+        <p>鼠标悬停移动体验聚光灯高光效果。</p>
+      </div>
+    </SpotlightCard>
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'children', desc: '卡片子元素内容', type: 'ReactNode', required: true },
+		{ name: 'spotlightColor', desc: '鼠标聚光灯跟随光晕的 RGBA 颜色', type: 'string', default: "'rgba(22, 119, 255, 0.15)'" },
+		{ name: 'spotlightSize', desc: '聚光灯光晕扩散半径（像素）', type: 'number', default: '320' },
+		{ name: 'dark', desc: '是否启用暗色高对比科技感主题', type: 'boolean', default: 'false' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			{/* 1. 浅色模式聚光灯卡片 */}
@@ -44,16 +72,25 @@ export default function SpotlightCardDemo() {
 							<div style={{ color: '#d3adf7', fontSize: 12, fontWeight: 600, marginBottom: 8 }}>
 								FUTURE OF UI COMPONENTS
 							</div>
-							<h4 style={{ margin: '0 0 12px 0', fontSize: 20, color: '#ffffff' }}>
-								下一代组件设计哲学
-							</h4>
-							<p style={{ margin: 0, color: '#a1a1aa', fontSize: 14, lineHeight: 1.7 }}>
-								将极致的视觉美感与中后台实用业务逻辑深度融合。无论是光晕追踪、微交互动效还是无障碍键盘导航，皆开箱即用。
+							<h3 style={{ margin: '0 0 12px 0', fontSize: 20, color: '#ffffff' }}>
+								下一代 AI 增强型设计系统
+							</h3>
+							<p style={{ margin: 0, color: '#8c8c8c', fontSize: 14, lineHeight: 1.6 }}>
+								专为追求极致视觉品质与生产力效率的团队量身打造，开箱即用。
 							</p>
 						</div>
 					</SpotlightCard>
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 680 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

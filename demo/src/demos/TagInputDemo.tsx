@@ -1,10 +1,45 @@
 import { useState } from 'react';
 import TagInput from '../../../TagInput';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function TagInputDemo() {
 	const [basicTags, setBasicTags] = useState<string[]>(['React', 'TypeScript', 'Vite']);
 	const [emailTags, setEmailTags] = useState<string[]>(['dev@company.com', 'admin@google.com']);
 	const [limitedTags, setLimitedTags] = useState<string[]>(['Frontend']);
+
+	const usageCode = `import { useState } from 'react';
+import { TagInput } from 'react-public-components';
+
+export default function App() {
+  const [tags, setTags] = useState(['React', 'TypeScript']);
+
+  return (
+    <TagInput
+      value={tags}
+      onChange={(newTags) => setTags(newTags)}
+      placeholder="输入标签后按回车..."
+      maxCount={5}
+      validate={(val) => val.length >= 2 ? true : '标签至少2个字符'}
+    />
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'value', desc: '当前标签字符串数组（受控）', type: 'string[]', default: '-' },
+		{ name: 'defaultValue', desc: '默认标签数组', type: 'string[]', default: '[]' },
+		{ name: 'onChange', desc: '标签数组改变时的回调函数', type: '(tags: string[]) => void', default: '-' },
+		{ name: 'maxCount', desc: '允许添加的最大标签数量上限', type: 'number', default: '-' },
+		{ name: 'maxLength', desc: '单个标签的最大字符长度限制', type: 'number', default: '-' },
+		{ name: 'allowDuplicates', desc: '是否允许添加重复名称的标签', type: 'boolean', default: 'false' },
+		{ name: 'separators', desc: "触发转为标签的按键/字符", type: 'string[]', default: "['Enter', ',', '，']" },
+		{ name: 'validate', desc: '自定义校验函数（返回 true 通过，返回 false 或 string 报错）', type: '(tag: string) => boolean | string', default: '-' },
+		{ name: 'placeholder', desc: '输入框占位文案', type: 'string', default: "'输入标签后按回车...'" },
+		{ name: 'disabled', desc: '是否禁用输入与编辑', type: 'boolean', default: 'false' },
+		{ name: 'renderTag', desc: '自定义单个 Tag 的渲染函数', type: '(tag, index, onClose) => ReactNode', default: '-' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
@@ -64,6 +99,15 @@ export default function TagInputDemo() {
 					</div>
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

@@ -1,6 +1,41 @@
 import TiltCard from '../../../TiltCard';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function TiltCardDemo() {
+	const usageCode = `import { TiltCard } from 'react-public-components';
+
+export default function App() {
+  return (
+    <TiltCard
+      maxAngle={15}
+      scale={1.02}
+      glare
+      style={{
+        width: 320,
+        height: 180,
+        borderRadius: 16,
+        background: 'linear-gradient(135deg, #1f1f1f, #141414)',
+        color: '#fff',
+        padding: 24
+      }}
+    >
+      <h3>黑金尊享卡</h3>
+      <p>8888 •••• •••• 2026</p>
+    </TiltCard>
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'children', desc: '卡片内部子元素节点', type: 'ReactNode', required: true },
+		{ name: 'maxAngle', desc: '最大倾斜旋转角度（度）', type: 'number', default: '15' },
+		{ name: 'scale', desc: '鼠标悬停时的立体缩放比例', type: 'number', default: '1.02' },
+		{ name: 'glare', desc: '是否开启表面随光照高光反光效果（Glare）', type: 'boolean', default: 'true' },
+		{ name: 'perspective', desc: '透视景深距离（像素）', type: 'number', default: '1000' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			<div>
@@ -50,21 +85,22 @@ export default function TiltCardDemo() {
 									color: '#8c8c8c',
 								}}
 							>
-								<span>CARDHOLDER: ALEX CHEN</span>
-								<span>EXP: 12/28</span>
+								<span>ALEX CHEN</span>
+								<span>EXP: 12/29</span>
 							</div>
 						</div>
 					</TiltCard>
 
-					{/* 科技产品卡片 */}
+					{/* 极简亮色卡片 */}
 					<TiltCard
-						maxAngle={14}
+						maxAngle={15}
 						style={{
 							width: 320,
 							height: 190,
-							background: 'linear-gradient(135deg, #1677ff 0%, #722ed1 100%)',
+							background: '#ffffff',
 							borderRadius: 16,
-							color: '#ffffff',
+							border: '1px solid #e8e8e8',
+							boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
 						}}
 					>
 						<div
@@ -77,23 +113,31 @@ export default function TiltCardDemo() {
 								justifyContent: 'space-between',
 							}}
 						>
+							<div style={{ fontSize: 24 }}>🚀</div>
 							<div>
-								<div style={{ fontSize: 12, opacity: 0.8, marginBottom: 4 }}>CLOUD PLATFORM</div>
-								<div style={{ fontSize: 18, fontWeight: 600 }}>Enterprise Pro Tier</div>
+								<h4 style={{ margin: '0 0 6px 0', fontSize: 16, color: '#1f1f1f' }}>
+									企业级效能引擎
+								</h4>
+								<p style={{ margin: 0, fontSize: 13, color: '#8c8c8c' }}>
+									毫秒级自动化构建与发布流水线
+								</p>
 							</div>
-
-							<p style={{ fontSize: 12, opacity: 0.9, lineHeight: 1.5, margin: 0 }}>
-								全天候 99.99% SLA 保证，支持多地域负载均衡与无限带宽。
-							</p>
-
-							<div style={{ fontSize: 12, fontWeight: 600 }}>即刻开启体验 →</div>
+							<div style={{ fontSize: 13, color: '#1677ff', fontWeight: 600 }}>
+								查看产品详情 ➔
+							</div>
 						</div>
 					</TiltCard>
 				</div>
-				<p style={{ color: '#8c8c8c', fontSize: 13, marginTop: 8 }}>
-					基于纯 CSS 3D 透视矩阵与鼠标坐标插值，表面带有逼真的动态光源反光（Glare）。
-				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 680 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

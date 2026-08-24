@@ -8,7 +8,7 @@ export interface JsonEditorProps {
 	/** 默认 JSON 数据内容 */
 	defaultValue?: string | object;
 	/** 内容变化回调 */
-	onChange?: (rawJson: string, parsedObject?: any) => void;
+	onChange?: (rawJson: string, parsedObject?: unknown) => void;
 	/** 是否只读模式，默认为 false */
 	readOnly?: boolean;
 	/** 缩进空格数，默认为 2 */

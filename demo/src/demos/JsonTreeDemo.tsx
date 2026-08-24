@@ -1,4 +1,6 @@
 import JsonTree from '../../../JsonTree';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function JsonTreeDemo() {
 	const sampleData = {
@@ -18,6 +20,26 @@ export default function JsonTreeDemo() {
 		},
 	};
 
+	const usageCode = `import { JsonTree } from 'react-public-components';
+
+export default function App() {
+  const data = {
+    name: 'Apollo',
+    nested: { env: 'production', count: 42 }
+  };
+
+  return (
+    <JsonTree data={data} defaultExpandedLevel={2} />
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'data', desc: '待展示与探查的 JSON 数据源对象或数组', type: 'any', required: true },
+		{ name: 'defaultExpandedLevel', desc: '默认初始展开的层级深度', type: 'number', default: '2' },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			<div>
@@ -29,6 +51,15 @@ export default function JsonTreeDemo() {
 					<JsonTree data={sampleData} defaultExpandedLevel={2} />
 				</div>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 680 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

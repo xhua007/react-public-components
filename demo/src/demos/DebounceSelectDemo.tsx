@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import DebounceSelect, { SelectOption } from '../../../DebounceSelect';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 // 模拟远程用户数据库
 const mockUserDatabase: SelectOption[] = [
@@ -15,7 +17,6 @@ const mockUserDatabase: SelectOption[] = [
 
 // 模拟异步请求
 const searchUsers = async (search: string): Promise<SelectOption[]> => {
-	console.log('正在请求 API 搜索:', search);
 	await new Promise((resolve) => setTimeout(resolve, 500));
 	if (!search.trim()) {
 		return mockUserDatabase.slice(0, 4);
@@ -28,6 +29,46 @@ const searchUsers = async (search: string): Promise<SelectOption[]> => {
 export default function DebounceSelectDemo() {
 	const [singleValue, setSingleValue] = useState<any>('zhangsan');
 	const [multiValue, setMultiValue] = useState<any[]>(['zhangsan', 'lisi']);
+
+	const usageCode = `import { useState } from 'react';
+import { DebounceSelect } from 'react-public-components';
+
+export default function App() {
+  const [value, setValue] = useState();
+
+  const fetchUsers = async (keyword: string) => {
+    const res = await fetch(\`/api/users?q=\${keyword}\`);
+    const data = await res.json();
+    return data.map(u => ({ label: u.name, value: u.id }));
+  };
+
+  return (
+    <DebounceSelect
+      value={value}
+      onChange={(val) => setValue(val)}
+      fetchOptions={fetchUsers}
+      debounceTimeout={300}
+      placeholder="搜索用户姓名..."
+      allowClear
+    />
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'fetchOptions', desc: '异步根据搜索关键字拉取选项数据的函数', type: '(search: string) => Promise<SelectOption[]>', required: true },
+		{ name: 'value', desc: '当前选中的值（受控）', type: 'SelectValue', default: '-' },
+		{ name: 'defaultValue', desc: '默认选中的值', type: 'SelectValue', default: '-' },
+		{ name: 'onChange', desc: '选中值发生变化时的回调函数', type: '(value, option) => void', default: '-' },
+		{ name: 'mode', desc: "选择模式：'single' 单选 / 'multiple' 多选 Tag 标签", type: "'single' | 'multiple'", default: "'single'" },
+		{ name: 'debounceTimeout', desc: '防抖等待时间（毫秒）', type: 'number', default: '300' },
+		{ name: 'placeholder', desc: '输入框占位符', type: 'string', default: "'请选择...'" },
+		{ name: 'allowClear', desc: '是否支持一键清空', type: 'boolean', default: 'true' },
+		{ name: 'disabled', desc: '是否禁用选择器', type: 'boolean', default: 'false' },
+		{ name: 'defaultOptions', desc: '初始化默认展示的预设选项列表', type: 'SelectOption[]', default: '[]' },
+		{ name: 'notFoundContent', desc: '无匹配搜索结果时的展示内容', type: 'ReactNode', default: "'暂无匹配数据'" },
+		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
+		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
+	];
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
@@ -104,6 +145,15 @@ export default function DebounceSelectDemo() {
 					支持 `debounceTimeout` 自定义防抖等待时长，支持 `disabled` 禁用态。
 				</p>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }

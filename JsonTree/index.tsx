@@ -3,7 +3,7 @@ import './index.less';
 
 export interface JsonTreeProps {
 	/** JSON 数据源 */
-	data: any;
+	data: unknown;
 	/** 默认展开层级深度，默认为 2 */
 	defaultExpandedLevel?: number;
 	/** 自定义类名 */
@@ -14,7 +14,7 @@ export interface JsonTreeProps {
 
 interface TreeNodeProps {
 	keyName?: string;
-	value: any;
+	value: unknown;
 	depth: number;
 	maxDepth: number;
 }
@@ -93,7 +93,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({ keyName, value, depth, maxDepth }) 
 							<TreeNode
 								key={k}
 								keyName={isArray ? undefined : k}
-								value={value[k]}
+								value={(value as Record<string, unknown>)[k]}
 								depth={depth + 1}
 								maxDepth={maxDepth}
 							/>

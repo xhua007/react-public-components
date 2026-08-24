@@ -1,6 +1,37 @@
 import Masonry from '../../../Masonry';
+import CodeSnippet from '../../../CodeSnippet';
+import { ApiTable, ApiPropItem } from '../components/ApiTable';
 
 export default function MasonryDemo() {
+	const usageCode = `import { Masonry } from 'react-public-components';
+
+export default function App() {
+  const items = [
+    { key: '1', height: 120, children: <div>卡片 1</div> },
+    { key: '2', height: 200, children: <div>卡片 2</div> },
+    { key: '3', height: 160, children: <div>卡片 3</div> },
+  ];
+
+  return (
+    <Masonry
+      columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+      gutter={[16, 16]}
+      items={items}
+    />
+  );
+}`;
+
+	const apiData: ApiPropItem[] = [
+		{ name: 'items', desc: '瀑布流子项数据列表，每项含 key, height, children, data', type: 'MasonryItem[]', required: true },
+		{ name: 'columns', desc: '瀑布流列数，支持固定数字或响应式断点对象（如 { xs: 1, md: 3, lg: 4 }）', type: 'number | object', default: '3' },
+		{ name: 'gutter', desc: '间距配置，支持统一数值或水平垂直数组 [horizontal, vertical]', type: 'number | [number, number]', default: '0' },
+		{ name: 'fresh', desc: '是否持续监听子项尺寸变化自适应重排', type: 'boolean', default: 'false' },
+		{ name: 'itemRender', desc: '自定义单项渲染函数', type: '(item: MasonryItem) => ReactNode', default: '-' },
+		{ name: 'onLayoutChange', desc: '瀑布流布局列排序重算完成回调', type: '(layout) => void', default: '-' },
+		{ name: 'styles', desc: '语义化 DOM 样式对象 (root, item)', type: 'MasonryStyles', default: '-' },
+		{ name: 'classNames', desc: '语义化 DOM 类名对象 (root, item)', type: 'MasonryClassNames', default: '-' },
+	];
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
 			<div>
@@ -141,6 +172,15 @@ export default function MasonryDemo() {
 					]}
 				/>
 			</div>
+
+			<div>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>💻 示例代码 / Usage</h3>
+				<div style={{ maxWidth: 640 }}>
+					<CodeSnippet code={usageCode} language="typescript" />
+				</div>
+			</div>
+
+			<ApiTable data={apiData} />
 		</div>
 	);
 }
