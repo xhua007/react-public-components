@@ -2,27 +2,40 @@
 	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 20px;
+	padding: 24px;
 	background: #ffffff;
-	border: 1px solid #f0f0f0;
-	border-radius: 12px;
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+	border: 1px solid #ebeef5;
+	border-radius: 16px;
+	box-shadow: 0 6px 24px -4px rgba(0, 0, 0, 0.05), 0 2px 6px -2px rgba(0, 0, 0, 0.02);
 	box-sizing: border-box;
 	user-select: none;
+	transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+	&:hover {
+		box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
+	}
 
 	&_wrap {
 		position: relative;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		border: 1px solid #f0f0f0;
-		border-radius: 8px;
-		padding: 8px;
+		border: 1px solid #f0f2f5;
+		border-radius: 12px;
 		background: #ffffff;
+		box-sizing: border-box;
+		overflow: hidden;
+		transition: all 0.2s ease;
+
+		// 四角精致扫码引导装饰线（可选）
+		&_bordered {
+			border: 1px dashed #d9d9d9;
+		}
 	}
 
 	&_canvas {
 		display: block;
+		border-radius: 6px;
 	}
 
 	// 嵌入中心 Logo
@@ -31,35 +44,45 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		width: 32px;
-		height: 32px;
-		border-radius: 6px;
-		border: 2px solid #ffffff;
-		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+		border-radius: 8px;
+		border: 2.5px solid #ffffff;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 		background: #ffffff;
 		object-fit: cover;
+		z-index: 5;
 	}
 
-	// 状态遮罩（过期 / 加载中）
+	// 状态遮罩（已过期 / 加载中）
 	&_mask {
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: rgba(255, 255, 255, 0.94);
-		backdrop-filter: blur(3px);
-		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.92);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		border-radius: 11px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: 8px;
-		font-size: 13px;
-		color: #595959;
-		cursor: pointer;
+		padding: 12px;
+		box-sizing: border-box;
 		z-index: 10;
-		transition: all 0.2s ease-in-out;
+		animation: rpcQrFadeIn 0.25s ease-out;
+
+		&_expired {
+			cursor: pointer;
+			gap: 8px;
+		}
+
+		&_title {
+			font-size: 13px;
+			font-weight: 500;
+			color: #333333;
+			letter-spacing: 0.2px;
+		}
 
 		&_loading {
 			cursor: default;
@@ -74,49 +97,125 @@
 		}
 	}
 
+	// 刷新按钮 (胶囊渐变设计)
 	&_refresh_btn {
 		display: inline-flex;
 		align-items: center;
-		gap: 4px;
-		padding: 4px 12px;
-		border-radius: 4px;
-		background: #1677ff;
+		justify-content: center;
+		gap: 6px;
+		padding: 6px 16px;
+		border-radius: 20px;
+		background: linear-gradient(135deg, #1677ff 0%, #0958d9 100%);
 		color: #ffffff;
 		border: none;
 		font-size: 12px;
+		font-weight: 500;
 		cursor: pointer;
-		margin-top: 4px;
+		box-shadow: 0 3px 10px rgba(22, 119, 255, 0.32);
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+		outline: none;
+
+		&:hover {
+			transform: translateY(-1px);
+			box-shadow: 0 5px 14px rgba(22, 119, 255, 0.42);
+			background: linear-gradient(135deg, #4096ff 0%, #1677ff 100%);
+
+			.rpc_qrcode_card_refresh_icon {
+				transform: rotate(180deg);
+			}
+		}
+
+		&:active {
+			transform: translateY(0);
+			box-shadow: 0 2px 6px rgba(22, 119, 255, 0.28);
+		}
 	}
 
-	// 文本说明
+	&_refresh_icon {
+		font-size: 13px;
+		transition: transform 0.35s ease;
+	}
+
+	// 加载旋转 Spinner
+	&_spinner_wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&_spinner {
+		font-size: 28px;
+		color: #1677ff;
+		animation: rpcQrRotate 1s linear infinite;
+	}
+
+	// 文本说明区域
 	&_info {
-		margin-top: 14px;
+		margin-top: 16px;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
+		gap: 5px;
+		max-width: 220px;
 	}
 
 	&_title {
-		font-size: 14px;
+		font-size: 15px;
 		font-weight: 600;
-		color: #1f1f1f;
+		color: #1a1a1a;
+		line-height: 1.4;
 	}
 
 	&_description {
-		font-size: 12px;
+		font-size: 13px;
 		color: #8c8c8c;
+		line-height: 1.4;
 	}
 
+	// 下载二维码按钮
 	&_download {
-		margin-top: 10px;
+		margin-top: 14px;
+		display: inline-flex;
+		align-items: center;
+		padding: 4px 12px;
+		border-radius: 6px;
 		color: #1677ff;
 		font-size: 12px;
+		font-weight: 500;
 		cursor: pointer;
-		text-decoration: underline;
+		background: #f0f7ff;
+		border: 1px solid #d6e4ff;
+		transition: all 0.2s ease;
+		outline: none;
 
 		&:hover {
-			color: #4096ff;
+			color: #0958d9;
+			background: #e6f0ff;
+			border-color: #adc6ff;
 		}
+
+		&:active {
+			background: #d6e4ff;
+		}
+	}
+}
+
+@keyframes rpcQrRotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes rpcQrFadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.97);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
 	}
 }

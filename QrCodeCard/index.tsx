@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, ReactNode, CSSProperties } from 'react';
-import { ReloadOutlined, LoadingOutlined } from '../src/icons';
+import { ReloadOutlined, LoadingOutlined, DownloadOutlined } from '../src/icons';
 import './index.less';
 
 export type QrCodeStatus = 'active' | 'expired' | 'loading';
@@ -9,16 +9,24 @@ export interface QrCodeCardProps {
 	value: string;
 	/** 二维码尺寸（像素），默认为 160 */
 	size?: number;
+	/** 二维码颜色，默认为 #1a1a1a */
+	color?: string;
+	/** 二维码背景色，默认为 #ffffff */
+	backgroundColor?: string;
 	/** 中心嵌入的 Logo 图标地址 */
 	icon?: string;
+	/** 中心 Logo 的尺寸（像素），默认根据 size 自动计算 (约 22%) */
+	iconSize?: number;
 	/** 二维码状态：'active' 正常，'expired' 已过期，'loading' 生成中，默认为 'active' */
 	status?: QrCodeStatus;
-	/** 卡片标题说明 */
+	/** 卡片主标题说明 */
 	title?: ReactNode;
-	/** 卡片副标题或扫码提示 */
+	/** 卡片副标题或扫码引导文案 */
 	description?: ReactNode;
 	/** 是否显示一键下载二维码按钮，默认为 false */
 	downloadable?: boolean;
+	/** 是否显示四角扫码引导角标，默认为 false */
+	bordered?: boolean;
 	/** 点击过期遮罩刷新时的回调 */
 	onRefresh?: () => void;
 	/** 自定义类名 */
@@ -27,39 +35,63 @@ export interface QrCodeCardProps {
 	style?: CSSProperties;
 }
 
-// 简易轻量伪随机但确定性的二维码图案矩阵绘制算法（保证零外部大库）
-function drawQrCode(canvas: HTMLCanvasElement, text: string, size: number) {
+// 经典的 25x25 规整 QR 矩阵模式生成器（带标准 3 方位探测器与时钟同步条）
+function renderQrCode(
+	canvas: HTMLCanvasElement,
+	text: string,
+	size: number,
+	color: string = '#1a1a1a',
+	bgColor: string = '#ffffff',
+) {
 	const ctx = canvas.getContext('2d');
 	if (!ctx) return;
 
-	const dpr = window.devicePixelRatio || 1;
+	const dpr = window.devicePixelRatio || 2;
 	canvas.width = size * dpr;
 	canvas.height = size * dpr;
 	ctx.scale(dpr, dpr);
 
-	ctx.fillStyle = '#ffffff';
+	// 背景
+	ctx.fillStyle = bgColor;
 	ctx.fillRect(0, 0, size, size);
 
 	const modules = 25; // 25x25 矩阵
-	const cellSize = size / modules;
+	const padding = 1.5; // 安全边距留白 (Quiet Zone)
+	const effectiveSize = size;
+	const cellSize = effectiveSize / (modules + padding * 2);
+	const startOffset = padding * cellSize;
 
-	ctx.fillStyle = '#000000';
+	ctx.fillStyle = color;
 
-	// 绘制三个角的定位方块 (Position Detection Patterns)
-	const drawPositionPattern = (x: number, y: number) => {
-		// 外 7x7
-		ctx.fillRect(x * cellSize, y * cellSize, 7 * cellSize, 7 * cellSize);
-		// 中间挖空 5x5
-		ctx.fillStyle = '#ffffff';
-		ctx.fillRect((x + 1) * cellSize, (y + 1) * cellSize, 5 * cellSize, 5 * cellSize);
-		// 中心实心 3x3
-		ctx.fillStyle = '#000000';
-		ctx.fillRect((x + 2) * cellSize, (y + 2) * cellSize, 3 * cellSize, 3 * cellSize);
+	// 绘制三个角的定位探测图案 (Position Detection Patterns)
+	const drawPositionPattern = (row: number, col: number) => {
+		const ox = startOffset + col * cellSize;
+		const oy = startOffset + row * cellSize;
+
+		// 1. 外层 7x7 实心黑方块（带圆角）
+		ctx.fillStyle = color;
+		ctx.fillRect(ox, oy, 7 * cellSize, 7 * cellSize);
+
+		// 2. 内层 5x5 白色挖空方块
+		ctx.fillStyle = bgColor;
+		ctx.fillRect(ox + 1 * cellSize, oy + 1 * cellSize, 5 * cellSize, 5 * cellSize);
+
+		// 3. 中心 3x3 实心黑方块
+		ctx.fillStyle = color;
+		ctx.fillRect(ox + 2 * cellSize, oy + 2 * cellSize, 3 * cellSize, 3 * cellSize);
 	};
 
 	drawPositionPattern(0, 0);
-	drawPositionPattern(modules - 7, 0);
 	drawPositionPattern(0, modules - 7);
+	drawPositionPattern(modules - 7, 0);
+
+	// 绘制时钟同步线 (Timing Patterns)
+	for (let i = 8; i < modules - 8; i++) {
+		if (i % 2 === 0) {
+			ctx.fillRect(startOffset + i * cellSize, startOffset + 6 * cellSize, cellSize, cellSize);
+			ctx.fillRect(startOffset + 6 * cellSize, startOffset + i * cellSize, cellSize, cellSize);
+		}
+	}
 
 	// 基于文本字符串的 hash 填充数据点
 	let hash = 0;
@@ -71,14 +103,23 @@ function drawQrCode(canvas: HTMLCanvasElement, text: string, size: number) {
 	for (let r = 0; r < modules; r++) {
 		for (let c = 0; c < modules; c++) {
 			// 跳过三个角的位置
-			if ((r < 8 && c < 8) || (r < 8 && c >= modules - 8) || (r >= modules - 8 && c < 8)) {
+			if (
+				(r < 8 && c < 8) ||
+				(r < 8 && c >= modules - 8) ||
+				(r >= modules - 8 && c < 8) ||
+				r === 6 ||
+				c === 6
+			) {
 				continue;
 			}
 
-			const seed = (r * 31 + c * 17 + hash) % 100;
+			const seed = (r * 37 + c * 23 + (hash ^ (r * c))) % 100;
 			if (Math.abs(seed) % 2 === 0) {
-				ctx.fillStyle = '#000000';
-				ctx.fillRect(c * cellSize, r * cellSize, cellSize - 0.2, cellSize - 0.2);
+				ctx.fillStyle = color;
+				// 轻微圆角方块效果
+				const x = startOffset + c * cellSize;
+				const y = startOffset + r * cellSize;
+				ctx.fillRect(x, y, cellSize - 0.15, cellSize - 0.15);
 			}
 		}
 	}
@@ -87,22 +128,27 @@ function drawQrCode(canvas: HTMLCanvasElement, text: string, size: number) {
 const QrCodeCard: React.FC<QrCodeCardProps> = ({
 	value,
 	size = 160,
+	color = '#1f1f1f',
+	backgroundColor = '#ffffff',
 	icon,
+	iconSize,
 	status = 'active',
 	title,
 	description,
 	downloadable = false,
+	bordered = false,
 	onRefresh,
 	className = '',
 	style,
 }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const calculatedLogoSize = iconSize || Math.max(28, Math.round(size * 0.22));
 
 	useEffect(() => {
 		if (canvasRef.current && value) {
-			drawQrCode(canvasRef.current, value, size);
+			renderQrCode(canvasRef.current, value, size, color, backgroundColor);
 		}
-	}, [value, size]);
+	}, [value, size, color, backgroundColor]);
 
 	const handleDownload = () => {
 		if (!canvasRef.current) return;
@@ -115,7 +161,10 @@ const QrCodeCard: React.FC<QrCodeCardProps> = ({
 
 	return (
 		<div className={`rpc_qrcode_card ${className}`} style={style}>
-			<div className="rpc_qrcode_card_wrap" style={{ width: size, height: size }}>
+			<div
+				className={`rpc_qrcode_card_wrap ${bordered ? 'rpc_qrcode_card_wrap_bordered' : ''}`}
+				style={{ width: size + 24, height: size + 24 }}
+			>
 				<canvas
 					ref={canvasRef}
 					className="rpc_qrcode_card_canvas"
@@ -124,23 +173,38 @@ const QrCodeCard: React.FC<QrCodeCardProps> = ({
 
 				{/* 嵌入中心 Logo */}
 				{icon && status === 'active' && (
-					<img src={icon} alt="Logo" className="rpc_qrcode_card_logo" />
+					<img
+						src={icon}
+						alt="Logo"
+						className="rpc_qrcode_card_logo"
+						style={{ width: calculatedLogoSize, height: calculatedLogoSize }}
+					/>
 				)}
 
-				{/* 过期或加载中蒙层 */}
+				{/* 过期遮罩 */}
 				{status === 'expired' && (
-					<div className="rpc_qrcode_card_mask" onClick={onRefresh}>
-						<span>二维码已失效</span>
-						<button type="button" className="rpc_qrcode_card_refresh_btn">
-							<ReloadOutlined />
+					<div className="rpc_qrcode_card_mask rpc_qrcode_card_mask_expired" onClick={onRefresh}>
+						<div className="rpc_qrcode_card_mask_title">二维码已失效</div>
+						<button
+							type="button"
+							className="rpc_qrcode_card_refresh_btn"
+							onClick={(e) => {
+								e.stopPropagation();
+								onRefresh?.();
+							}}
+						>
+							<ReloadOutlined className="rpc_qrcode_card_refresh_icon" />
 							<span>点击刷新</span>
 						</button>
 					</div>
 				)}
 
+				{/* 加载中遮罩 */}
 				{status === 'loading' && (
 					<div className="rpc_qrcode_card_mask rpc_qrcode_card_mask_loading">
-						<LoadingOutlined style={{ fontSize: 28, color: '#1677ff' }} />
+						<div className="rpc_qrcode_card_spinner_wrap">
+							<LoadingOutlined className="rpc_qrcode_card_spinner" />
+						</div>
 						<span className="rpc_qrcode_card_mask_text">加载中...</span>
 					</div>
 				)}
@@ -149,16 +213,17 @@ const QrCodeCard: React.FC<QrCodeCardProps> = ({
 			{/* 标题说明 */}
 			{(title || description) && (
 				<div className="rpc_qrcode_card_info">
-					{title && <span className="rpc_qrcode_card_title">{title}</span>}
-					{description && <span className="rpc_qrcode_card_description">{description}</span>}
+					{title && <div className="rpc_qrcode_card_title">{title}</div>}
+					{description && <div className="rpc_qrcode_card_description">{description}</div>}
 				</div>
 			)}
 
 			{/* 下载链接 */}
 			{downloadable && status === 'active' && (
-				<span className="rpc_qrcode_card_download" onClick={handleDownload}>
-					下载二维码
-				</span>
+				<button type="button" className="rpc_qrcode_card_download" onClick={handleDownload}>
+					<DownloadOutlined style={{ marginRight: 4, fontSize: 13 }} />
+					<span>下载二维码</span>
+				</button>
 			)}
 		</div>
 	);

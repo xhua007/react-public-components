@@ -817,3 +817,20 @@ export const ExportOutlined = ({ style, className, onClick }: IconProps & { onCl
 	</svg>
 );
 
+export const HolderOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+	<svg
+		viewBox="64 64 896 896"
+		focusable="false"
+		width="1em"
+		height="1em"
+		fill="currentColor"
+		aria-hidden="true"
+		style={{ ...baseStyle, ...style }}
+		className={className}
+		onClick={onClick}
+	>
+		<path d="M300 276a56 56 0 10112 0 56 56 0 10-112 0zm0 236a56 56 0 10112 0 56 56 0 10-112 0zm0 236a56 56 0 10112 0 56 56 0 10-112 0zm312-472a56 56 0 10112 0 56 56 0 10-112 0zm0 236a56 56 0 10112 0 56 56 0 10-112 0zm0 236a56 56 0 10112 0 56 56 0 10-112 0z" />
+	</svg>
+);
+
+
