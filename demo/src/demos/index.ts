@@ -59,3 +59,4 @@ export { default as DualRangeSliderDemo } from './DualRangeSliderDemo';
 export { default as FilterChipsDemo } from './FilterChipsDemo';
 export { default as AnnouncementBarDemo } from './AnnouncementBarDemo';
 export { default as JsonDiffViewerDemo } from './JsonDiffViewerDemo';
+export { default as CeilingBoxDemo } from './CeilingBoxDemo';

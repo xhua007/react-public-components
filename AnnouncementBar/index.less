@@ -1,34 +1,122 @@
 .rpc_announcement_bar {
 	width: 100%;
-	background: linear-gradient(90deg, #1677ff 0%, #722ed1 100%);
-	color: #ffffff;
-	padding: 8px 16px;
+	padding: 9px 40px 9px 16px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
-	font-size: 13px;
+	font-size: 13.5px;
 	font-weight: 500;
 	box-sizing: border-box;
 	user-select: none;
+	overflow: hidden;
+	max-height: 80px;
+	opacity: 1;
+	transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.25s ease;
+
+	// 吸顶时的阴影与层级
+	&_sticky,
+	&_fixed {
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+	}
+
+	// 关闭动画
+	&_closing {
+		max-height: 0 !important;
+		opacity: 0 !important;
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+	}
+
+	// 预设主题色系
+	&_primary {
+		background: linear-gradient(90deg, #1677ff 0%, #391085 100%);
+		color: #ffffff;
+	}
+
+	&_purple {
+		background: linear-gradient(90deg, #722ed1 0%, #eb2f96 100%);
+		color: #ffffff;
+	}
+
+	&_warning {
+		background: linear-gradient(90deg, #fa8c16 0%, #f5222d 100%);
+		color: #ffffff;
+	}
+
+	&_success {
+		background: linear-gradient(90deg, #389e0d 0%, #0958d9 100%);
+		color: #ffffff;
+	}
+
+	&_danger {
+		background: linear-gradient(90deg, #cf1322 0%, #fa541c 100%);
+		color: #ffffff;
+	}
+
+	&_body {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		overflow: hidden;
+	}
 
 	&_content {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		gap: 8px;
+		line-height: 1.4;
+		text-align: center;
+		white-space: nowrap;
+	}
+
+	// 跑马灯滚动
+	&_marquee {
+		animation: rpcAnnouncementMarquee 15s linear infinite;
+		will-change: transform;
+
+		&:hover {
+			animation-play-state: paused;
+		}
 	}
 
 	&_close {
 		position: absolute;
-		right: 16px;
-		background: none;
+		right: 14px;
+		top: 50%;
+		transform: translateY(-50%);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+		background: transparent;
 		border: none;
-		color: rgba(255, 255, 255, 0.8);
+		border-radius: 4px;
+		color: rgba(255, 255, 255, 0.85);
 		cursor: pointer;
-		font-size: 14px;
+		transition: all 0.15s ease;
+		padding: 0;
+		outline: none;
 
 		&:hover {
 			color: #ffffff;
+			background: rgba(255, 255, 255, 0.18);
 		}
+
+		&:active {
+			background: rgba(255, 255, 255, 0.28);
+		}
+	}
+}
+
+@keyframes rpcAnnouncementMarquee {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(-100%);
 	}
 }

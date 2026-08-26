@@ -238,7 +238,10 @@ export { default as FilterChips } from '../FilterChips';
 export type { FilterChipsProps, FilterChipItem } from '../FilterChips';
 
 export { default as AnnouncementBar } from '../AnnouncementBar';
-export type { AnnouncementBarProps } from '../AnnouncementBar';
+export type { AnnouncementBarProps, AnnouncementType } from '../AnnouncementBar';
 
 export { default as JsonDiffViewer } from '../JsonDiffViewer';
 export type { JsonDiffViewerProps } from '../JsonDiffViewer';
+
+export { default as CeilingBox } from '../CeilingBox';
+export type { CeilingBoxProps } from '../CeilingBox';

@@ -57,6 +57,7 @@ import 'react-public-components/styles.css';
 | **`CascadeDrawer`** | 级联下钻抽屉 | 多层级无限下钻抽屉容器，带顶部面包屑返回导航与平滑推拉动效。 |
 | **`KanbanBoard`** | 任务看板 | 轻量任务看板与泳道管理，基于原生 HTML5 Drag & Drop 跨列平滑拖拽。 |
 | **`DragSortList`** | 拖拽排序列表 | 纯原生轻量拖拽重排序列表，支持平滑占位与阴影反馈。 |
+| **`CeilingBox`** | 吸顶容器 | 智能吸顶/吸底容器组件，支持自动占位防页面塌陷、毛玻璃滤镜与 Render Props 状态感知。 |
 | **`Marquee`** | 无缝跑马灯 | 基于硬件加速的无缝平滑滚动 Logo 墙与广播通知条，支持悬停暂停与边缘渐变。 |
 | **`ScrollTracker`** | 滚动与吸顶 | 阅读进度条（ScrollTracker）与智能吸顶容器（StickyHeader，带毛玻璃与阴影）。 |
 | **`InfiniteScrollList`** | 无限滚动列表 | 触底自动触发异步加载的无限滚动列表容器，内置加载骨架与到底提示。 |

@@ -61,6 +61,7 @@ import {
 	FilterChipsDemo,
 	AnnouncementBarDemo,
 	JsonDiffViewerDemo,
+	CeilingBoxDemo,
 } from './demos';
 
 // 组件导航菜单配置
@@ -145,6 +146,13 @@ const navCategories: ComponentCategory[] = [
 	{
 		category: '布局与导航 Layout & Nav',
 		items: [
+			{
+				key: 'CeilingBox',
+				name: 'CeilingBox',
+				title: '吸顶容器',
+				tag: '1.4.0',
+				description: '智能吸顶/吸底容器组件，支持自动占位防页面塌陷、毛玻璃滤镜与 Render Props 状态感知。',
+			},
 			{
 				key: 'CascadeDrawer',
 				name: 'CascadeDrawer',
@@ -541,6 +549,11 @@ const navCategories: ComponentCategory[] = [
 // 组件与对应的 Demo 组件映射表
 const demoComponentsMap: Record<string, { name: string; title: string; component: ComponentType }> =
 	{
+		CeilingBox: {
+			name: 'CeilingBox',
+			title: '吸顶容器',
+			component: CeilingBoxDemo,
+		},
 		JsonDiffViewer: {
 			name: 'JsonDiffViewer',
 			title: 'JSON 差异比对器',
