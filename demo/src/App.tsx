@@ -63,6 +63,7 @@ import {
 	JsonDiffViewerDemo,
 	CeilingBoxDemo,
 } from './demos';
+import { CloseCircleFilled } from '../../src/icons';
 
 // 组件导航菜单配置
 interface ComponentMenuItem {
@@ -754,22 +755,51 @@ export default function App() {
 						/>
 						组件预览库
 					</div>
-					<input
-						type="text"
-						placeholder="搜索组件..."
-						value={searchKeyword}
-						onChange={(e) => setSearchKeyword(e.target.value)}
-						style={{
-							width: '100%',
-							padding: '7px 12px',
-							borderRadius: 6,
-							border: '1px solid #d9d9d9',
-							fontSize: 13,
-							outline: 'none',
-							boxSizing: 'border-box',
-							transition: 'all 0.2s',
-						}}
-					/>
+					<div style={{ position: 'relative', width: '100%' }}>
+						<input
+							type="text"
+							placeholder="搜索组件..."
+							value={searchKeyword}
+							onChange={(e) => setSearchKeyword(e.target.value)}
+							style={{
+								width: '100%',
+								padding: '7px 28px 7px 12px',
+								borderRadius: 6,
+								border: '1px solid #d9d9d9',
+								fontSize: 13,
+								outline: 'none',
+								boxSizing: 'border-box',
+								transition: 'all 0.2s',
+							}}
+						/>
+						{searchKeyword && (
+							<span
+								onClick={() => setSearchKeyword('')}
+								title="清除搜索"
+								style={{
+									position: 'absolute',
+									right: 8,
+									top: '50%',
+									transform: 'translateY(-50%)',
+									cursor: 'pointer',
+									color: '#bfbfbf',
+									fontSize: 13,
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'center',
+									transition: 'color 0.15s ease',
+								}}
+								onMouseEnter={(e) => {
+									e.currentTarget.style.color = '#595959';
+								}}
+								onMouseLeave={(e) => {
+									e.currentTarget.style.color = '#bfbfbf';
+								}}
+							>
+								<CloseCircleFilled />
+							</span>
+						)}
+					</div>
 				</div>
 
 				{/* 组件分类与菜单列表 */}
