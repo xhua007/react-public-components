@@ -1,0 +1,61 @@
+.rpc_lazy_load_box {
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+
+	&_fade_in {
+		animation: rpcLazyFadeIn 0.3s cubic-bezier(0.2, 0, 0, 1) forwards;
+	}
+}
+
+.rpc_lazy_load_placeholder {
+	position: relative;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 6px;
+	background: #f5f5f7;
+	overflow: hidden;
+	box-sizing: border-box;
+
+	&_bordered {
+		border: 1px dashed #d9d9d9;
+	}
+}
+
+.rpc_lazy_load_skeleton {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0) 0%,
+		rgba(255, 255, 255, 0.6) 50%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	background-size: 200% 100%;
+	animation: rpcLazyShimmer 1.6s infinite ease-in-out;
+}
+
+@keyframes rpcLazyFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(4px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes rpcLazyShimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}

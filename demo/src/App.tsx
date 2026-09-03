@@ -62,6 +62,8 @@ import {
 	AnnouncementBarDemo,
 	JsonDiffViewerDemo,
 	CeilingBoxDemo,
+	PeriodSelectDemo,
+	LazyLoadBoxDemo,
 } from './demos';
 import { CloseCircleFilled } from '../../src/icons';
 
@@ -148,6 +150,13 @@ const navCategories: ComponentCategory[] = [
 		category: '布局与导航 Layout & Nav',
 		items: [
 			{
+				key: 'LazyLoadBox',
+				name: 'LazyLoadBox',
+				title: '视口懒加载容器',
+				tag: '1.4.0',
+				description: '视口距离感知与按需加载容器，彻底拦截非可视模块接口调用，支持预加载距离与防塌陷占位。',
+			},
+			{
 				key: 'CeilingBox',
 				name: 'CeilingBox',
 				title: '吸顶容器',
@@ -222,6 +231,13 @@ const navCategories: ComponentCategory[] = [
 	{
 		category: '数据录入 Data Entry',
 		items: [
+			{
+				key: 'PeriodSelect',
+				name: 'PeriodSelect',
+				title: '周期/粒度切换器',
+				tag: '1.4.0',
+				description: '紧凑型时间周期与维度单选切换器，精准还原高亮竖线分隔与多尺寸支持。',
+			},
 			{
 				key: 'DualRangeSlider',
 				name: 'DualRangeSlider',
@@ -550,6 +566,16 @@ const navCategories: ComponentCategory[] = [
 // 组件与对应的 Demo 组件映射表
 const demoComponentsMap: Record<string, { name: string; title: string; component: ComponentType }> =
 	{
+		LazyLoadBox: {
+			name: 'LazyLoadBox',
+			title: '视口懒加载容器',
+			component: LazyLoadBoxDemo,
+		},
+		PeriodSelect: {
+			name: 'PeriodSelect',
+			title: '周期/粒度切换器',
+			component: PeriodSelectDemo,
+		},
 		CeilingBox: {
 			name: 'CeilingBox',
 			title: '吸顶容器',

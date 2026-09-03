@@ -1,0 +1,104 @@
+.rpc_period_select {
+	--rpc-period-active-color: #1677ff;
+
+	display: inline-flex;
+	align-items: stretch;
+	border: 1px solid #d9d9d9;
+	border-radius: 4px;
+	background: #ffffff;
+	user-select: none;
+	box-sizing: border-box;
+	overflow: hidden;
+	position: relative;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+	// 尺寸控制
+	&_small {
+		height: 24px;
+		.rpc_period_select_item {
+			padding: 0 10px;
+			font-size: 12px;
+		}
+	}
+
+	&_middle {
+		height: 28px;
+		.rpc_period_select_item {
+			padding: 0 14px;
+			font-size: 14px;
+		}
+	}
+
+	&_large {
+		height: 32px;
+		.rpc_period_select_item {
+			padding: 0 18px;
+			font-size: 15px;
+		}
+	}
+
+	&_block {
+		display: flex;
+		width: 100%;
+
+		.rpc_period_select_item {
+			flex: 1;
+			text-align: center;
+		}
+	}
+
+	&_disabled {
+		opacity: 0.55;
+		cursor: not-allowed;
+		background: #f5f5f5;
+		border-color: #d9d9d9;
+
+		.rpc_period_select_item {
+			cursor: not-allowed;
+			pointer-events: none;
+		}
+	}
+
+	// 选项子项
+	&_item {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		color: #333333;
+		cursor: pointer;
+		line-height: 1;
+		transition: color 0.15s ease, background-color 0.15s ease;
+
+		&:hover:not(&_disabled) {
+			color: var(--rpc-period-active-color);
+		}
+
+		&_active {
+			color: var(--rpc-period-active-color);
+			font-weight: 500;
+		}
+
+		&_disabled {
+			color: #bfbfbf;
+			cursor: not-allowed;
+		}
+	}
+
+	// 选项文字
+	&_text {
+		position: relative;
+		z-index: 2;
+	}
+
+	// 选中项左侧的高亮分割竖线
+	&_active_line {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background-color: var(--rpc-period-active-color);
+		z-index: 3;
+	}
+}
