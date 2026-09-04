@@ -1,4 +1,4 @@
-import React, { useId, CSSProperties } from 'react';
+import React, { useRef, CSSProperties } from 'react';
 import './index.less';
 
 export interface MiniSparklineProps {
@@ -18,6 +18,8 @@ export interface MiniSparklineProps {
 	style?: CSSProperties;
 }
 
+let sparklineIdCounter = 0;
+
 const MiniSparkline: React.FC<MiniSparklineProps> = ({
 	data = [],
 	color = '#1677ff',
@@ -27,7 +29,12 @@ const MiniSparkline: React.FC<MiniSparklineProps> = ({
 	className = '',
 	style,
 }) => {
-	const gradientId = useId();
+	const idRef = useRef<string>();
+	if (!idRef.current) {
+		sparklineIdCounter += 1;
+		idRef.current = `rpc_sparkline_grad_${sparklineIdCounter}`;
+	}
+	const gradientId = idRef.current;
 
 	if (data.length < 2) return null;
 
