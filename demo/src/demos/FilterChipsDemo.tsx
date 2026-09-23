@@ -38,8 +38,18 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'chips', desc: '筛选胶囊列表，每项包含 id, label, value', type: 'FilterChipItem[]', required: true },
-		{ name: 'onRemove', desc: '点击单个筛选项右侧关闭按钮的回调', type: '(id: string) => void', default: '-' },
+		{
+			name: 'chips',
+			desc: '筛选胶囊列表，每项包含 id, label, value',
+			type: 'FilterChipItem[]',
+			required: true,
+		},
+		{
+			name: 'onRemove',
+			desc: '点击单个筛选项右侧关闭按钮的回调',
+			type: '(id: string) => void',
+			default: '-',
+		},
 		{ name: 'onClearAll', desc: '点击末尾一键清空按钮的回调', type: '() => void', default: '-' },
 		{ name: 'clearText', desc: '清空按钮的文案', type: 'string', default: "'清空筛选'" },
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },

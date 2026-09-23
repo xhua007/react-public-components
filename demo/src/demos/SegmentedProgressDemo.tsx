@@ -21,10 +21,25 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'segments', desc: '分段数据列表，每项含 label, value, color, suffix', type: 'ProgressSegment[]', required: true },
-		{ name: 'total', desc: '总量基准数值（不传时自动对所有分段 value 求和）', type: 'number', default: '各分段求和' },
+		{
+			name: 'segments',
+			desc: '分段数据列表，每项含 label, value, color, suffix',
+			type: 'ProgressSegment[]',
+			required: true,
+		},
+		{
+			name: 'total',
+			desc: '总量基准数值（不传时自动对所有分段 value 求和）',
+			type: 'number',
+			default: '各分段求和',
+		},
 		{ name: 'height', desc: '进度条高度（像素）', type: 'number', default: '10' },
-		{ name: 'showLegend', desc: '是否在进度条下方展示图例 Legend', type: 'boolean', default: 'true' },
+		{
+			name: 'showLegend',
+			desc: '是否在进度条下方展示图例 Legend',
+			type: 'boolean',
+			default: 'true',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

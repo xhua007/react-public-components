@@ -60,7 +60,11 @@ function DragSortList<T>({
 	itemsRef.current = items;
 
 	// 处理鼠标按下发起拖拽
-	const handlePointerDown = (e: React.PointerEvent<HTMLElement>, index: number, fromHandle: boolean) => {
+	const handlePointerDown = (
+		e: React.PointerEvent<HTMLElement>,
+		index: number,
+		fromHandle: boolean,
+	) => {
 		if (disabled || e.button !== 0) return;
 		if (handleOnly && !fromHandle) return;
 
@@ -99,7 +103,9 @@ function DragSortList<T>({
 				} else if (pointerY < itemElements[0].getBoundingClientRect().top) {
 					newHoverIndex = 0;
 					break;
-				} else if (pointerY > itemElements[itemElements.length - 1].getBoundingClientRect().bottom) {
+				} else if (
+					pointerY > itemElements[itemElements.length - 1].getBoundingClientRect().bottom
+				) {
 					newHoverIndex = itemElements.length - 1;
 					break;
 				}
@@ -118,7 +124,15 @@ function DragSortList<T>({
 			const to = hoverIndexRef.current;
 			const currentList = itemsRef.current;
 
-			if (from !== null && to !== null && from !== to && from >= 0 && to >= 0 && from < currentList.length && to < currentList.length) {
+			if (
+				from !== null &&
+				to !== null &&
+				from !== to &&
+				from >= 0 &&
+				to >= 0 &&
+				from < currentList.length &&
+				to < currentList.length
+			) {
 				const reorderedList = arrayMove(currentList, from, to);
 				onReorder(reorderedList, from, to);
 			}
@@ -185,9 +199,7 @@ function DragSortList<T>({
 										</span>
 									)}
 
-									<div className="rpc_drag_sort_list_content">
-										{renderItem(item, idx, false)}
-									</div>
+									<div className="rpc_drag_sort_list_content">{renderItem(item, idx, false)}</div>
 								</>
 							)}
 						</div>
@@ -196,7 +208,11 @@ function DragSortList<T>({
 			</div>
 
 			{/* 浮动随动幽灵卡片（全局悬浮脱离文档流，100% 顺畅跟手，绝对 0 跳动） */}
-			{dragIndex !== null && pointerCoord && dragItemRect && draggedItemData && typeof document !== 'undefined' && (
+			{dragIndex !== null &&
+				pointerCoord &&
+				dragItemRect &&
+				draggedItemData &&
+				typeof document !== 'undefined' &&
 				ReactDOM.createPortal(
 					<div
 						className="rpc_drag_sort_list_floating_ghost"
@@ -208,7 +224,10 @@ function DragSortList<T>({
 						}}
 					>
 						{showHandle && (
-							<span className="rpc_drag_sort_list_handle" style={{ cursor: 'grabbing', color: '#1677ff' }}>
+							<span
+								className="rpc_drag_sort_list_handle"
+								style={{ cursor: 'grabbing', color: '#1677ff' }}
+							>
 								<HolderOutlined />
 							</span>
 						)}
@@ -217,8 +236,7 @@ function DragSortList<T>({
 						</div>
 					</div>,
 					document.body,
-				)
-			)}
+				)}
 		</>
 	);
 }

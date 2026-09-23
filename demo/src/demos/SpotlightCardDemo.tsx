@@ -22,7 +22,12 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'children', desc: '卡片子元素内容', type: 'ReactNode', required: true },
-		{ name: 'spotlightColor', desc: '鼠标聚光灯跟随光晕的 RGBA 颜色', type: 'string', default: "'rgba(22, 119, 255, 0.15)'" },
+		{
+			name: 'spotlightColor',
+			desc: '鼠标聚光灯跟随光晕的 RGBA 颜色',
+			type: 'string',
+			default: "'rgba(22, 119, 255, 0.15)'",
+		},
 		{ name: 'spotlightSize', desc: '聚光灯光晕扩散半径（像素）', type: 'number', default: '320' },
 		{ name: 'dark', desc: '是否启用暗色高对比科技感主题', type: 'boolean', default: 'false' },
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },

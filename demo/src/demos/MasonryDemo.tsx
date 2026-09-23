@@ -22,14 +22,54 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'items', desc: '瀑布流子项数据列表，每项含 key, height, children, data', type: 'MasonryItem[]', required: true },
-		{ name: 'columns', desc: '瀑布流列数，支持固定数字或响应式断点对象（如 { xs: 1, md: 3, lg: 4 }）', type: 'number | object', default: '3' },
-		{ name: 'gutter', desc: '间距配置，支持统一数值或水平垂直数组 [horizontal, vertical]', type: 'number | [number, number]', default: '0' },
-		{ name: 'fresh', desc: '是否持续监听子项尺寸变化自适应重排', type: 'boolean', default: 'false' },
-		{ name: 'itemRender', desc: '自定义单项渲染函数', type: '(item: MasonryItem) => ReactNode', default: '-' },
-		{ name: 'onLayoutChange', desc: '瀑布流布局列排序重算完成回调', type: '(layout) => void', default: '-' },
-		{ name: 'styles', desc: '语义化 DOM 样式对象 (root, item)', type: 'MasonryStyles', default: '-' },
-		{ name: 'classNames', desc: '语义化 DOM 类名对象 (root, item)', type: 'MasonryClassNames', default: '-' },
+		{
+			name: 'items',
+			desc: '瀑布流子项数据列表，每项含 key, height, children, data',
+			type: 'MasonryItem[]',
+			required: true,
+		},
+		{
+			name: 'columns',
+			desc: '瀑布流列数，支持固定数字或响应式断点对象（如 { xs: 1, md: 3, lg: 4 }）',
+			type: 'number | object',
+			default: '3',
+		},
+		{
+			name: 'gutter',
+			desc: '间距配置，支持统一数值或水平垂直数组 [horizontal, vertical]',
+			type: 'number | [number, number]',
+			default: '0',
+		},
+		{
+			name: 'fresh',
+			desc: '是否持续监听子项尺寸变化自适应重排',
+			type: 'boolean',
+			default: 'false',
+		},
+		{
+			name: 'itemRender',
+			desc: '自定义单项渲染函数',
+			type: '(item: MasonryItem) => ReactNode',
+			default: '-',
+		},
+		{
+			name: 'onLayoutChange',
+			desc: '瀑布流布局列排序重算完成回调',
+			type: '(layout) => void',
+			default: '-',
+		},
+		{
+			name: 'styles',
+			desc: '语义化 DOM 样式对象 (root, item)',
+			type: 'MasonryStyles',
+			default: '-',
+		},
+		{
+			name: 'classNames',
+			desc: '语义化 DOM 类名对象 (root, item)',
+			type: 'MasonryClassNames',
+			default: '-',
+		},
 	];
 
 	return (

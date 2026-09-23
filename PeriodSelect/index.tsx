@@ -55,12 +55,10 @@ export function PeriodSelect<T = string | number>({
 	className = '',
 	style,
 }: PeriodSelectProps<T>) {
-	const initialValue =
-		defaultValue !== undefined ? defaultValue : (options[0]?.value as T);
+	const initialValue = defaultValue !== undefined ? defaultValue : (options[0]?.value as T);
 	const [internalValue, setInternalValue] = useState<T>(initialValue);
 
-	const currentValue =
-		controlledValue !== undefined ? controlledValue : internalValue;
+	const currentValue = controlledValue !== undefined ? controlledValue : internalValue;
 
 	const handleSelect = (item: PeriodSelectOption<T>) => {
 		if (disabled || item.disabled) return;
@@ -108,11 +106,7 @@ export function PeriodSelect<T = string | number>({
 					.join(' ');
 
 				return (
-					<div
-						key={String(item.value)}
-						className={itemClass}
-						onClick={() => handleSelect(item)}
-					>
+					<div key={String(item.value)} className={itemClass} onClick={() => handleSelect(item)}>
 						{showActiveLine && <span className="rpc_period_select_active_line" />}
 						<span className="rpc_period_select_text">{item.label}</span>
 					</div>

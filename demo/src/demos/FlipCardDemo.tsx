@@ -30,12 +30,37 @@ export default function App() {
 	const apiData: ApiPropItem[] = [
 		{ name: 'front', desc: '卡片正面展示内容', type: 'ReactNode', required: true },
 		{ name: 'back', desc: '卡片背面展示内容', type: 'ReactNode', required: true },
-		{ name: 'trigger', desc: "翻转触发方式：'hover' 鼠标悬停 / 'click' 点击", type: "'hover' | 'click'", default: "'hover'" },
-		{ name: 'direction', desc: "翻转旋转轴方向：'horizontal' 水平翻转 / 'vertical' 垂直翻转", type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+		{
+			name: 'trigger',
+			desc: "翻转触发方式：'hover' 鼠标悬停 / 'click' 点击",
+			type: "'hover' | 'click'",
+			default: "'hover'",
+		},
+		{
+			name: 'direction',
+			desc: "翻转旋转轴方向：'horizontal' 水平翻转 / 'vertical' 垂直翻转",
+			type: "'horizontal' | 'vertical'",
+			default: "'horizontal'",
+		},
 		{ name: 'flipped', desc: '当前是否翻转到背面（受控）', type: 'boolean', default: '-' },
-		{ name: 'onFlip', desc: '翻转状态切换时的回调函数', type: '(isFlipped: boolean) => void', default: '-' },
-		{ name: 'width', desc: '卡片宽度（像素数字或 CSS 字符串）', type: 'number | string', default: '300' },
-		{ name: 'height', desc: '卡片高度（像素数字或 CSS 字符串）', type: 'number | string', default: '200' },
+		{
+			name: 'onFlip',
+			desc: '翻转状态切换时的回调函数',
+			type: '(isFlipped: boolean) => void',
+			default: '-',
+		},
+		{
+			name: 'width',
+			desc: '卡片宽度（像素数字或 CSS 字符串）',
+			type: 'number | string',
+			default: '300',
+		},
+		{
+			name: 'height',
+			desc: '卡片高度（像素数字或 CSS 字符串）',
+			type: 'number | string',
+			default: '200',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

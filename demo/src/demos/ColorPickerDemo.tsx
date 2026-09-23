@@ -286,8 +286,12 @@ export default function ColorPickerDemo() {
 							]}
 							panelRender={(_, { components: { Picker, Presets } }) => (
 								<div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-									<div><Presets /></div>
-									<div style={{ borderLeft: '1px solid #f0f0f0', paddingLeft: 16 }}><Picker /></div>
+									<div>
+										<Presets />
+									</div>
+									<div style={{ borderLeft: '1px solid #f0f0f0', paddingLeft: 16 }}>
+										<Picker />
+									</div>
 								</div>
 							)}
 						/>
@@ -350,19 +354,69 @@ export default function App() {
 			<ApiTable
 				data={[
 					{ name: 'value', desc: '当前选中的颜色值（受控）', type: 'string | Color', default: '-' },
-					{ name: 'defaultValue', desc: '默认颜色值', type: 'string | Color', default: "'#1677ff'" },
-					{ name: 'onChange', desc: '实时拖拽调整颜色时的回调', type: '(color: Color) => void', default: '-' },
-					{ name: 'onChangeComplete', desc: '颜色拖拽松开完成时的回调', type: '(color: Color) => void', default: '-' },
-					{ name: 'showText', desc: '是否展示文本格式与色值字符串', type: 'boolean | ((color) => ReactNode)', default: 'false' },
+					{
+						name: 'defaultValue',
+						desc: '默认颜色值',
+						type: 'string | Color',
+						default: "'#1677ff'",
+					},
+					{
+						name: 'onChange',
+						desc: '实时拖拽调整颜色时的回调',
+						type: '(color: Color) => void',
+						default: '-',
+					},
+					{
+						name: 'onChangeComplete',
+						desc: '颜色拖拽松开完成时的回调',
+						type: '(color: Color) => void',
+						default: '-',
+					},
+					{
+						name: 'showText',
+						desc: '是否展示文本格式与色值字符串',
+						type: 'boolean | ((color) => ReactNode)',
+						default: 'false',
+					},
 					{ name: 'allowClear', desc: '是否允许清除颜色', type: 'boolean', default: 'false' },
 					{ name: 'disabled', desc: '是否禁用选择器', type: 'boolean', default: 'false' },
-					{ name: 'disabledAlpha', desc: '是否禁用透明度 Alpha 通道调节', type: 'boolean', default: 'false' },
-					{ name: 'format', desc: "当前格式：'hex' | 'rgb' | 'hsb'", type: 'ColorFormat', default: "'hex'" },
-					{ name: 'mode', desc: "颜色模式：'single' 单色 / 'gradient' 渐变色", type: "'single' | 'gradient' | ColorMode[]", default: "'single'" },
+					{
+						name: 'disabledAlpha',
+						desc: '是否禁用透明度 Alpha 通道调节',
+						type: 'boolean',
+						default: 'false',
+					},
+					{
+						name: 'format',
+						desc: "当前格式：'hex' | 'rgb' | 'hsb'",
+						type: 'ColorFormat',
+						default: "'hex'",
+					},
+					{
+						name: 'mode',
+						desc: "颜色模式：'single' 单色 / 'gradient' 渐变色",
+						type: "'single' | 'gradient' | ColorMode[]",
+						default: "'single'",
+					},
 					{ name: 'presets', desc: '预设颜色预选板列表', type: 'ColorPresetItem[]', default: '-' },
-					{ name: 'panelRender', desc: '自定义渲染弹出选择面板结构', type: '(panel, { components }) => ReactNode', default: '-' },
-					{ name: 'size', desc: "触发器尺寸：'small' | 'middle' | 'large'", type: 'string', default: "'middle'" },
-					{ name: 'trigger', desc: "触发浮层方式：'click' | 'hover'", type: "'click' | 'hover'", default: "'click'" },
+					{
+						name: 'panelRender',
+						desc: '自定义渲染弹出选择面板结构',
+						type: '(panel, { components }) => ReactNode',
+						default: '-',
+					},
+					{
+						name: 'size',
+						desc: "触发器尺寸：'small' | 'middle' | 'large'",
+						type: 'string',
+						default: "'middle'",
+					},
+					{
+						name: 'trigger',
+						desc: "触发浮层方式：'click' | 'hover'",
+						type: "'click' | 'hover'",
+						default: "'click'",
+					},
 				]}
 			/>
 		</div>

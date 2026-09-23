@@ -18,10 +18,25 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'src', desc: 'PDF 文件 URL 地址或 Blob URL', type: 'string', required: true },
-		{ name: 'title', desc: '顶部展示的 PDF 文档标题', type: 'ReactNode', default: "'PDF Document Preview'" },
-		{ name: 'height', desc: '阅读器高度（像素数字或 CSS 字符串）', type: 'number | string', default: '500' },
+		{
+			name: 'title',
+			desc: '顶部展示的 PDF 文档标题',
+			type: 'ReactNode',
+			default: "'PDF Document Preview'",
+		},
+		{
+			name: 'height',
+			desc: '阅读器高度（像素数字或 CSS 字符串）',
+			type: 'number | string',
+			default: '500',
+		},
 		{ name: 'width', desc: '阅读器宽度', type: 'number | string', default: "'100%'" },
-		{ name: 'showDownload', desc: '是否在工具栏展示一键下载按钮', type: 'boolean', default: 'true' },
+		{
+			name: 'showDownload',
+			desc: '是否在工具栏展示一键下载按钮',
+			type: 'boolean',
+			default: 'true',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

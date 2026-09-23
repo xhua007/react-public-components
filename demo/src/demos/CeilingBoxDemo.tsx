@@ -109,7 +109,14 @@ export default function App() {
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 			{/* 1. 局部滚动容器吸顶演练 */}
 			<div>
-				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						marginBottom: 12,
+					}}
+				>
 					<h3 style={{ fontSize: 16, margin: 0 }}>
 						1. 局部容器内智能吸顶 (Sticky Container + 状态感知)
 					</h3>
@@ -127,7 +134,8 @@ export default function App() {
 					</span>
 				</div>
 				<p style={{ color: '#595959', fontSize: 14, marginBottom: 16 }}>
-					向下滚动下方长列表，当滚动至操作栏时，操作栏将<strong>自动锁定吸顶</strong>，并自动保留原位占位高度，防止页面发生闪跳。
+					向下滚动下方长列表，当滚动至操作栏时，操作栏将<strong>自动锁定吸顶</strong>
+					，并自动保留原位占位高度，防止页面发生闪跳。
 				</p>
 
 				<div
@@ -146,7 +154,8 @@ export default function App() {
 					<div style={{ padding: '24px 0', color: '#595959', lineHeight: 1.8 }}>
 						<h4 style={{ margin: '0 0 8px 0', color: '#1f1f1f' }}>📋 顶部前置导言区域</h4>
 						<p style={{ margin: 0 }}>
-							向下滚动即可看到吸顶组件 <code>CeilingBox</code>。它支持自动占位维持布局稳定，无需开发者手动计算高度。
+							向下滚动即可看到吸顶组件 <code>CeilingBox</code>
+							。它支持自动占位维持布局稳定，无需开发者手动计算高度。
 						</p>
 					</div>
 

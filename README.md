@@ -3,13 +3,13 @@
 [![npm version](https://img.shields.io/npm/v/react-public-components.svg)](https://www.npmjs.com/package/react-public-components)
 [![license](https://img.shields.io/npm/l/react-public-components.svg)](https://github.com/xhua007/react-public-components)
 
-📦 **企业级现代 React 通用核心组件库**。零沉重 UI 库绑定，开箱即用，提供 61 款真正高频、极客质感的中后台与现代 Web 应用组件。
+📦 **企业级现代 React 通用核心组件库**。零沉重 UI 库绑定，开箱即用，提供 63 款真正高频、极客质感的中后台与现代 Web 应用组件。
 
 ---
 
 ## 🌟 特性亮点
 
-- 💎 **精炼通用**：涵盖中后台与 SaaS 产品的通用、布局导航、数据录入、数据展示、反馈 5 大类别共 61 款高频组件。
+- 💎 **精炼通用**：涵盖中后台与 SaaS 产品的通用、布局导航、数据录入、数据展示、反馈 5 大类别共 63 款高频组件。
 - ⚡ **轻量零依赖**：不强制依赖 Ant Design 等庞大第三方 UI 库，体积小巧，按需引入。
 - 🛡️ **工业级防御**：核心安全组件（如 `Watermark`）采用原生 DOM 脱离 VDOM 注入防篡改架构，支持毫秒自愈与防审查元素删除。
 - 🎨 **极客质感**：现代设计语言，自带平滑微动效、毛玻璃（Glassmorphism）、硬件加速流光与暗色模式适配。
@@ -17,117 +17,184 @@
 
 ---
 
-## 快速安装
+## 🚀 快速上手与使用说明
+
+### 1. 安装组件库
 
 ```bash
+# 使用 npm
 npm install react-public-components
-# 或使用 pnpm
+
+# 或使用 pnpm (推荐)
 pnpm add react-public-components
+
 # 或使用 yarn
 yarn add react-public-components
 ```
 
-在项目入口文件中引入全局样式：
+### 2. 引入基础样式 (重要)
+
+本组件库采用轻量、零运行时损耗的代码与样式抽离方案（CSS Extraction），组件 JS 产物仅包含纯逻辑与类名，**全局样式只需在项目根入口引入一次**即可全应用生效。
+
+请在项目的根入口文件（如 `main.tsx`、`index.tsx` 或 `App.tsx`）顶部引入：
 
 ```tsx
+// main.tsx 或 index.tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+// 👈 仅需在此全局引入一次，所有业务页面和子组件即可拥有完整视觉与动效
 import 'react-public-components/styles.css';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+```
+
+> [!NOTE]
+> **为什么需要引入 `styles.css`？**
+>
+> - **零运行时开销**：不使用重型的 CSS-in-JS 运行时计算，完全由浏览器底层 CSS 引擎解析，首屏性能更优；
+> - **强缓存与轻量**：CSS 独立打包，可被浏览器单独强缓存，避免 JS 产物体积膨胀；
+> - **全项目单次引入**：不需要在每个业务组件中重复引入样式，根入口引入一次后，全站所有组件随处直接可用。
+
+### 3. 在业务组件中使用
+
+在项目入口引入 `styles.css` 后，所有业务模块直接引入组件即可使用，代码极简干净：
+
+```tsx
+import React, { useState } from 'react';
+import { PeriodSelect, LazyLoadBox, CopyButton } from 'react-public-components';
+
+export default function MyDashboard() {
+	const [period, setPeriod] = useState('week');
+
+	return (
+		<div style={{ padding: 24 }}>
+			{/* 周期切换器 */}
+			<PeriodSelect value={period} onChange={(val) => setPeriod(val)} />
+
+			{/* 视口懒加载容器（距离滚动条 200px 提前加载） */}
+			<LazyLoadBox offset={200} height={200} style={{ marginTop: 20 }}>
+				<div>📊 视口按需加载的业务看板内容...</div>
+			</LazyLoadBox>
+
+			{/* 复制按钮 */}
+			<CopyButton text="https://github.com/xhua007/react-public-components" />
+		</div>
+	);
+}
+```
+
+### 4. 按需引入与 Tree-Shaking
+
+组件库原生支持标准的 ESM 规范。使用现代打包工具（如 Vite、Webpack 5、Rollup）构建时，会自动对未使用的组件进行 Tree-Shaking 剪枝，最终生产构建仅打包实际 import 到的组件代码。
+
+```tsx
+// 推荐写法：打包工具会自动 Tree-Shake 摇掉未使用的组件
+import { PeriodSelect, Watermark } from 'react-public-components';
+import type { PeriodSelectProps } from 'react-public-components';
 ```
 
 ---
 
-## 🧩 组件全览（61 款核心高频组件）
+## 🧩 组件全览（63 款核心高频组件）
 
 ### 1. 通用 General (8 款)
-| 组件名 | 中文名称 | 特性与场景说明 |
-| :--- | :--- | :--- |
-| **`CodeSnippet`** | 代码预览块 | 极客代码展示块，支持暗色主题、一键复制与多行展开收起。 |
-| **`Watermark`** | 安全水印 | DOM 防篡改盲水印，脱离 VDOM 具备毫秒级自愈与防审查元素删除能力。 |
-| **`QrCodeCard`** | 二维码卡片 | 优雅企业级二维码展示卡片，支持 Logo 嵌入、状态覆盖（加载/过期刷新）与一键下载。 |
-| **`GuidedTour`** | 新手引导 | 新手引导步进器，带智能镂空高亮遮罩、步骤弹窗与状态持久化。 |
-| **`FilePreviewer`** | 文件预览 | 多格式文件与媒体统一弹窗预览器，支持图片、音视频、PDF、代码与一键下载。 |
-| **`Fullscreen`** | 全屏容器 | 支持局部元素原生全屏与网页内最大化置顶切换，支持快捷悬浮按钮与 Render Props。 |
-| **`CopyButton`** | 复制按钮 | 增强型剪贴板复制组件，支持 Tooltip 状态反馈、输入框后缀吸附与异步文本。 |
-| **`ContextMenu`** | 右键快捷菜单 | 自定义右键上下文菜单，支持多级嵌套、分割线、禁用态与快捷键提示。 |
+
+| 组件名              | 中文名称     | 特性与场景说明                                                                  |
+| :------------------ | :----------- | :------------------------------------------------------------------------------ |
+| **`CodeSnippet`**   | 代码预览块   | 极客代码展示块，支持暗色主题、一键复制与多行展开收起。                          |
+| **`Watermark`**     | 安全水印     | DOM 防篡改盲水印，脱离 VDOM 具备毫秒级自愈与防审查元素删除能力。                |
+| **`QrCodeCard`**    | 二维码卡片   | 优雅企业级二维码展示卡片，支持 Logo 嵌入、状态覆盖（加载/过期刷新）与一键下载。 |
+| **`GuidedTour`**    | 新手引导     | 新手引导步进器，带智能镂空高亮遮罩、步骤弹窗与状态持久化。                      |
+| **`FilePreviewer`** | 文件预览     | 多格式文件与媒体统一弹窗预览器，支持图片、音视频、PDF、代码与一键下载。         |
+| **`Fullscreen`**    | 全屏容器     | 支持局部元素原生全屏与网页内最大化置顶切换，支持快捷悬浮按钮与 Render Props。   |
+| **`CopyButton`**    | 复制按钮     | 增强型剪贴板复制组件，支持 Tooltip 状态反馈、输入框后缀吸附与异步文本。         |
+| **`ContextMenu`**   | 右键快捷菜单 | 自定义右键上下文菜单，支持多级嵌套、分割线、禁用态与快捷键提示。                |
 
 ---
 
 ### 2. 布局与导航 Layout & Nav (10 款)
-| 组件名 | 中文名称 | 特性与场景说明 |
-| :--- | :--- | :--- |
-| **`LazyLoadBox`** | 视口懒加载容器 | 视口距离感知与按需加载容器，彻底拦截非可视模块接口调用，支持预加载距离与防塌陷占位。 |
-| **`CascadeDrawer`** | 级联下钻抽屉 | 多层级无限下钻抽屉容器，带顶部面包屑返回导航与平滑推拉动效。 |
-| **`KanbanBoard`** | 任务看板 | 轻量任务看板与泳道管理，基于原生 HTML5 Drag & Drop 跨列平滑拖拽。 |
-| **`DragSortList`** | 拖拽排序列表 | 纯原生轻量拖拽重排序列表，支持平滑占位与阴影反馈。 |
-| **`CeilingBox`** | 吸顶容器 | 智能吸顶/吸底容器组件，支持自动占位防页面塌陷、毛玻璃滤镜与 Render Props 状态感知。 |
-| **`Marquee`** | 无缝跑马灯 | 基于硬件加速的无缝平滑滚动 Logo 墙与广播通知条，支持悬停暂停与边缘渐变。 |
-| **`ScrollTracker`** | 滚动与吸顶 | 阅读进度条（ScrollTracker）与智能吸顶容器（StickyHeader，带毛玻璃与阴影）。 |
-| **`InfiniteScrollList`** | 无限滚动列表 | 触底自动触发异步加载的无限滚动列表容器，内置加载骨架与到底提示。 |
-| **`CollapseBox`** | 折叠容器 | 支持水平与垂直方向折叠的弹性容器组件，支持自定义按钮位置与默认尺寸。 |
-| **`Splitter`** | 分隔面板 | 支持多面板拖拽调整尺寸、折叠与双击重置的可定制分隔面板组件。 |
-| **`Masonry`** | 瀑布流 | 基于列优先的高性能响应式瀑布流布局组件，遵循 AntD 规范。 |
+
+| 组件名                   | 中文名称       | 特性与场景说明                                                                       |
+| :----------------------- | :------------- | :----------------------------------------------------------------------------------- |
+| **`LazyLoadBox`**        | 视口懒加载容器 | 视口距离感知与按需加载容器，彻底拦截非可视模块接口调用，支持预加载距离与防塌陷占位。 |
+| **`CascadeDrawer`**      | 级联下钻抽屉   | 多层级无限下钻抽屉容器，带顶部面包屑返回导航与平滑推拉动效。                         |
+| **`KanbanBoard`**        | 任务看板       | 轻量任务看板与泳道管理，基于原生 HTML5 Drag & Drop 跨列平滑拖拽。                    |
+| **`DragSortList`**       | 拖拽排序列表   | 纯原生轻量拖拽重排序列表，支持平滑占位与阴影反馈。                                   |
+| **`CeilingBox`**         | 吸顶容器       | 智能吸顶/吸底容器组件，支持自动占位防页面塌陷、毛玻璃滤镜与 Render Props 状态感知。  |
+| **`Marquee`**            | 无缝跑马灯     | 基于硬件加速的无缝平滑滚动 Logo 墙与广播通知条，支持悬停暂停与边缘渐变。             |
+| **`ScrollTracker`**      | 滚动与吸顶     | 阅读进度条（ScrollTracker）与智能吸顶容器（StickyHeader，带毛玻璃与阴影）。          |
+| **`InfiniteScrollList`** | 无限滚动列表   | 触底自动触发异步加载的无限滚动列表容器，内置加载骨架与到底提示。                     |
+| **`CollapseBox`**        | 折叠容器       | 支持水平与垂直方向折叠的弹性容器组件，支持自定义按钮位置与默认尺寸。                 |
+| **`Splitter`**           | 分隔面板       | 支持多面板拖拽调整尺寸、折叠与双击重置的可定制分隔面板组件。                         |
+| **`Masonry`**            | 瀑布流         | 基于列优先的高性能响应式瀑布流布局组件，遵循 AntD 规范。                             |
 
 ---
 
 ### 3. 数据录入 Data Entry (16 款)
-| 组件名 | 中文名称 | 特性与场景说明 |
-| :--- | :--- | :--- |
-| **`PeriodSelect`** | 周期/粒度切换器 | 紧凑型时间周期与维度单选切换器，精准还原高亮竖线分隔与多尺寸支持。 |
-| **`DualRangeSlider`** | 双滑块区间选择器 | 双向双滑块区间选择器，支持数值/价格跨度筛选与防交叉穿透。 |
-| **`FilterChips`** | 已选筛选胶囊栏 | 多维已选筛选项胶囊汇总栏，支持单项删除与一键清空全部。 |
-| **`FileDropZone`** | 拖拽上传容器 | 现代极客拖拽上传虚线容器，支持流光呼吸高亮与剪贴板截图粘贴。 |
-| **`TreeTransfer`** | 树形穿梭框 | 树形层级穿梭框，左侧目录树级联勾选与右侧平铺已选列表。 |
-| **`NumberStepper`** | 平滑数字步进器 | 长按连续加减数字步进器，支持步长控制与上下限保护。 |
-| **`KeyValEditor`** | 键值对编辑器 | 动态增删 API Headers 与环境变量配置项，支持密码掩码与单行禁用。 |
-| **`QuickDateRange`** | 快捷日期筛选 | 今日/近7天/本月等预设日期胶囊标签与自定义日期范围双向联动。 |
-| **`TreeFilterPanel`** | 树形平铺筛选 | 多级分类平铺联动筛选器，支持多选、快捷全部、分类汇总与一键清空。 |
-| **`NumericRangeInput`** | 数值区间输入 | 价格与数值区间范围输入框，自带双向联动校验与快捷区间预设标签。 |
-| **`CronPicker`** | Cron 选择器 | 定时任务 Cron 表达式可视化生成器，支持按天/周/月多周期配置与中文人话翻译。 |
-| **`TagInput`** | 标签输入器 | 自由标签输入组件，支持回车/逗号打标签、退格删除、双击编辑与正则校验。 |
-| **`PasswordStrength`** | 密码强度检测 | 多维度密码复杂度实时评分与 4 段彩色进度条可视化指示器。 |
-| **`ImageCropper`** | 图片裁剪 | 轻量原生 Canvas 图片裁剪器，支持拖拽、滚轮缩放、90° 旋转、圆形头像裁剪与 Modal 弹窗。 |
-| **`DebounceSelect`** | 防抖下拉框 | 防抖异步搜索选择器，内置时序竞态保护、单选/多选 Tags 模式与加载态。 |
-| **`ColorPicker`** | 颜色选择器 | 支持 HEX、HSB、RGB 及渐变色模式的高级颜色选择与调色板组件。 |
+
+| 组件名                  | 中文名称         | 特性与场景说明                                                                        |
+| :---------------------- | :--------------- | :------------------------------------------------------------------------------------ |
+| **`PeriodSelect`**      | 周期/粒度切换器  | 紧凑型时间周期与维度单选切换器，精准还原高亮竖线分隔与多尺寸支持。                    |
+| **`DualRangeSlider`**   | 双滑块区间选择器 | 双向双滑块区间选择器，支持数值/价格跨度筛选与防交叉穿透。                             |
+| **`FilterChips`**       | 已选筛选胶囊栏   | 多维已选筛选项胶囊汇总栏，支持单项删除与一键清空全部。                                |
+| **`FileDropZone`**      | 拖拽上传容器     | 现代极客拖拽上传虚线容器，支持流光呼吸高亮与剪贴板截图粘贴。                          |
+| **`TreeTransfer`**      | 树形穿梭框       | 树形层级穿梭框，左侧目录树级联勾选与右侧平铺已选列表。                                |
+| **`NumberStepper`**     | 平滑数字步进器   | 长按连续加减数字步进器，支持步长控制与上下限保护。                                    |
+| **`KeyValEditor`**      | 键值对编辑器     | 动态增删 API Headers 与环境变量配置项，支持密码掩码与单行禁用。                       |
+| **`QuickDateRange`**    | 快捷日期筛选     | 今日/近7天/本月等预设日期胶囊标签与自定义日期范围双向联动。                           |
+| **`TreeFilterPanel`**   | 树形平铺筛选     | 多级分类平铺联动筛选器，支持多选、快捷全部、分类汇总与一键清空。                      |
+| **`NumericRangeInput`** | 数值区间输入     | 价格与数值区间范围输入框，自带双向联动校验与快捷区间预设标签。                        |
+| **`CronPicker`**        | Cron 选择器      | 定时任务 Cron 表达式可视化生成器，支持按天/周/月多周期配置与中文人话翻译。            |
+| **`TagInput`**          | 标签输入器       | 自由标签输入组件，支持回车/逗号打标签、退格删除、双击编辑与正则校验。                 |
+| **`PasswordStrength`**  | 密码强度检测     | 多维度密码复杂度实时评分与 4 段彩色进度条可视化指示器。                               |
+| **`ImageCropper`**      | 图片裁剪         | 轻量原生 Canvas 图片裁剪器，支持拖拽、滚轮缩放、90° 旋转、圆形头像裁剪与 Modal 弹窗。 |
+| **`DebounceSelect`**    | 防抖下拉框       | 防抖异步搜索选择器，内置时序竞态保护、单选/多选 Tags 模式与加载态。                   |
+| **`ColorPicker`**       | 颜色选择器       | 支持 HEX、HSB、RGB 及渐变色模式的高级颜色选择与调色板组件。                           |
 
 ---
 
 ### 4. 数据展示 Display (26 款)
-| 组件名 | 中文名称 | 特性与场景说明 |
-| :--- | :--- | :--- |
-| **`JsonDiffViewer`** | JSON 差异比对器 | JSON 结构体增删改差异彩色高亮探查，支持新旧值对照。 |
-| **`JsonTree`** | JSON 树状探查器 | 树状无限折叠展开的 JSON 探查器，支持数据类型高亮与路径探查。 |
-| **`MiniSparkline`** | 单行微趋势折线图 | 指标卡与表格专用的极简微折线走势图，纯 SVG 贝塞尔曲线平滑绘制。 |
-| **`SegmentedProgress`** | 分段多色进度条 | 单条轨道并列展示多色分段比例，支持存储空间占比与图例。 |
-| **`TrendIndicator`** | KPI 趋势升降胶囊 | 微型 KPI 指标变动升降胶囊，自动根据正负值判断涨跌并支持红绿反转。 |
-| **`PhotoViewer`** | 相册画廊查看器 | 全功能多图画廊查看器，支持左右键盘按键切图与缩略图底栏联动。 |
-| **`StatusTimeline`** | 审批流时间轴 | 高级审批流与动态耗时时间轴，包含节点状态徽标、经办人与流转耗时。 |
-| **`GradientText`** | 流光渐变文字 | 现代 SaaS 霓虹横向流光渐变文字，支持背景平滑滚动动画。 |
-| **`VideoPlayer`** | 视频播放器 | 轻量现代化视频播放器，暗黑毛玻璃控制条、快进快退 10s、0.75x~2.0x 倍速与画中画。 |
-| **`PdfViewer`** | PDF 在线阅读器 | 轻量 Web PDF 阅读器，支持缩放 Zoom、90° 顺时针旋转与一键下载。 |
-| **`BadgeRibbon`** | 斜角丝带角标 | 卡片左上/右上 45° 倾斜缎带徽章，支持 HOT/PRO 推荐与渐变色。 |
-| **`ShimmerSkeleton`** | 流光骨架屏 | 高质感渐变流光掠过骨架屏，支持卡片、列表、头像与多行文本。 |
-| **`FlipCard`** | 3D 翻转卡片 | 3D 正反面翻转卡片，鼠标悬停或点击触发 180° 平滑翻转展示详情。 |
-| **`VirtualList`** | 虚拟列表 | 零依赖轻量虚拟滚动列表，万级海量数据 60FPS 极速渲染不卡顿。 |
-| **`MetricCard`** | KPI 指标卡 | Dashboard 看板指标卡片，集成 CountUp 数字跳动、环比升降趋势与微折线 Sparkline。 |
-| **`ActivityLog`** | 操作审计日志 | 中后台业务操作与审批流动态时间轴，支持操作人头像、相对时间与变动详情折叠。 |
-| **`AudioPlayer`** | 音频播放条 | 轻量客服录音与语音回放条，支持 Seek 拖拽、倍速切换与一键下载。 |
-| **`TiltCard`** | 3D 倾斜卡片 | 鼠标悬停 3D 景深物理倾斜与流光高光跟随卡片。 |
-| **`SpotlightCard`** | 聚光灯卡片 | 鼠标光晕聚光灯实时追踪跟随卡片，具备前沿极客科技感与暗色模式。 |
-| **`SensitiveMask`** | 敏感脱敏 | 手机号/身份证/银行卡/邮箱等敏感数据脱敏展示，支持点击眼睛解密与复制。 |
-| **`DiffViewer`** | 差异比对 | 轻量文本与代码行级差异比对器，支持分栏 Split 与行内 Unified 模式。 |
-| **`JsonEditor`** | JSON 查看与编辑 | 轻量免外部依赖的 JSON 语法高亮查看与编辑器，支持格式化、单行压缩与错误定位。 |
-| **`CountUp`** | 数字滚动 | 基于高质量缓动算法的平滑数字跳动动画组件，支持前缀后缀与命令式 Ref 控制。 |
-| **`TextEllipsis`** | 文本省略 | 支持单行/多行文本截断、展开/收起切换、溢出智能 Tooltip 与一键复制。 |
-| **`BorderBeam`** | 边框流光 | 为卡片或容器边框添加流动高亮与自定义渐变动画的特效组件。 |
-| **`DisabledBox`** | 禁用遮罩 | 为子级元素或复杂区域提供统一的禁用态透明遮罩与防交互保护。 |
+
+| 组件名                  | 中文名称         | 特性与场景说明                                                                  |
+| :---------------------- | :--------------- | :------------------------------------------------------------------------------ |
+| **`JsonDiffViewer`**    | JSON 差异比对器  | JSON 结构体增删改差异彩色高亮探查，支持新旧值对照。                             |
+| **`JsonTree`**          | JSON 树状探查器  | 树状无限折叠展开的 JSON 探查器，支持数据类型高亮与路径探查。                    |
+| **`MiniSparkline`**     | 单行微趋势折线图 | 指标卡与表格专用的极简微折线走势图，纯 SVG 贝塞尔曲线平滑绘制。                 |
+| **`SegmentedProgress`** | 分段多色进度条   | 单条轨道并列展示多色分段比例，支持存储空间占比与图例。                          |
+| **`TrendIndicator`**    | KPI 趋势升降胶囊 | 微型 KPI 指标变动升降胶囊，自动根据正负值判断涨跌并支持红绿反转。               |
+| **`PhotoViewer`**       | 相册画廊查看器   | 全功能多图画廊查看器，支持左右键盘按键切图与缩略图底栏联动。                    |
+| **`StatusTimeline`**    | 审批流时间轴     | 高级审批流与动态耗时时间轴，包含节点状态徽标、经办人与流转耗时。                |
+| **`GradientText`**      | 流光渐变文字     | 现代 SaaS 霓虹横向流光渐变文字，支持背景平滑滚动动画。                          |
+| **`VideoPlayer`**       | 视频播放器       | 轻量现代化视频播放器，暗黑毛玻璃控制条、快进快退 10s、0.75x~2.0x 倍速与画中画。 |
+| **`PdfViewer`**         | PDF 在线阅读器   | 轻量 Web PDF 阅读器，支持缩放 Zoom、90° 顺时针旋转与一键下载。                  |
+| **`BadgeRibbon`**       | 斜角丝带角标     | 卡片左上/右上 45° 倾斜缎带徽章，支持 HOT/PRO 推荐与渐变色。                     |
+| **`ShimmerSkeleton`**   | 流光骨架屏       | 高质感渐变流光掠过骨架屏，支持卡片、列表、头像与多行文本。                      |
+| **`FlipCard`**          | 3D 翻转卡片      | 3D 正反面翻转卡片，鼠标悬停或点击触发 180° 平滑翻转展示详情。                   |
+| **`VirtualList`**       | 虚拟列表         | 零依赖轻量虚拟滚动列表，万级海量数据 60FPS 极速渲染不卡顿。                     |
+| **`MetricCard`**        | KPI 指标卡       | Dashboard 看板指标卡片，集成 CountUp 数字跳动、环比升降趋势与微折线 Sparkline。 |
+| **`ActivityLog`**       | 操作审计日志     | 中后台业务操作与审批流动态时间轴，支持操作人头像、相对时间与变动详情折叠。      |
+| **`AudioPlayer`**       | 音频播放条       | 轻量客服录音与语音回放条，支持 Seek 拖拽、倍速切换与一键下载。                  |
+| **`TiltCard`**          | 3D 倾斜卡片      | 鼠标悬停 3D 景深物理倾斜与流光高光跟随卡片。                                    |
+| **`SpotlightCard`**     | 聚光灯卡片       | 鼠标光晕聚光灯实时追踪跟随卡片，具备前沿极客科技感与暗色模式。                  |
+| **`SensitiveMask`**     | 敏感脱敏         | 手机号/身份证/银行卡/邮箱等敏感数据脱敏展示，支持点击眼睛解密与复制。           |
+| **`DiffViewer`**        | 差异比对         | 轻量文本与代码行级差异比对器，支持分栏 Split 与行内 Unified 模式。              |
+| **`JsonEditor`**        | JSON 查看与编辑  | 轻量免外部依赖的 JSON 语法高亮查看与编辑器，支持格式化、单行压缩与错误定位。    |
+| **`CountUp`**           | 数字滚动         | 基于高质量缓动算法的平滑数字跳动动画组件，支持前缀后缀与命令式 Ref 控制。       |
+| **`TextEllipsis`**      | 文本省略         | 支持单行/多行文本截断、展开/收起切换、溢出智能 Tooltip 与一键复制。             |
+| **`BorderBeam`**        | 边框流光         | 为卡片或容器边框添加流动高亮与自定义渐变动画的特效组件。                        |
+| **`DisabledBox`**       | 禁用遮罩         | 为子级元素或复杂区域提供统一的禁用态透明遮罩与防交互保护。                      |
 
 ---
 
 ### 5. 反馈 Feedback (3 款)
-| 组件名 | 中文名称 | 特性与场景说明 |
-| :--- | :--- | :--- |
-| **`AnnouncementBar`** | 广播通知横幅 | 页面顶部吸顶渐变广播横幅，支持可配置关闭与持久化记忆。 |
-| **`HoverCard`** | 悬浮资料卡 | Twitter / GitHub 风格悬浮信息卡片，防误触延迟与视口防溢出。 |
-| **`EnvBadge`** | 环境防误触角标 | 醒目的环境状态标识胶囊，点击查看构建版本详情并支持多环境跳转。 |
+
+| 组件名                | 中文名称       | 特性与场景说明                                                 |
+| :-------------------- | :------------- | :------------------------------------------------------------- |
+| **`AnnouncementBar`** | 广播通知横幅   | 页面顶部吸顶渐变广播横幅，支持可配置关闭与持久化记忆。         |
+| **`HoverCard`**       | 悬浮资料卡     | Twitter / GitHub 风格悬浮信息卡片，防误触延迟与视口防溢出。    |
+| **`EnvBadge`**        | 环境防误触角标 | 醒目的环境状态标识胶囊，点击查看构建版本详情并支持多环境跳转。 |
 
 ---
 
@@ -139,18 +206,18 @@ import 'react-public-components/styles.css';
 import { Watermark } from 'react-public-components';
 
 export default function App() {
-  return (
-    <Watermark
-      content={['内部机密 严禁外传', 'alex.chen 2026-08-18']}
-      color="rgba(0, 0, 0, 0.10)"
-      antiTamper
-    >
-      <div style={{ padding: 32, height: 400 }}>
-        <h2>核心财务分析报告</h2>
-        <p>即便在控制台尝试删除 DOM 或在 Styles 面板取消勾选属性，水印也会毫秒自愈复原。</p>
-      </div>
-    </Watermark>
-  );
+	return (
+		<Watermark
+			content={['内部机密 严禁外传', 'alex.chen 2026-08-18']}
+			color="rgba(0, 0, 0, 0.10)"
+			antiTamper
+		>
+			<div style={{ padding: 32, height: 400 }}>
+				<h2>核心财务分析报告</h2>
+				<p>即便在控制台尝试删除 DOM 或在 Styles 面板取消勾选属性，水印也会毫秒自愈复原。</p>
+			</div>
+		</Watermark>
+	);
 }
 ```
 
@@ -160,16 +227,16 @@ export default function App() {
 import { Splitter } from 'react-public-components';
 
 export default function App() {
-  return (
-    <Splitter style={{ height: 400 }}>
-      <Splitter.Panel defaultSize="30%" min="15%" collapsible>
-        <div style={{ padding: 16 }}>左侧导航树</div>
-      </Splitter.Panel>
-      <Splitter.Panel>
-        <div style={{ padding: 16 }}>主体工作区内容</div>
-      </Splitter.Panel>
-    </Splitter>
-  );
+	return (
+		<Splitter style={{ height: 400 }}>
+			<Splitter.Panel defaultSize="30%" min="15%" collapsible>
+				<div style={{ padding: 16 }}>左侧导航树</div>
+			</Splitter.Panel>
+			<Splitter.Panel>
+				<div style={{ padding: 16 }}>主体工作区内容</div>
+			</Splitter.Panel>
+		</Splitter>
+	);
 }
 ```
 
@@ -179,13 +246,13 @@ export default function App() {
 import { CodeSnippet } from 'react-public-components';
 
 export default function App() {
-  return (
-    <CodeSnippet
-      language="typescript"
-      code={`const greeting: string = "Hello, react-public-components!";\nconsole.log(greeting);`}
-      showLineNumbers
-    />
-  );
+	return (
+		<CodeSnippet
+			language="typescript"
+			code={`const greeting: string = "Hello, react-public-components!";\nconsole.log(greeting);`}
+			showLineNumbers
+		/>
+	);
 }
 ```
 
@@ -212,6 +279,7 @@ npm run dev
 本项目已配置 `"prepublishOnly": "npm run build"` 自动化钩子，每次执行 `npm publish` 时会自动先执行全量类型与产物打包构建。
 
 ### 1. 前置准备与环境检查
+
 ```bash
 # 检查当前 npm 源是否为官方镜像源（若不是需切换）
 npm config get registry
@@ -223,6 +291,7 @@ npm login --auth-type=web
 ```
 
 ### 2. 更新版本号 (遵循 SemVer 规范)
+
 ```bash
 # 小修复与优化（Patch）：1.2.0 -> 1.2.1
 npm version patch
@@ -235,6 +304,7 @@ npm version major
 ```
 
 ### 3. 构建与本地验证
+
 ```bash
 # 验证组件库核心打包（生成 dist/ 产物）
 npm run build
@@ -244,6 +314,7 @@ npm run build:demo
 ```
 
 ### 4. 提交代码与推送到 GitHub
+
 ```bash
 git add .
 git commit -m "chore(release): bump version to x.x.x"
@@ -251,6 +322,7 @@ git push
 ```
 
 ### 5. 正式发布到 npm
+
 ```bash
 # 执行发布（自动触发 prepublishOnly 构建）
 npm publish --access public

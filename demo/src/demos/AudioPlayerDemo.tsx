@@ -21,7 +21,12 @@ export default function App() {
 	const apiData: ApiPropItem[] = [
 		{ name: 'src', desc: '音频播放地址 URL 或 Blob URL', type: 'string', required: true },
 		{ name: 'title', desc: '音频标题或文件名说明', type: 'ReactNode', default: '-' },
-		{ name: 'defaultPlaybackRate', desc: '默认播放倍速（如 1.0, 1.25, 1.5, 2.0）', type: 'number', default: '1.0' },
+		{
+			name: 'defaultPlaybackRate',
+			desc: '默认播放倍速（如 1.0, 1.25, 1.5, 2.0）',
+			type: 'number',
+			default: '1.0',
+		},
 		{ name: 'showDownload', desc: '是否展示一键下载音频按钮', type: 'boolean', default: 'true' },
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },

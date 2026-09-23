@@ -23,13 +23,28 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'title', desc: '指标卡片标题', type: 'ReactNode', required: true },
-		{ name: 'value', desc: '核心指标数值（数字自动平滑滚动跳跃，支持字符串）', type: 'number | string', required: true },
+		{
+			name: 'value',
+			desc: '核心指标数值（数字自动平滑滚动跳跃，支持字符串）',
+			type: 'number | string',
+			required: true,
+		},
 		{ name: 'prefix', desc: '数值前缀单位（如 ¥）', type: 'ReactNode', default: '-' },
 		{ name: 'suffix', desc: '数值后缀单位（如 人、%）', type: 'ReactNode', default: '-' },
-		{ name: 'trend', desc: "环比趋势方向：'up' 上升（绿） / 'down' 下降（红）", type: "'up' | 'down'", default: '-' },
+		{
+			name: 'trend',
+			desc: "环比趋势方向：'up' 上升（绿） / 'down' 下降（红）",
+			type: "'up' | 'down'",
+			default: '-',
+		},
 		{ name: 'trendValue', desc: '趋势数值标签（如 +18.5%）', type: 'ReactNode', default: '-' },
 		{ name: 'trendLabel', desc: '趋势对比说明文本（如 较上月）', type: 'ReactNode', default: '-' },
-		{ name: 'chartData', desc: '底部迷你 Sparkline 折线图数据数值数组', type: 'number[]', default: '-' },
+		{
+			name: 'chartData',
+			desc: '底部迷你 Sparkline 折线图数据数值数组',
+			type: 'number[]',
+			default: '-',
+		},
 		{ name: 'chartColor', desc: '微折线图主题颜色', type: 'string', default: "'#1677ff'" },
 		{ name: 'footer', desc: '底部说明文本或自定义节点', type: 'ReactNode', default: '-' },
 		{ name: 'extra', desc: '卡片右上角额外操作区节点', type: 'ReactNode', default: '-' },

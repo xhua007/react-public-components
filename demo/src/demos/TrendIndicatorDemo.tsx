@@ -22,12 +22,27 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'value', desc: '变动数值（正数自动显示 + 并标绿，负数自动显示 - 并标红）', type: 'number', required: true },
-		{ name: 'type', desc: "展示模式：'filled' 填充胶囊 / 'outlined' 描边 / 'text' 纯文字", type: "'filled' | 'outlined' | 'text'", default: "'filled'" },
+		{
+			name: 'value',
+			desc: '变动数值（正数自动显示 + 并标绿，负数自动显示 - 并标红）',
+			type: 'number',
+			required: true,
+		},
+		{
+			name: 'type',
+			desc: "展示模式：'filled' 填充胶囊 / 'outlined' 描边 / 'text' 纯文字",
+			type: "'filled' | 'outlined' | 'text'",
+			default: "'filled'",
+		},
 		{ name: 'suffix', desc: '数值后缀单位', type: 'string', default: "'%'" },
 		{ name: 'prefix', desc: '数值前缀说明', type: 'string', default: "''" },
 		{ name: 'precision', desc: '保留小数位数', type: 'number', default: '1' },
-		{ name: 'reverse', desc: '是否反转红绿色彩规则（如延时/错误率下降时判定为好）', type: 'boolean', default: 'false' },
+		{
+			name: 'reverse',
+			desc: '是否反转红绿色彩规则（如延时/错误率下降时判定为好）',
+			type: 'boolean',
+			default: 'false',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

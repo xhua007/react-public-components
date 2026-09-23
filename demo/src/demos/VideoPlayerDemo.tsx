@@ -19,8 +19,18 @@ export default function App() {
 	const apiData: ApiPropItem[] = [
 		{ name: 'src', desc: '视频文件播放地址 URL', type: 'string', required: true },
 		{ name: 'poster', desc: '视频未播放时的封面图 URL', type: 'string', default: '-' },
-		{ name: 'width', desc: '播放器宽度（像素数字或百分比字符串）', type: 'number | string', default: '640' },
-		{ name: 'height', desc: '播放器高度（像素数字或百分比字符串）', type: 'number | string', default: '360' },
+		{
+			name: 'width',
+			desc: '播放器宽度（像素数字或百分比字符串）',
+			type: 'number | string',
+			default: '640',
+		},
+		{
+			name: 'height',
+			desc: '播放器高度（像素数字或百分比字符串）',
+			type: 'number | string',
+			default: '360',
+		},
 		{ name: 'autoPlay', desc: '是否在加载完成后自动播放', type: 'boolean', default: 'false' },
 		{ name: 'loop', desc: '是否循环播放', type: 'boolean', default: 'false' },
 		{ name: 'muted', desc: '是否默认静音', type: 'boolean', default: 'false' },

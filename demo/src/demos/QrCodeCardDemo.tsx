@@ -30,7 +30,12 @@ export default function App() {
 		{ name: 'color', desc: '二维码点阵颜色', type: 'string', default: "'#1f1f1f'" },
 		{ name: 'backgroundColor', desc: '二维码背景颜色', type: 'string', default: "'#ffffff'" },
 		{ name: 'icon', desc: '中心嵌入的 Logo 图标图片地址', type: 'string', default: '-' },
-		{ name: 'iconSize', desc: '中心 Logo 尺寸（像素），默认自适应约 22%', type: 'number', default: '-' },
+		{
+			name: 'iconSize',
+			desc: '中心 Logo 尺寸（像素），默认自适应约 22%',
+			type: 'number',
+			default: '-',
+		},
 		{
 			name: 'status',
 			desc: "二维码状态：'active' 正常 / 'expired' 已过期 / 'loading' 加载中",
@@ -75,7 +80,8 @@ export default function App() {
 					1. 扫码登录 / 支付二维码卡片（支持状态切换、失效蒙层与下载）
 				</h3>
 				<p style={{ color: '#595959', fontSize: 14, marginBottom: 16 }}>
-					提供清晰规范的 QR Code 矩阵渲染、高斯模糊失效毛玻璃蒙层、渐变悬浮刷新胶囊按钮与加载中状态。
+					提供清晰规范的 QR Code
+					矩阵渲染、高斯模糊失效毛玻璃蒙层、渐变悬浮刷新胶囊按钮与加载中状态。
 				</p>
 
 				{/* 现代分段胶囊控制器 */}

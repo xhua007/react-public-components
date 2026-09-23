@@ -41,10 +41,25 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'images', desc: '相册图片列表，每项含 src, title, alt', type: 'PhotoItem[]', required: true },
+		{
+			name: 'images',
+			desc: '相册图片列表，每项含 src, title, alt',
+			type: 'PhotoItem[]',
+			required: true,
+		},
 		{ name: 'defaultIndex', desc: '初始默认选中的图片下标', type: 'number', default: '0' },
-		{ name: 'height', desc: '主预览区高度（像素数字或 CSS 字符串）', type: 'number | string', default: '380' },
-		{ name: 'onChange', desc: '切换图片时的回调函数', type: '(index: number) => void', default: '-' },
+		{
+			name: 'height',
+			desc: '主预览区高度（像素数字或 CSS 字符串）',
+			type: 'number | string',
+			default: '380',
+		},
+		{
+			name: 'onChange',
+			desc: '切换图片时的回调函数',
+			type: '(index: number) => void',
+			default: '-',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

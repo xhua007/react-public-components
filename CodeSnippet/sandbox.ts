@@ -179,7 +179,8 @@ export function openInCodePen(code: string, config: SandboxConfig = {}) {
 		.replace(/export\s+default\s+App;?/g, '')
 		.replace(/export\s+default\s+/g, '');
 
-	cleanJs += '\n\nconst root = ReactDOM.createRoot(document.getElementById("root"));\nroot.render(<App />);';
+	cleanJs +=
+		'\n\nconst root = ReactDOM.createRoot(document.getElementById("root"));\nroot.render(<App />);';
 
 	const data = {
 		title: config.title || 'react-public-components Demo',
@@ -193,9 +194,7 @@ export function openInCodePen(code: string, config: SandboxConfig = {}) {
 			'https://unpkg.com/react-dom@18/umd/react-dom.production.min.js',
 			'https://unpkg.com/react-public-components/dist/index.umd.js',
 		].join(';'),
-		css_external: [
-			'https://unpkg.com/react-public-components/dist/index.css',
-		].join(';'),
+		css_external: ['https://unpkg.com/react-public-components/dist/index.css'].join(';'),
 	};
 
 	const input = document.createElement('input');

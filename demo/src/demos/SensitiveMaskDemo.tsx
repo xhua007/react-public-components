@@ -34,14 +34,39 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'text', desc: '原始敏感文本字符串', type: 'string', required: true },
-		{ name: 'type', desc: "脱敏规则类型：'phone' | 'idcard' | 'email' | 'bankcard' | 'custom'", type: 'SensitiveType', default: "'phone'" },
+		{
+			name: 'type',
+			desc: "脱敏规则类型：'phone' | 'idcard' | 'email' | 'bankcard' | 'custom'",
+			type: 'SensitiveType',
+			default: "'phone'",
+		},
 		{ name: 'defaultMasked', desc: '初始默认是否为密文遮罩状态', type: 'boolean', default: 'true' },
 		{ name: 'maskSymbol', desc: '密文占位替换符号', type: 'string', default: "'*'" },
-		{ name: 'unmaskedStart', desc: '自定义保留头部明文字符数（仅 type="custom" 时生效）', type: 'number', default: '2' },
-		{ name: 'unmaskedEnd', desc: '自定义保留尾部明文字符数（仅 type="custom" 时生效）', type: 'number', default: '2' },
-		{ name: 'toggleable', desc: '是否展示小眼睛图标支持明文/密文切换', type: 'boolean', default: 'true' },
+		{
+			name: 'unmaskedStart',
+			desc: '自定义保留头部明文字符数（仅 type="custom" 时生效）',
+			type: 'number',
+			default: '2',
+		},
+		{
+			name: 'unmaskedEnd',
+			desc: '自定义保留尾部明文字符数（仅 type="custom" 时生效）',
+			type: 'number',
+			default: '2',
+		},
+		{
+			name: 'toggleable',
+			desc: '是否展示小眼睛图标支持明文/密文切换',
+			type: 'boolean',
+			default: 'true',
+		},
 		{ name: 'copyable', desc: '是否展示一键复制明文按钮', type: 'boolean', default: 'false' },
-		{ name: 'onToggle', desc: '切换明文/密文时的拦截回调（返回 false 可阻止切换，支持异步鉴权 Promise）', type: '(nextMasked: boolean) => boolean | Promise<boolean>', default: '-' },
+		{
+			name: 'onToggle',
+			desc: '切换明文/密文时的拦截回调（返回 false 可阻止切换，支持异步鉴权 Promise）',
+			type: '(nextMasked: boolean) => boolean | Promise<boolean>',
+			default: '-',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

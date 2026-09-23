@@ -10,7 +10,9 @@
 	box-sizing: border-box;
 	overflow: hidden;
 	position: relative;
-	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	transition:
+		border-color 0.2s ease,
+		box-shadow 0.2s ease;
 
 	// 尺寸控制
 	&_small {
@@ -68,7 +70,9 @@
 		color: #333333;
 		cursor: pointer;
 		line-height: 1;
-		transition: color 0.15s ease, background-color 0.15s ease;
+		transition:
+			color 0.15s ease,
+			background-color 0.15s ease;
 
 		&:hover:not(&_disabled) {
 			color: var(--rpc-period-active-color);

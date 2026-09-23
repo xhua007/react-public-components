@@ -30,7 +30,12 @@ export default function App() {
 		{ name: 'children', desc: '卡片内部子元素节点', type: 'ReactNode', required: true },
 		{ name: 'maxAngle', desc: '最大倾斜旋转角度（度）', type: 'number', default: '15' },
 		{ name: 'scale', desc: '鼠标悬停时的立体缩放比例', type: 'number', default: '1.02' },
-		{ name: 'glare', desc: '是否开启表面随光照高光反光效果（Glare）', type: 'boolean', default: 'true' },
+		{
+			name: 'glare',
+			desc: '是否开启表面随光照高光反光效果（Glare）',
+			type: 'boolean',
+			default: 'true',
+		},
 		{ name: 'perspective', desc: '透视景深距离（像素）', type: 'number', default: '1000' },
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
@@ -122,9 +127,7 @@ export default function App() {
 									毫秒级自动化构建与发布流水线
 								</p>
 							</div>
-							<div style={{ fontSize: 13, color: '#1677ff', fontWeight: 600 }}>
-								查看产品详情 ➔
-							</div>
+							<div style={{ fontSize: 13, color: '#1677ff', fontWeight: 600 }}>查看产品详情 ➔</div>
 						</div>
 					</TiltCard>
 				</div>

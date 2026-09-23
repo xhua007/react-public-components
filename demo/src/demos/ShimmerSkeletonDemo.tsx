@@ -24,9 +24,24 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'loading', desc: '是否处于加载中占位骨架屏状态', type: 'boolean', default: 'true' },
-		{ name: 'type', desc: "骨架形态类型：'text' 文本 / 'card' 卡片 / 'list' 列表 / 'avatar' 头像", type: "'text' | 'card' | 'list' | 'avatar'", default: "'card'" },
-		{ name: 'rows', desc: '文本骨架占位条数（仅在 type="text" 有效）', type: 'number', default: '3' },
-		{ name: 'children', desc: '加载完成 (loading=false) 后展示的真实业务组件', type: 'ReactNode', default: '-' },
+		{
+			name: 'type',
+			desc: "骨架形态类型：'text' 文本 / 'card' 卡片 / 'list' 列表 / 'avatar' 头像",
+			type: "'text' | 'card' | 'list' | 'avatar'",
+			default: "'card'",
+		},
+		{
+			name: 'rows',
+			desc: '文本骨架占位条数（仅在 type="text" 有效）',
+			type: 'number',
+			default: '3',
+		},
+		{
+			name: 'children',
+			desc: '加载完成 (loading=false) 后展示的真实业务组件',
+			type: 'ReactNode',
+			default: '-',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

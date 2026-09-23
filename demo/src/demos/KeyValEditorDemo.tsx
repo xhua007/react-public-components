@@ -34,12 +34,37 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'value', desc: '键值对数组（受控），每项含 key, value, enabled, isSecret', type: 'KeyValItem[]', default: '-' },
-		{ name: 'defaultValue', desc: '默认键值对数组', type: 'KeyValItem[]', default: "[{ key: '', value: '', enabled: true }]" },
-		{ name: 'onChange', desc: '列表数据增删改变化时的回调函数', type: '(items: KeyValItem[]) => void', default: '-' },
-		{ name: 'allowSecret', desc: '是否允许配置密码/Token 掩码隐藏显示', type: 'boolean', default: 'true' },
+		{
+			name: 'value',
+			desc: '键值对数组（受控），每项含 key, value, enabled, isSecret',
+			type: 'KeyValItem[]',
+			default: '-',
+		},
+		{
+			name: 'defaultValue',
+			desc: '默认键值对数组',
+			type: 'KeyValItem[]',
+			default: "[{ key: '', value: '', enabled: true }]",
+		},
+		{
+			name: 'onChange',
+			desc: '列表数据增删改变化时的回调函数',
+			type: '(items: KeyValItem[]) => void',
+			default: '-',
+		},
+		{
+			name: 'allowSecret',
+			desc: '是否允许配置密码/Token 掩码隐藏显示',
+			type: 'boolean',
+			default: 'true',
+		},
 		{ name: 'keyPlaceholder', desc: 'Key 输入框占位文案', type: 'string', default: "'Key 键名'" },
-		{ name: 'valPlaceholder', desc: 'Value 输入框占位文案', type: 'string', default: "'Value 键值'" },
+		{
+			name: 'valPlaceholder',
+			desc: 'Value 输入框占位文案',
+			type: 'string',
+			default: "'Value 键值'",
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

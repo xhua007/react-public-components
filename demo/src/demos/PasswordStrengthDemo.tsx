@@ -32,10 +32,30 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'password', desc: '当前输入的密码文本字符串', type: 'string', default: '-' },
-		{ name: 'showText', desc: '是否在进度条右侧显示强度文字说明（弱/中/强/极强）', type: 'boolean', default: 'true' },
-		{ name: 'showRules', desc: '是否在底部展开密码合规性校验规则 Checklist 清单', type: 'boolean', default: 'false' },
-		{ name: 'rules', desc: '自定义密码校验规则列表', type: 'PasswordRule[]', default: '长度、大小写、数字、特殊符号' },
-		{ name: 'onLevelChange', desc: '密码强度等级改变时的回调 (0 ~ 4)', type: '(level: 0 | 1 | 2 | 3 | 4) => void', default: '-' },
+		{
+			name: 'showText',
+			desc: '是否在进度条右侧显示强度文字说明（弱/中/强/极强）',
+			type: 'boolean',
+			default: 'true',
+		},
+		{
+			name: 'showRules',
+			desc: '是否在底部展开密码合规性校验规则 Checklist 清单',
+			type: 'boolean',
+			default: 'false',
+		},
+		{
+			name: 'rules',
+			desc: '自定义密码校验规则列表',
+			type: 'PasswordRule[]',
+			default: '长度、大小写、数字、特殊符号',
+		},
+		{
+			name: 'onLevelChange',
+			desc: '密码强度等级改变时的回调 (0 ~ 4)',
+			type: '(level: 0 | 1 | 2 | 3 | 4) => void',
+			default: '-',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

@@ -145,11 +145,36 @@ export default function App() {
 
 			<ApiTable
 				data={[
-					{ name: 'children', desc: '需要文本截断的文字内容或节点', type: 'ReactNode', required: true },
-					{ name: 'lines', desc: '最大展示行数（超过自动展示省略号）', type: 'number', default: '1' },
-					{ name: 'expandable', desc: '是否支持展开/收起按钮（支持布尔值或配置对象 { collapsedText, expandedText }）', type: 'boolean | TextEllipsisExpandConfig', default: 'false' },
-					{ name: 'tooltip', desc: "悬停 Tooltip 提示：'auto' 仅溢出截断时展示 / true 始终展示 / false 禁用", type: "'auto' | boolean | ReactNode", default: "'auto'" },
-					{ name: 'copyable', desc: '是否在右侧展示一键复制完整文本按钮', type: 'boolean', default: 'false' },
+					{
+						name: 'children',
+						desc: '需要文本截断的文字内容或节点',
+						type: 'ReactNode',
+						required: true,
+					},
+					{
+						name: 'lines',
+						desc: '最大展示行数（超过自动展示省略号）',
+						type: 'number',
+						default: '1',
+					},
+					{
+						name: 'expandable',
+						desc: '是否支持展开/收起按钮（支持布尔值或配置对象 { collapsedText, expandedText }）',
+						type: 'boolean | TextEllipsisExpandConfig',
+						default: 'false',
+					},
+					{
+						name: 'tooltip',
+						desc: "悬停 Tooltip 提示：'auto' 仅溢出截断时展示 / true 始终展示 / false 禁用",
+						type: "'auto' | boolean | ReactNode",
+						default: "'auto'",
+					},
+					{
+						name: 'copyable',
+						desc: '是否在右侧展示一键复制完整文本按钮',
+						type: 'boolean',
+						default: 'false',
+					},
 					{ name: 'prefix', desc: '前缀装饰节点', type: 'ReactNode', default: '-' },
 					{ name: 'suffix', desc: '后缀说明节点', type: 'ReactNode', default: '-' },
 					{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },

@@ -50,9 +50,24 @@ export default function App() {
 			type: '(newItems: T[], fromIndex: number, toIndex: number) => void',
 			required: true,
 		},
-		{ name: 'keyExtractor', desc: '获取每项唯一标识 Key 的函数', type: '(item: T, index: number) => string | number', required: true },
-		{ name: 'renderItem', desc: '自定义渲染单个列表项内容，接收 item, index, isDragging', type: '(item: T, index: number, isDragging: boolean) => ReactNode', required: true },
-		{ name: 'handleOnly', desc: '是否仅允许通过左侧把手图标进行拖拽重排', type: 'boolean', default: 'false' },
+		{
+			name: 'keyExtractor',
+			desc: '获取每项唯一标识 Key 的函数',
+			type: '(item: T, index: number) => string | number',
+			required: true,
+		},
+		{
+			name: 'renderItem',
+			desc: '自定义渲染单个列表项内容，接收 item, index, isDragging',
+			type: '(item: T, index: number, isDragging: boolean) => ReactNode',
+			required: true,
+		},
+		{
+			name: 'handleOnly',
+			desc: '是否仅允许通过左侧把手图标进行拖拽重排',
+			type: 'boolean',
+			default: 'false',
+		},
 		{ name: 'showHandle', desc: '是否展示左侧拖拽把手图标', type: 'boolean', default: 'true' },
 		{ name: 'disabled', desc: '是否禁用拖拽排序', type: 'boolean', default: 'false' },
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
@@ -70,7 +85,15 @@ export default function App() {
 				</p>
 
 				<div style={{ marginBottom: 16, display: 'flex', gap: 16, alignItems: 'center' }}>
-					<label style={{ fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
+					<label
+						style={{
+							fontSize: 13,
+							display: 'inline-flex',
+							alignItems: 'center',
+							gap: 6,
+							cursor: 'pointer',
+						}}
+					>
 						<input
 							type="checkbox"
 							checked={handleOnly}
@@ -101,8 +124,18 @@ export default function App() {
 										style={{
 											padding: '2px 8px',
 											borderRadius: 4,
-											background: item.priority === '高' ? '#fff1f0' : item.priority === '中' ? '#f6ffed' : '#f5f5f5',
-											color: item.priority === '高' ? '#cf1322' : item.priority === '中' ? '#389e0d' : '#8c8c8c',
+											background:
+												item.priority === '高'
+													? '#fff1f0'
+													: item.priority === '中'
+														? '#f6ffed'
+														: '#f5f5f5',
+											color:
+												item.priority === '高'
+													? '#cf1322'
+													: item.priority === '中'
+														? '#389e0d'
+														: '#8c8c8c',
 											fontWeight: 500,
 										}}
 									>

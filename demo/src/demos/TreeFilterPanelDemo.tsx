@@ -89,12 +89,27 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'options', desc: '树形分类选项列表，每项含 label, value, children', type: 'TreeFilterNode[]', required: true },
+		{
+			name: 'options',
+			desc: '树形分类选项列表，每项含 label, value, children',
+			type: 'TreeFilterNode[]',
+			required: true,
+		},
 		{ name: 'value', desc: '当前选中的值数组（受控）', type: '(string | number)[]', default: '-' },
 		{ name: 'defaultValue', desc: '默认选中的值数组', type: '(string | number)[]', default: '[]' },
-		{ name: 'onChange', desc: '选中值增减改变时的回调函数', type: '(values) => void', default: '-' },
+		{
+			name: 'onChange',
+			desc: '选中值增减改变时的回调函数',
+			type: '(values) => void',
+			default: '-',
+		},
 		{ name: 'multiple', desc: '是否支持多选', type: 'boolean', default: 'true' },
-		{ name: 'levelLabels', desc: '每一级分类的说明标题列表', type: 'string[]', default: "['一级分类', '二级分类', '三级标签']" },
+		{
+			name: 'levelLabels',
+			desc: '每一级分类的说明标题列表',
+			type: 'string[]',
+			default: "['一级分类', '二级分类', '三级标签']",
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

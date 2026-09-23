@@ -28,21 +28,66 @@ export default function App() {
 }`;
 
 	const splitterApiData: ApiPropItem[] = [
-		{ name: 'orientation', desc: "分屏方向：'horizontal' 水平分屏 / 'vertical' 垂直分屏", type: "'horizontal' | 'vertical'", default: "'horizontal'" },
-		{ name: 'lazy', desc: '是否启用延迟拖拽（拖拽过程中仅移动虚线指示器，松开后生效）', type: 'boolean', default: 'false' },
+		{
+			name: 'orientation',
+			desc: "分屏方向：'horizontal' 水平分屏 / 'vertical' 垂直分屏",
+			type: "'horizontal' | 'vertical'",
+			default: "'horizontal'",
+		},
+		{
+			name: 'lazy',
+			desc: '是否启用延迟拖拽（拖拽过程中仅移动虚线指示器，松开后生效）',
+			type: 'boolean',
+			default: 'false',
+		},
 		{ name: 'children', desc: 'Splitter.Panel 子面板节点', type: 'ReactNode', required: true },
-		{ name: 'onResize', desc: '面板尺寸变化时的实时回调函数', type: '(sizes: number[]) => void', default: '-' },
-		{ name: 'onResizeEnd', desc: '拖拽调整尺寸结束时的回调函数', type: '(sizes: number[]) => void', default: '-' },
-		{ name: 'styles', desc: '语义化 DOM 样式对象或函数 (root, panel, dragger)', type: 'SplitterStyles', default: '-' },
-		{ name: 'classNames', desc: '语义化 DOM 类名对象或函数 (root, panel, dragger)', type: 'SplitterClassNames', default: '-' },
+		{
+			name: 'onResize',
+			desc: '面板尺寸变化时的实时回调函数',
+			type: '(sizes: number[]) => void',
+			default: '-',
+		},
+		{
+			name: 'onResizeEnd',
+			desc: '拖拽调整尺寸结束时的回调函数',
+			type: '(sizes: number[]) => void',
+			default: '-',
+		},
+		{
+			name: 'styles',
+			desc: '语义化 DOM 样式对象或函数 (root, panel, dragger)',
+			type: 'SplitterStyles',
+			default: '-',
+		},
+		{
+			name: 'classNames',
+			desc: '语义化 DOM 类名对象或函数 (root, panel, dragger)',
+			type: 'SplitterClassNames',
+			default: '-',
+		},
 	];
 
 	const panelApiData: ApiPropItem[] = [
-		{ name: 'defaultSize', desc: '面板初始默认尺寸（支持数字 px 或百分比字符串如 40%）', type: 'number | string', default: '-' },
+		{
+			name: 'defaultSize',
+			desc: '面板初始默认尺寸（支持数字 px 或百分比字符串如 40%）',
+			type: 'number | string',
+			default: '-',
+		},
 		{ name: 'min', desc: '面板最小允许尺寸限制', type: 'number | string', default: '-' },
 		{ name: 'max', desc: '面板最大允许尺寸限制', type: 'number | string', default: '-' },
-		{ name: 'collapsible', desc: '折叠配置：支持布尔值或对象 { start, end, showCollapsibleIcon }', type: 'boolean | object', default: 'false' },
-		{ name: 'resizable', desc: '是否允许通过分隔条拖拽调整该面板大小', type: 'boolean', default: 'true' },
+		{
+			name: 'collapsible',
+			desc: '折叠配置：支持布尔值或对象 { start, end, showCollapsibleIcon }',
+			type: 'boolean | object',
+			default: 'false',
+		},
+		{
+			name: 'resizable',
+			desc: '是否允许通过分隔条拖拽调整该面板大小',
+			type: 'boolean',
+			default: 'true',
+		},
 		{ name: 'size', desc: '受控尺寸', type: 'number | string', default: '-' },
 	];
 

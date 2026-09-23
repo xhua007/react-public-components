@@ -26,8 +26,18 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'activeKey', desc: '当前选中的快捷项 key（受控）', type: 'string', default: '-' },
-		{ name: 'defaultKey', desc: "默认选中的快捷项 key（如 'today' | 'yesterday' | '7days' | '30days' | 'thisMonth' | 'lastMonth'）", type: 'string', default: "'7days'" },
-		{ name: 'onChange', desc: '点击切换日期快捷胶囊时的回调函数，回传 [startDate, endDate] 与 key', type: '(dateRange: [string, string], key: string) => void', default: '-' },
+		{
+			name: 'defaultKey',
+			desc: "默认选中的快捷项 key（如 'today' | 'yesterday' | '7days' | '30days' | 'thisMonth' | 'lastMonth'）",
+			type: 'string',
+			default: "'7days'",
+		},
+		{
+			name: 'onChange',
+			desc: '点击切换日期快捷胶囊时的回调函数，回传 [startDate, endDate] 与 key',
+			type: '(dateRange: [string, string], key: string) => void',
+			default: '-',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

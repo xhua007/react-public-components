@@ -55,17 +55,42 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'fetchOptions', desc: '异步根据搜索关键字拉取选项数据的函数', type: '(search: string) => Promise<SelectOption[]>', required: true },
+		{
+			name: 'fetchOptions',
+			desc: '异步根据搜索关键字拉取选项数据的函数',
+			type: '(search: string) => Promise<SelectOption[]>',
+			required: true,
+		},
 		{ name: 'value', desc: '当前选中的值（受控）', type: 'SelectValue', default: '-' },
 		{ name: 'defaultValue', desc: '默认选中的值', type: 'SelectValue', default: '-' },
-		{ name: 'onChange', desc: '选中值发生变化时的回调函数', type: '(value, option) => void', default: '-' },
-		{ name: 'mode', desc: "选择模式：'single' 单选 / 'multiple' 多选 Tag 标签", type: "'single' | 'multiple'", default: "'single'" },
+		{
+			name: 'onChange',
+			desc: '选中值发生变化时的回调函数',
+			type: '(value, option) => void',
+			default: '-',
+		},
+		{
+			name: 'mode',
+			desc: "选择模式：'single' 单选 / 'multiple' 多选 Tag 标签",
+			type: "'single' | 'multiple'",
+			default: "'single'",
+		},
 		{ name: 'debounceTimeout', desc: '防抖等待时间（毫秒）', type: 'number', default: '300' },
 		{ name: 'placeholder', desc: '输入框占位符', type: 'string', default: "'请选择...'" },
 		{ name: 'allowClear', desc: '是否支持一键清空', type: 'boolean', default: 'true' },
 		{ name: 'disabled', desc: '是否禁用选择器', type: 'boolean', default: 'false' },
-		{ name: 'defaultOptions', desc: '初始化默认展示的预设选项列表', type: 'SelectOption[]', default: '[]' },
-		{ name: 'notFoundContent', desc: '无匹配搜索结果时的展示内容', type: 'ReactNode', default: "'暂无匹配数据'" },
+		{
+			name: 'defaultOptions',
+			desc: '初始化默认展示的预设选项列表',
+			type: 'SelectOption[]',
+			default: '[]',
+		},
+		{
+			name: 'notFoundContent',
+			desc: '无匹配搜索结果时的展示内容',
+			type: 'ReactNode',
+			default: "'暂无匹配数据'",
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

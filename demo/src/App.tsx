@@ -154,14 +154,16 @@ const navCategories: ComponentCategory[] = [
 				name: 'LazyLoadBox',
 				title: '视口懒加载容器',
 				tag: '1.4.0',
-				description: '视口距离感知与按需加载容器，彻底拦截非可视模块接口调用，支持预加载距离与防塌陷占位。',
+				description:
+					'视口距离感知与按需加载容器，彻底拦截非可视模块接口调用，支持预加载距离与防塌陷占位。',
 			},
 			{
 				key: 'CeilingBox',
 				name: 'CeilingBox',
 				title: '吸顶容器',
 				tag: '1.4.0',
-				description: '智能吸顶/吸底容器组件，支持自动占位防页面塌陷、毛玻璃滤镜与 Render Props 状态感知。',
+				description:
+					'智能吸顶/吸底容器组件，支持自动占位防页面塌陷、毛玻璃滤镜与 Render Props 状态感知。',
 			},
 			{
 				key: 'CascadeDrawer',

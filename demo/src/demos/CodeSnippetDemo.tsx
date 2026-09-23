@@ -115,25 +115,90 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'code', desc: '代码文本内容（单代码模式）', type: 'string', default: '-' },
-		{ name: 'language', desc: '编程语言标识（如 tsx, ts, jsx, bash, json 等）', type: 'string', default: "'tsx'" },
-		{ name: 'theme', desc: "代码块主题风格：'dark' 暗色（默认） / 'light' 亮色", type: "'dark' | 'light'", default: "'dark'" },
-		{ name: 'showActions', desc: '是否在代码块顶部展示经典操作工具栏（CodeSandbox、CodePen、StackBlitz、外部打开、复制、代码展开折叠）', type: 'boolean', default: 'false' },
-		{ name: 'actions', desc: '自定义操作工具栏按钮列表，可自定义图标顺序或插入自定义节点', type: "(BuiltinAction | ReactNode)[]", default: "['codesandbox', 'codepen', 'stackblitz', 'external', 'copy', 'collapse']" },
-		{ name: 'onAction', desc: '点击操作工具栏按钮时的回调函数（回传 codesandbox / codepen / stackblitz / external / copy / collapse）', type: '(actionKey: string) => void', default: '-' },
-		{ name: 'sandboxConfig', desc: '自定义沙箱项目配置（支持 title, description, dependencies 等）', type: 'SandboxConfig', default: '-' },
-		{ name: 'externalUrl', desc: '自定义外部全屏运行页面的独立 URL（不传时自动动态生成纯净预览）', type: 'string', default: '-' },
-		{ name: 'tabs', desc: '多语言/多版本 Tabs 切换列表，每项含 key, label, code, language', type: 'CodeTabItem[]', default: '-' },
+		{
+			name: 'language',
+			desc: '编程语言标识（如 tsx, ts, jsx, bash, json 等）',
+			type: 'string',
+			default: "'tsx'",
+		},
+		{
+			name: 'theme',
+			desc: "代码块主题风格：'dark' 暗色（默认） / 'light' 亮色",
+			type: "'dark' | 'light'",
+			default: "'dark'",
+		},
+		{
+			name: 'showActions',
+			desc: '是否在代码块顶部展示经典操作工具栏（CodeSandbox、CodePen、StackBlitz、外部打开、复制、代码展开折叠）',
+			type: 'boolean',
+			default: 'false',
+		},
+		{
+			name: 'actions',
+			desc: '自定义操作工具栏按钮列表，可自定义图标顺序或插入自定义节点',
+			type: '(BuiltinAction | ReactNode)[]',
+			default: "['codesandbox', 'codepen', 'stackblitz', 'external', 'copy', 'collapse']",
+		},
+		{
+			name: 'onAction',
+			desc: '点击操作工具栏按钮时的回调函数（回传 codesandbox / codepen / stackblitz / external / copy / collapse）',
+			type: '(actionKey: string) => void',
+			default: '-',
+		},
+		{
+			name: 'sandboxConfig',
+			desc: '自定义沙箱项目配置（支持 title, description, dependencies 等）',
+			type: 'SandboxConfig',
+			default: '-',
+		},
+		{
+			name: 'externalUrl',
+			desc: '自定义外部全屏运行页面的独立 URL（不传时自动动态生成纯净预览）',
+			type: 'string',
+			default: '-',
+		},
+		{
+			name: 'tabs',
+			desc: '多语言/多版本 Tabs 切换列表，每项含 key, label, code, language',
+			type: 'CodeTabItem[]',
+			default: '-',
+		},
 		{ name: 'activeTabKey', desc: '当前激活的 Tab key（受控）', type: 'string', default: '-' },
 		{ name: 'defaultActiveTabKey', desc: '默认激活的 Tab key', type: 'string', default: '-' },
-		{ name: 'onTabChange', desc: 'Tab 切换时的回调函数', type: '(key: string) => void', default: '-' },
+		{
+			name: 'onTabChange',
+			desc: 'Tab 切换时的回调函数',
+			type: '(key: string) => void',
+			default: '-',
+		},
 		{ name: 'collapsible', desc: '是否开启折叠收起代码功能', type: 'boolean', default: 'false' },
-		{ name: 'defaultCollapsed', desc: '默认是否处于折叠收起状态', type: 'boolean', default: 'false' },
+		{
+			name: 'defaultCollapsed',
+			desc: '默认是否处于折叠收起状态',
+			type: 'boolean',
+			default: 'false',
+		},
 		{ name: 'collapsed', desc: '当前是否处于折叠收起状态（受控）', type: 'boolean', default: '-' },
-		{ name: 'onCollapseChange', desc: '折叠/展开状态改变时的回调函数', type: '(collapsed: boolean) => void', default: '-' },
-		{ name: 'showCollapseFooter', desc: '是否在底部展示“^ 收起代码 / v 展开代码”控制栏', type: 'boolean', default: 'false' },
+		{
+			name: 'onCollapseChange',
+			desc: '折叠/展开状态改变时的回调函数',
+			type: '(collapsed: boolean) => void',
+			default: '-',
+		},
+		{
+			name: 'showCollapseFooter',
+			desc: '是否在底部展示“^ 收起代码 / v 展开代码”控制栏',
+			type: 'boolean',
+			default: 'false',
+		},
 		{ name: 'showLineNumbers', desc: '是否展示代码行号', type: 'boolean', default: 'false' },
 		{ name: 'copyable', desc: '是否展示一键复制按钮', type: 'boolean', default: 'true' },
-		{ name: 'title', desc: '顶部自定义标题/说明标签（无 showActions 时生效）', type: 'ReactNode', default: 'language 名称' },
+		{
+			name: 'title',
+			desc: '顶部自定义标题/说明标签（无 showActions 时生效）',
+			type: 'ReactNode',
+			default: 'language 名称',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];
@@ -146,7 +211,9 @@ export default function App() {
 					1. 文档演示组件操作栏 (Actions Bar + TS/JS Tabs + 底部折叠收起)
 				</h3>
 				<p style={{ color: '#595959', fontSize: 14, marginBottom: 16 }}>
-					支持上方 CodeSandbox、CodePen、StackBlitz、在新标签页打开、复制代码、展开/收起完整工具按钮组，支持 TypeScript / JavaScript 语言切换以及底部收起条。
+					支持上方
+					CodeSandbox、CodePen、StackBlitz、在新标签页打开、复制代码、展开/收起完整工具按钮组，支持
+					TypeScript / JavaScript 语言切换以及底部收起条。
 				</p>
 
 				<div style={{ maxWidth: 720 }}>

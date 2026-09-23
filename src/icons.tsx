@@ -737,7 +737,11 @@ export const StarFilled = ({
 	</svg>
 );
 
-export const CodeSandboxOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const CodeSandboxOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="0 0 1024 1024"
 		focusable="false"
@@ -753,7 +757,11 @@ export const CodeSandboxOutlined = ({ style, className, onClick }: IconProps & {
 	</svg>
 );
 
-export const CodePenOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const CodePenOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="0 0 1024 1024"
 		focusable="false"
@@ -769,7 +777,11 @@ export const CodePenOutlined = ({ style, className, onClick }: IconProps & { onC
 	</svg>
 );
 
-export const ThunderboltOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const ThunderboltOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -785,7 +797,11 @@ export const ThunderboltOutlined = ({ style, className, onClick }: IconProps & {
 	</svg>
 );
 
-export const CodeOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const CodeOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -801,7 +817,11 @@ export const CodeOutlined = ({ style, className, onClick }: IconProps & { onClic
 	</svg>
 );
 
-export const ExportOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const ExportOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -817,7 +837,11 @@ export const ExportOutlined = ({ style, className, onClick }: IconProps & { onCl
 	</svg>
 );
 
-export const HolderOutlined = ({ style, className, onClick }: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
+export const HolderOutlined = ({
+	style,
+	className,
+	onClick,
+}: IconProps & { onClick?: (e: React.MouseEvent) => void }) => (
 	<svg
 		viewBox="64 64 896 896"
 		focusable="false"
@@ -832,5 +856,3 @@ export const HolderOutlined = ({ style, className, onClick }: IconProps & { onCl
 		<path d="M300 276a56 56 0 10112 0 56 56 0 10-112 0zm0 236a56 56 0 10112 0 56 56 0 10-112 0zm0 236a56 56 0 10112 0 56 56 0 10-112 0zm312-472a56 56 0 10112 0 56 56 0 10-112 0zm0 236a56 56 0 10112 0 56 56 0 10-112 0zm0 236a56 56 0 10112 0 56 56 0 10-112 0z" />
 	</svg>
 );
-
-

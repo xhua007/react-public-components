@@ -55,10 +55,20 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'treeData', desc: '左侧树形数据源数组，每项包含 key, title, children', type: 'TreeTransferNode[]', required: true },
+		{
+			name: 'treeData',
+			desc: '左侧树形数据源数组，每项包含 key, title, children',
+			type: 'TreeTransferNode[]',
+			required: true,
+		},
 		{ name: 'targetKeys', desc: '右侧已选节点 keys 列表（受控）', type: 'string[]', default: '-' },
 		{ name: 'defaultTargetKeys', desc: '默认已选节点 keys 列表', type: 'string[]', default: '[]' },
-		{ name: 'onChange', desc: '已选项增减改变时的回调函数', type: '(targetKeys: string[]) => void', default: '-' },
+		{
+			name: 'onChange',
+			desc: '已选项增减改变时的回调函数',
+			type: '(targetKeys: string[]) => void',
+			default: '-',
+		},
 		{ name: 'sourceTitle', desc: '左侧树面板标题', type: 'string', default: "'待选项目录'" },
 		{ name: 'targetTitle', desc: '右侧已选列表面板标题', type: 'string', default: "'已选项目'" },
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },

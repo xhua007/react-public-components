@@ -28,7 +28,12 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'items', desc: '时间轴节点列表，每项含 title, description, time, duration, status, operator', type: 'StatusTimelineItem[]', required: true },
+		{
+			name: 'items',
+			desc: '时间轴节点列表，每项含 title, description, time, duration, status, operator',
+			type: 'StatusTimelineItem[]',
+			required: true,
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

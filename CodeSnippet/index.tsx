@@ -29,12 +29,7 @@ export interface CodeTabItem {
 }
 
 export type BuiltinAction =
-	| 'codesandbox'
-	| 'codepen'
-	| 'stackblitz'
-	| 'copy'
-	| 'external'
-	| 'collapse';
+	'codesandbox' | 'codepen' | 'stackblitz' | 'copy' | 'external' | 'collapse';
 
 export interface CodeSnippetProps {
 	/** 代码文本内容（单代码模式） */

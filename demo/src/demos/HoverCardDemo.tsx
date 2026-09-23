@@ -29,8 +29,18 @@ export default function App() {
 	const apiData: ApiPropItem[] = [
 		{ name: 'children', desc: '触发悬浮卡片的宿主子元素节点', type: 'ReactNode', required: true },
 		{ name: 'content', desc: '鼠标悬浮时弹出的卡片详细内容', type: 'ReactNode', required: true },
-		{ name: 'openDelay', desc: '鼠标移入展开前的防误触延迟时间（毫秒）', type: 'number', default: '200' },
-		{ name: 'closeDelay', desc: '鼠标移出关闭前的平滑缓冲延迟时间（毫秒）', type: 'number', default: '200' },
+		{
+			name: 'openDelay',
+			desc: '鼠标移入展开前的防误触延迟时间（毫秒）',
+			type: 'number',
+			default: '200',
+		},
+		{
+			name: 'closeDelay',
+			desc: '鼠标移出关闭前的平滑缓冲延迟时间（毫秒）',
+			type: 'number',
+			default: '200',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

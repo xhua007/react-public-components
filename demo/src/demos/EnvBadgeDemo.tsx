@@ -28,11 +28,36 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'env', desc: "当前运行环境：'dev' | 'test' | 'uat' | 'staging' | 'prod'", type: 'EnvType', required: true },
-		{ name: 'placement', desc: "悬浮挂载位置：'top-right' | 'top-left' | 'bottom-right'", type: 'EnvPlacement', default: "'top-right'" },
-		{ name: 'label', desc: '自定义显示的标签文字（不传时展示大写的环境名称）', type: 'ReactNode', default: '-' },
-		{ name: 'info', desc: '构建与部署版本元数据，包含 version, branch, commit, buildTime, apiHost', type: 'EnvBuildInfo', default: '-' },
-		{ name: 'switchList', desc: '快捷切换至其他环境的跳转链接列表', type: 'EnvSwitchItem[]', default: '-' },
+		{
+			name: 'env',
+			desc: "当前运行环境：'dev' | 'test' | 'uat' | 'staging' | 'prod'",
+			type: 'EnvType',
+			required: true,
+		},
+		{
+			name: 'placement',
+			desc: "悬浮挂载位置：'top-right' | 'top-left' | 'bottom-right'",
+			type: 'EnvPlacement',
+			default: "'top-right'",
+		},
+		{
+			name: 'label',
+			desc: '自定义显示的标签文字（不传时展示大写的环境名称）',
+			type: 'ReactNode',
+			default: '-',
+		},
+		{
+			name: 'info',
+			desc: '构建与部署版本元数据，包含 version, branch, commit, buildTime, apiHost',
+			type: 'EnvBuildInfo',
+			default: '-',
+		},
+		{
+			name: 'switchList',
+			desc: '快捷切换至其他环境的跳转链接列表',
+			type: 'EnvSwitchItem[]',
+			default: '-',
+		},
 		{ name: 'visible', desc: '是否显示环境角标', type: 'boolean', default: 'true' },
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },

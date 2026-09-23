@@ -114,7 +114,9 @@ const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
 			}}
 		>
 			<div className="rpc_announcement_bar_body">
-				<div className={`rpc_announcement_bar_content ${marquee ? 'rpc_announcement_bar_marquee' : ''}`}>
+				<div
+					className={`rpc_announcement_bar_content ${marquee ? 'rpc_announcement_bar_marquee' : ''}`}
+				>
 					{children}
 				</div>
 			</div>

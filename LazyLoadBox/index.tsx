@@ -32,7 +32,11 @@ export interface LazyRenderProps {
 	load: () => void;
 }
 
-export type LazyOffset = number | string | [number | string, number | string] | [number | string, number | string, number | string, number | string];
+export type LazyOffset =
+	| number
+	| string
+	| [number | string, number | string]
+	| [number | string, number | string, number | string, number | string];
 
 export interface LazyLoadBoxProps {
 	/**
@@ -87,11 +91,7 @@ export interface LazyLoadBoxProps {
 	 * 指定局部滚动容器（支持 DOM 节点、RefObject、选择器字符串或 getter 函数），默认监听 window 视口
 	 */
 	scrollContainer?:
-		| HTMLElement
-		| null
-		| string
-		| RefObject<HTMLElement | null>
-		| (() => HTMLElement | null);
+		HTMLElement | null | string | RefObject<HTMLElement | null> | (() => HTMLElement | null);
 	/**
 	 * 交叉比例阈值（0 ~ 1），默认 0
 	 */
@@ -160,7 +160,7 @@ export const LazyLoadBox = forwardRef<LazyLoadBoxRef, LazyLoadBoxProps>(
 			className = '',
 			style,
 		},
-		ref
+		ref,
 	) => {
 		const containerRef = useRef<HTMLDivElement | null>(null);
 		const [isInView, setIsInView] = useState<boolean>(Boolean(ssr || forceRender));
@@ -262,7 +262,7 @@ export const LazyLoadBox = forwardRef<LazyLoadBoxRef, LazyLoadBoxProps>(
 						root: rootElement,
 						rootMargin,
 						threshold,
-					}
+					},
 				);
 
 				observer.observe(target);
@@ -323,24 +323,20 @@ export const LazyLoadBox = forwardRef<LazyLoadBoxRef, LazyLoadBoxProps>(
 					...style,
 				}}
 			>
-				{shouldRenderContent ? (
-					typeof children === 'function' ? (
-						(children as (props: LazyRenderProps) => ReactNode)({
-							isInView,
-							hasLoaded,
-							load: triggerLoad,
-						})
-					) : (
-						children
-					)
-				) : placeholder !== undefined ? (
-					placeholder
-				) : (
-					defaultPlaceholder
-				)}
+				{shouldRenderContent
+					? typeof children === 'function'
+						? (children as (props: LazyRenderProps) => ReactNode)({
+								isInView,
+								hasLoaded,
+								load: triggerLoad,
+							})
+						: children
+					: placeholder !== undefined
+						? placeholder
+						: defaultPlaceholder}
 			</div>
 		);
-	}
+	},
 );
 
 LazyLoadBox.displayName = 'LazyLoadBox';

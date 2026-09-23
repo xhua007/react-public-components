@@ -29,21 +29,61 @@ export default function App() {
 }`;
 
 	const trackerApiData: ApiPropItem[] = [
-		{ name: 'position', desc: "进度条吸附位置：'top' 顶部 / 'bottom' 底部", type: "'top' | 'bottom'", default: "'top'" },
+		{
+			name: 'position',
+			desc: "进度条吸附位置：'top' 顶部 / 'bottom' 底部",
+			type: "'top' | 'bottom'",
+			default: "'top'",
+		},
 		{ name: 'height', desc: '进度条高度（像素）', type: 'number', default: '3' },
-		{ name: 'color', desc: '进度条颜色或多段渐变色彩数组', type: 'string | string[]', default: "'#1677ff'" },
-		{ name: 'showPercentage', desc: '是否在角落显示当前已阅读百分比角标', type: 'boolean', default: 'false' },
-		{ name: 'target', desc: '监听滚动的目标 DOM 容器（不传时监听整个浏览器 window）', type: 'HTMLElement | (() => HTMLElement | null)', default: 'window' },
-		{ name: 'onChange', desc: '滚动百分比改变回调 (0 ~ 100)', type: '(percent: number) => void', default: '-' },
+		{
+			name: 'color',
+			desc: '进度条颜色或多段渐变色彩数组',
+			type: 'string | string[]',
+			default: "'#1677ff'",
+		},
+		{
+			name: 'showPercentage',
+			desc: '是否在角落显示当前已阅读百分比角标',
+			type: 'boolean',
+			default: 'false',
+		},
+		{
+			name: 'target',
+			desc: '监听滚动的目标 DOM 容器（不传时监听整个浏览器 window）',
+			type: 'HTMLElement | (() => HTMLElement | null)',
+			default: 'window',
+		},
+		{
+			name: 'onChange',
+			desc: '滚动百分比改变回调 (0 ~ 100)',
+			type: '(percent: number) => void',
+			default: '-',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];
 
 	const stickyApiData: ApiPropItem[] = [
-		{ name: 'children', desc: '子内容或 Render Props 函数，接收 isSticky 状态', type: 'ReactNode | ((isSticky: boolean) => ReactNode)', required: true },
+		{
+			name: 'children',
+			desc: '子内容或 Render Props 函数，接收 isSticky 状态',
+			type: 'ReactNode | ((isSticky: boolean) => ReactNode)',
+			required: true,
+		},
 		{ name: 'offsetTop', desc: '触发吸顶的距离顶部偏移阈值（像素）', type: 'number', default: '0' },
-		{ name: 'onStickyChange', desc: '吸顶状态切换回调', type: '(isSticky: boolean) => void', default: '-' },
-		{ name: 'target', desc: '监听滚动的外部容器', type: 'HTMLElement | (() => HTMLElement | null)', default: 'window' },
+		{
+			name: 'onStickyChange',
+			desc: '吸顶状态切换回调',
+			type: '(isSticky: boolean) => void',
+			default: '-',
+		},
+		{
+			name: 'target',
+			desc: '监听滚动的外部容器',
+			type: 'HTMLElement | (() => HTMLElement | null)',
+			default: 'window',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];
@@ -88,10 +128,12 @@ export default function App() {
 								关于 React Public Components 组件库
 							</h4>
 							<p>
-								这是一个专为中后台及现代 Web 开发打造的 React 公共组件库。它致力于补充主流 UI 库所未提供的高频实用组件，提供开箱即用、零第三方 UI 库依赖的轻量级解决方案。
+								这是一个专为中后台及现代 Web 开发打造的 React 公共组件库。它致力于补充主流 UI
+								库所未提供的高频实用组件，提供开箱即用、零第三方 UI 库依赖的轻量级解决方案。
 							</p>
 							<p>
-								所有组件均拥有精心调校的设计美感，提供顺畅的微交互动效与严苛的 TypeScript 类型定义，助您轻松构建现代化 Web 应用。
+								所有组件均拥有精心调校的设计美感，提供顺畅的微交互动效与严苛的 TypeScript
+								类型定义，助您轻松构建现代化 Web 应用。
 							</p>
 						</div>
 					</div>

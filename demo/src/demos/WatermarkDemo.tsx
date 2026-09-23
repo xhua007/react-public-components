@@ -190,10 +190,25 @@ export default function App() {
 
 			<ApiTable
 				data={[
-					{ name: 'content', desc: '水印文本内容，传数组时按多行平铺绘制', type: 'string | string[]', required: true },
+					{
+						name: 'content',
+						desc: '水印文本内容，传数组时按多行平铺绘制',
+						type: 'string | string[]',
+						required: true,
+					},
 					{ name: 'children', desc: '水印包裹的子内容节点', type: 'ReactNode', default: '-' },
-					{ name: 'antiTamper', desc: '开启防篡改防御（防 F12 审查元素删除/隐藏/修改属性毫秒自愈）', type: 'boolean', default: 'true' },
-					{ name: 'color', desc: '水印文字颜色及透明度', type: 'string', default: "'rgba(0, 0, 0, 0.12)'" },
+					{
+						name: 'antiTamper',
+						desc: '开启防篡改防御（防 F12 审查元素删除/隐藏/修改属性毫秒自愈）',
+						type: 'boolean',
+						default: 'true',
+					},
+					{
+						name: 'color',
+						desc: '水印文字颜色及透明度',
+						type: 'string',
+						default: "'rgba(0, 0, 0, 0.12)'",
+					},
 					{ name: 'fontSize', desc: '水印文字字号（像素）', type: 'number', default: '14' },
 					{ name: 'rotate', desc: '水印单元旋转角度（度）', type: 'number', default: '-22' },
 					{ name: 'width', desc: '单个水印单元宽度（像素）', type: 'number', default: '240' },

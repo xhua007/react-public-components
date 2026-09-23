@@ -1,10 +1,4 @@
-import React, {
-	useState,
-	useEffect,
-	useRef,
-	ReactNode,
-	CSSProperties,
-} from 'react';
+import React, { useState, useEffect, useRef, ReactNode, CSSProperties } from 'react';
 import './index.less';
 
 export interface CeilingBoxProps {
@@ -46,7 +40,10 @@ const CeilingBox: React.FC<CeilingBoxProps> = ({
 	affixedStyle,
 }) => {
 	const [isAffixed, setIsAffixed] = useState<boolean>(false);
-	const [boxRect, setBoxRect] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
+	const [boxRect, setBoxRect] = useState<{ width: number; height: number }>({
+		width: 0,
+		height: 0,
+	});
 
 	const placeholderRef = useRef<HTMLDivElement>(null);
 	const contentRef = useRef<HTMLDivElement>(null);
@@ -138,8 +135,7 @@ const CeilingBox: React.FC<CeilingBoxProps> = ({
 		return fixedStyle;
 	};
 
-	const renderedContent =
-		typeof children === 'function' ? children(isAffixed) : children;
+	const renderedContent = typeof children === 'function' ? children(isAffixed) : children;
 
 	return (
 		<div
@@ -154,9 +150,7 @@ const CeilingBox: React.FC<CeilingBoxProps> = ({
 				ref={contentRef}
 				className={`rpc_ceiling_box ${
 					isAffixed ? 'rpc_ceiling_box_affixed' : ''
-				} ${isAffixed && blur ? 'rpc_ceiling_box_blur' : ''} ${
-					isAffixed ? affixedClassName : ''
-				}`}
+				} ${isAffixed && blur ? 'rpc_ceiling_box_blur' : ''} ${isAffixed ? affixedClassName : ''}`}
 				style={{
 					...computeFixedStyle(),
 					...(isAffixed ? affixedStyle : {}),

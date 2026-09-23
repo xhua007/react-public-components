@@ -15,9 +15,24 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'children', desc: '需要施加禁用保护的子元素内容', type: 'ReactNode', default: '-' },
-		{ name: 'disabled', desc: '是否开启禁用保护（禁用时阻止点击冒泡、置灰并显示锁图标）', type: 'boolean', default: 'false' },
-		{ name: 'iconAlign', desc: "锁图标对齐方向：'left' 左侧 / 'right' 右侧", type: "'left' | 'right'", default: "'left'" },
-		{ name: 'title', desc: '备用内容节点（当未传 children 时生效）', type: 'ReactNode', default: '-' },
+		{
+			name: 'disabled',
+			desc: '是否开启禁用保护（禁用时阻止点击冒泡、置灰并显示锁图标）',
+			type: 'boolean',
+			default: 'false',
+		},
+		{
+			name: 'iconAlign',
+			desc: "锁图标对齐方向：'left' 左侧 / 'right' 右侧",
+			type: "'left' | 'right'",
+			default: "'left'",
+		},
+		{
+			name: 'title',
+			desc: '备用内容节点（当未传 children 时生效）',
+			type: 'ReactNode',
+			default: '-',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

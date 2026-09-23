@@ -48,14 +48,34 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'value', desc: '受控 JSON 数据内容（可传字符串或对象）', type: 'string | object', default: '-' },
+		{
+			name: 'value',
+			desc: '受控 JSON 数据内容（可传字符串或对象）',
+			type: 'string | object',
+			default: '-',
+		},
 		{ name: 'defaultValue', desc: '默认 JSON 数据内容', type: 'string | object', default: '-' },
-		{ name: 'onChange', desc: '内容修改回调函数，回传原始字符串与解析后的 Object 对象', type: '(rawJson: string, parsedObject?: any) => void', default: '-' },
+		{
+			name: 'onChange',
+			desc: '内容修改回调函数，回传原始字符串与解析后的 Object 对象',
+			type: '(rawJson: string, parsedObject?: any) => void',
+			default: '-',
+		},
 		{ name: 'readOnly', desc: '是否为只读模式', type: 'boolean', default: 'false' },
-		{ name: 'height', desc: '编辑器高度（像素数字或 CSS 字符串）', type: 'number | string', default: '280' },
+		{
+			name: 'height',
+			desc: '编辑器高度（像素数字或 CSS 字符串）',
+			type: 'number | string',
+			default: '280',
+		},
 		{ name: 'indent', desc: '格式化缩进空格数', type: 'number', default: '2' },
 		{ name: 'showLineNumbers', desc: '是否展示代码行号', type: 'boolean', default: 'true' },
-		{ name: 'showToolbar', desc: '是否展示顶部工具栏（含一键美化、压缩与复制按钮）', type: 'boolean', default: 'true' },
+		{
+			name: 'showToolbar',
+			desc: '是否展示顶部工具栏（含一键美化、压缩与复制按钮）',
+			type: 'boolean',
+			default: 'true',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

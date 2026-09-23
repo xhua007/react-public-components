@@ -20,7 +20,12 @@ export default function App() {
 		{ name: 'text', desc: '缎带角标上展示的文字或节点', type: 'ReactNode', required: true },
 		{ name: 'children', desc: '被包裹的卡片容器子元素', type: 'ReactNode', required: true },
 		{ name: 'color', desc: '缎带背景色或渐变色', type: 'string', default: "'#ff4d4f'" },
-		{ name: 'placement', desc: "挂载角落位置：'start' 左上角 / 'end' 右上角", type: "'start' | 'end'", default: "'end'" },
+		{
+			name: 'placement',
+			desc: "挂载角落位置：'start' 左上角 / 'end' 右上角",
+			type: "'start' | 'end'",
+			default: "'end'",
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];
@@ -67,7 +72,9 @@ export default function App() {
 								borderRadius: 8,
 							}}
 						>
-							<div style={{ fontSize: 16, fontWeight: 600, marginBottom: 6 }}>AI 智能代码生成器</div>
+							<div style={{ fontSize: 16, fontWeight: 600, marginBottom: 6 }}>
+								AI 智能代码生成器
+							</div>
 							<div style={{ fontSize: 22, fontWeight: 700, color: '#1677ff', marginBottom: 12 }}>
 								免费体验
 							</div>

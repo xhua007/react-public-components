@@ -27,7 +27,12 @@ export default function App() {
 	const apiData: ApiPropItem[] = [
 		{ name: 'value', desc: '当前 Cron 表达式字符串（受控）', type: 'string', default: '-' },
 		{ name: 'defaultValue', desc: '默认 Cron 表达式', type: 'string', default: "'0 0 12 * * ?'" },
-		{ name: 'onChange', desc: 'Cron 表达式改变时的回调，回传最新表达式与人话中文解释', type: '(cron: string, humanReadable: string) => void', default: '-' },
+		{
+			name: 'onChange',
+			desc: 'Cron 表达式改变时的回调，回传最新表达式与人话中文解释',
+			type: '(cron: string, humanReadable: string) => void',
+			default: '-',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

@@ -32,10 +32,20 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'items', desc: '海量数据源数组', type: 'T[]', required: true },
-		{ name: 'renderItem', desc: '渲染单个列表项的函数，接收 item 与 index', type: '(item: T, index: number) => ReactNode', required: true },
+		{
+			name: 'renderItem',
+			desc: '渲染单个列表项的函数，接收 item 与 index',
+			type: '(item: T, index: number) => ReactNode',
+			required: true,
+		},
 		{ name: 'itemHeight', desc: '单个列表项的固定行高（像素）', type: 'number', default: '48' },
 		{ name: 'height', desc: '滚动可视容器高度（像素）', type: 'number', default: '360' },
-		{ name: 'keyExtractor', desc: '提取每项唯一 Key 的函数', type: '(item: T, index: number) => string | number', default: '-' },
+		{
+			name: 'keyExtractor',
+			desc: '提取每项唯一 Key 的函数',
+			type: '(item: T, index: number) => string | number',
+			default: '-',
+		},
 		{ name: 'buffer', desc: '视口外额外渲染的缓冲项数量', type: 'number', default: '5' },
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },

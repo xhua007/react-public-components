@@ -24,12 +24,22 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'value', desc: '当前双向区间值 [minVal, maxVal]（受控）', type: '[number, number]', default: '-' },
+		{
+			name: 'value',
+			desc: '当前双向区间值 [minVal, maxVal]（受控）',
+			type: '[number, number]',
+			default: '-',
+		},
 		{ name: 'defaultValue', desc: '默认区间值', type: '[number, number]', default: '[20, 80]' },
 		{ name: 'min', desc: '允许选择的最小值', type: 'number', default: '0' },
 		{ name: 'max', desc: '允许选择的最大值', type: 'number', default: '100' },
 		{ name: 'step', desc: '滑动步长', type: 'number', default: '1' },
-		{ name: 'onChange', desc: '区间滑动改变时的回调函数', type: '(val: [number, number]) => void', default: '-' },
+		{
+			name: 'onChange',
+			desc: '区间滑动改变时的回调函数',
+			type: '(val: [number, number]) => void',
+			default: '-',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

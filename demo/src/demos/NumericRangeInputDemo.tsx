@@ -28,9 +28,24 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'value', desc: '当前区间值 [min, max]（受控）', type: '[number | undefined, number | undefined]', default: '-' },
-		{ name: 'defaultValue', desc: '默认区间值', type: '[number | undefined, number | undefined]', default: '[undefined, undefined]' },
-		{ name: 'onChange', desc: '区间数值改变时的回调函数', type: '(range: RangeValue) => void', default: '-' },
+		{
+			name: 'value',
+			desc: '当前区间值 [min, max]（受控）',
+			type: '[number | undefined, number | undefined]',
+			default: '-',
+		},
+		{
+			name: 'defaultValue',
+			desc: '默认区间值',
+			type: '[number | undefined, number | undefined]',
+			default: '[undefined, undefined]',
+		},
+		{
+			name: 'onChange',
+			desc: '区间数值改变时的回调函数',
+			type: '(range: RangeValue) => void',
+			default: '-',
+		},
 		{ name: 'min', desc: '允许输入的最小值限制', type: 'number', default: '-' },
 		{ name: 'max', desc: '允许输入的最大值限制', type: 'number', default: '-' },
 		{ name: 'step', desc: '步长', type: 'number', default: '1' },

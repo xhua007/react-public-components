@@ -43,8 +43,18 @@ export default function App() {
 	const apiData: ApiPropItem[] = [
 		{ name: 'open', desc: '是否打开抽屉', type: 'boolean', required: true },
 		{ name: 'onClose', desc: '点击遮罩或关闭按钮时的回调', type: '() => void', required: true },
-		{ name: 'rootLevel', desc: '初始根层级配置，包含 id, title, content (支持 pushLevel 函数)', type: 'CascadeLevel', required: true },
-		{ name: 'width', desc: '抽屉宽度（像素数字或百分比字符串）', type: 'number | string', default: '440' },
+		{
+			name: 'rootLevel',
+			desc: '初始根层级配置，包含 id, title, content (支持 pushLevel 函数)',
+			type: 'CascadeLevel',
+			required: true,
+		},
+		{
+			name: 'width',
+			desc: '抽屉宽度（像素数字或百分比字符串）',
+			type: 'number | string',
+			default: '440',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

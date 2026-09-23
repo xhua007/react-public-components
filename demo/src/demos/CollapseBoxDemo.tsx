@@ -23,12 +23,37 @@ export default function App() {
 
 	const apiData: ApiPropItem[] = [
 		{ name: 'children', desc: '折叠容器主体内容', type: 'ReactNode', default: '-' },
-		{ name: 'direction', desc: "折叠方向：'horizontal' 水平 / 'vertical' 垂直", type: "'horizontal' | 'vertical'", default: "'horizontal'" },
-		{ name: 'buttonPosition', desc: "折叠触发按钮位置：'left' | 'right' | 'top' | 'bottom'", type: 'string', default: "'right'" },
-		{ name: 'defaultWidth', desc: '默认展开宽度（支持像素数字或百分比字符串）', type: 'number | string', default: '600' },
-		{ name: 'defaultHeight', desc: '默认展开高度（支持像素数字或百分比字符串）', type: 'number | string', default: '300' },
+		{
+			name: 'direction',
+			desc: "折叠方向：'horizontal' 水平 / 'vertical' 垂直",
+			type: "'horizontal' | 'vertical'",
+			default: "'horizontal'",
+		},
+		{
+			name: 'buttonPosition',
+			desc: "折叠触发按钮位置：'left' | 'right' | 'top' | 'bottom'",
+			type: 'string',
+			default: "'right'",
+		},
+		{
+			name: 'defaultWidth',
+			desc: '默认展开宽度（支持像素数字或百分比字符串）',
+			type: 'number | string',
+			default: '600',
+		},
+		{
+			name: 'defaultHeight',
+			desc: '默认展开高度（支持像素数字或百分比字符串）',
+			type: 'number | string',
+			default: '300',
+		},
 		{ name: 'title', desc: '内容折叠区域说明标题', type: 'string', default: "'内容区域'" },
-		{ name: 'headerHeight', desc: '顶部标题栏高度（仅在垂直折叠且传了 title 时有效）', type: 'number', default: '40' },
+		{
+			name: 'headerHeight',
+			desc: '顶部标题栏高度（仅在垂直折叠且传了 title 时有效）',
+			type: 'number',
+			default: '40',
+		},
 		{ name: 'contentPadding', desc: '容器内边距', type: 'string', default: "'16px'" },
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 	];

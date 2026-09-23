@@ -626,13 +626,43 @@ export default function App() {
 
 			<ApiTable
 				data={[
-					{ name: 'children', desc: '被边框流光包裹的卡片内容节点', type: 'ReactNode', default: '-' },
-					{ name: 'color', desc: '流光颜色（单色字符串或渐变点数组 [{ color, percent }]）', type: 'string | BorderBeamColorStop[]', default: "'#1677ff'" },
-					{ name: 'size', desc: '流光可见光带段的长度尺寸（像素）', type: 'number | string', default: '100' },
-					{ name: 'duration', desc: '流光沿边缘完整跑完一圈的周期耗时（秒）', type: 'number', default: '6' },
-					{ name: 'lineWidth', desc: '流光光带线宽（像素）', type: 'number | string', default: "'1px'" },
+					{
+						name: 'children',
+						desc: '被边框流光包裹的卡片内容节点',
+						type: 'ReactNode',
+						default: '-',
+					},
+					{
+						name: 'color',
+						desc: '流光颜色（单色字符串或渐变点数组 [{ color, percent }]）',
+						type: 'string | BorderBeamColorStop[]',
+						default: "'#1677ff'",
+					},
+					{
+						name: 'size',
+						desc: '流光可见光带段的长度尺寸（像素）',
+						type: 'number | string',
+						default: '100',
+					},
+					{
+						name: 'duration',
+						desc: '流光沿边缘完整跑完一圈的周期耗时（秒）',
+						type: 'number',
+						default: '6',
+					},
+					{
+						name: 'lineWidth',
+						desc: '流光光带线宽（像素）',
+						type: 'number | string',
+						default: "'1px'",
+					},
 					{ name: 'count', desc: '同时环绕运行的流光粒子数量', type: 'number', default: '1' },
-					{ name: 'outset', desc: '流光层相对容器外扩偏移量', type: 'number | string', default: '-' },
+					{
+						name: 'outset',
+						desc: '流光层相对容器外扩偏移量',
+						type: 'number | string',
+						default: '-',
+					},
 				]}
 			/>
 		</div>

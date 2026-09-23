@@ -20,7 +20,9 @@ function HeavyModuleCard({
 
 	useEffect(() => {
 		const timestamp = new Date().toLocaleTimeString();
-		onApiCall(`[${timestamp}] 🚀 模块 #${id} (${title}) 首次进入视口预加载范围，已触发调用接口 /api/v1/module/${id}`);
+		onApiCall(
+			`[${timestamp}] 🚀 模块 #${id} (${title}) 首次进入视口预加载范围，已触发调用接口 /api/v1/module/${id}`,
+		);
 
 		// 模拟异步接口耗时 500ms
 		const timer = setTimeout(() => {
@@ -73,7 +75,15 @@ function HeavyModuleCard({
 			</div>
 
 			{loading ? (
-				<div style={{ height: 90, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8c8c8c' }}>
+				<div
+					style={{
+						height: 90,
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						color: '#8c8c8c',
+					}}
+				>
 					正在拉取并解析后端数据流...
 				</div>
 			) : (
@@ -81,7 +91,9 @@ function HeavyModuleCard({
 					<div style={{ fontSize: 13, color: '#595959', marginBottom: 8 }}>
 						业务指标趋势分析（模拟接口回传数据）：
 					</div>
-					<div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, height: 60, paddingTop: 6 }}>
+					<div
+						style={{ display: 'flex', alignItems: 'flex-end', gap: 12, height: 60, paddingTop: 6 }}
+					>
 						{data.map((val, idx) => (
 							<div key={idx} style={{ flex: 1, textAlign: 'center' }}>
 								<div
@@ -262,7 +274,9 @@ export default function Dashboard() {
 					1. 视口距离感知与接口请求拦截模拟器（滚动查看效果）
 				</h3>
 				<p style={{ fontSize: 13, color: '#666', margin: '0 0 16px 0' }}>
-					每个模块挂载时都会调用自身的数据接口。使用 <code>LazyLoadBox</code> 后，未在视口的模块完全不会发起接口请求。当滚动到距离视口下方设定像素（如 {offset}px）时，才会精准提前触发加载。
+					每个模块挂载时都会调用自身的数据接口。使用 <code>LazyLoadBox</code>{' '}
+					后，未在视口的模块完全不会发起接口请求。当滚动到距离视口下方设定像素（如 {offset}
+					px）时，才会精准提前触发加载。
 				</p>
 
 				{/* 交互控制台 */}
@@ -364,7 +378,11 @@ export default function Dashboard() {
 							等待滚动触发... 当前未进入视口的模块保持静默，无任何接口被唤醒。
 						</div>
 					) : (
-						logs.map((log, i) => <div key={i} style={{ lineHeight: 1.6 }}>{log}</div>)
+						logs.map((log, i) => (
+							<div key={i} style={{ lineHeight: 1.6 }}>
+								{log}
+							</div>
+						))
 					)}
 				</div>
 
@@ -408,12 +426,7 @@ export default function Dashboard() {
 							scrollContainer="#demo-scroll-box"
 							forceRender={forceAll}
 						>
-							<HeavyModuleCard
-								id={m.id}
-								title={m.title}
-								color={m.color}
-								onApiCall={handleLog}
-							/>
+							<HeavyModuleCard id={m.id} title={m.title} color={m.color} onApiCall={handleLog} />
 						</LazyLoadBox>
 					))}
 				</div>
@@ -452,7 +465,9 @@ export default function Dashboard() {
 								background: '#fff',
 							}}
 							onClick={() => {
-								alert(`当前元素在视口内: ${boxRef.current?.getInView()}，是否已完成加载: ${boxRef.current?.getHasLoaded()}`);
+								alert(
+									`当前元素在视口内: ${boxRef.current?.getInView()}，是否已完成加载: ${boxRef.current?.getHasLoaded()}`,
+								);
 							}}
 						>
 							查看 Ref 状态

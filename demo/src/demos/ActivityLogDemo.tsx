@@ -66,7 +66,12 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'items', desc: '操作活动日志项列表，每项含 id, operator, role, action, target, time, detail, avatar', type: 'ActivityItem[]', required: true },
+		{
+			name: 'items',
+			desc: '操作活动日志项列表，每项含 id, operator, role, action, target, time, detail, avatar',
+			type: 'ActivityItem[]',
+			required: true,
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

@@ -232,9 +232,19 @@ export default function App() {
 						default: '-',
 					},
 					{ name: 'menuClassName', desc: '弹出菜单的自定义类名', type: 'string', default: '-' },
-					{ name: 'menuStyle', desc: '弹出菜单浮层的自定义行内样式', type: 'CSSProperties', default: '-' },
+					{
+						name: 'menuStyle',
+						desc: '弹出菜单浮层的自定义行内样式',
+						type: 'CSSProperties',
+						default: '-',
+					},
 					{ name: 'className', desc: '外层包裹容器的自定义类名', type: 'string', default: '-' },
-					{ name: 'style', desc: '外层包裹容器的自定义行内样式', type: 'CSSProperties', default: '-' },
+					{
+						name: 'style',
+						desc: '外层包裹容器的自定义行内样式',
+						type: 'CSSProperties',
+						default: '-',
+					},
 				]}
 			/>
 		</div>

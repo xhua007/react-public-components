@@ -127,15 +127,10 @@ export default function App() {
 				</h3>
 				<div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
 					<div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-						<PeriodSelect
-							value={activePeriod}
-							onChange={(val) => setActivePeriod(val)}
-						/>
+						<PeriodSelect value={activePeriod} onChange={(val) => setActivePeriod(val)} />
 						<span style={{ fontSize: 13, color: '#666' }}>
 							当前选中：
-							<strong style={{ color: '#1677ff', marginLeft: 4 }}>
-								{activePeriod}
-							</strong>
+							<strong style={{ color: '#1677ff', marginLeft: 4 }}>{activePeriod}</strong>
 						</span>
 					</div>
 					<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
@@ -183,9 +178,7 @@ export default function App() {
 
 			{/* 3. 自定义主题色与选项 */}
 			<div>
-				<h3 style={{ fontSize: 16, marginBottom: 12 }}>
-					3. 自定义主题色与自定义维度选项
-				</h3>
+				<h3 style={{ fontSize: 16, marginBottom: 12 }}>3. 自定义主题色与自定义维度选项</h3>
 				<div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
 					<div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
 						<PeriodSelect
@@ -194,9 +187,7 @@ export default function App() {
 							onChange={(val) => setCustomPeriod(val)}
 							activeColor="#722ed1"
 						/>
-						<span style={{ fontSize: 13, color: '#722ed1' }}>
-							紫色主题色 / 自定义日周月年维度
-						</span>
+						<span style={{ fontSize: 13, color: '#722ed1' }}>紫色主题色 / 自定义日周月年维度</span>
 					</div>
 
 					<div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
@@ -205,9 +196,7 @@ export default function App() {
 							onChange={(val) => setColorPeriod(val)}
 							activeColor="#52c41a"
 						/>
-						<span style={{ fontSize: 13, color: '#52c41a' }}>
-							绿色主题色
-						</span>
+						<span style={{ fontSize: 13, color: '#52c41a' }}>绿色主题色</span>
 					</div>
 				</div>
 			</div>
@@ -223,9 +212,7 @@ export default function App() {
 						<PeriodSelect options={disabledOptions} defaultValue="week" />
 					</div>
 					<div>
-						<div style={{ fontSize: 12, color: '#888', marginBottom: 6 }}>
-							整体组件禁用
-						</div>
+						<div style={{ fontSize: 12, color: '#888', marginBottom: 6 }}>整体组件禁用</div>
 						<PeriodSelect disabled defaultValue="quarter" />
 					</div>
 				</div>

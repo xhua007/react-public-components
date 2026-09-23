@@ -130,10 +130,30 @@ export default function App() {
 }`;
 
 	const apiData: ApiPropItem[] = [
-		{ name: 'columns', desc: '泳道列数据数组，每项包含 id, title, items, color', type: 'KanbanColumn<T>[]', required: true },
-		{ name: 'keyExtractor', desc: '提取每张卡片唯一标识 Key 的函数', type: '(item: T) => string', required: true },
-		{ name: 'renderCard', desc: '自定义渲染单个卡片内容的函数', type: '(item: T, columnId: string) => ReactNode', required: true },
-		{ name: 'onCardMove', desc: '卡片跨列/本列拖拽放置完成后的回调函数', type: '(cardId, sourceCol, targetCol, newIndex) => void', default: '-' },
+		{
+			name: 'columns',
+			desc: '泳道列数据数组，每项包含 id, title, items, color',
+			type: 'KanbanColumn<T>[]',
+			required: true,
+		},
+		{
+			name: 'keyExtractor',
+			desc: '提取每张卡片唯一标识 Key 的函数',
+			type: '(item: T) => string',
+			required: true,
+		},
+		{
+			name: 'renderCard',
+			desc: '自定义渲染单个卡片内容的函数',
+			type: '(item: T, columnId: string) => ReactNode',
+			required: true,
+		},
+		{
+			name: 'onCardMove',
+			desc: '卡片跨列/本列拖拽放置完成后的回调函数',
+			type: '(cardId, sourceCol, targetCol, newIndex) => void',
+			default: '-',
+		},
 		{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 		{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 	];

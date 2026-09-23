@@ -193,15 +193,50 @@ export default function App() {
 
 			<ApiTable
 				data={[
-					{ name: 'src', desc: '待裁剪的图片源地址或 Base64 字符串', type: 'string', required: true },
-					{ name: 'aspectRatio', desc: '裁剪框宽高比（如 1 代表 1:1 正方形，16/9 代表宽屏，0 代表自由矩形）', type: 'number', default: '1' },
-					{ name: 'shape', desc: "裁剪框形状：'rect' 矩形 / 'round' 圆形（适合头像）", type: "'rect' | 'round'", default: "'rect'" },
-					{ name: 'modal', desc: '是否以 Modal 模态弹窗形式弹出展示', type: 'boolean', default: 'false' },
+					{
+						name: 'src',
+						desc: '待裁剪的图片源地址或 Base64 字符串',
+						type: 'string',
+						required: true,
+					},
+					{
+						name: 'aspectRatio',
+						desc: '裁剪框宽高比（如 1 代表 1:1 正方形，16/9 代表宽屏，0 代表自由矩形）',
+						type: 'number',
+						default: '1',
+					},
+					{
+						name: 'shape',
+						desc: "裁剪框形状：'rect' 矩形 / 'round' 圆形（适合头像）",
+						type: "'rect' | 'round'",
+						default: "'rect'",
+					},
+					{
+						name: 'modal',
+						desc: '是否以 Modal 模态弹窗形式弹出展示',
+						type: 'boolean',
+						default: 'false',
+					},
 					{ name: 'open', desc: 'Modal 模式下的显隐受控状态', type: 'boolean', default: 'true' },
-					{ name: 'title', desc: 'Modal 模式下的弹窗标题', type: 'ReactNode', default: "'图片裁剪'" },
-					{ name: 'onOk', desc: '点击确认裁剪完成时的回调（回传 dataURL, blob, width, height）', type: '(result: CropResult) => void', default: '-' },
+					{
+						name: 'title',
+						desc: 'Modal 模式下的弹窗标题',
+						type: 'ReactNode',
+						default: "'图片裁剪'",
+					},
+					{
+						name: 'onOk',
+						desc: '点击确认裁剪完成时的回调（回传 dataURL, blob, width, height）',
+						type: '(result: CropResult) => void',
+						default: '-',
+					},
 					{ name: 'onCancel', desc: '点击取消/关闭弹窗时的回调', type: '() => void', default: '-' },
-					{ name: 'height', desc: '内嵌模式下的画布固定高度（像素）', type: 'number', default: '360' },
+					{
+						name: 'height',
+						desc: '内嵌模式下的画布固定高度（像素）',
+						type: 'number',
+						default: '360',
+					},
 					{ name: 'className', desc: '自定义类名', type: 'string', default: '-' },
 					{ name: 'style', desc: '自定义行内样式', type: 'CSSProperties', default: '-' },
 				]}
